@@ -1,0 +1,29 @@
+---
+sidebar_position: 27
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Ae Time
+
+## Time values returned by blocks
+
+Time values are always returns as (floating point) numbers representing the number of seconds. In a composition these times are always measured relative to the start of the composition such that the beginning of the comp is always 0 (even if the [display start time](aeComp.mdx#ae_comp_set_attribute_display_start_time) of the comp is not 0). 
+For most scenarios, this is a very simple solution. But if you need to work with comps whose display start time is not 0, you need to add the display start time to the value returned by a block, to obtain the time shown in the Ae user interface.
+
+## Specifying Time Values
+
+If you need to pass a time value as an argument to a block, you can specify it in one of the following formats:
+- a simple number like `12.4`is interpreted as a time given in seconds
+- strings containing minutes and seconds like `1:22`, `1m 22s`, `82s`, `82 secs` or `82 seconds`
+- string values containing hours, minutes and seconds like `3h 3m 2s`
+- string values containing timecodes like `00:00:00:00` or `00:00:00;00` (the latter with semicolon will be interpreted as drop-frame timecode)
+- strings like `frame 10` or `10 frames`
+
+## Comp Time vs. Source Clip Time {#comp_time}
+
+<RetinaImg src="/img/blockOther/layer_times.png" alt="Layer Times: In Point, Out Point and Start Time"/>
+
+The [start time](aeLayer.mdx#ae_layer_set_attribute_start_time), [in point](aeLayer.mdx#ae_layer_set_attribute_in_point) and [out point](aeLayer.mdx#ae_layer_set_attribute_out_point) of a layer are all specified in composition time, where a value of 0 corresponds to the beginning of the composition.

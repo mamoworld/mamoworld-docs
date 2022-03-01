@@ -1,0 +1,125 @@
+---
+sidebar_position: 19
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Pr Time
+
+The blocks in this this section help you to convert time and timecode values from and to different formats. 
+
+## Automatic Time Conversion
+
+In general, Automation Blocks returns any time values as a point number in seconds. However, if a block expects a value to be a time, Automation Blocks does its best to also convert any other values into that format.
+
+In particular, it does the following:
+- if you provide a number, Automation Blocks assumes that this is a value in seconds and uses it as is
+- texts which look like numbers are converted to a number in seconds. This works for texts like `14` or `14.3` and numbers followed by a label like `14s`, `14 secs`, or `14 seconds`
+- texts of the form `00:00`, `3m 4s`, `3 min 4 secs` etc. are converted from minutes and seconds to a value in seconds
+- texts of the form `1h 3m 4s` or `1hrs 3min 4secs` or `1 hour 3 minutes 4 seconds` etc. are converted from hours, minutes and seconds to a value in seconds
+- texts of the form `00:00:00:000` and `00:00:00,000` are considered to be hours, minutes, seconds and milliseconds and converted to a value in seconds
+
+:::danger Frame Numbers
+
+If you work with frame numbers, Automation Blocks does not convert these automatically. It considers simple numbers to be values in seconds, so if you have frame numbers, you'll need to use the [Convert Timecode to Time Block](prTime#pr_time_from_timecode) to convert the frame number to a value in seconds.
+
+:::
+
+:::danger timecode
+
+Like frame numbers, timecodes also cannot be automatically converted into a value in seconds. The reason is that the timecode `00:00:00:01`, for example, can mean different times - depending on the framerate of the sequence! Therefore, you need to convert timecode values to time using the [Convert Timecode to Time Block](prTime#pr_time_from_timecode) in which you can specify the frame rate that should be used.
+
+:::
+
+## Format Time {#pr_format_time}
+
+<RetinaImg src="/img/blockScreenshots/PrTime/pr_format_time.png" alt="Block pr_format_time"/>
+
+
+This block can format the given time value in all kinds of ways.
+By default, all time values that Automation Blocks return are a simple number which corresponds to the time in seconds. This is useful to do calculations with these values, but when you want to write time values to a file, for example, you often want to format it in a different way. With this block, you can convert a time to any of the following formats:
+
+#### available formats
+
+- seconds (`148s`)
+- M:SS (`3:04`)
+- MM:SS (`03:04`)
+- H:MM:SS (`0:03:04`)
+- H:MM:SS,MS (`0:03:04,000`)
+- HH:MM:SS,MS (`00:03:04,000`)
+
+If you need to convert the time to a timecode format, use the [Convert Time to Timecode Block](prTime#pr_time_to_timecode) or the [Convert Time to Timecode of Sequence Block](prTime#pr_time_to_timecode_of_sequence) instead.
+
+:::danger accuracy
+
+Note that by converting values to these formats, you lose accuracy - even with the format that involves milliseconds. If your time is `1.2345 seconds`, for example, and you convert it to H:MM:SS,MS then the number is rounded to `0:00:01,235`.
+
+:::
+
+## Convert Time to Timecode {#pr_time_to_timecode}
+
+<RetinaImg src="/img/blockScreenshots/PrTime/pr_time_to_timecode.png" alt="Block pr_time_to_timecode"/>
+
+
+This block converts the time to any timecode format. 
+For most timecode formats, only the time value - no additional information - is needed for the conversion. But for some timecode formats like `frames` (which just outputs a frame number), you need to provide the framerate that should be used for this conversion. An extra framerate input appears when you choose one of these formats:
+
+<RetinaImg src="/img/blockOther/pr_time_to_timecode_example_framerate.png" alt="example framerate"/>
+
+
+Instead of a number, you can also provide a sequence as an example, to use the framerate of that sequence:
+
+<RetinaImg src="/img/blockOther/pr_time_to_timecode_example_sequence.png" alt="example framerate from sequence"/>
+
+
+
+
+## Convert Time to Timecode of Sequence {#pr_time_to_timecode_of_sequence}
+
+<RetinaImg src="/img/blockScreenshots/PrTime/pr_time_to_timecode_of_sequence.png" alt="Block pr_time_to_timecode_of_sequence"/>
+
+
+This block works exactly the same as the [Convert Time to Timecode Block](prTime#pr_time_to_timecode), except that you don't have to choose a timecode format. Instead, the block uses the timecode format that Premiere Pro is using in the given sequence (and if a framerate is required, it is also taken from that sequence).
+
+This is useful if you want to display timecodes in exactly the same way as Premiere does (if the user changes the time display for a sequence in Premiere Pro, the behavior of the block changes accordingly).
+
+
+
+
+
+## Convert Timecode to Time {#pr_time_from_timecode}
+
+<RetinaImg src="/img/blockScreenshots/PrTime/pr_time_from_timecode.png" alt="Block pr_time_from_timecode"/>
+
+
+This block converts texts of any of the following formats into a time value in seconds:
+
+- `00:00:00:00` 
+- `00:00:00:00000` 
+- `frame 0`
+- `0 frames`
+
+Note that texts of the form `1234` are considered to be a value in seconds, but texts of the form `frame 1234` are considered to be a frame number. Hence, if you have a frame number value, just put the text `frame ` before it to make sure they are interpreted correctly. You can use the [Text Pattern](text#string_pattern), for example, to add such a prefix. The following example converts the frame number `123` to a value in seconds (assuming the frame rate of the active sequence)
+
+<RetinaImg src="/img/blockOther/pr_time_from_timecode_frame_number_example.png" alt="convert frame number to time"/>
+
+
+#### frame rate
+
+The exact time that a timecode corresponds to depends on the framerate (the number of frames per second). Hence, you need to specify a framerate that is used for the calculation. You can specify the framerate either as a number, like `24` or `23.976023976024`, a text like `24 fps`, or give a sequence, project item or sequence clip object instead, to use the framerate of that sequence or footage.
+
+## Convert Time Between Sequence and Clip {#pr_clip_time_to_sequence_time}
+
+<RetinaImg src="/img/blockScreenshots/PrTime/pr_clip_time_to_sequence_time.png" alt="Block pr_clip_time_to_sequence_time"/>
+
+
+Time values related to a clip in a sequence can be measured in different ways:
+- **clip time** measures the time so that `0` is the beginning of the footage file (and the clip starts in the footage at its [in point](prSequenceClips#in-point))
+- **sequence time** measures the time so that `0` is the beginning of the sequence (and the clip starts in the sequence at its [start time in sequence](prSequenceClips#start-time-in-sequence)
+
+<RetinaImg src="/img/blockOther/sequence_vs_clip_time@2x.png" alt="Sequence Time vs Clip Time"/>
+
+
+This block converts between a time value in sequence time and clip time, or vice versa. If you convert the in point of a clip from clip time to sequence time, for example, you get the sequence start time of the clip.

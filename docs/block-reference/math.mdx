@@ -1,0 +1,139 @@
+---
+sidebar_position: 4
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Math
+
+The blocks in this section are your pocket calculator. Use them for all kinds of mathematical calculations.
+
+## Number {#math_number}
+
+<RetinaImg src="/img/blockScreenshots/Math/math_number.png" alt="Block math_number"/>
+
+
+This block represents a number.
+
+
+## Arithmetic {#math_arithmetic}
+
+<RetinaImg src="/img/blockScreenshots/Math/math_arithmetic.png" alt="Block math_arithmetic"/>
+
+
+Here you can add, subtract, multiply and divide numbers. Superheroes can also do power calculations with the `^` operator. `2^10` means 2 to the power of 10, for example.
+
+When you combine several math operations, be aware of the order of the operations:
+
+<RetinaImg src="/img/blockOther/math_arithmetic_example_1.png" alt="order of operations"/>
+
+
+In the example on the left, we calculate `(1+2)*3`, whereas on the right we calculate `1+(2*3)`.
+
+## Math Function {#math_single}
+
+<RetinaImg src="/img/blockScreenshots/Math/math_single.png" alt="Block math_single"/>
+
+
+This block gives you access to the most commonly used mathematical functions:
+- **square root**
+- **absolute** (makes negative numbers positive and keeps positive numbers unchanged)
+- **-** (multiplies by -1, i.e. makes negative numbers positive and vise versa)
+- **ln** calculates the natural logarithm  of the basis e.
+- **log10** calculates the logarithm of the basis 10.
+- **e^** calculates e to the power of x
+- **10^** calculates 10 to the power of x
+
+
+## Trigonometry {#math_trig}
+
+<RetinaImg src="/img/blockScreenshots/Math/math_trig.png" alt="Block math_trig"/>
+
+
+Calculates trigonometric functions like sine or cosine. The angle is given in *degrees*.
+
+
+## Math Constant {#math_constant}
+
+<RetinaImg src="/img/blockScreenshots/Math/math_constant.png" alt="Block math_constant"/>
+
+
+This block gives you access to various mathematical constants.
+
+
+## Math Number Property {#math_number_property}
+
+<RetinaImg src="/img/blockScreenshots/Math/math_number_property.png" alt="Block math_number_property"/>
+
+
+Gives you access to mathematical constants like *pi* or *e*.
+
+
+## Round Number {#math_round}
+
+<RetinaImg src="/img/blockScreenshots/Math/math_round.png" alt="Block math_round"/>
+
+
+Rounds a point number up. By default, rounds to the nearest number, but you can also force it to always round up or always round down.
+
+
+## Math on List {#math_on_list}
+
+<RetinaImg src="/img/blockScreenshots/Math/math_on_list.png" alt="Block math_on_list"/>
+
+
+This block performs math operations on lists (of numbers):
+
+- *sum*  returns the sum of all items in the list
+- *min* returns the smallest item in the list
+- *max* returns the largest item in the list
+- *average* returns the average of the list items (their sum divided by the number of elements)
+- *median* returns the [median](https://en.wikipedia.org/wiki/Median) of the list items.
+- *modes* returns a list of the most common item(s) in the list
+- *standard deviation* returns the [standard deviation](https://en.wikipedia.org/wiki/Standard_deviation) of the list items
+- *random item* returns a random element from the list
+
+## Remainder Of {#math_modulo}
+
+<RetinaImg src="/img/blockScreenshots/Math/math_modulo.png" alt="Block math_modulo"/>
+
+
+Returns the remainder of dividing the two numbers.
+
+
+## Constrain Number {#math_constrain}
+
+<RetinaImg src="/img/blockScreenshots/Math/math_constrain.png" alt="Block math_constrain"/>
+
+
+Constrains the number to be between the specified limits (inclusive).
+
+### Example: constrain user input
+
+
+<RetinaImg src="/img/blockOther/math_constrain_example.png" alt="constrain example"/>
+
+
+This example asks the user to enter a number. Then the script makes sure that the resulting number is between 0 and 100. If the user enters something bigger than 100, for example, the result will still be 100 and if the user enters a negative number, the result will be 0.
+
+
+## Random Number {#math_random_int_or_float}
+
+<RetinaImg src="/img/blockScreenshots/Math/math_random_int_or_float.png" alt="Block math_random_int_or_float"/>
+
+
+This block returns a random number in the given range. When you generate integers, the boundaries are inclusive, i.e a random number from 0 to 10 can result in any of those numbers, including 0 and 10.
+
+If you generate point numbers, the right boundary is exclusive, i.e. a floating point number between 0 and 10 can be 0 or 9.9999999 but never 10.
+
+
+## Random Fraction {#math_random_float}
+
+<RetinaImg src="/img/blockScreenshots/Math/math_random_float.png" alt="Block math_random_float"/>
+
+
+This block returns a random point number between 0 (inclusive) and 1 (exclusive). Effectively, this is just a more compact notation for
+
+<RetinaImg src="/img/blockOther/math_random_float_example.png" alt="random fraction example"/>

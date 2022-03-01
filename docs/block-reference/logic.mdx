@@ -1,0 +1,131 @@
+---
+sidebar_position: 5
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Logic
+
+## Overview 
+
+Logic blocks are about yes/no questions. Is this project item a sequence? Has this clip been used in a sequence at least once? In programming languages, these kinds of questions can be formulated with (boolean) logic and the answer to the question is either the value `true` (for yes) or `false` (for no).
+
+In Automation Blocks, logic values have pointed edges - in contrast to texts or numbers, which have rounded edges:
+
+<RetinaImg src="/img/blockOther/logic_shape_example.png" alt="Block shapes"/>
+
+
+So whenever you see these pointed shapes, you know that a logic value (or yes/no question) is expected at that point.
+
+
+## If {#controls_if}
+
+<RetinaImg src="/img/blockScreenshots/Logic/controls_if.png" alt="Block controls_if"/>
+
+
+The *if* block is the the most essential block in the logic category. Whereas all other logic blocks are about formulating logic questions, the *if* block is about what should actually be done if the answer to the question is yes (or what else should be done when the answer is no).
+
+At the top of the *if* block, you need to insert a logic value aka yes/no question and the blocks you plug inside the if block are only executed if the answer to this question is yes (i.e. `true`). This example writes `the sequence has markers` to the console if the active sequence has at least one marker (and does nothing otherwise):
+
+<RetinaImg src="/img/blockOther/controls_if_example_1.png" alt="Block shapes"/>
+
+
+### If ... Else {#controls_if_else_1}
+
+When you click on the blue cog wheel icon on the top left of the *if* block, you can also add an *else* section too. The *else* section will only be executed if the answer to the questions is no (i.e. `false`). Let's extend our example so it outputs `the sequence has NO markers` if the sequences does NOT have at least one marker:
+
+<Anigif src={useBaseUrl('/img/blockOther/if_else_example.gif')} />
+
+### If ... Else If ... Else
+
+
+Finally, you can have an *if* block that asks multiple questions by adding *else if* sections to the block. When the answer to the first question is `false` (and only in that case), it does not go to the *else* block immediately, but first asks the second question. Here is an example:
+
+<RetinaImg src="/img/blockOther/controls_if_example_2.png" alt="Block shapes"/>
+
+
+This example checks the type of the project item with name `my item name`. The *if* block executes exactly one of the "write to console" blocks in order to state what type the project item actually has.
+
+
+## Compare {#logic_compare}
+
+<RetinaImg src="/img/blockScreenshots/Logic/logic_compare.png" alt="Block logic_compare"/>
+
+
+This block can compare two numbers. Use it to ask questions like "Are the numbers equal" or "Is the first number greater than the second number".
+
+### Example: Has Footage been used?
+
+<RetinaImg src="/img/blockOther/logic_compare_example.png" alt="Block logic_compare"/>
+
+
+Here we use the Compare block to ask if a footage item has been used at least once ("Is the number of times the footage item has been used greater or equal to one?"):
+
+
+## And/Or {#logic_operation}
+
+<RetinaImg src="/img/blockScreenshots/Logic/logic_operation.png" alt="Block logic_operation"/>
+
+
+With this block you can combine two questions into one. If you choose "and", the result is only `true` if both questions are answered with `true`. For "or" the result is `true` if at least one of the two questions is answered with `true`.
+
+<RetinaImg src="/img/blockOther/logic_operation_example.png" alt="or example"/>
+
+
+This example returns `true` if either the video or the audio  of the footage item (or both audio and video) has been used at least once.
+
+## Not {#logic_negate}
+
+<RetinaImg src="/img/blockScreenshots/Logic/logic_negate.png" alt="Block logic_negate"/>
+
+
+This block turns a `true` into a `false` and vice versa.
+
+### Example: End of Textfile
+
+<RetinaImg src="/img/blockOther/logic_negate_example.png" alt="or example"/>
+
+
+The [End of File](filesText#extendscript_text_file_eof) block returns `true`, if the script has read the entire contents of the textfile already. If you plug it into a *Not* block, it returns `true` if there is still content left to read.
+
+## Boolean (Logic Value){#logic_boolean}
+
+<RetinaImg src="/img/blockScreenshots/Logic/logic_boolean.png" alt="Block logic_boolean"/>
+
+
+This block always returns `true` or always returns `false` (depending on which of the two you have chosen in the dropdown).
+
+
+## Null {#logic_null}
+
+<RetinaImg src="/img/blockScreenshots/Logic/logic_null.png" alt="Block logic_null"/>
+
+
+The JavaScript value [null](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null), which represents the intentional absense of any object value.
+You can also use Null directly in a logic test (as the condition of an [if block](logic#controls_if), for example). In a logic test, Null will behave like `false` whereas any other object behaves like `true`. For an example, see the [Ternary Test](logic#logic_ternary) below.
+
+
+## Ternary Test {#logic_ternary}
+
+<RetinaImg src="/img/blockScreenshots/Logic/logic_ternary.png" alt="Block logic_ternary"/>
+
+
+This block is similar to an [if...else](logic#controls_if_else_1) statement. The difference is the following: in the *if...else* block you can plug in two block stacks (where one block stack is executed when the condition is `true` and the other block stack when the condition is `false`). In the *Ternary Test* you plug in two values instead of two block stacks and the first value is returned if the condition is `true` and the second is returned if the value is `false`. In other words, this is a mini-version of the *if....else* block that is just about calculating a single value instead of executing arbitrary blocks.
+
+<RetinaImg src="/img/blockOther/logic_ternary_example_simple.png" alt="simple ternary example"/>
+
+
+In this example, the block on the left returns `first text` whereas the block on the right returns `second text`.
+
+### Example: null and markers
+
+This script prints on the console `first sequence marker is at 5 seconds` if the active sequence has its first marker at that time and if the active sequence has no marker, it prints `sequence has no marker` instead.
+
+<RetinaImg src="/img/blockOther/logic_ternary_example_complex.png" alt="Complex ternary and null example"/>
+
+
+In the first line, we save the first marker of the active sequence in the [variable](variables.mdx) `my marker`. If the sequence has no marker, we give the variable the value `null` instead, to indicate that there is no such marker object.
+
+When we want to use the marker, we need to first check if the marker actually exists or is `null`. To do this, we test the `my marker` variable in an *if* block. Since `null` evaluates to `false` (whereas any other object, like a valid marker, evaluates to `true`), the first *write to console* block is only executed if a marker exists and the second one only otherwise.

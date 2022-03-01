@@ -1,0 +1,183 @@
+---
+sidebar_position: 7
+sidebar_class_name: newsidebargroup
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# User Interface & Comments
+
+These blocks allow you to create user interfaces, like showing a message or asking the user to enter a value or confirm an action. There are also some blocks that help you to document your code and link to external resources.
+
+
+## Modal Input Dialog {#modal_input_dialog}
+
+<RetinaImg src="/img/blockScreenshots/UserInterfaceAndComments/modal_input_dialog.png" alt="Block modal_input_dialog"/>
+
+Yes, this block might looks scary at first sight, but it is very easy to use and allows you to create a custom user interface for your block script!
+
+By default, it shows a user interface which demos all available elements:
+
+<RetinaImg src="/img/blockOther/modal_input_dialog_ui.png" alt="Block modal_input_dialog"/>
+
+### Choosing UI Elements
+
+As you can see, each row of the block creates one input of the final dialog.
+To remove, add or reorder the inputs, click on the blue cog wheel icon in the top left corner of the block.
+
+Here I removed all, except the first three inputs and have set their type to single line text, checkbox and dropdown:
+
+<RetinaImg src="/img/blockOther/modal_input_dialog_example_1.png" alt="Ae Scripting Creating a User Interface"/>
+
+
+### Initialize Values
+
+Note that the text input and the dropdown show the value `undefined` when the dialog opens. To change that, we need to understand that each input is connected to a [variable](variables.mdx), namely `user input 1`, `user input 2`, etc. The block shows as default value the value that the respective variable had before the block is executed, and after you entered the values and closed the dialog, it will set the variables to the values you entered.
+
+Hence, to change the default values we need to [set the variables](variables.mdx#variables_set) to the values we want, before the block that creates the user interface:
+
+<RetinaImg src="/img/blockOther/modal_input_dialog_example_2.png" alt="Ae Scripting Creating a User Interface"/>
+
+### Dropdown Lists
+
+Note that we set `user input 3` to `first options|second one|and third`. That's the way how you specify the options of a dropdown: Just use a single [text](text.mdx) where you separate the different options with a | symbol
+
+If you want to access the values the user entered, you find them again in the variables `user input 1` etc. If the user chose "second one" in the dropdown, for example, the variable `user input 3` will have the value `second one` after the Modal Input Dialog block was executed.
+
+### Dropdown Lists with Color
+
+If your dropdown choices are hex codes like `#ffffff` or label color names like `Sea Foam`, Automation Blocks detects that automatically and shows the color next to the text. To create the dialog below, we initialized the variable of the dropdown with `#23341e|#485e38|#f3971b|#6c6c6c`:
+
+<RetinaImg src="/img/blockOther/modal_input_dialog_example_color.png" alt="Ae Scripting Dropdown List with Color"/>
+
+
+
+:::tip rename variables
+
+In the dropdowns at the right end of each row of the block (the ones showing "user input 1" etc you can choose the variable that should be used by this input and you also find there an option to rename the variable. Giving your variables meaningful names can make your scripts much easier to read.
+
+:::
+
+## Write to Console {#block_extendscript_console_log}
+
+<RetinaImg src="/img/blockScreenshots/UserInterfaceAndComments/block_extendscript_console_log.png" alt="Block block_extendscript_console_log"/>
+
+
+This block prints the given message in Automation Block's console panel. This is useful 
+- to inform the user about the progress
+- to debug the output
+- to output data (you can cut & paste text from the console to use it somewhere else), but for this you can also [write text files](filesText)
+
+
+## Alert Dialog {#block_extendscript_alert}
+
+<RetinaImg src="/img/blockScreenshots/UserInterfaceAndComments/block_extendscript_alert.png" alt="Block block_extendscript_alert"/>
+
+
+This block shows the given message in a popup dialog. 
+
+<RetinaImg src="/img/blockOther/alert_example.png" alt="Block block_extendscript_alert"/>
+
+**Message vs Error**
+
+You have the option to alert a message or an error. The only difference is that in the latter case the script stops with an error after the message has been shown.
+
+:::tip Alternative: Write to Console Block
+
+If you want to show a lot of messages, better use [Log to Console](./userInterfaceAndComments#block_extendscript_console_log), which does not require any user interaction to close the message popup.
+
+:::
+
+
+
+## Confirm Dialog {#block_type_extendscript_confirm}
+
+<RetinaImg src="/img/blockScreenshots/UserInterfaceAndComments/block_type_extendscript_confirm.png" alt="Block block_type_extendscript_confirm"/>
+
+
+This block shows a popup window with a confirmation message, which you can answer with 'yes' or 'no'.
+
+<RetinaImg src="/img/blockOther/confirm_example.png" alt="Block block_extendscript_alert"/>
+
+
+The block returns a logic value `true` or `false` (depending on if you answer 'yes' or 'no'), which you can use in [if statements](https://github.com/google/blockly/wiki/IfElse) and other logic operations.
+
+## Save File Dialog {#block_extendscript_save_file_dlg}
+
+<RetinaImg src="/img/blockScreenshots/UserInterfaceAndComments/block_extendscript_save_file_dlg.png" alt="Block block_extendscript_save_file_dlg"/>
+
+
+Shows a "Save File" dialog and returns the chosen file. 
+
+If you put a [File block](files#block_extendscript_file) into the `preselected file` parameter, the dialog will choose this file by default, but still allow the user to choose another one.
+
+:::tip Hard coded files
+
+If you want to hard-code a particular file instead of allowing the user to choose one, you can use the [File block](files#block_extendscript_file) instead.
+
+:::
+
+
+## Open File Dialog {#block_extendscript_open_file_dlg}
+
+<RetinaImg src="/img/blockScreenshots/UserInterfaceAndComments/block_extendscript_open_file_dlg.png" alt="Block block_extendscript_open_file_dlg"/>
+
+
+Shows an "Open File" dialog and returns the chosen file.
+
+In contrast to the Save File dialog, in the Open File dialog the user can only choose existing files.
+
+If you put a [File block](files#block_extendscript_file) into the `preselected file` parameter, the dialog will choose this file by default, but still allow the user to choose another one.
+
+:::tip Hard coded files
+
+If you want to hard-code a particular file instead of allowing the user to choose one, you can use the [File block](files#block_extendscript_file) instead.
+
+:::
+
+
+## Open Folder Dialog {#block_extendscript_open_folder_dlg}
+
+<RetinaImg src="/img/blockScreenshots/UserInterfaceAndComments/block_extendscript_open_folder_dlg.png" alt="Block block_extendscript_open_folder_dlg"/>
+
+
+Shows an "Open Folder" dialog and returns the chosen folder.
+
+If you put a [Folder block](files#block_extendscript_folder) into the `preselected folder` parameter, the dialog will choose this folder by default, but still allow the user to choose another one.
+
+:::tip Hard coded folder
+
+If you want to hard-code a particular folder instead of allowing the user to choose one, you can use the [Folder block](files#block_extendscript_folder) instead.
+
+:::
+
+## Prompt Dialog {#block_extendscript_prompt}
+
+<RetinaImg src="/img/blockScreenshots/UserInterfaceAndComments/block_extendscript_prompt.png" alt="Block block_extendscript_prompt"/>
+
+
+Shows a prompt dialog box where the user can enter some text. 
+
+<RetinaImg src="/img/blockOther/prompt_example.png" alt="Block block_extendscript_alert"/>
+
+
+You can use this block instead of a simple text block, whenever you want the user to enter a custom text instead of using a hard-coded one.
+
+## Comment - Open Web Page {#es_tutorial}
+
+<RetinaImg src="/img/blockScreenshots/UserInterfaceAndComments/es_tutorial.png" alt="Block es_tutorial"/>
+
+
+Allows you to embed a link to a website (like a documentation or tutorial).
+If you click the play button next to the *open web page* text, the given url opens in the default web browser.
+This block has no effect on the Automation Blocks script at all and is just for documentation purposes.
+
+## Comment - Text {#mm_multiline_comment_block}
+
+<RetinaImg src="/img/blockScreenshots/UserInterfaceAndComments/mm_multiline_comment_block.png" alt="Block mm_multiline_comment_block"/>
+
+
+Use this block to add comments to your script.
+This block has no effect on the Automation Blocks script at all and is just for documentation purposes.

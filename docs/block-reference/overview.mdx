@@ -1,0 +1,240 @@
+---
+sidebar_position: 0
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Overview
+
+##  Finding the Blocks You Need
+
+The block reference describes all blocks which are available in Automation Blocks for Premiere Pro and After Effects.
+In order to find the blocks you need quickly, you need to understand the categories that the blocks are grouped into. Therefore, we give you an overview of these categories here.
+
+The categories are grouped into three main sections. Let's take a look at each of them quickly.
+
+<RetinaImg src="/img/tutorials-pr/firstSteps/block_categories.png" alt="preferences"/>
+
+This screenshot is from Premiere Pro. In After Effects the structure is identical, except that instead of the blocks which are specific to Premiere Pro, you have blocks which are specific to After Effects.
+
+## General Programming
+
+In the unlikely case that you are a programmer, the blocks you find here willb be self-explanatory: They contain the same basic ingredients as any programming language. In the much more likely case that you're not a programmer, these might be overwhelming, so my advice is: don't worry to much about them for now. You will learn how to use them step by step in our tutorial series. At the moment, it's only important to develop a vague intuition for what these blocks might be good for. So, let me give you an overview:
+
+### Text 
+
+Your scripts often deal with texts. Maybe you want to rename a project item? Well that name is a text. Or perhaps you want to add some metadata to it, like a copyright notice? That metadata is text, too. Text is everywhere, and the functions in this section allow you to work with texts - to create them, search within them, or change them in all kinds of ways. The most basic text block is this one (and you've used it already, without really noticing): 
+
+<RetinaImg src="/img/tutorials-pr/firstSteps/bin_subbin_text.png" alt="text block"/>
+
+
+Later, when you're a more experienced automation hero, instead of "use the bin with name `bin\subbin`" you can say things like "use the bin with the name that you get when taking the name of the active sequence, replacing `final` by `almost final` and adding `-revision003`. And all the tools for this kind of text tweaking are found within this very category.
+
+### Variables
+
+This is a more advanced topic (if you have no programming experience). In a nutshell, it allows you to save a value in a variable and then reuse it in later steps of your script. We will use variables for the first time in the tutorial [Search & Replace in Project Items](../tutorials-pr/searchReplaceProjectItems.mdx). If you can't wait, here's a quick example:
+
+<RetinaImg src="/img/tutorials-pr/firstSteps/variables_example.png" alt="variables example"/>
+
+
+In the first block, we create a variable named `scene name` and give it the value `my awesome scene 1`. Then we create a project bin with that name and two sub-bins named `audio` and `video` inside of it. Finally, we also create a sequence with the name `my awesome scene 1`. The great thing is that when you move on to your next awesome scene, you just need to update the name in the very first block, instead of searching though your entire script for every occurrence of `my awesome scene 1`. 
+
+### Loops
+
+Again, advanced. In your scripts, you'll often want to do something many times - like looping over all sequences of your project, in order to add all of them to the render queue. Or when you search for something, you might want to loop over all project items. This category only contains some "general purpose" loops and you will need them very rarely. You'll find more specialized (and hence simpler to use) loops in other categories. In the "Files Text" category, for example, you'll find a block to loop over all lines of a text file, and in the category "Pr Sequence" a block to loop over all clips of a sequence. To save you the effort of browsing through all categories, here's the list of all those specialized loops:
+
+- [loop over all lines of a text file](../block-reference/filesText#extendscript_text_file_for_all_lines)
+- [loop over all rows/columns of a spreadsheet](../block-reference/filesSpreadsheet#spreadsheet_for_each_row)
+- [loop over all open projects](../block-reference/prProject#block_pr_for_all_open_projects)
+- [loop over project items](../block-reference/prProjectItems#block_pr_for_all_items_in_bin)
+- [loop over clips in a sequence](../block-reference/prSequenceClips#block_pr_for_all_sequence_items)
+- [loop over markers of a clip or sequence](../block-reference/prMarker#pr_marker_for_all_of_project_item)
+- [loop over parameters of a clip](../block-reference/prMogrtsAndClipParameters#block_pr_for_all_component_params_of_clip)
+
+You'll always recognize those loop blocks easily, based on their green color. But let's postpone this topic to *Automation Superhero Class 3*, a.k.a the [Search & Replace in Project Item Tutorial](../tutorials-pr/searchReplaceProjectItems.mdx).
+
+<RetinaImg src="/img/tutorials-pr/firstSteps/loop_example.png" alt="Loop example"/>
+
+
+
+
+### Math
+
+Want to save the project `my project 001.prpro` as `my project 002.prpro`? Or add 10 frame handles to the in and out points of your clips? Or figure out how to scale a 2000x1000 pixel image to fit exactly into a 1920x1080 comp? For all these things, you need to do basic math like adding or multiplying numbers. Consider the blocks in this section to be your pocket calculator. Here, I combined two Math blocks to calculate the square root of (1+2), for example:
+
+<RetinaImg src="/img/tutorials-pr/firstSteps/math_example.png" alt="Math example"/>
+
+
+
+### Logic
+
+Does the name of this footage item contain the text "final"? Is this footage item used at least once? Is it offline? Does this sequence have markers? Is this footage an audio file? The blue logic blocks allow you to formulate these types of yes/no questions. Programmers call the result of such a question a boolean value, and it is either `true` (for yes) or `false` (for no). The [If block](../block-reference/logic#controls_if) in this category allows your script to behave in a different way depending on whether the answer to such a question is yes or no. So whenever your script needs to distiguish between different cases, you'll need the logic blocks.
+
+<RetinaImg src="/img/tutorials-pr/firstSteps/logic_example.png" alt="Math example"/>
+
+
+
+### Lists
+
+Some values consist of several components. The position or size of a clip, for example, consists of an X and a Y value. 
+
+<RetinaImg src="/img/tutorials-pr/firstSteps/lists_example.png" alt="Lists example"/>
+
+
+Automation Blocks represents these as lists (programmers also call them arrays). There is no limit to the length of a list, and you can also use lists to collect values. When you import footage, for example, maybe you only want to import very specific files that you pick based on some custom logic tests (say only files of a particular file type). Then you can collect all footage items which pass your tests in a list and then pass this list to a block that imports all files in that list.
+
+
+
+## UI and Files
+
+The blocks in these categories allow you to create your own user interfaces and to work with files - like reading or writing text or spreadsheet files.
+
+### User Interface & Comments
+
+These blocks allow you to create some basic user interfaces, like showing an *Open File* dialog or a prompt where the user can enter some text. It also contains the *comment* blocks which we can use to document our scripts.
+
+<RetinaImg src="/img/tutorials-pr/firstSteps/ui_example.png" alt="UI example"/>
+
+
+The block on the left saves the current project to the file `myProject.prproj` on your desktop. In contrast, each time the block on the right side is executed, it shows a "Save File" dialog and then saves it to the file you've chosen.
+
+### Files
+
+These are like the block equivalent of your Windows Explorer or Mac OS Finder. Copy or delete files, look at (or create a list of) all files in a particular folder, or create folders. All these basic file operations can be found in this category.
+
+<RetinaImg src="/img/tutorials-pr/firstSteps/files_example.png" alt="files example"/>
+
+
+### Files Name & Path
+
+Consistent naming of files and folders is an important part of effective workflows. So, when you automate your workflows, you often have to modify file paths. If you want to export a video and give it the same name as your Premiere Pro project, for example, you'll need to somehow turn the text `myProject.prproj` into `myProject.mp4`.
+The blocks in this section are your swiss army knife to work with file paths. 
+
+So, the next time on of your colleagues didn't follow the naming conventions and wonders how to rename those 1000 png files effectively, you'll be able to hack a script together in a few minutes that does just that, leaving plenty of time for your colleague to invite you for lunch.  
+
+<RetinaImg src="/img/tutorials-pr/firstSteps/filenames_example.png" alt="filenames example"/>
+
+
+
+
+### Files Text
+
+Here you'll find blocks to read and write text files. Maybe you want a list of all footage files used in your project? Or do fancier things like creating .srt files (SubRip Subtitles), or exporting the markers of your sequence as YouTube chapter markers. Whenever you want to read or write text files, you need these blocks.
+
+This example prints each line of the file `test.txt` within Automation Block's console:
+
+<RetinaImg src="/img/tutorials-pr/firstSteps/files_text_example.png" alt="text files example"/>
+
+
+
+### Files Spreadsheet
+
+Here you'll find blocks to read and write spreadsheet files. They work similar to the text file blocks, but instead create or read spreadsheet files that you can use with Microsoft Excel, Apple Numbers, Google Docs, or any other spreadsheet app. Yes, it is really that easy to create a spreadsheet:
+
+<RetinaImg src="/img/tutorials-pr/firstSteps/files_spreadsheet_example.png" alt="spreadsheet files example"/>
+
+
+
+## Premiere Pro specific {#premiere_pro_specific_blocks}
+
+These are the blocks that directly talk to, and remote-control, Premiere Pro. Those are only available in Premiere Pro and we have an analogous selection of [Blocks for After Effects](#after_effects_specific_blocks)
+
+### Pr Project
+
+Here you'll find blocks to open, save and create Premiere Pro projects, but also to create new bins and import footage (you know the [Sync Folder Block](../block-reference/prProject#block_pr_sync_project_bin_with_folder) already). Some project settings, like setting scratch disk paths, are also available.
+
+<RetinaImg src="/img/tutorials-pr/firstSteps/pr_project_example.png" alt="project example"/>
+
+
+
+### Pr Project Items
+
+These blocks cover everything you can do with an individual project item. A project item is anything that is listed in your project panel (or its sub-bins), like a footage item, a bin, or a sequence. You can loop over the project items and read or write things like their name, metadata, or label color, for example.
+
+<RetinaImg src="/img/tutorials-pr/firstSteps/pr_project_item_example.png" alt="project items example"/>
+
+
+### Pr Sequence
+
+A sequence is a project item, so if you want to do something with it that you would normally do in the project panel (like renaming it or moving it to another bin), you can use the blocks in the category "*Pr Project Items*" for this. But a sequence is much more than a "normal" project item. Everything that you can only do with sequences, but not with other project items, can be found in this category. The functionality ranges from creating new sequences to inserting clips to retrieving properties like the position of the playhead.
+
+<RetinaImg src="/img/tutorials-pr/firstSteps/pr_sequence_example.png" alt="sequence example"/>
+
+
+
+### Pr Sequence Clips
+
+If you want to work with individual clips inside a sequence, you'll need the blocks in this category. Note the difference between clips and project items: In Premiere Pro, you can right-click on an item in the project panel and choose "*Rename...*" or you can right-click on a clip inside a sequence and choose "*Rename...*"
+These are two very different things! The former renames the item itself, whereas the latter only renames that single occurrence of that item in the sequence. In the same way, blocks in the category "*Pr Project Items*" act on the items in the project panel, whereas the blocks in this category act on the clips (i.e. occurrences of project items) in a sequence.
+
+<RetinaImg src="/img/tutorials-pr/firstSteps/pr_sequence_clip_example.png" alt="sequence clip example"/>
+
+
+The block on the left returns the name of the first clip in track `V1` of the sequence with name `mySequence`. The block on the right (which comes from the category "*Pr Project Items*" and not "*Pr Sequence Clips*") returns the name of the corresponding project item instead.
+
+### Pr Mogrts & Clip Parameters
+
+These blocks give you access to the things that are included in Premiere Pro's *Effect Controls* panel and the *Edit* tab of the *Essential Graphics* panel. You can set parameters, or even keyframe them! You can replace the texts in Motion Graphics Templates, too:
+
+<RetinaImg src="/img/tutorials-pr/firstSteps/pr_mogrts_example.png" alt="mogrts example"/>
+
+
+### Pr Marker
+
+The blocks in this category give you access to the markers of sequences and project items. If you make videos for YouTube, search in the script library for the example "export markers to YouTube chapter text". It exports your markers to chapters that YouTube visualizes directly inside the video player.
+
+<RetinaImg src="/img/tutorials-pr/firstSteps/pr_marker_example.png" alt="marker example"/>
+
+
+### Pr Rendering
+
+These blocks allow you to add sequences or clips to the Adobe Media Encoder render queue, start the queue, etc.
+
+<RetinaImg src="/img/tutorials-pr/firstSteps/pr_rendering_example.png" alt="rendering example"/>
+
+
+### Pr Time
+
+These blocks help you to convert between different time and timecode formats. Automation Blocks represents all time values in seconds (as point numbers), because this way you can easily add and subtract those values. Automation Blocks also does its best to convert time values from other formats wherever necessary. If you export time values to a spreadsheet, for example, and need them in a particular format, the blocks in this category will do that for you.
+
+Since these time conversions are essentially math, the blocks have a bluish color, similar to the blocks in the Math category.
+
+<RetinaImg src="/img/tutorials-pr/firstSteps/pr_time_example.png" alt="time example"/>
+
+
+## After Effects specific {#after_effects_specific_blocks}
+
+These are the blocks that directly talk to, and remote-control, After Effects. Those are only available in After Effects and we have an analogous selection of [Blocks for Premiere Pro](#premiere_pro_specific_blocks).
+
+### Ae Project
+
+Here you find the basic project operations like saving or closing a project, but also to import footage and creating project bins. You can even sync entire folders on your hard-drive to import all their content at once.
+
+This category also has one additional very special block: The block [Execute Menu Command](aeProject.mdx#ae_execute_menu_command) allows to execute any menu command of After Effects. If you want to do anything that can be done with After Effects' main menu, you can do it with this block!
+
+### Ae Project Items
+
+In this category you find all the blocks you need to work with the items listed in the project panel. You can loop over all items of the project - or only of a particualar project bin, which is useful if you want to search for something or cleanup the project, for example. You can get or set all kinds of item attributes - like their name, source file, or label color, for example. And of course, you can also delete items.
+
+### Ae Comp
+
+The blocks in this category allow to manipulate a comp. You can create a new composition, change the comp settings, or loop over the frames of the composition, for example.
+
+### Ae Layer
+
+Here you find the blocks to manipulate a layer in a composition. You can create new layers, apply effects or presets to them and change attributes like the layer's name or label color. You can also duplicate or delete a layer or move it to another comp, for example.
+
+### Ae Layer Properties
+
+Properties are the things which you can keyframe (or apply expressions to) in the timeline. Here you find the blocks to set their value, expression or do more fancy things like separating their dimension.
+
+### Ae Keyframes
+
+These blocks allow you to work with keyframes, but the functionality goes way beyond creating single keyframes. You can load an entire range of keyframes from a property and save them as part of your script, for example, to apply them to other properties easily. If you insert some keyframes which push your layer to the side, wouldn't it be cool if any subsequent keyframes which have been on the layer already are auto-adjusted (i.e. move to the side), too? Yes, the blocks in this category give you exactly this high-level manipulation of keyframes.
+
+### Ae Rendering
+
+This section contains blocks to operate After Effects render queue and also to send render jobs to Adobe Media Encoder.
+

@@ -1,0 +1,338 @@
+---
+sidebar_position: 21
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Ae Project Items
+
+The blocks in this section allow you to do all kinds of things with project items - i.e. all the footage, compositions, solids, bins etc that are listed in the project panel (and its sub bins). Note that if a project item is a composition, you can also use the blocks in the section [Ae Comp](aeComp.mdx)  with it, which give you access to functionality that is specific to comps only.
+
+### Accessing a Particular Project Item {#accessProjectItem} 
+
+Automation Blocks represents project items by a text - like a path indicating where the item can be found.
+You can specify a particular project item as follows:
+
+- **Project Item** and **Project Bin** blocks. The [Project Item Block](#ae_item_path) and the [Project Bin Block](#ae_itembin_path) are the easiest way to specify an item path, if the item already exists in your project. Just select the item in your project, click the block's *refresh* button and it will generate the item path for you.
+
+- **Name:** If the project item has a unique name, just use a text block with that name `my item name`
+- **Path:** You can also give a path to where the item can be found, like `/bin/subbin/my item name`. If you provide the full path instead of a name, Automation Blocks does not need to search your entire project, which makes the script faster. Also. you'll avoid getting into trouble if multiple project items have the same name. Note that a string `Comp 1` searches for a project item in all bins of the project panel whereas `/Comp 1` only looks for it in the root bin.
+
+- **Layer or Property** If you have a [layer](aeLayer.mdx) or [property of a layer](aeLayerProperties.mdx#ae_layer_properties_access)  you can use it as argument of any block that expects a project item. Automation Blocks will convert it to the project item of the layer's source automatically. If the layer has no corresponding project item (i.e. is a text, shape, camera or light layer, for example) the project item of the comp is used instead.
+You can also use the layer's [source item attribute](aeLayer.mdx#ae_layer_set_attribute_source_item).
+
+- **Compostions** Since comositions are project items, you can use compositions (like the [Active Comp block](aeComp.mdx#ae_active_comp), for example) as arguments for any blocks which expect a project item.
+
+
+## Project Item {#ae_item_path}
+
+<RetinaImg src="/img/blockScreenshots/AeProjectItems/ae_item_path.png" alt="Block ae_item_path"/>
+
+This block is used inside other blocks whenever you need to specify a particular project item. Just select a project item in the project panel and click the block's *refresh* icon to choose it.
+
+### Project Item vs Text
+Technically, a *Project Item* block is a simple *Text* block which allows to create the texts of project item paths very conveniently.
+
+Say you have a project item "myVideo.mp4" inside the project bin "footage", you can simply reference it with a [Text block](text.mdx#text) and enter the text `footage/myVideo.mp4`. But instead of a *Text* block, it is much more convenient to use a *Project Item* block. With the *Project Item* block you don't need to type the path manually, and instead just use the refresh button to generate it automatically.
+
+
+## Project Bin {#ae_itembin_path}
+
+<RetinaImg src="/img/blockScreenshots/AeProjectItems/ae_itembin_path.png" alt="Block ae_itembin_path"/>
+
+This block is exactly identical to the [Project Item Block](#ae_item_path), except that only allows to select project bins and no other items. By default, this block is empty, which represents the root bin of the project.
+
+## The Only Selected Project Item {#block_ae_get_only_selected_item}
+
+<RetinaImg src="/img/blockScreenshots/AeProjectItems/block_ae_get_only_selected_item.png" alt="Block block_ae_get_only_selected_item"/>
+
+In situations where you expect the user to have selected exactly one item in the project panel, you can use this block to access this selected item. The block will stop with an error message if you have no or multiple project items selected.
+
+**Item vs Bin**
+
+In the dropdown list you can set an option to accept 
+
+- only items
+- only bins
+- both items and bins
+
+In the first case, the block also stops with an error if the only selected project item is a bin and in the second case it stops with an error if it is not a bin.
+
+
+
+## For Each Project Item {#block_ae_for_all_items_in_bin}
+
+<RetinaImg src="/img/blockScreenshots/AeProjectItems/block_ae_for_all_items_in_bin.png" alt="Block block_ae_for_all_items_in_bin"/>
+
+The block is a [loop](loops.mdx) which allows to do something with all project items (or all selected project items). The blocks you plug inside this block are executed many times - names one time for each of the project items.
+
+### Parameters {#block_ae_for_all_items_in_bin_params}
+
+**my item variable**
+
+The block creates a [variable](variables.mdx) `my item`. Each time the blocks you plug inside the loop are executed, this variable has a different value - namely the [Project Item](aeProjectItems.mdx#accessProjectItem) that the loop is processing at that time. 
+
+**project bin**
+
+Here you can choose a bin of your project to only loop over the items contained in that bin. 
+If you leave this control empty, the root bin of the project panel will be used. Using the dropdown before the parameter, you can choose to process only the items in the project bin, or also the ones contained in subbins.
+
+**only selected items**
+
+With this checkbox you can limit the block to only loop over project items which are selected in the project panel. If you want to loop over all selected items of the project, make sure to set the option *project bin* to `project bin and sub-bins`, because otherwise only the selected items in the root bin of the project are considered.
+
+**allowed types**
+
+With these checkboxes you can limit the block to only loop over items of specific types. To loop over all comps of the project, for example, just keep the *composition* checkbox checked and uncheck all others.
+
+### Example
+
+This example shows one alert message for each project item in the root bin of the project panel. In the message box, the name of the respective item is shown.
+<RetinaImg src="/img/blockOther/block_ae_for_all_items_in_bin_example.png" alt="Example: Looping over project items"/>
+
+
+## List of Project Items {#block_ae_get_items_in_bin}
+
+<RetinaImg src="/img/blockScreenshots/AeProjectItems/block_ae_get_items_in_bin.png" alt="Block block_ae_get_items_in_bin"/>
+
+This block is similar to the block [For Each Project Item](#block_ae_for_all_items_in_bin), but instead of looping over the project items, it creates a list of them. The parameters are exactly the same as the [parameters of the For Each Project Item block](#block_ae_for_all_items_in_bin_params).
+
+### Example {#block_ae_get_items_in_bin_example}
+
+This script uses the *List of Project Items* in combination with the [Select Project Items](#block_ae_item_select) block, to select all footage items in the project bin with name "scene 1". Note that we have chosen `in bin and sub-bins` such that also items included in sub-bins of the bin "scene 1" will be selected.
+
+<RetinaImg src="/img/blockOther/block_ae_get_items_in_bin_example.png" alt="Example: Looping over project items"/>
+
+
+## For Each Layer with Source Item {#block_ae_for_all_layers_with_source_item}
+
+<RetinaImg src="/img/blockScreenshots/AeProjectItems/block_ae_for_all_layers_with_source_item.png" alt="Block block_ae_for_all_layers_with_source_item"/>
+
+This block is a [loop](loops.mdx) which allows to do something with all layers (of the entire project), which use a particular project item as source. If the project item is a composition, it will loop over all layers which are precomps using exactly that composition, for example. And if the project item is a video clip, it will loop over all layers which contain this video clip as source.
+
+**my layer**
+
+This block executes the blocks you plug inside of it many times, namely once for each layer, that has the given item as source. Before those blocks are executed, the [variable](variables.mdx) `my layer` is set to layer that is considered in this repetition of the loop. If the project item is used in three layers, for example, then the blocks are executed three times and each time the variable `my layer` is one of these three layers.
+
+**item(s)**
+
+Here you can either specify a single project item or an entire [list](lists.mdx) (array) of project items. The block will then loop over all layers which use one of these project items as their source.
+
+## Get Attribute of Project Item {#ae_item_get_attribute}
+
+<RetinaImg src="/img/blockScreenshots/AeProjectItems/ae_item_get_attribute.png" alt="Block ae_item_get_attribute"/>
+
+Returns one of the attributes of the given project item, like its file, frame rate or label color. For a description of all available attributes see [Set Attribute of Project Item](#ae_item_set_attribute). Note that compositions are also project items. To access properties that are specific to compositions you need to use the block [Get Attribute of Comp](aeComp.mdx#ae_comp_get_attribute) (which also accepts a project item as argument, if this project item is a comp).
+
+## Set Attribute of Project Item {#ae_item_set_attribute}
+
+<RetinaImg src="/img/blockScreenshots/AeProjectItems/ae_item_set_attribute.png" alt="Block ae_item_set_attribute"/>
+
+Sets any of the available attributes of a project item. After you choose an attribute, the inputs of the block change as needed for that attribute.
+Note that compositions are also project items. To set properties that are specific to compositions you need to use the block [Get Attribute of Comp](aeComp.mdx#ae_comp_get_attribute) (which also accepts a project item as argument, if this project item is a comp).
+
+The available attributes of project items are listed below. If an attribute is marked as read-only, you can only get but not set this attribute.
+
+### comment
+
+The comment text for a project item. To see the comments in the project panel, right-click on the title row of the project panel and choose in the menu `Columns->Comment`. This will reveal an extra column in the project panel which shows the item comment.
+
+### duration (read-only, except for comp items)
+
+The duration of the project item in seconds. For details on time values see [Ae Time](aeTime.mdx).
+
+### file {#ae_item_set_attribute_file}
+
+The [file](files.mdx#accessFile) of the project item. If you set this value, the result is the same as if you would right click the item in the project panel and choose `Replace Footage->File...`.
+
+### footage missing (read-only)
+
+A [logic value](logic.mdx) `true` or `false` indicating if the file of the project item is missing on the harddrive.
+
+### frame duration
+
+The duration of a single frame in seconds. If the frame rate of the comp is 25fps, for example, the duration is 1/25s = 0.04s.
+Don't use this value for items which have no video (like bins or still images).
+
+### frame rate
+
+The number of frames per second of the project item. Don't use this value for items which have no video (like bins or still images).
+
+### has audio (read-only)
+
+A [logic value](logic.mdx) `true` or `false` indicating if the project item has audio contents.
+
+### has video (read-only) {#ae_item_set_attribute_has_video}
+
+A [logic value](logic.mdx) `true` or `false` indicating if the project item has video contents (this is also `true` for still images).
+
+### height {#ae_item_set_attribute_height}
+
+The height of the video in pixels. Only use this if the attribute [has video](#ae_item_set_attribute_has_video) is `true`.
+See also the attributes [width](#ae_item_set_attribute_width) and [size](#ae_item_set_attribute_size).
+
+### id (read-only)
+
+A unique and persistent identification number used internally to identify an item between sessions. The value of the ID remains the same when the project is saved to a file and later reloaded. However, when you import this project into another project, new IDs are assigned to all items in the imported project. The ID is not displayed anywhere in the user interface.
+
+### label color HexCode (read-only)
+
+The label color of the project item as hex color string (like `#ff0000` for 100% red, for example).
+
+### label color id {#ae_item_set_attribute_label_color_id}
+
+The ID of the label color (0 for None, or 1 to 16 for one of the preset colors in the *Labels* preferences)
+
+### label color name {#ae_item_set_attribute_label_color_name}
+
+The label color name of the project item as configured in the *Labels* preferences (like `Red`, `Sea Foam`, or `None`). 
+
+By default, the block to set the label color name shows a convenient dropdown where you can pick any of the default label colors. Note that this dropdown does not update, when you have configured custom label color names. If you have configured custom label colors in the preferences, you can either drag a [Text](text.mdx#text) block on top of the dropdown and enter the custom label name manually, or you set the label color using the [color id](#ae_item_set_attribute_label_color_id).
+
+<Anigif src={useBaseUrl('/img/blockOther/ae_item_set_attribute_label_color_name.gif')} width="766px" />
+
+### name
+
+The name of the project item as shown in the project panel.
+
+:::danger Renaming breaks variables
+
+Note that project items are accessed in Automation Blocks by name or path. If you have stored in a [variable](variables.mdx) the path `footage/myVideo.mp4`, for example, and then rename the project item to `new name`, the old variable cannot access the project item anymore, since there exists no item with name `myVideo.mp4` in the bin `footage` anymore.
+
+Workaround: Usually it works best to only rename a project item after all other things you might want to do with it (such that you don't need to access it anymore). Alternatively you can update the variable to `footage/new name` (for example with the block [Replace in Text](text.mdx#string_replace)).
+
+:::
+
+### parent bin {#ae_item_set_attribute_parent_bin}
+
+The bin of the project panel, in which the project item is located. Set this value, to move the item to another project bin. If you enter a path of a project bin, which does not exist, yet, the block creates the bin for you.
+
+This example moves the project item `Comp 1` from the folder `work in progress` to the folder `final`:
+
+<Anigif src={useBaseUrl('/img/blockOther/ae_item_set_attribute_parent_bin.gif')} width="870px" />
+
+### pixel aspect
+
+The pixel aspect ratio of the video (1 for the default, square pixels).
+
+### proxy {#ae_item_set_attribute_proxy}
+
+The proxy [file](files.mdx#accessFile) of this item or [null](logic.mdx#logic_null) if the item has no proxy.
+When you set a proxy, it is enabled automatically. To enable/disable it later, use the attribute [user proxy](#ae_item_set_attribute_use_proxy).
+
+To remove existing proxies, set this value to [null](logic.mdx#logic_null).
+
+### selected {#ae_item_set_attribute_selected}
+
+A [logic value](logic.mdx) `true` or `false` indicating whether the item is selected in the project panel. Note that setting this attribute for an item does not change the selection of any other items (i.e. keeps everything else selected that has been selected before).
+
+To change the selection in the project panel, you can either set this attribute or use the block [Select Project Items
+](#block_ae_item_select).
+
+### size \[w,h] {#ae_item_set_attribute_size}
+
+A [list](lists.mdx) (array) containing the width and height of the video in pixels. Only use this if the attribute [has video](#ae_item_set_attribute_has_video) is `true`.
+If you only need one of the two values, use the attributes [width](#ae_item_set_attribute_width) and [height](#ae_item_set_attribute_height) instead.
+
+
+### time
+
+The current time of the item when it is being previewed directly from the Project panel (in seconds).  For details on time values see [Ae Time](aeTime.mdx).
+
+### tree path (read-only)
+
+The full path of the project item in the project panel. For the item `myVideo.mp4`in the bin `footage` the tree path would be `footage/myVideo.mp4`. To move the item into a different project bin, set the [parent bin attribute](#ae_item_set_attribute_parent_bin).
+
+If you need the path of the corresponding footage file instead of the path of the item itself, use the [attribute file](#ae_item_set_attribute_file) instead.
+
+### type (read-only) {#ae_item_set_attribute_type}
+
+One of the following [text](text.mdx) values:
+- `CompItem` if the project item is a [Composition](aeComp.mdx)
+- `FootageNoSolidItem` if the video is a footage file (video or audio or image) but not a solid (which would technically also be footage).
+- `SolidItem` if the project item is a solid
+- `FolderItem` if the project item is a project bin
+
+### type name (localized)
+
+A user-readable name for the item type; for example, `Folder`, `Footage`, or `Composition`. These names are application locale-dependent, meaning that they are different depending on the application’s interface language. Note that `Footage` can also be a solid item. To distinguish between solid and other footage, and get language-independent values, use the attribute [Type](#ae_item_set_attribute_type) instead.
+
+| en_US | Composition    | Folder     | Footage             |
+|-------|----------------|------------|---------------------|
+| de_DE | Komposition    | Ordner     | Footage             |
+| es_ES | Composición    | Carpeta    | Material de archivo |
+| fr_FR | Composition    | Dossier    | Métrage             |
+| it_IT | Composizione   | Cartella   | Metraggio           |
+| ja_JP | コンポジション | フォルダー | フッテージ          |
+| ko_KR | 컴포지션       | 폴더       | 푸티지              |
+| pt_BR | Composição     | Pasta      | Gravação            |
+| ru_ru | Композиция     | Папка      | Видеоряд            |
+| zh_CN | 合成           | 文件夹     | 素材                |
+
+### use proxy {#ae_item_set_attribute_use_proxy}
+
+A [logic value](logic.mdx) `true` or `false`. When true, a proxy is used for the item.
+
+You can set this value if you want to enable or disable an already configured proxy for this project item. To set a new proxy (or remove it) use the attribue [proxy](#ae_item_set_attribute_proxy) instead.
+
+### used in (comp list) (read-only)
+
+A [list](lists.mdx) (array) of the [compositions](aeComp.mdx) which use this footage item.
+
+### width {#ae_item_set_attribute_width}
+
+The width of the video in pixels. Only use this if the attribute [has video](#ae_item_set_attribute_has_video) is `true`.
+See also the attributes [height](#ae_item_set_attribute_height) and [size](#ae_item_set_attribute_size).
+
+
+## Select Project Items {#block_ae_item_select}
+
+<RetinaImg src="/img/blockScreenshots/AeProjectItems/block_ae_item_select.png" alt="Block block_ae_item_select"/>
+
+Use this block to control which items are selected in the project panel. As argument you  can either give a single [Project Item](aeProjectItems.mdx#accessProjectItem) or a [list](lists.mdx) (array) of project items.
+
+### Parameters
+
+- `select project items` selects all the given project items and deselects everything else that has been selected before.
+- `add to project selection` selects all the given project items and also keeps everything selected that has been selected before.
+- `remove from project selection` deselects all given project items (and ignores the ones that are not selected anyway).
+
+
+### Example {#block_ae_item_select_example}
+
+If you select some footage layers in the active composition and then run this script, it will select their corresponding project items in the project panel, too:
+
+<RetinaImg src="/img/blockOther/block_ae_item_select_example.png" alt="Example: select the project items of selected layers"/>
+
+To retrieve a list of the selected footage layer, we use the block [List of Layers](aeLayer.mdx#ae_layer_list). Also note that Automation Blocks notices that the *Select Project Items* block expects project items, but you give it layers instead. Therefore, [according to the rules outlined here](#accessProjectItem), Automation Blocks converts the list of layers into a list of their corresponding project items automatically.
+
+Another example for the *Select Project Items* block can be found [here](#block_ae_get_items_in_bin_example).
+
+:::tip Get/Set Selected Attribute
+
+With the blocks [Get Attribute of Project Item](#ae_item_get_attribute) and [Set Attribute of Project Item](#ae_item_set_attribute), you can also retrieve and change the selection status of an individual project item (by choosing the attribute [Selected](#ae_item_set_attribute_selected)).
+
+:::
+
+## Delete Project Items {#block_ae_item_delete}
+
+<RetinaImg src="/img/blockScreenshots/AeProjectItems/block_ae_item_delete.png" alt="Block block_ae_item_delete"/>
+
+This block deletes project items from the project panel. You can give either a single [Project Item](aeProjectItems.mdx#accessProjectItem) or a [List of Project Items](#block_ae_get_items_in_bin) as argument.
+
+### Example
+
+This script deletes all project items which are currently selected in the project panel. To create a list of all selected project items, it uses the block [List of Project Items](#block_ae_get_items_in_bin).
+
+<RetinaImg src="/img/blockOther/block_ae_item_delete_example.png" alt="Example:Delete all selected items from project panel"/>
+
+
+## Project Item Exists {#ae_item_exists}
+
+<RetinaImg src="/img/blockScreenshots/AeProjectItems/ae_item_exists.png" alt="Block ae_item_exists"/>
+
+This block returns a [logic value](logic.mdx) which is `true`, if the given project item exists.
+
+See also the [Property Exists](aeLayerProperties#ae_property_exists) block.

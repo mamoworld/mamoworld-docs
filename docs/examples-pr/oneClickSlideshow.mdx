@@ -1,0 +1,89 @@
+---
+sidebar_position: 2
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+import Youtube from '../../src/components/YouTube'
+
+# One-Click Slideshow
+
+## Overview
+
+If you ever need to create a slideshow from a bunch of photos, this script is for you! Just run the script, choose a folder with images (and optionally also music) and it creates a slideshow from start to finish and adds it to Adobe Media Encoder queue.
+
+In more detail, the script does the following:
+
+1. it imports the entire folder you choose (including subfolders) in your Premiere Pro project
+2. it creates a new sequence
+3. it inserts all images it can find in your folder (or subfolders) into that sequence
+4. it scales the images to fill the frame accuratly and adds a subtle pan and zoom (a.k.a. Ken Burns effect) to bring the images to life. The effect is achieved with position and scale keyframes such that you can easily tweak it later, if you want.
+5. if there is any music in your folder (or subfolders), it inserts as many of those songs as necessary into the sequence to cover the entire duration of the slideshow. The last song is also faded out at the end of the slideshow using volume keyframes.
+6. it adds the sequence to the render queue
+
+## Usage
+
+<Youtube id="JZTiUNnHtEI" />
+
+1. Run the script *one click slideshow* with the Automation Blocks Launcher (or with the Automation Blocks Editor)
+2. In the dialog that pops up, choose a folder that contains the images you want to use for the slideshow. If you want background music, make sure the music file(s) are in that folder, too. Both images and music can also be in subfolders.
+3. Wait until the script is done - this may take about a minute.
+4. Play the sequence to check if everything looks good and if so, start the render job that the script has already added to Media Encoder for you. Of course, you can also do whatever manual tweaks you want in Premiere.
+
+## Customization Tips
+
+If you open the script in the Automation Blocks Editor panel, you will see that it is pretty long (which is no surprise, since it does quite a lot of things). But fortunately the script is structured such that most of the customizations can be done in the first few lines.
+
+<RetinaImg src="/img/examples-pr/oneClickSlideshow/oneClickSlideshow_customization_overview.png" alt="customization overview"/>
+
+### Image Duration
+
+To change how long each image is visible, you don't even need to modify the script. Just go to the Premiere Pro Preferences and adjust the  `Still Image Default Duration` in the *Timeline* section to your liking.
+
+<RetinaImg src="/img/examples-pr/oneClickSlideshow/still_image_default_duration.png" alt="customization overview"/>
+
+### Preselect a Folder
+
+You can customize the folder, where the *Choose Folder* dialog starts in the same way as we [preseleted a file in the YouTube Chapter Export script](youTubeChapterMarkers#preselectFile). Just drag a [Folder block](../block-reference/files#block_extendscript_folder) onto the *preselected folder* parameter of the *Select Folder* dialog and choose the folder you want.
+
+<Anigif src={useBaseUrl('/img/examples-pr/oneClickSlideshow/step_2_preselect_folder.gif')} />
+
+### Zoom Effect Intensity
+
+<RetinaImg src="/img/examples-pr/oneClickSlideshow/oneClickSlideshow_customization_scale_factor.png" alt="customization of scale factor"/>
+
+In the second line of the script you find the [variable](../block-reference/variables.mdx) `scale factor percent` which controls the zoom at the beginning of each image. It is set to 120 by default, which means that each image starts with a zoom of 120% and ends with 100% (where 100% means that the image exactly fills the frame). If you set the parameter to 100, the images do not zoom at all, since then both start and end are at 100%. If you set them to higher numbers than 120, the zoom effect becomes more intense.
+
+### Video Format, Resolution, Framerate
+
+By default, the script creates a 1920x1080 sequence at 30pfs which is good for a typical YouTube video. If you want a different format, you can control both the settings of the sequence in Premiere Pro (line 3 of the script) and the output Preset that is used in Adobe Media Encoder (line 4).
+
+<RetinaImg src="/img/examples-pr/oneClickSlideshow/oneClickSlideshow_customization_format.png" alt="customization of video format"/>
+
+If you want to render a 4K video, try 
+
+- `RED R3D/HD 4K/4K HD 16x9 29.97` as sequence preset and
+- `H264 YouTube 2160p 4K Ultra HD` as export preset
+
+If you want to have full control, you can even create your own custom presets for both the sequence and the export. For details on that see the [New Sequence from Preset block](../block-reference/prSequence#block_pr_new_sequence) and the [Add to Media Encoder Queue block](../block-reference/prRendering#block_media_encoder_render).
+
+### Output File
+
+By default, the file that is added to the renderqueue is named `slideshow.mp4` and it is put in the same folder that contains the images and music of your slideshow:
+
+<RetinaImg src="/img/examples-pr/oneClickSlideshow/oneClickSlideshow_customization_output_file.png" alt="customization of output file"/>
+
+Here we customized the output file such that it is in the same folder as our Premiere Pro project and also has the same name as the project (except for the file extension `.mp4` instead of `.prproj`):
+
+<RetinaImg src="/img/examples-pr/oneClickSlideshow/oneClickSlideshow_customization_output_file_project.png" alt="customization of output file"/>
+
+This video shows how we did this customization:
+
+<Anigif src={useBaseUrl('/img/examples-pr/oneClickSlideshow/step_3_output_file.gif')} />
+
+### Don't add to Render Queue
+
+Maybe you always want to customize the slideshow manually before you actually render it. Then it can be anyoing that the slideshow is added to the renderqueue automatically. To change this, just disable (or delete) the [Add to Media Encoder Queue block](../block-reference/prRendering#block_media_encoder_render) at the very bottom of the script.
+
+<Anigif src={useBaseUrl('/img/examples-pr/oneClickSlideshow/step_4_dont_render.gif')} />

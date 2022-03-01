@@ -1,0 +1,104 @@
+---
+sidebar_position: 25
+---
+
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import Anigif from "../../src/components/Anigif";
+import RetinaImg from "../../src/components/RetinaImg";
+
+# Ae Keyframes
+
+The blocks in this category allow you to work with keyframes on [properties](aeLayerProperties.mdx) in After Effects. 
+
+## Add Keyframes {#ae_keyframes_apply}
+
+<RetinaImg
+  src="/img/blockScreenshots/AeKeyframes/ae_keyframes_apply.png"
+  alt="Block ae_keyframes_apply"
+/>
+
+This block can create keyframes on any keyframeable property. It is your keyframe copy and paste operation on steriods. If the property already has keyframes, it can even adjust those for you - say you add keyframes which move the layer 100 pixels downwards, then it can move all keyframes after the newly inserted ones 100 pixels down, too.
+
+To use the block, you need to specify the following parameters
+
+**keyframe list**: tell your block script, which keyframes you want to add, you can either us a [Static Keyframe List](#ae_keyframe_json_const) or a [Dynamic Keyframe List](#ae_keyframe_json_from_prop). By default, the *Add Keyframes* block comes with a static keyframe list. If you want to use a dynamic one instead, just create a *Dynamic Keyframe List* block and drag it ontop of the static list to replace it.
+
+**property**: choose the [Layer Property](aeLayerProperties.mdx#ae_layer_properties_access) to which the keyframes should be applied
+
+**time**: the [time](aeTime.mdx) where the first new keyframe should be located (the distance of the other keyframes depends on the keyframe data you provide).
+
+### Adjustment of Sourrounding Keyframes
+
+The two dropdowns at the bottom of the block allow you to adjust the existing keyframes to the newly inserted ones - or also vice versa! The first dropdown controls the behavior of the keyframes before the newly inserted ones and the second dropdown controls the behavior of the keyframes after the newly inserted ones.
+
+#### Adjust Keyframes before newly inserted ones
+
+<RetinaImg src="/img/blockOther/ae_keyframes_apply_merge_option.png" alt="Merge Options Keys before"/>
+
+Here you have the following options:
+- **don't change:** keeps all keyframes before the new ones exactly as they are and pastes the new keyframes without modifying them in any way.
+- **offset (to fit seamlessly):** offsets all the keyframes before the new ones such that the last one of them ends exactly at the value, where the first newly inserted keyframe is. Example: Say you already have two scale keyframes on your layer, which scale it from 20% to 50% and now you want to append after that two keyframes which scale from 60% to 80%. Then this option will change the first to keyframes to 30% and 60%, i.e. add 10 to them to ensure they end at 60%, which is exactly the value with which the new inserted keyframes start.
+- **offset new keyframes to fit seamlessly to:** This option adjusts the newly inserted keyframes such that they start exactly where the last keyframe before the new ones ends. Example: If you already have two scale keyframes which animate the layer from 20% scale to 50% and you insert new keyframes with an animation from 60% to 80% after that, then those new keyframes will be changed to 50% and 70% to make sure they start exactly at the 50% where the animation of the existing keyframes ended.
+
+- **hold last** this option just turns the last existing keyframe before the new ones into a hold keyframe. That way you can ensure that the transition from the previous keys to the start of the new keys happens appruptly at the first new key.
+
+#### Adjust Keyframes after newly inserted ones
+
+<RetinaImg src="/img/blockOther/ae_keyframes_apply_merge_option_2.png" alt="Merge Options Keys after"/>
+
+Here you have the following options:
+
+- **don't change:** keeps all keyframes before the new ones exactly as they are and pastes the new keyframes without modifying them in any way.
+- **offset (to fit seamlessly):** offsets all the keyframes after the new ones such that the first of them starts exactly at the value, where the last newly inserted keyframe iends. Example: Say you already have two scale keyframes on your layer, which scale it from 20% to 50% and now you want to insert BEFORE those existing keys two keyframes which scale from 60% to 80%. Then this option will change the old keyframes to 80% and 110%, i.e. i.e. they still scale up by 30% but instead of starting from 20% now they start from the 80%, where the newly inserted keyframes end.
+
+- **hold first** this option just turns the first existing keyframe after the new ones into a hold keyframe. That way you can ensure that the transition from the last newly inserted key to the next key happens abruptly immediately after the last newly inserted key.
+
+:::tip Seamless Animation
+
+A very powerful combination for seamless animations is 
+
+- **offset new keyframes to fit seamlessly to existing keyframes before new keyframes** combined with
+- **offset (to fit seamlessly) existing keyframes after new keyframes**
+
+That way, the newly inserted keyframes and the existing keyframes after them are all shifted as needed to create a seamless animation.
+
+:::
+
+
+## Static Keyframe List {#ae_keyframe_json_const}
+
+<RetinaImg
+  src="/img/blockScreenshots/AeKeyframes/ae_keyframe_json_const.png"
+  alt="Block ae_keyframe_json_const"
+/>
+
+Static Keyframe lists save the keyframe data inside the block - in other words, they contain one hard-coded list of keyframes (including all easing information). 
+
+<Anigif src={useBaseUrl('/img/blockOther/ae_keyframe_json_const_load_keys.gif')} width="378px" />
+
+Using a static keyframe list is very simple: Just select any keyframes (of a single property) in the Ae timeline and click the refresh icon of this block. The text field of the block now contains the keyframe data. To apply those keyframes to a property, use the block [Add Keyframes](#ae_keyframes_apply). 
+
+:::tip JSON data
+
+Technically, the result of this block is a text in a json format (which is identical to the data shown in the block's text field) . This allows you to write the data to a text file, for example, or bind it to a [variable](variables.mdx).
+
+:::
+
+
+## Dynamic Keyframe List {#ae_keyframe_json_from_prop}
+
+<RetinaImg
+  src="/img/blockScreenshots/AeKeyframes/ae_keyframe_json_from_prop.png"
+  alt="Block ae_keyframe_json_from_prop"
+/>
+
+This block reads keyframe data from a [Layer Property](aeLayerProperties.mdx#ae_layer_properties_access) and returns it as a json string.
+In contrast to the [Static Keyframe List](#ae_keyframe_json_const), this block does not store any keyframe data, but just stores in information from which property the keyframe data should be retrieved. In other words, instead of saving a fixed set of keyframes with your script, this block reads keyframe data from the currently open Ae project in real time, each time the block is executed.
+
+
+
+The dropdown option of the block allows you to specify which keyframes of the property you want to read and has the following options:
+- **all keyframes**
+- **selected keyframes**
+- **keyframes in workarea**
+- **keyframes in time range** (if you choose this, two more options appear to select a start and end time)

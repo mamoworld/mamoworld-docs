@@ -1,0 +1,60 @@
+---
+sidebar_position: 10
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Files Text
+
+These blocks read and write text files from your hard-drive.
+You don't need to worry about details like opening or closing files. Automation Blocks opens the files when you try to read/write them the first time and closes them automatically when the script is done.
+
+:::tip Text Formats
+
+These blocks just support the simple text format (.txt) and cannot parse rich text (.rtf)
+
+:::
+
+## Write Text File {#block_extendscript_text_file_write}
+
+<RetinaImg src="/img/blockScreenshots/FilesText/block_extendscript_text_file_write.png" alt="Block block_extendscript_text_file_write"/>
+
+
+Writes the given text to a text file. If the text file already exists, the new text is appended to the end of the file. If you don't want that, [delete the file](files#block_extendscript_delete_file) first.
+
+If the file does not yet exist, it will be created.
+
+#### Create Folder if Not Existing 
+
+If this option is enabled, the folder where the text file is located (and any of its parent folders) are created if they don't exist, yet. This means if you want to create the file in a new folder, you don't have to worry about creating the folder before writing the file.
+
+:::tip format with pattern
+
+If the text you want to write has a complex structure, you can combine the *Write Text File* block with the [Text Pattern Block](text#string_pattern). The script *export marker to srt file* is a good example of this.
+
+:::
+
+## For All Lines of Text File{#extendscript_text_file_for_all_lines}
+
+<RetinaImg src="/img/blockScreenshots/FilesText/extendscript_text_file_for_all_lines.png" alt="Block extendscript_text_file_for_all_lines"/>
+
+
+This block reads a text line by line.
+
+The blocks that you nest inside this block are executed once for each line of the text. During that execution, the text of the line is accessible in the [variable](variables.mdx) `my line`.
+
+## Read Text File {#extendscript_text_file_read}
+
+<RetinaImg src="/img/blockScreenshots/FilesText/extendscript_text_file_read.png" alt="Block extendscript_text_file_read"/>
+
+
+Reads either the entire contents of a text file, or just a single line. If you choose to read a single line, it will start with the first line and each subsequent call will read the next line. However, to read the entire file line by line, the [For All Lines of Text File Block](filesText#extendscript_text_file_for_all_lines) is the better option.
+
+## End of File {#extendscript_text_file_eof}
+
+<RetinaImg src="/img/blockScreenshots/FilesText/extendscript_text_file_eof.png" alt="Block extendscript_text_file_eof"/>
+
+
+When you read a file line by line using the [Read Text File Block](filesText#extendscript_text_file_read), you can use this block to check if the end of the file has been reached. It returns the logic value `true` if the end of the file has been reached and `false` if there is still content left to read.

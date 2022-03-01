@@ -1,0 +1,198 @@
+---
+sidebar_position: 17
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Pr Marker
+
+### Accessing a Particular Marker {#accessMarker}
+
+In contrast to [projects](prProject#accessProject), [project items](prProjectItems#accessProjectItem), [sequences](prSequence#accessSequence) and [clips](prSequenceClips#accessSequenceClip), markers are **not** represented as texts in Automation Blocks. Therefore, the only way to access a particular marker is by using the blocks in this section (in particular [For Each Marker](prMarker#pr_marker_for_all_of_project_item) and [Get Marker](prMarker#pr_marker_get)).
+
+## For Each Marker {#pr_marker_for_all_of_project_item}
+
+<RetinaImg src="/img/blockScreenshots/PrMarker/pr_marker_for_all_of_project_item.png" alt="Block pr_marker_for_all_of_project_item"/>
+
+
+This block iterates over all markers (or all markers of a particular type) of the given sequence or project item. The blocks you nest inside this block are called one time for each of those markers. During this execution, the respective marker is stored in the [variable](variables.mdx) `my marker`. 
+
+#### sequence or project item
+
+Here you can specify the sequence or project item whose markers you want to modify. You can also provide a clip here. If you do, the block uses the marker of the project item of that clip (which are also the markers that Premiere Pro shows on clips in the timeline).
+
+#### type
+
+With the type filter you can limit the result to only the markers of a particular type. The available types are the same as in Premiere Pro's *Edit Marker* Dialog:
+
+- *all markers*
+- *comment marker*
+- *chapter marker*
+- *segmentation marker*
+- *web link*
+- *Flash Clue Point*
+
+## Get Marker {#pr_marker_get}
+
+<RetinaImg src="/img/blockScreenshots/PrMarker/pr_marker_get.png" alt="Block pr_marker_get"/>
+
+
+#### marker number
+
+The numbering of markers starts with `1` for the first marker. To figure out how many markers (or how many markers of a particular type) a sequence or project item has, you can use the [Get Number of Markers Block](prMarker#pr_marker_get_num). If you want to do something with each marker, the [For Each Marker Block](prMarker#pr_marker_for_all_of_project_item) is the much faster and easier solution.
+
+#### type
+
+With the type filter you can limit the result to only the markers of a particular type. 
+If you choose `comment marker`, for example, marker `1` is the first marker of type comment.
+The available types are the same as in Premiere Pro's *Edit Marker* Dialog:
+
+- *all markers*
+- *comment marker*
+- *chapter marker*
+- *segmentation marker*
+- *web link*
+- *Flash Clue Point*
+
+#### sequence/project item
+
+Here you can specify the sequence or project item whose markers you want to modify. You can also provide a clip here. If you do, the block uses the marker of the project item of that clip (which are also the markers that Premiere Pro shows on clips in the timeline).
+
+
+:::tip use variables
+
+Usually you want to do several things with the same marker (like changing both its name and comment, or start and end time).
+Instead of creating one copy of this block each time you need to access the marker, it is better to use this block just one time and store the result in a [variable](variables.mdx). Then you can use the variable to perform all the changes on the marker.
+
+This not only creates cleaner code, it also calculates much faster.
+
+:::
+
+## Get Number of Markers {#pr_marker_get_num}
+
+<RetinaImg src="/img/blockScreenshots/PrMarker/pr_marker_get_num.png" alt="Block pr_marker_get_num"/>
+
+
+This block returns the number of markers of the given sequence, project item or clip.
+
+#### type
+
+With the type filter you can limit the result to only the markers of a particular type:
+
+- *all markers*
+- *comment marker*
+- *chapter marker*
+- *segmentation marker*
+- *web link*
+- *Flash Clue Point*
+
+
+## Create Marker {#pr_marker_create}
+
+<RetinaImg src="/img/blockScreenshots/PrMarker/pr_marker_create.png" alt="Block pr_marker_create"/>
+
+
+Creates a new marker in the given sequence, project item or clip at the given time.
+
+#### Time
+
+The time is given in seconds (see the blocks in [Pr Time](prTime) for converting between different time and timecode formats). For sequences, a time of `0` corresponds to the beginning of the sequence, and for clips and project items, a time of `0` corresponds to the beginning of the corresponding footage.
+
+#### Save it in Variable
+
+The block saves the created marker in the [variable](variables.mdx) `my marker`. Hence, if you want to set marker properties like the name, comment, type, duration, color etc., you can use this variable with the [Set Property of Marker Block](prMarker#pr_marker_set_property).
+
+## Get Property of Marker {#pr_marker_get_property}
+
+<RetinaImg src="/img/blockScreenshots/PrMarker/pr_marker_get_property.png" alt="Block pr_marker_get_property"/>
+
+
+This block can retrieve any of the properties of a marker listed below. As a marker, you need to give a marker [variable](variables.mdx), as created with the [For Each Marker Block](prMarker#pr_marker_for_all_of_project_item), the [Get Marker Block](prMarker#pr_marker_get), or the [Create Marker Block](prMarker#pr_marker_create).
+
+### start time
+
+The start time of the marker in seconds. For sequence markers, `0` is the beginning of the sequence, for project items and clips, `0` is the beginning of the corresponding footage.
+
+### end time
+
+The end time of the marker in seconds. For sequence markers, `0` is the beginning of the sequence, for project items and clips, `0` is the beginning of the corresponding footage.
+
+
+### duration
+
+The duration of the marker in seconds. If you set the duration, it will change the end time and keep the start time unchanged.
+
+### name
+
+The name of the marker.
+
+### comments
+
+The comments of the marker. In contrast to the marker name, this text can have multiple lines - you can use the *multiline text block* in the *Text* section for that.
+
+### type
+
+The type of the marker. One of these texts:
+
+- `Comment` 
+- `Chapter`
+- `Segmentation`
+- `WebLink`
+
+### color
+
+The color of the marker. One of these texts:
+
+- `Green`
+- `Red`
+- `Purple`
+- `Orange`
+- `Yellow`
+- `White`
+- `Blue`
+- `Cyan`
+
+### color index
+
+The color index - a number between `0` and `7`, where `0` represents `Green` and `7`represents `Cyan`.
+If you set this value, you can also give higher (or even negative) numbers, and Automation Blocks will then start to loop the colors. So `8`is the same as `0`, `9`is the same as `1`, etc.
+
+### web link URL
+
+The web link URL (only for markers of type `WebLink`). If you set this value, the marker type is switched to `WebLink` automatically.
+
+### web link frame target
+
+The web link frame target (only for markers of type `WebLink`). If you set this value, the marker type is switched to `WebLink` automatically.
+
+### guid (unique ID)
+
+The unique identifier of the marker, created at the time of instantiation.
+
+## Set Property of Marker {#pr_marker_set_property}
+
+<RetinaImg src="/img/blockScreenshots/PrMarker/pr_marker_set_property.png" alt="Block pr_marker_set_property"/>
+
+
+This block can set all kinds of properties of a marker. For a detailed description of which properties can be set, read the documentation of the [Get Property of Marker Block](prMarker#pr_marker_get_property).
+
+## Delete Marker {#pr_marker_delete_one}
+
+<RetinaImg src="/img/blockScreenshots/PrMarker/pr_marker_delete_one.png" alt="Block pr_marker_delete_one"/>
+
+
+This block deletes a single marker of the given sequence, project item or clip. Marker numbers start with `1` for the first marker.
+
+#### type
+
+If you choose a particular type of marker, the marker number only takes markers of this type into account.
+So if you choose `comment marker` instead of `all markers`, `3` denotes the third comment marker, for example.
+
+## Delete All Markers {#pr_marker_delete_all}
+
+<RetinaImg src="/img/blockScreenshots/PrMarker/pr_marker_delete_all.png" alt="Block pr_marker_delete_all"/>
+
+
+This block deletes all markers of the given sequence, project item or clip. You can also choose to only delete all markers of a particular type.

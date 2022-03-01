@@ -1,0 +1,325 @@
+---
+sidebar_position: 22
+---
+
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import Anigif from "../../src/components/Anigif";
+import RetinaImg from "../../src/components/RetinaImg";
+
+# Ae Comp
+
+### Accessing a Particular Composition {#accessComp}
+
+Comps are project items. Hence, if you need to give a block a comp as argument, you can access the exactly in the same way as you [access any other project items](aeProjectItems.mdx#accessProjectItem). To access the currently active composition, you can use the block [Active Compositon](#ae_active_comp).
+
+
+## Active Composition {#ae_active_comp}
+
+<RetinaImg
+  src="/img/blockScreenshots/AeComp/ae_active_comp.png"
+  alt="Block ae_active_comp"
+/>
+
+Returns the active composition of the project or throws an error if there is no active composition.
+
+## Has Active Composition {#ae_has_active_comp}
+
+<RetinaImg
+  src="/img/blockScreenshots/AeComp/ae_has_active_comp.png"
+  alt="Block ae_has_active_comp"
+/>
+
+Returns the [Logic value](logic.mdx) `true` or `false` indicating if there is an active composition or not. You can use it with an [If Block](logic.mdx/#controls_if) to execute some code only if there is an active composition. This script shows an alert message with the name of the active composition if ther is one and shows the message `there is no active composition` otherwise:
+
+<RetinaImg
+  src="/img/blockOther/ae_has_active_comp_example.png"
+  alt="Example: Checking if project has an active comp"
+/>
+
+## New Composition {#ae_new_comp}
+
+This block creates a new composition in the project and saves it in the [variable](variables.mdx) myComp (such that you can easily access it for subsequent operations on the comp).
+There are two ways to create a new composition with this block - either you create an empty comp or create it with the help of some clips.
+
+### Creating an Empty Comp
+
+<RetinaImg
+  src="/img/blockScreenshots/AeComp/ae_new_comp.png"
+  alt="Block ae_new_comp"
+/>
+
+If you choose the option `empty composition`, you can specify
+
+- **name** of the new comp,
+- **target bin** inside the Ae project where the new comp should be placed (see the [Project Bin Block](aeProjectItems.mdx#ae_itembin_path) for details)
+- **width** and **height** of the new comp in pixels
+- **pixel aspect** (use 1 for square pixels)
+- **duration** of the new comp (like `10s` or `100 frames`, if you specify just a number it will be treated as number of seconds)
+- **frame rate** - the number of frames per second
+
+### Creating a Comp with Clips
+
+<RetinaImg
+  src="/img/blockOther/ae_new_comp_clips.png"
+  alt="Block ae_new_comp"
+/>
+
+If you choose the option `comp with clip(s)`, if will create a composition whose size, duration etc fits to the clips you provide and inserts the clips into it.
+
+You can specify the following parameters:
+
+- **name** of the new comp,
+- **target bin** inside the Ae project where the new comp should be placed (see the [Project Bin Block](aeProjectItems.mdx#ae_itembin_path) for details)
+- **source clip(s) or bin(s)** here you can specify either a single [project item](#ae_item_path) or [bin](aeProjectItems.mdx#ae_itembin_path) or also entire [lists](lists.mdx) of them. If you specify a bin, it will use all project items inside the bins (but not items included in subbins). The created comp will include all provided clips and will have the width, height, pixel aspect and frame rate of the first video clip.
+- **layer order** must be one of
+  - `stack`: each clip starts at the beginning of the comp
+  - `sequence`: each clip starts where the previous clip ends
+  - `sequence reverse`: like `sequence` except that the layer order is reversed (i.e layer 1 will be the last clip)
+  - `sequence (audio and video separately)`: like `sequence` except that if you have both audio and video (or image) files, those will be treated as separate groups. Example: If you want to create an image slideshow with music, you can use this option. It will sequence the image files such that they show up one after the other and will sequence the music files such that they play one after the other while the images are shown.
+  - `sequence (audio and video separately)`: a combination of `sequence reverse` and `sequence (audio and video separately)`
+- **still image duration** is only used if your clips contain still images. You can use values like `10s` or `100 frames`, if you specify just a number it will be treated as number of seconds.
+- **overlap duration** is only used if you choose one of the `Sequence`options as _Layer Order_. In that case, it speficies how much two adjacent clips overlap in time.Use values like `10s` or `100 frames`, if you specify just a number it will be treated as number of seconds)
+
+## Get Attribute of Comp {#ae_comp_get_attribute}
+
+<RetinaImg
+  src="/img/blockScreenshots/AeComp/ae_comp_get_attribute.png"
+  alt="Block ae_comp_get_attribute"
+/>
+
+Returns one of the attributes of the given composition, like its active camera, number of layers or motion blur settings. For a description of all available attributes see [Set Attribute of Comp](#ae_comp_set_attribute). Note that compositions are also project items. To access properties that are available on all project items (like the project bin where it is located) you need to use the block [Get Attribute of Project Item](aeProjectItems#ae_item_get_attribute) (which also accepts comps as argument).
+
+## Set Attribute of Comp {#ae_comp_set_attribute}
+
+<RetinaImg
+  src="/img/blockScreenshots/AeComp/ae_comp_set_attribute.png"
+  alt="Block ae_comp_set_attribute"
+/>
+
+Sets any of the available attributes of a composition. After you choose an attribute, the inputs of the block change as needed for that attribute.
+Note that compositions are also project items. To set properties that are available on all project items (like the project bin where it is located) you need to use the block [Set Attribute of Project Item](aeProjectItems#ae_item_set_attribute) (which also accepts comps as argument).
+
+The available attributes of comps are listed below. If an attribute is marked as read-only, you can only get but not set this attribute.
+
+### active camera (read-only) {#ae_comp_set_attribute_active_camera}
+
+The layer that is the active camera of the given composition. If the composition has no active camera, it throws an error. TO check if the composition has an active camera, use the attribute [has active camera](#ae_comp_set_attribute_has_active_camera).
+
+### background color
+
+The background color as configured in the composition settings. If you get the property, the result is a hex string (like `#00ff00`). If you set it, you can provide the color in many formats - see [Ae Color](aeColor.mdx) for details.
+
+### current time
+
+The current time (location of the playhead) in seconds. The time is measured relative to the start of the composition, i.e. the first frame is always at 0. If you set the current time, you can specify it in various formats like `1s` or `1:15` `frame 100`. See [Ae Time](aeTime.mdx) for details.
+
+If your comp starts with a different time than 0 and you want to take that into account, you need to add the [Display Start Time](#ae_comp_set_attribute_display_start_time) to this value.
+
+### display start frame {#ae_comp_set_attribute_start_frame}
+
+Returns the frame number of the first frame of the composition (as configured by the _start timecode_ in the composition settings). Note that this value is a frame number and not a time code.
+
+### display start time (s) {#ae_comp_set_attribute_display_start_time}
+
+Same as [display start frame](#ae_comp_set_attribute_start_frame) but the result is a time in seconds instead of frames.
+
+### down sample factor (resolution)
+
+<RetinaImg src="/img/blockOther/comp_attribute_down_sampling_factor.png" alt="After Effects Down Sampling Factor"/>
+
+The factor by which the x and y resolution of the Composition panel is
+downsampled.
+You can specify either a single number, or a [list](lists.mdx) (array) of two numbers to set different values for x and y. 
+
+**Examples:** 
+
+To do all calculations in full resolution, you can either pass `1` or a list `[1,1]`. A value of `4` sets the resolution to *Quarter*.
+
+The list `[1,4]` calculates every pixel in x dimension (100%) but only every 4th pixel in y dimention (25%).
+
+### duration
+
+The duration of the composition in seconds. For details on time values see [Ae Time](aeTime.mdx).
+
+### Essential Graphics name
+
+<RetinaImg src="/img/blockOther/comp_attribute_essential_graphics_name.png" alt="After Effects Essential Graphics Name"/>
+
+The name for the comp as specified in the Essential Graphics panel (not the same as the [name of the comp](#ae_comp_set_attribute_name)).
+The name in the Essential Graphics panel is used for the file name of an exported Motion Graphics template.
+
+### frame blending
+
+<RetinaImg src="/img/blockOther/comp_attribute_frame_blending.png" alt="After Effects Frame Blending Attribute"/>
+
+The [logic value](logic.mdx) `true` or `false`, indicating if Frame Blending is enabled for the composition.
+
+### frame duration (s)
+
+The duration of a single frame in seconds. If the frame rate of the comp is 25fps, for example, the duration is 1/25s = 0.04s.
+
+### frame rate
+
+The number of frames per second of the comp.
+
+### has active camera (read-only) {#ae_comp_set_attribute_has_active_camera} 
+
+A [logic value](logic.mdx) `true`or `false` indicating if the comp has an active camera or not. If the value is `true`, you can retrieve the active camera layer with the attribute [active camera](#ae_comp_set_attribute_active_camera)
+
+### height {#ae_comp_set_attribute_height}
+
+The height of the composition in pixels (see also attribute [width](#ae_comp_set_attribute_width) and [size](#ae_comp_set_attribute_size).
+
+### hide shy layers
+
+<RetinaImg src="/img/blockOther/comp_attribute_shy.png" alt="After Effects Shy Layers"/>
+
+A [logic value](logic.mdx) `true` or `false` indicating whether shy layers should be hidden in the timeline or not.
+
+### motion blur {#ae_comp_set_attribute_motion_blur}
+
+<RetinaImg src="/img/blockOther/comp_attribute_motion_blur.png" alt="After Effects Enable Motion Blur"/>
+
+A [logic value](logic.mdx) `true` or `false` indicating whether motion blur is enabled for the comp or not. 
+
+Note that you can also activate motion blur [for individual layers](aeLayer.mdx#ae_layer_set_attribute_motion_blur).
+
+### motion blur - adaptive sample limit
+
+The *Adaptive Sample Limit* value in the *Advanced* tab of the *Composition Settings*. Must be an integer number in the range between 2 and 64. If you provide numbers outside that range, Automation Blocks will clip them for you to stay in that range.
+
+### motion blur - samples per frame
+
+The *Samples per Frame* value in the *Advanced* tab of the *Composition Settings*. Must be an integer number in the range between 20 and 256. If you provide numbers outside that range, Automation Blocks will clip them for you to stay in that range.
+
+### motion blur - shutter angle
+
+The *Shutter Angle* value in the *Advanced* tab of the *Composition Settings*. Must be an integer number in the range between 0 and 720 degrees. If you provide numbers outside that range, Automation Blocks will clip them for you to stay within that range.
+
+### motion blur - shutter phase
+
+The *Shutter Phase* value in the *Advanced* tab of the *Composition Settings*. Must be an integer number in the range between -360 and 360 degrees. If you provide numbers outside that range, Automation Blocks will clip them for you to stay within that range.
+
+### name {#ae_comp_set_attribute_name}
+
+The name of the composition (which is identical to the name of the project item in the project panel).
+
+### number of layers (read-only)
+
+The number of layers that the composition has. To do something with all layers, use the block [For Each Layer](aeLayer.mdx#ae_layer_for_all) and to get a list of all layers, you can also use the block [List of Layers](aeLayer.mdx#ae_layer_list).
+
+### preserve nested framerate
+
+A [logic value](logic.mdx) `true` or `false` representing the option *"Preserve frame rate when nested or in render queue"* in the *Advanced* tab of the *Composition Settings*.
+
+### preserve nested resolution
+
+A [logic value](logic.mdx) `true` or `false` representing the option *"Preserve resolution when nested"* in the *Advanced* tab of the *Composition Settings*.
+
+### renderer
+
+The renderer that you can configure in the *3D Renderer* tab of the *Composition Settings*. 
+If you get this value, the name will be one of the following internal names:
+- `ADBE Advanced 3d` for the Classic 3D Renderer
+- `ADBE Ernst` for the Cinema 4D Renderer
+
+If you want to set this value, by default the block shows a convenient drop down where you can pick the renderer. But if you want to read the rendere name from a [variable](variables.mdx), for example, you can simply drag the variable on top of the dropdown to replace it . In that case, your variable should contain a string with either an internal name (`ADBE Advanced 3d`, `ADBE Ernst`) or the normal renderer name (`Classic 3D` or `Cinema 4D`). Upper/lower case and spaces in the names are ignored.
+
+### size \[w,h] {#ae_comp_set_attribute_size}
+
+Returns a [list](lists.mdx) (array) containing the width and height of the composition in pixels.
+(If you just need one of the two values, you can use the attribute [width](#ae_comp_set_attribute_width) or [height](#ae_comp_set_attribute_height) instead)
+
+### uses drop-frame timecode
+
+A [logic value](logic.mdx) `true` or `false` representing the "Drop Frame/Non-Drop Frame" option of the Frame Rate in the Composition Settings.
+
+### width {#ae_comp_set_attribute_width}
+
+The width of the compsition in pixels (see also attribute [height](#ae_comp_set_attribute_height) and [size](#ae_comp_set_attribute_size).
+
+### work area duration
+
+The duration of the workarea. For details on time values see [Ae Time](aeTime.mdx).
+If you change the duration, the start of the workarea will stay where it is and the end will update according to the new duration.
+
+### work area end
+
+The end of the workarea. For details on time values see [Ae Time](aeTime.mdx). If you set the end of the workarea, the duration will update accordingly. If the new end is before the current start, the start will update, too (such that the workarea will have a duration of 0).
+
+### work area start
+
+The start of the workarea. For details on time values see [Ae Time](aeTime.mdx). If you set th start, the end won't change with it (unless the new start is behind the old end, which will result in a workarea with duration 0)
+
+
+
+
+## For Each Frame {#for_each_frame}
+
+<RetinaImg
+  src="/img/blockScreenshots/AeComp/for_each_frame.png"
+  alt="Block for_each_frame"
+/>
+
+This block is a [loop](loops.mdx) which allows to do something on each frame of the given composition or each frame of the workarea.
+The blocks that you nest inside this block are executed many times, namely one time for each frame. During each round the [variable](variables.mdx) `my frame time` is set to the time (in seconds) of the respective frame.
+
+**comp/layers** if you choose the option `layers`instead of `comp` you can replace the parameter `active composition` by either a single layer or a [list](lists.mdx) (array) of layers. This is similar to the work area option, except that the time range is limited to the area of the given layers instead of the work area. More precisely, in that case the block will only iterate over the frames which are in-between the earliest of the in points of the given layers and the latest of their out points. 
+
+**only in workarea** is a [logic value](logic.mdx) (`true` or `false`), which allows to only loop over the frames of the workarea instead of all frames of the comp.
+
+**step size** allows you to skip frames. Hence, for a value of `10 frames`, the nested blocks will only be executed once for every 10th frame and the fames in-between are skipped.
+
+## Duplicate Comp {#ae_comp_duplicate}
+
+<RetinaImg
+  src="/img/blockScreenshots/AeComp/ae_comp_duplicate.png"
+  alt="Block ae_comp_duplicate"
+/>
+
+With this block you can duplicate a composition.
+
+**new comp var**
+
+After the comp has been duplicated, the variable `new comp var` will point to that duplicated comp. Hence, if you want to do some changes in the duplicated comp in subsequent blocks of your script, you can access it easily using this variable.
+
+Here is an example, which first duplicates a composition and then sets the name of the duplicate to *"my duplicate comp name"*:
+<RetinaImg
+  src="/img/blockScreenshots/AeComp/ae_comp_duplicate_example.png"
+  alt="After Effects script: Duplicate Composition and Rename it"
+/>
+
+
+Note how the second block, which does the renaming, uses `new comp var` to access the composition.
+
+**duplicate precomps**
+
+If this[logic value](logic.mdx) is `true`, the block will check, if the composition has any precomps. If it has precomps, not only the composition, but also those precomps will be duplicated. The block makes sure that if the same precomp is used multiple times, that it is duplicated only once.
+
+**fix expressions**
+
+This option will check all expressions in the duplicated composition (and precomps, if that option is enabled). If those expressions contain the name of the comp (or any of the precomps), then this name will be replaced by the name of the duplicate comp.
+Note that this option only touches expressions in the newly created comps. In all other comps of the project, the expressions are not touched (i.e. they will still point to the original and not to the duplicated comps).
+
+
+## Clear Guides {#ae_comp_clear_guides}
+
+<RetinaImg
+  src="/img/blockScreenshots/AeComp/ae_comp_clear_guides.png"
+  alt="Block ae_comp_clear_guides"
+/>
+
+Removes all guides (in horizontal or vertical direction or both) from the given composition. You can also give an entire [list](lists.mdx) (array) of compositions as argument. In that case, the guides of all those comps are removed.
+
+## Add Guides {#ae_comp_add_guides}
+
+<RetinaImg
+  src="/img/blockScreenshots/AeComp/ae_comp_add_guides.png"
+  alt="Block ae_comp_add_guides"
+/>
+
+Add horizontal or vertical guides to the given comp. You can also give an entire [list](lists.mdx) (array) of compositions as argument. In that case, the guides are added to all those comps.
+
+### Adding multiple guides
+
+Instead of a single position, you can also give a [list](lists.mdx) (array) of numbers as position argument. In that case, one new guides is added for each list entry.

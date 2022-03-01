@@ -1,0 +1,173 @@
+---
+sidebar_position: 1
+sidebar_class_name: newsidebargroup
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Text
+
+## Text {#text}
+
+<RetinaImg src="/img/blockScreenshots/Text/text.png" alt="Block text"/>
+
+
+This block creates a simple text. If you need a text with multiple lines, use the [Multiline Text block](text#text_multiline) instead.
+
+### Text for Paths
+In Automation Blocks, texts are also used to [access project items](prProjectItems#accessProjectItem) or [clips](prSequenceClips#accessSequenceClip) by their path. You can also use it for File and Folder path but for those, Automation Blocks has dedicated [File](files#block_extendscript_file) and [Folder](files#block_extendscript_folder) blocks, which allow you to choose this type of path more conveniently.
+
+
+## Multiline Text {#text_multiline}
+
+<RetinaImg src="/img/blockScreenshots/Text/text_multiline.png" alt="Block text_multiline"/>
+
+
+This block is identical to the [Text block](text#text), except that it supports multiple lines.
+
+
+## Join Text {#text_join}
+
+<RetinaImg src="/img/blockScreenshots/Text/text_join.png" alt="Block text_join"/>
+
+
+This block combines several texts into a single one.
+By default, it offers inputs for two texts, but you can add more by clicking on the blue cog wheel in the top left corner of the block. If you need to combine many texts, the [Text Pattern](text#string_pattern) might be more convenient to use. The following blocks do exactly the same - on the left with the Join Text block, and on the right with the Text Pattern block:
+
+<RetinaImg src="/img/blockOther/text_join_example.png" alt="Block text_join"/>
+
+
+
+
+## Text Pattern {#string_pattern}
+
+<RetinaImg src="/img/blockScreenshots/Text/string_pattern.png" alt="Block string_pattern"/>
+
+
+This block takes a template text and replaces any occurrence of the placeholder symbols `$1`, `$2`,... with the respective texts. The example above creates the text `Mr. Miller is 41 year old`.
+
+The placeholders can occur in the template text in any order, and if any of them occurs multiple times, all occurrences are replaced.
+
+To add more (or remove) placeholders, click on the blue cog wheel icon in the top left corner of the block.
+
+This block is also very useful to create file paths. This example creates the text `path/to/myFile_001.jpg`, for example:
+
+<RetinaImg src="/img/blockOther/string_pattern_example_files.png" alt="Block example: creating file paths with pattern"/>
+
+
+
+:::tip Multi-line texts
+
+Of course, you can also use a [multi-line text](#text_multiline) as your pattern.
+
+:::
+
+
+## Replace in Text {#string_replace}
+
+<RetinaImg src="/img/blockScreenshots/Text/string_replace.png" alt="Block string_replace"/>
+
+
+This block does a basic search & replace on the given text. It can either replace all occurrences, or only the first occurrence of the search word. For an example, see the tutorial [Search & Replace in Project Items](../tutorials-pr/searchReplaceProjectItems#search--replace-in-texts)
+
+If you just want to search without replacing, you can use the [Find In Text block](text#text_indexOf).
+
+## For All RegExp Matches {#string_for_all_regex_matches}
+
+<RetinaImg src="/img/blockScreenshots/Text/string_for_all_regex_matches.png" alt="Block string_for_all_regex_matches"/>
+
+
+This is an advanced block to search in a text with the help of regular expressions. If you don't know what regular expressions are, I recommend [this article](https://www.codemag.com/article/0305041/Getting-Started-With-Regular-Expressions) to get started. Regular expressions can be very useful to read structured data from a text file. For a more advanced example, see the script "Import Marker from Srt File".
+
+For a simpler search, you can also use the [Find in Text block](text#text_indexOf).
+
+### Example 
+
+<RetinaImg src="/img/blockOther/string_for_all_regex_matches_example.png" alt="RegEx example"/>
+
+
+This script searches in the text `this file has the following format: mp4` for the expression `format: (.*)`, which essentially says "search for something that starts with `format: ` followed by arbitrary characters (this is the `.*`). Since we have put `.*` in parentheses, this part of the result is stored in a capturing group.
+
+The block now searches in the text and for each occurrence it finds, it executes the blocks you nest inside of it. The search result is stored in the [variable](variables.mdx) `match`. Match is actually a list, whose first element is the full match and the second element is the match of the first capturing group (and if you have a second capturing group in your regular expression, it is stored in the next element of the list, etc).
+In  our example, the block finds exactly one match, and hence executes the nested blocks only once. The first list entry of `match` is `format: mp4` (the full match) and the second list entry is just `mp4` (the first capturing group). Hence, the script prints the following text to the console:
+```
+found match 'format: mp4' with first capturing group 'mp4'
+```
+
+
+
+
+## Text Length {#text_length}
+
+<RetinaImg src="/img/blockScreenshots/Text/text_length.png" alt="Block text_length"/>
+
+
+This block returns the length of the given text, i.e. the number of characters including spaces, line break characters etc. For `abc` it returns 3 and for `Hello World` it returns 11. 
+
+
+## Is Text Empty {#text_isEmpty}
+
+<RetinaImg src="/img/blockScreenshots/Text/text_isEmpty.png" alt="Block text_isEmpty"/>
+
+
+Returns the [logic value](logic) `True` when the given text has a length of 0 and otherwise `False`. 
+
+
+## Change Case of Text {#text_changeCase}
+
+<RetinaImg src="/img/blockScreenshots/Text/text_changeCase.png" alt="Block text_changeCase"/>
+
+
+This block can change the case of a text to:
+- UPPER CASE
+- lower case
+- Title Case
+
+
+## Find In Text {#text_indexOf}
+
+<RetinaImg src="/img/blockScreenshots/Text/text_indexOf.png" alt="Block text_indexOf"/>
+
+
+This block searches for the occurrence of a text inside another text. If it finds the text, it returns the position where it was found. If the hit already starts at the very first letter, it returns `1`, for example. If it does not find the word, it returns `0`.
+
+:::danger 0 vs -1
+
+If you are a programmer, you might be familiar with functions like `indexOf` in JavaScript, which also return the position of the match they found. JavaScript returns -1 when it didn't find anything, since 0 is the first letter of the text in JavaScript. However, in Automation Blocks we count the letters starting with 1, and 0 means that nothing was found.
+
+:::
+
+### Example
+
+This example checks if the name of the active sequence contains `final` and then prints in the console either `sequence name contains the word "final"` or `sequence name does not contain the word "final"`:
+
+<RetinaImg src="/img/blockOther/text_indexOf_example.png" alt="Block text_indexOf"/>
+
+
+
+
+
+## Get Letter {#text_charAt}
+
+<RetinaImg src="/img/blockScreenshots/Text/text_charAt.png" alt="Block text_charAt"/>
+
+
+This block returns a single letter of the given text.
+
+
+## Get Substring {#text_getSubstring}
+
+<RetinaImg src="/img/blockScreenshots/Text/text_getSubstring.png" alt="Block text_getSubstring"/>
+
+
+This block returns a part of the given text.
+
+
+## Trim Spaces {#text_trim}
+
+<RetinaImg src="/img/blockScreenshots/Text/text_trim.png" alt="Block text_trim"/>
+
+
+This block removes spaces (and other whitespace like tabs) from the beginning and/or end of the given text. This is useful if you ask the user to enter some text with a [prompt](userInterfaceAndComments#block_extendscript_prompt), for example, but want to ignore any space he might accidentally add to his input.

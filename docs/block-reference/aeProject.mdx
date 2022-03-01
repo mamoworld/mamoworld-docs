@@ -1,0 +1,182 @@
+---
+sidebar_position: 20
+sidebar_class_name: newsidebargroup
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Ae Project
+
+Here you find all blocks which do something with the After Effects project, that is not spefific to a particular project item or composition.
+That includes things like creating folders, importing footage or saving and closing projects, as well as executing Ae menu commands.
+
+
+
+
+## Create Bin {#ae_project_item_create_bin}
+
+<RetinaImg src="/img/blockScreenshots/AeProject/ae_project_item_create_bin.png" alt="Block ae_project_item_create_bin"/>
+
+This block creates a new bin in the project panel. 
+
+**paths and subbins**
+
+
+Instead of the name of a bin like `footage`, you can also provide an entire path like `footage/audio`. In that case a bin `footage` is created (if it does not exist, yet) and inside of it a bin `audio` (again, only if a subbin of that name does not exist, yet).
+
+**parent bin**
+
+Here, you can enter the name or path of a parent bin, inside of which the bin should be created. Instead of entering a bin manually, you can select the bin in your project and then click the refresh button of the parent bin input.
+
+Note that if you want to create a bin `psd` inside a bin `footage`, for example, you have two options:
+1. enter `footage/psd` as bin path and leave parent bin empty
+2. enter `psd`as bin path and set parent bin to `footage``
+
+The only difference is that the first option creates the bin footage, if it does not exist, yet, whereas the second option throws an error in that case.
+
+**example**
+
+This video shows some examples how to use the *Create Bin* block:
+<Anigif src={useBaseUrl('/img/blockOther/ae_project_item_create_bin_example.gif')} width="863px" />
+
+## Sync Folder {#block_ae_sync_project_bin_with_folder}
+
+<RetinaImg src="/img/blockScreenshots/AeProject/block_ae_sync_project_bin_with_folder.png" alt="Block block_ae_sync_project_bin_with_folder"/>
+
+This block is your smart file importer. It syncs a bin in the project panel with a folder on your harddrive, i.e. it imports all files from that folder into the bin, but only if they haven't been imported before already. This means whenever the content of the folder changes, you can simply execute the block again to update the content of the project, accordingly.
+
+**sync folder** is the [folder](files.mdx#accessFile) on your hard-drive which should be imported. 
+
+**with project bin** is the bin in the project panel, into which the files of the given folder should be imported. If the project bin does not exist, the block creates it for you.
+
+**subfolders** can be set to 
+- `include`: creates for each subfolder also a corresponding subbin and syncs those, too. 
+	Hence, the entire folder structure (including subfolders of subfolders) is recreated inside the project panel.
+- `exclude`: ignores all content of subfolders
+- `flatten`: imports files from subfolders directly into the main bin instead of creating subbins for them.
+
+**import multi-layer files as** allows to import those as `footage`, `comp` or `comp (cropped layers)`. These are exactly the same options as the options provided by Ae's normal import dialog.
+
+**import numbered images as** allows to import images as `still image` or `image sequence`. Note that images, which have no number at the end of their file name are always imported as `still image`. Hence, if you set this option to `image sequence`, a file *myImage.png* will still be imported as still image, but an image *myImage000.png* or *myImage004.png* will be treated as part of an image sequence.
+
+**delete other items** enables a check if the synced project bin in the project panel contains other items, which are not included in the folder on your hard-drive. Note that this open deletes all other items (also comps etc), to ensure that the content of the folder and the synced project bin are 100% identical.
+
+:::tip no live update
+
+Note that when the content of the folder on your harddrive changes, the project bin does not update instantly. You need to execute the block again, to apply all changes to the project bin, too.
+
+:::
+
+
+## Import File {#block_ae_import_file}
+
+<RetinaImg src="/img/blockScreenshots/AeProject/block_ae_import_file.png" alt="Block block_ae_import_file"/>
+
+This block imports a single footage file into the project. 
+
+### Project Item Variable
+The new project item is saved in the [variable](variables.mdx) `project item var`, hence, you can use this [variable](variables.mdx) if you want to do anything with the imported item in subsequent blocks. In this example, I first import a footage file and then insert it as [new layer](aeLayer.mdx#ae_new_layer) into the active composition:
+
+<RetinaImg src="/img/blockOther/block_ae_import_file_example.png" alt="Import file and insert it in the active composition"/>
+
+### Parameters 
+**project bin** is the (name or path of) the bin in the project panel into which the file should be imported.
+
+**import multi-layer files as** allows to import those as `footage`, `comp` or `comp (cropped layers)`. These are exactly the same options as the options provided by Ae's normal import dialog.
+
+**import images as** allows to import images as `still image` or `image sequence`.
+
+**avoid duplicates** checks if the footage item has already been imported into that project bin before. If that is the case, the block does not import the footage a second time and binds the variabel `project item var` to the already existing project item instead.
+
+:::tip Importing Many Files
+
+If you want to import multiple files, consider using the [Sync Folder](#block_ae_sync_project_bin_with_folder) block instead.
+
+:::
+
+
+## Current Project File {#block_ae_project_file}
+
+<RetinaImg src="/img/blockScreenshots/AeProject/block_ae_project_file.png" alt="Block block_ae_project_file"/>
+
+This block returns the [file path](files.mdx#accessFile) of the currently open project file. If the current project has not been saved, yet, it throws an error. To check if a project file exists, use the block [Has Project File](#block_ae__has_project_file).
+
+## Has Project File {#block_ae__has_project_file}
+
+<RetinaImg src="/img/blockScreenshots/AeProject/block_ae__has_project_file.png" alt="Block block_ae__has_project_file"/>
+
+A [logic value](logic.mdx) which `false`, if the currently open project has no project file, yet (i.e. has not been saved, yet, at all).
+
+## Current Project Folder {#block_ae_project_folder}
+
+<RetinaImg src="/img/blockScreenshots/AeProject/block_ae_project_folder.png" alt="Block block_ae_project_folder"/>
+
+This block returns the [folder path](files.mdx#accessFile) of the folder which contains the currently open project. If the current project has not been saved, yet, it throws an error. To check if a project file (and hence project folder) exists, use the block [Has Project File](#block_ae__has_project_file).
+
+## Project Name {#block_ae_project_name}
+
+<RetinaImg src="/img/blockScreenshots/AeProject/block_ae_project_name.png" alt="Block block_ae_project_name"/>
+
+This block returns the name of the project (i.e. the filename of the aep file) with or without the .aep extension.
+
+If you need the full file path, use the block [Current Project File](#block_ae_project_file) instead.
+
+## Save Project {#ae_project_save}
+
+<RetinaImg src="/img/blockScreenshots/AeProject/ae_project_save.png" alt="Block ae_project_save"/>
+
+This block saves the current project, exactly as the menu command File->Save.
+
+## Save Project As {#ae_project_save_as}
+
+<RetinaImg src="/img/blockScreenshots/AeProject/ae_project_save_as.png" alt="Block ae_project_save_as"/>
+
+Saves the Ae project to a new [file](files.mdx#accessFile).
+
+**allow to overwrite if file exists**: if you disable this option, the block throws an error if the file aready exists.
+
+**create folder if not existing**: if this open is enabled, the block creates the folders of the given file path, if they don't exist, yet.
+
+## Open Project {#ae_project_open}
+
+<RetinaImg src="/img/blockScreenshots/AeProject/ae_project_open.png" alt="Block ae_project_open"/>
+
+Opens the given project [file](files.mdx#accessFile).
+
+**if current project has unsaved changes** offers the choices `don't save`, `save` and `prompt`.
+
+## Close Project {#ae_project_close}
+
+<RetinaImg src="/img/blockScreenshots/AeProject/ae_project_close.png" alt="Block ae_project_close"/>
+
+Closes the currently open Ae project.
+
+**if current project has unsaved changes** offers the choices `don't save`, `save` and `prompt`.
+
+## New Project {#ae_project_new}
+
+<RetinaImg src="/img/blockScreenshots/AeProject/ae_project_new.png" alt="Block ae_project_new"/>
+
+Creates a new, empty Ae project.
+
+**if current project has unsaved changes** offers the choices `don't save`, `save` and `prompt`.
+
+
+
+## Execute Menu Command {#ae_execute_menu_command}
+
+<RetinaImg src="/img/blockScreenshots/AeProject/ae_execute_menu_command.png" alt="Block ae_execute_menu_command"/>
+
+This block allows to execute any command of After Effects' main menu. As argument, you need to provide either the exact label of the menu entry, like `Increment and Save` or `Open Team Project...`. Make sure to write the exact text shown in the menu, including spaces, dots and use the correct upper/lower case.
+
+<RetinaImg src="/img/blockOther/ae_execute_menu_command_example.png" alt="Menu command using a label"/>
+
+Instead of using the label, you can also enter a After Effects menu command ID. David Torno created a great [description, what menu command IDs are, as well as a comprehensive list of them](https://www.provideocoalition.com/after-effects-menu-command-ids/).
+
+:::danger Support for other UI Languages
+
+Note that the menu command names area different in each language. `Save as...` only works for English Ae, for example, whereas you need to use in the German version `Speichern Unter...` instead. To be compatible with After Effects installations in different languages, better use IDs instead of label names.
+
+:::

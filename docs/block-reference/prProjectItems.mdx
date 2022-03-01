@@ -1,0 +1,440 @@
+---
+sidebar_position: 13
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Pr Project Items
+
+The blocks in this section allow you to do all kinds of things with project items - i.e. all the footage, sequences, bins etc that are listed in the project panel (and its sub bins).
+
+### Accessing a Particular Project Item {#accessProjectItem}
+
+Automation Blocks represents project items by a text - like a path indicating where the item can be found.
+You can specify a particular project item as follows:
+
+- **Name:** If the project item has a unique name, just use a text block with that name `my item name`
+- **Path:** You can also give a path to where the item can be found, like `bin\subbin\my item name`. Note that in contrast to file paths on your hard-drive, these paths inside your project structure always use backslashes! If you provide the full path, Automation Blocks does not need to search your entire project, which makes the script faster. Also. you'll avoid getting into trouble if multiple project items have the same name.
+- **Path with project:** If you want to access project items from a project that is not the active project (but is still open in Premiere), you can put the project name at the beginning of the path: `myProject.prproj\bin\subbin\my item name`.
+- **File:** If you want to access a project item that represents a footage file (and not a sequence or bin, for example), you can also provide the file name (or better the entire path) to that file: `myFootage.mov` or `/path/to/myFootage.mov`. When a project item is expected, Automation Blocks will convert the file name or path to a project item (by searching for a project item which represents that file). If the footage is not found in the project, the script stops with an error. Also note that in contrast to project item paths, the file paths may use `/` instead of `\`. And again: if you provide the entire file path instead of just the file name, you'll avoid trouble when you have multiple files with the same name.
+- **Sequence or clip:** if you have a particular sequence or sequence clip (i.e. the occurrence of some footage inside a sequence) and want to use the project item that corresponds to it, Automation Blocks will convert it for you automatically. So in every block that expects a project item as an argument, you can also provide a sequence clip instead and its corresponding project item will be used.
+
+
+## For Each Project Item {#block_pr_for_all_items_in_bin}
+
+<RetinaImg src="/img/blockScreenshots/prProjectItems/block_pr_for_all_items_in_bin.png" alt="Block block_pr_for_all_items_in_bin"/>
+
+
+Iterates over all project items of a project bin (and optionally sub-bins). 
+The blocks you nest inside this block are executed once for each of those project items. During the execution of these blocks, the respective project item itself is saved in the [variable](variables.mdx) `my item`.
+
+It comes in two flavors:
+
+- **bin:** only iterates over the project items which are contained in the bin, but not project items contained in any of its sub-bins.
+
+- **bin and sub-bins:** iterates over all project items which are inside the bin or any of its sub-bins.
+
+You can filter the types of project items that you want to iterate using the checkbox options.
+
+By default (bin `\`) this block iterates over all project items in the root bin of the active project. For all the ways to specify a particular bin, see [Accessing a Particular Project Item](prProjectItems#accessProjectItem).
+
+#### Selected Items
+
+The block can either iterate over all project items (in the given bin) or only over the selected ones.
+Note that in a Premiere Pro project you can have several selections at the same time: In addition to the project panel, you can have open bin panels and each of those come with their own, independent selection:
+
+<RetinaImg src="/img/blockOther/project_panel_selection_example.png" alt="project panel vs bin panel"/>
+
+However, Automation Blocks always just considers the selection of the project panel and not the selection of other bin panels.
+In the example above, `song 1` and `song 2` are selected in the project panel (and hence considered by Automation Blocks), whereas `song 3` is selected in a bin panel (but ignored by Automation Blocks).
+
+## List of Project Items in Bin {#block_pr_get_items_in_bin}
+
+<RetinaImg src="/img/blockScreenshots/prProjectItems/block_pr_get_items_in_bin.png" alt="Block block_pr_get_items_in_bin"/>
+
+
+This block creates a list of all project items that are contained in the given project bin (and optionally all sub-bins). It comes in two flavors:
+
+- **bin:** only adds the project items to the list which are contained in the bin, but not project items contained in any of its sub-bins.
+
+- **bin and sub-bins:** adds all project items to the lists which are inside the bin or any its sub-bins.
+
+
+You can filter the types of project items of which you want to iterate using the checkbox options.
+
+By default (bin `\`) this block puts all project items in the root bin of the active project in the list. For all the ways to specify a particular bin, see [Accessing a Particular Project Item](prProjectItems#accessProjectItem).
+
+#### Selected Items
+
+The block can either return a list of all project items (in the given bin) or only a list of the selected ones. Note that in a Premiere Pro project you can have several selections at the same time and that that Automation Blocks always just considers the selection of the Project panel and not of other bin panels. For details see the [For Each Project Item block](prProjectItems#block_pr_for_all_items_in_bin)
+
+:::tip Iterating
+
+If you want to do something with all the items in a project bin, there is no need to create a list. You can use the [For Each Project Item Block](prProjectItems#block_pr_for_all_items_in_bin) instead.
+
+:::
+
+## Get Property of Project Item {#pr_item_get_property}
+
+<RetinaImg src="/img/blockScreenshots/PrProjectItems/pr_item_get_property.png" alt="Block pr_item_get_property"/>
+
+
+Returns one of the following properties of the given project item. Depending on the type of the project item, it may not have all those values. Each project item has a name, but a project item of type bin has no in point, for example.
+
+### in point 
+
+The *in point* of the project item (in seconds). Note that while the [in point of a clip in a sequence](prSequenceClips#in-point) describes at what time in the actual source file the clip in the sequence starts, the inPoint of the project item corresponds to the in point you can set in the source monitor. This in point is also used when rendering the item (when being rendered on its own and not as part of a sequence).
+
+### out point 
+The *out point* of the project item (in seconds). Note that while the [out point of a clip in a sequence](prSequenceClips#out-point) describes at what time in the actual source file the clip in the sequence starts, the inPoint of the project item corresponds to the in point you can set in the source monitor. This in point is also used when rendering the item (when being rendered on its own and not as part of a sequence).
+
+### zero point
+
+Usually a footage item starts with the time 0s and then the zero point is also 0. But the beginning of the file can be assigned any other time - and this time is called the zero point. Note that the zero point is only used for displaying the time code in the user interface. Internally, in Premiere Pro (and also in Automation Blocks), for all in points, out points etc. it is assumed that the clip time starts at 0 and the zero point has no influence on them.
+
+### duration
+
+The duration of the footage item in seconds (and the Still Image Default Duration for still images)
+
+### name
+
+The name of the project item as shown in the project panel
+
+### node id
+
+A unique ID assigned to the project item, upon being added to the project. Several project items may have the same name and the same media path, but their node id is always unique.
+
+### team project asset id
+
+The Team Projects Asset ID of the project item.
+
+### tree path
+
+The current project location of the project item, like `\ProjectName.prproj\Media\MXF\filename.mxf`. As mentioned [here](prProjectItems#accessProjectItem), in Automation Blocks a project item is represented by this kind of path text. Therefore, a tree path is a valid project item in Automation Blocks, too.
+
+### parent bin
+
+The bin in which the project item is contained. If you want to move the item to a different bin, use the [Move Project Item to Bin block](prProjectItems#block_pr_item_move_to_bin).
+
+### (extended) type 
+
+The type of the project item. The result is one of the following texts
+- `TYPE_FOOTAGE` : an item representing a video or image file
+- `TYPE_FILE` : an item representing a file that is not a video or image file - like a text file, for example
+- `TYPE_ROOT` : the root bin of the project that contains all other project items
+- `TYPE_BIN` : a bin that is not the root bin
+- `TYPE_MERGED_CLIP` : a merged clip
+- `TYPE_SEQUENCE` : a sequence
+- `TYPE_MULTICAM_SEQUENCE` : a [multi-camera source sequence](https://helpx.adobe.com/premiere-pro/using/create-multi-camera-source-sequence.html)
+
+If you just want to check if your project item has one particular type, you can also use the [Project Item Has Type Block](prProjectItems#block_pr_item_has_extended_type).
+
+### can change media path
+
+This is `true` when the item is associated with a media file and that media file can be changed. If it is `true` you can change it with the [Change Media of Project Item Block](prProjectItems#block_pr_item_change_media).
+
+### media path
+
+The file that belongs to this project item. You can change it with the [Change Media of Project Item Block](prProjectItems#block_pr_item_change_media)
+
+### can proxy
+
+This value is `true` or `false` depending on whether this project item supports proxies or not.
+
+### has proxy
+
+This value is `true` or `false` depending on whether this project item has a proxy or not.
+
+### proxy path
+
+The proxy file for this project item (only if "*has proxy*" is `true`)
+
+### is offline
+
+This is `true` if the project item is currently offline and otherwise `false`.
+
+### color label
+
+The label color of this project item represented as a text. One of the following values:
+- `Violet`
+- `Iris`
+- `Caribbean`
+- `Lavender`
+- `Cerulean`
+- `Forest`
+- `Rose`
+- `Mango`
+- `Purple`
+- `Blue`
+- `Teal`
+- `Magenta`
+- `Tan`
+- `Green`
+- `Brown`
+- `Yellow`
+
+You can *set this property* via both 
+- [Set Property of Project Item Block](prProjectItems#pr_item_set_property) which accepts as a value either: any of the color name texts above, or a number where `Violet` corresponds to `0` and `Yellow` corresponds to `15`.
+- [Set Label Color of Project Item Block](prProjectItems#block_pr_item_metadata_color_label_set) which offers a convenient dropdown menu to choose the label color.
+
+### alpha usage
+
+The alpha channel usage as specified in the *interpret footage* dialog. Must be one of the following texts
+- `ALPHACHANNEL_NONE`
+- `ALPHACHANNEL_STRAIGHT`
+- `ALPHACHANNEL_PREMULTIPLIED`
+- `ALPHACHANNEL_IGNORE`
+
+### field type
+
+The field type as specified in the *interpret footage* dialog. Must be one of the following texts
+- `FIELDTYPE_DEFAULT`
+- `FIELDTYPE_PROGRESSIVE`
+- `FIELDTYPE_UPPERFIRST`
+- `FIELDTYPE_LOWERFIRST`
+
+### ignore alpha
+
+as specified in the *interpret footage* dialog (`true` or `false`)
+
+### invert alpha
+
+as specified in the *interpret footage* dialog (`true` or `false`)
+
+### framerate
+
+The frame rate as specified in the *interpret footage* dialog.
+
+### pixel aspect ratio
+
+The pixel aspect ratio as specified in the *interpret footage* dialog.
+
+### remove pulldown
+
+The remove pulldown option as specified in the *interpret footage* dialog (`true`or `false`).
+
+### vr conform projection type
+
+The projection type, as specified in the *VR properties* dialog. One of the following texts
+
+- `VR_CONFORM_PROJECTION_NONE`
+- `VR_CONFORM_PROJECTION_EQUIRECTANGULAR`
+
+### vr layout type
+
+The VR layout type as specified in the *VR properties* dialog. One of the following texts
+
+- `VR_LAYOUT_MONOSCOPIC`
+- `VR_LAYOUT_STEREO_OVER_UNDER`
+- `VR_LAYOUT_STEREO_SIDE_BY_SIDE`
+
+
+### vr horizontal view
+
+The horizontal capture view, as specified in the *VR properties* dialog.
+
+### vr vertical view
+
+The vertical capture view, as specified in the *VR properties* dialog.
+
+### video usage
+
+A number, indicating how often the video of this item has been used in a sequence.
+
+### audio usage
+
+A number, indicating how often the audio of this item has been used in a sequence.
+
+### has video
+
+Is true `true` if the project item has video (i.e. is a video file or a sequence)
+
+### has audio
+
+Is true `true` if the project item has audio (i.e. is an audio file, or a video file with audio or a sequence)
+
+### is still image
+
+Is `true` if the footage item is a still image (like a single png or jpg, but no image sequence) and `false` for everything else.
+
+### rating
+
+A number between 0 and 5 (for a rating of 0 to 5 stars). To see it in the project panel, enable the metadata display for *Basic->Rating*.
+
+### good checkbox
+
+Either `true` or `false` - this corresponds to the *good* checkbox in the project panel. To see it in the project panel, enable the metadata display for *Premiere Pro Project Metadata->Good*
+
+### hidden
+
+Either `true` or `false` - can be used to hide elements from the project panel. This corresponds to the *hide* checkbox in the project panel. To see it in the project panel, enable the metadata display for *Premiere Pro Project Metadata->Hide*. 
+
+### width
+
+The with of the footage in pixels.
+
+### height
+
+The height of the footage in pixels.
+
+### aspect ratio
+
+The aspect ratio of the footage (assuming square pixels).
+
+### pixel aspect ratio
+
+The pixel aspect ratio of the footage.
+
+### frame aspect ratio
+
+The aspect ratio of the footage (taking into account the pixel aspect ratio).
+
+## Set Property of Project Item {#pr_item_set_property}
+
+<RetinaImg src="/img/blockScreenshots/PrProjectItems/pr_item_set_property.png" alt="Block pr_item_set_property"/>
+
+
+This block sets any property for a project item. For a list of the available properties and their description, see the [Get Property of Project Item Block](prProjectItems#pr_item_get_property). Note that some of the properties described there are read only and don't occur in the Set Property of Project Item block.
+
+
+
+## Get Metadata of Project Item {#pr_item_get_metadata}
+
+<RetinaImg src="/img/blockScreenshots/PrProjectItems/pr_item_get_metadata.png" alt="Block pr_item_get_metadata"/>
+
+
+Can retrieve any kind of metadata (both project metadata and xmp metadata) from a project item. 
+The dropdown contains a list of metadata properties that most project items have. But this block is not limited to the properties listed there - it can retrieve **any kind of metadata**, as long as you have an example project item that has the kind of metadata you want to read:
+
+### Reading metadata keys from a sample clip
+
+1. select a clip in the active sequence (not in the project panel) 
+2. click the refresh icon (circular arrow) behind the dropdown in the *Get Metadata of Project Item* block
+3. now the dropdown list is updated and contains all metadata keys it could find in the selected clip
+
+This way, you can access any kind of metadata entries - even properties of a new custom schema that you created yourself.
+
+:::tip Get Property Block
+
+A few frequently used metadata properties like *video usage*, *audio usage*, *hidden* or *good* are also available in the [Get Property of Project Item Block](prProjectItems#pr_item_get_property)
+
+:::
+
+
+## Set Metadata of Project Item {#pr_item_set_metadata}
+
+<RetinaImg src="/img/blockScreenshots/PrProjectItems/pr_item_set_metadata.png" alt="Block pr_item_set_metadata"/>
+
+
+Writes any kind of metadata to a project item. Exactly as in the *Get Metadata of Project Item* block, although in this block you can also use the refresh icon behind the dropdown field to load all available metadata keys from a clip in your sequence. See the description of the [Get Metadata of Project Item Block](prProjectItems#pr_item_get_metadata) for details.
+
+## Move Project Item to Bin {#block_pr_item_move_to_bin}
+
+<RetinaImg src="/img/blockScreenshots/PrProjectItems/block_pr_item_move_to_bin.png" alt="Block block_pr_item_move_to_bin"/>
+
+
+Moves the given project item to a project bin. If the bin does not exist, the script stops with an error. So make sure to [create the bin](prProject#pr_project_item_create_bin) before you execute this block, if you want to move the project item to a bin that does not yet exist.
+
+For all possibilities to specify a project item (or a bin - which is also a project item), see the section [Accessing a Particular Project Item](prProjectItems#accessProjectItem)
+
+## Delete Project Item {#block_pr_item_delete}
+
+<RetinaImg src="/img/blockScreenshots/PrProjectItems/block_pr_item_delete.png" alt="Block block_pr_item_delete"/>
+
+
+Deletes the given project item. Note that for footage items, only the item, but not the footage file on the hard-drive, is deleted. If you want to delete the footage file too, use the [Delete File Block](files#block_extendscript_delete_file) for that.
+
+For all possibilities to specify a project item, see the section [Accessing a Particular Project Item](prProjectItems#accessProjectItem)
+
+## Project Item Has Type {#block_pr_item_has_extended_type}
+
+<RetinaImg src="/img/blockScreenshots/PrProjectItems/block_pr_item_has_extended_type.png" alt="Block block_pr_item_has_extended_type"/>
+
+
+Checks if the given project item has the chosen type and returns `true` or `false`. You can choose one of the following types:
+- `TYPE_FOOTAGE` : an item representing a video or image file
+- `TYPE_FILE` : an item representing a file that is not a video or image file - like a text file, for example
+- `TYPE_ROOT` : the root bin of the project that contains all other project items
+- `TYPE_BIN` : a bin that is not the root bin
+- `TYPE_MERGED_CLIP` : a merged clip
+- `TYPE_SEQUENCE` : a sequence
+- `TYPE_MULTICAM_SEQUENCE` : a [multi-camera source sequence](https://helpx.adobe.com/premiere-pro/using/create-multi-camera-source-sequence.html)
+
+If you want to retrieve the type of a project item as a text instead of checking for a particular type, you can use the 
+[Get Property of Project Item Block](prProjectItems#pr_item_get_property) to retrieve the (extended) type.
+
+For all possibilities to specify a project item, see the section [Accessing a Particular Project Item](prProjectItems#accessProjectItem)
+
+## Set Label Color of Project Item {#block_pr_item_metadata_color_label_set}
+
+<RetinaImg src="/img/blockScreenshots/PrProjectItems/block_pr_item_metadata_color_label_set.png" alt="Block block_pr_item_metadata_color_label_set"/>
+
+
+This block sets the label color of the given project item to the color you choose in the dropdown.
+If you want to set the label color based on a text, you can also set it using the [Set Property of Project Item Block](prProjectItems#pr_item_set_property). This is useful if you want to read the color name from a file, for example, instead of using exactly the same color each time the block is executed.
+
+For all possibilities to specify a project item, see the section [Accessing a Particular Project Item](prProjectItems#accessProjectItem)
+
+## Change Media of Project Item {#block_pr_item_change_media}
+
+<RetinaImg src="/img/blockScreenshots/PrProjectItems/block_pr_item_change_media.png" alt="Block block_pr_item_change_media"/>
+
+
+With this block you can replace the footage file of a footage item (like when you right-click on a footage item and choose *replace footage...*).
+
+:::danger Does not work for all items
+
+Some items (like sequences or bins) have no media path that can be changed. To check if a project item supports this operation, use the [Get Property of Project Item Block](prProjectItems#pr_item_get_property) to read the *can change media path* property.
+
+:::
+
+## Create Subclip {#pr_project_item_create_subclip}
+
+<RetinaImg src="/img/blockScreenshots/PrProjectItems/pr_project_item_create_subclip.png" alt="Block pr_project_item_create_subclip"/>
+
+
+Creates a subclip of the given project item. 
+
+#### subclip name or path (optional)
+
+If you provide a text like `my item name` for this parameter, the subclip gets this name.
+If you provide a full path like `path\to\my item name`, the subclip is named `my item name` and moved into the bin `path\to`. If this bin does not exist yet, it will also be created.
+
+
+#### start time** and **end time (optional)
+
+If you don't specify a start or end time, the current in point or out point of the clip is used.
+For details on time values, see [Pr Time](prTime).
+
+#### hard boundaries
+
+This checkbox corresponds to the option "*Restrict Times to Subclip Boundaries*" in Premiere Pro's dialogs to create or change subclips.
+
+#### take video** and **take audio
+
+determines if the video and/or audio of the project item should be used for the subclip.
+
+
+## Get New Unique Project Item Path {#block_pr_item_unique_name}
+
+<RetinaImg src="/img/blockScreenshots/PrProjectItems/block_pr_item_unique_name.png" alt="Block block_pr_item_unique_name"/>
+
+To avoid trouble, it is always good not to have two project items with exactly the same name in exactly the same bin. Therefore, if you want to create a new item with name `my sequence`, for example, and in the same project bin there is already an item with name `my sequence`, then we better name the new one `my sequence 2`. That's exactly what this block is doing:
+
+<RetinaImg src="/img/blockOther/block_pr_item_unique_name_example_2.png" alt="check if project item exists"/>
+
+
+The text you plug into this block must be the path to a project item (like `my sequence` for an item in the root folder of the project or `my bin\my sequence` if the item is located in another bin of the project). The block will then return 
+
+- exactly the same path, if no item with the same path exists, yet
+- the same path with a number appended, if the item exists already.
+
+That way you can be sure the block always returns an item path that does not exist in the project yet (but there could be existing items with the same name in a different bin).
+
+### Checking if Project Item Exists
+
+<RetinaImg src="/img/blockOther/block_pr_item_unique_name_example.png" alt="check if project item exists"/>
+
+You can also use this block to test if a project item exists. This example returns `true` if a project item `image1.png` exists in the project bin `footage` and it returns `false` if it does not exist (since the *Get Unique Project Item Path* block returns something different than the original path itself if and only if it already exists).

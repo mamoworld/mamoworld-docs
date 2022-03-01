@@ -1,0 +1,124 @@
+---
+sidebar_position: 6
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Lists
+
+## Create List {#lists_create_with}
+
+<RetinaImg src="/img/blockScreenshots/Lists/lists_create_with.png" alt="Block lists_create_with"/>
+
+
+This block creates a list with all the items you give it. Here is an example that creates a list with two items, namely 0.5 and 1:
+
+<RetinaImg src="/img/blockOther/lists_create_with_example_1.png" alt="create list example"/>
+
+
+This tye of list can for example be used to [set the position of a clip](prMogrtsAndClipParameters#pr_component_parameter_set_value) (where the first item is used as x and the second item as y value).
+
+If you click on the blue cog wheel icon, you can change the number of list elements (and even reorder them): 
+
+<Anigif src={useBaseUrl('/img/blockOther/lists_create_with_add_items.gif')} width="450px"/>
+
+If you remove all entries, you can also create an empty list:
+
+<RetinaImg src="/img/blockOther/lists_create_with_example_empty.png" alt="create empty list example"/>
+
+
+## List Repeat {#lists_repeat}
+
+<RetinaImg src="/img/blockScreenshots/Lists/lists_repeat.png" alt="Block lists_repeat"/>
+
+
+Creats a list with many identical values. These two blocks do exactly the same thing:
+
+<RetinaImg src="/img/blockOther/lists_repeat_example.png" alt="repeat list example"/>
+
+
+
+## Length of List {#lists_length}
+
+<RetinaImg src="/img/blockScreenshots/Lists/lists_length.png" alt="Block lists_length"/>
+
+
+This block returns the length of the list (i.e. the number of items contained in the list).
+
+
+## Is Empty List {#lists_isEmpty}
+
+<RetinaImg src="/img/blockScreenshots/Lists/lists_isEmpty.png" alt="Block lists_isEmpty"/>
+
+
+This block returns the [Logic value](logic) `true` if the given list is empty and `false` otherwise. The following two are identical:
+
+<RetinaImg src="/img/blockOther/lists_isEmpty_example.png" alt="list empty example"/>
+
+
+
+## Find in List {#lists_indexOf}
+
+<RetinaImg src="/img/blockScreenshots/Lists/lists_indexOf.png" alt="Block lists_indexOf"/>
+
+
+This block searches though the items in the given list and when it finds one that has the given value, it returns the (one-based) index of that element. If none of the elements has the given value, it returns 0.
+
+<RetinaImg src="/img/blockOther/lists_indexOf_example.png" alt="find in list example"/>
+
+
+This example searches in the list `0,200,50` for the value 50. Since 50 is the third element in the list, the result is 3. If you searched for 60 instead, the result would be 0 (since 60 is not in the list at all).
+
+## Get in List {#lists_getIndex}
+
+<RetinaImg src="/img/blockScreenshots/Lists/lists_getIndex.png" alt="Block lists_getIndex"/>
+
+
+Returns and/or removes the item from the list. If you choose `#`, you need to give the index of the item you want to retrieve, so 1 for the first list item, for example. 
+
+
+## Set in List {#lists_setIndex}
+
+<RetinaImg src="/img/blockScreenshots/Lists/lists_setIndex.png" alt="Block lists_setIndex"/>
+
+
+This block can set (i.e. overwrite) an item in the list or insert a new one. Note that indices are 1-based, so #3 is the third element of the list.
+
+
+## Get Sub-list {#lists_getSublist}
+
+<RetinaImg src="/img/blockScreenshots/Lists/lists_getSublist.png" alt="Block lists_getSublist"/>
+
+
+Returns a smaller list containing only a subset of the items of the given list.
+
+
+## List From/To Text {#lists_split}
+
+<RetinaImg src="/img/blockScreenshots/Lists/lists_split.png" alt="Block lists_split"/>
+
+
+If you have a text that consists of several values separated by a comma (or other delimiter symbol), this block can turn the text into an actual list. These two blocks have exactly the same result:
+
+<RetinaImg src="/img/blockOther/lists_split_example.png" alt="split list example"/>
+
+
+Note that the conversion does not remove any empty space symbols around the delimiter.
+Therefore, if your list elements are separated by a comma and a space i.e. `item1, item2, item3,...` instead of `item1,item2,item3,...` then you should use `, ` (comma and a space) as separator because otherwise the list entries will have a space at the beginning. Of course, you can also remove whitespace with the [Trim Spaces block](text#text_trim).
+
+
+
+## Sort List {#lists_sort}
+
+<RetinaImg src="/img/blockScreenshots/Lists/lists_sort.png" alt="Block lists_sort"/>
+
+
+This block can sort the items in a list. Numeric is useful for lists of numbers and alphabetic for lists of texts.
+
+
+
+
+
+

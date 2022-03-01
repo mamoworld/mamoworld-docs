@@ -1,0 +1,239 @@
+---
+sidebar_position: 3
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Loops
+
+## Overview
+
+Loops allow you to repeat a particular task many times. For a more detailed explanation, see the section [My First Loop](../tutorials-pr/searchReplaceProjectItems#firstLoop) of the tutorial "*Search & Replace in Project Items*"
+
+## Specialized Loops
+
+The blocks in this section are general purpose loops, but you find some more specialized loops in other sections:
+
+- [loop over all lines of a text file](../block-reference/filesText#extendscript_text_file_for_all_lines)
+- [loop over all rows/columns of a spreadsheet](../block-reference/filesSpreadsheet#spreadsheet_for_each_row)
+- [loop over all matches of a regular expression in a text](../block-reference/text#string_for_all_regex_matches)
+
+**Premiere Pro**
+- [loop over all open Pr projects](../block-reference/prProject#block_pr_for_all_open_projects)
+- [loop over Pr project items](../block-reference/prProjectItems#block_pr_for_all_items_in_bin)
+- [loop over clips in a sequence](../block-reference/prSequenceClips#block_pr_for_all_sequence_items)
+- [loop over markers of a clip or sequence](../block-reference/prMarker#pr_marker_for_all_of_project_item)
+- [loop over parameters of a clip](../block-reference/prMogrtsAndClipParameters#block_pr_for_all_component_params_of_clip)
+
+**After Effects**
+
+- [loop over Ae project items](../block-reference/aeProjectItems.mdx#block_ae_for_all_items_in_bin)
+- [loop over frames of a composition](../block-reference/aeComp.mdx#for_each_frame)
+- [loop over layers of a composition](../block-reference/aeLayer#ae_layer_for_all)
+- [loop over layers with a particular source item](../block-reference/aeProjectItems.mdx#block_ae_for_all_layers_with_source_item)
+- [loop over properties of layers](../block-reference/aeLayerProperties#ae_property_for_all)
+
+
+## Repeat Loop {#controls_repeat_ext}
+
+<RetinaImg src="/img/blockScreenshots/Loops/controls_repeat_ext.png" alt="Block controls_repeat_ext"/>
+
+
+This loop just executes the blocks you plug inside of it as many times as you want. It is the most simple loop and therefore useful to understand the concept of loop blocks. However, in practice you will use the [For Loop](loops#controls_forcontrols_for) much more often, which is very similar, but more powerful.
+
+### Example
+
+<RetinaImg src="/img/blockOther/controls_repeat_ext_example.png" alt="Block controls_repeat_ext"/>
+
+
+This example prints the following output to the console:
+
+```
+I am first
+this block is repeated
+this block is repeated
+this block is repeated
+I am last
+```
+
+As you can see, the block that is plugged inside the block is executed three times, whereas the other blocks above and below are just executed once. 
+
+
+## While/Until Loop {#controls_whileUntil}
+
+<RetinaImg src="/img/blockScreenshots/Loops/controls_whileUntil.png" alt="Block controls_whileUntil"/>
+
+
+In the top row of this loop you need to put a condition (a [logic value](logic) that evaluates to either `true` or `false`).
+The loop executes the blocks you plug inside it again and again, but before it starts a new round of the loop, it checks the condition, and if this condition evaluates to `false` it stops looping. In other words, the While/Until loop repeats until the condition is not `true` anymore. 
+
+### While vs Until 
+In the dropdown of the block you can choose between "while" and "until". The only difference is that for "while" the condition is also evaluated before the very first loop execution. In other words, the "until" loop always executes at least once, whereas the "while" loop does not execute at all if the condition already evaluates to `false` at the very beginning.
+
+### Example - Import Multiple Folders
+
+<RetinaImg src="/img/blockOther/controls_whileUntil_example.png" alt="Block controls_whileUntil"/>
+
+
+This script imports multiple footage folders into your Premiere Pro project. The blocks plugged inside the loop first show a "Choose Folder" dialog and then import the folder that the user has chosen.
+Since we plugged the blocks into the loop, after that the script asks "Do you want to import more footage?" and as long as the user chooses "yes", the script repeats the process. Note that we have chosen the "until" option, so that the question is not asked before the first folder import.
+
+By the way, if you're wondering what the [Tinker File Path block](filesNameAndPath#string_tinker_path) here does: from the full path (say `C:\projects\myProject\footage`), it just takes the name (like `footage` in our example) and puts a `\` in front of it to indicate that we want to import it to a bin in the root bin of the project (`\footage` denotes a bin "footage" in the root bin, whereas `footage` denotes a bin with name "footage" that could be anywhere - so Automation Blocks would search your project to see if it can find a bin of that name).
+
+
+## Count With {#controls_for}
+
+<RetinaImg src="/img/blockScreenshots/Loops/controls_for.png" alt="Block controls_for"/>
+
+
+The "Count With" loop is similar to the simple [Repeat Loop](loops#controls_repeat_ext), but it offers a [variable](variables.mdx) `i`, which you can use for counting how often the loop has already repeated. 
+
+:::danger Count with is NOT a real For loop
+
+If you know a `for(...)` loop, you might get the impression that "Count with" is the same, but there is a subtle difference: When you "count from x to y" and y is smaller than x, then the count goes backwards (whereas the *for* loop would not execute at all). To achieve the usual *for* loop behavior, better use a *while* loop:
+
+<RetinaImg src="/img/blockOther/controls_for_example.png" alt="Count with is not a for loop"/>
+
+:::
+
+### By parameter
+
+<RetinaImg src="/img/blockOther/controls_for_example_1.png" alt="for loop simple example"/>
+
+
+This block prints the following to the console:
+
+```
+this is loop repetition 1
+this is loop repetition 2
+this is loop repetition 3
+this is loop repetition 4
+this is loop repetition 5
+this is loop repetition 6
+this is loop repetition 7
+this is loop repetition 8
+this is loop repetition 9
+this is loop repetition 10
+```
+
+As you can see, the variable `i` is incremented by 1 each time the loop repeats.
+If we change the `by` parameter to 4, the variable `i` grows by 4 in each iteration of the loop:
+
+<RetinaImg src="/img/blockOther/controls_for_example_2.png" alt="for loop simple example 2"/>
+
+
+```
+this is loop repetition 1
+this is loop repetition 5
+this is loop repetition 9
+```
+
+
+### Example - Export Stills
+
+<RetinaImg src="/img/blockOther/controls_for_example_3.png" alt="for loop simple example 3"/>
+
+
+
+This loop exports still images from the active sequence. In the example, the 0.5 at the end of the first line results in the export of one still image every 0.5 seconds of the sequence. The loop [variable](variables.mdx) `i` is also used to name the exported stills. The created output files are
+```
+frame_at_0s.jpg
+frame_at_0.5s.jpg
+frame_at_1s.jpg
+frame_at_1.5s.jpg
+...
+```
+If you prefer frame numbers or timecodes instead of seconds in the file names, you could use the blocks in the category [Pr Time](prTime) to convert the time in seconds into your preferred format.
+
+
+## For Each Loop {#controls_forEach}
+
+<RetinaImg src="/img/blockScreenshots/Loops/controls_forEach.png" alt="Block controls_forEach"/>
+
+
+The *For Each* loop takes a list and then executes the blogs you plug inside of it once for each list element. The list element is stored in the [variable](variables.mdx) `j`.
+
+<RetinaImg src="/img/blockOther/controls_forEach_example_1.png" alt="for each example 1"/>
+
+
+This example calls the "write to console" block three times. The first time j is `Monday` the second time `Tuesday`and the third time `3`. Hence, the script writes the following on the console:
+
+```
+Monday
+Tuesday
+3
+```
+
+### Example
+
+<RetinaImg src="/img/blockOther/controls_forEach_example_2.png" alt="for each example 2"/>
+
+
+This scripts adds the sequences with names `very first draft`, `my sequence final` and `final final 03` to the render queue. Note that the variable `j` is both used for the sequence name that is rendered and for the output file.
+
+## Loop Break/Continue {#controls_flow_statements}
+
+<RetinaImg src="/img/blockScreenshots/Loops/controls_flow_statements.png" alt="Block controls_flow_statements"/>
+
+
+The break/continue block can be plugged inside any loop block to stop its execution early. Here is a basic example, where the loop is configured to repeat ten times, but inside the loop we check if the 5th repetition has been reached, and if so break out of the loop:
+
+<RetinaImg src="/img/blockOther/controls_flow_statements_example_1.png" alt="break example 1"/>
+
+
+As a result, the loop only executes 5 times and the script shows this in the console:
+
+```
+1
+2
+3
+4
+5
+```
+
+### Example - Break out of Search
+
+Here is a more practical example, where we search for a sequence item. We loop over all project items, but as soon as we've found one that is a sequence, we stop.
+
+<RetinaImg src="/img/blockOther/controls_flow_statements_example_2.png" alt="break example 2"/>
+
+
+The same pattern can be used for all
+kinds of search operations, when you
+don't want to continue the loop after
+you've found what you were looking for.
+
+
+### Continue option
+
+If you choose the `continue with next operation` instead of `break out`, the loop only stops the current iteration and immediately continues with the next one.
+
+<RetinaImg src="/img/blockOther/controls_flow_statements_example_3.png" alt="continue example"/>
+
+
+
+In this example, each iteration writes two messages to the console - one before and one after the *if* condition. In the fifth iteration, the condition is `true`, so we execute the `continue with next iteration` statement. As as result, the second console output is skipped in the 5th iteration and there is no line `this is still iteration 5` in the console output:
+
+```
+1
+this is still iteration 1
+2
+this is still iteration 2
+3
+this is still iteration 3
+4
+this is still iteration 4
+5
+6
+this is still iteration 6
+7
+this is still iteration 7
+8
+this is still iteration 8
+9
+this is still iteration 9
+10
+this is still iteration 10
+```

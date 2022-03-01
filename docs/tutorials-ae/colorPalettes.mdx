@@ -1,0 +1,63 @@
+---
+sidebar_position: 3
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Color Palette Workflow
+
+## Overview
+ 
+The Automation Blocks script **link to color palette** offers a very easy and powerful color workflow in After Effects. Store your colors in one central color palette comp and link anything in your project to it. When you modify the color palette, all linked color values in your scene update instantly.
+
+ <div class="video-container"><iframe src="https://www.youtube.com/embed/G6QafG2KLZ0?rel=0"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+</div>
+
+## Usage
+
+### Linking Colors (and creating palette comp)
+
+Just select some color properties or Text or Solid layers in your project and run the script. A dialog pops up where you can pick the color to which you want to link: 
+
+<RetinaImg src="/img/tutorials-ae/colorPaletteLinkDialog.png" alt="After Effects Script: Link to Color Palette"/>
+  
+After you chose a color, two things will happen:
+
+1. if there is no color palette comp in your project, yet, it creates one
+2. it links the selected color properties to the chosen color of the color palette
+
+If you didn't select any color properties, but a Text or Solid layer (or several of them), it creates a fill effect on those layers and links the fill color to the palette.
+
+**Saturation & Brightness**
+
+If you change the *Saturation* or *Brightness* values in the link dialog, the linked color will not have exactly the color of the palette, but a modified (desaturated/darker/brigher/...) variant of it.
+
+### Changing the Color Palette
+
+The color theme comp contains a shape layer with (by default) five shapes - each representing one of the colors of the palette. If you change the fill color of one of the shapes, all linked colors in your project change with it, instantly.
+
+
+## Customizations
+
+### Adding More Colors (or Changing Default Colors)
+
+If you open the block code of the script, at the very beginning you see a list of the default colors of the color palette. You can change those default colors and even add more colors to the list. After you did that, please delete the color palette comp from your project (if it already has one), such that with the next execution of the script a new color palette comp with the new colors is created.
+
+<Anigif src={useBaseUrl('/img/tutorials-ae/colorPaletteChangeColors.gif')} width="650px" />
+
+### Customizing Name & Location of Color Palette Comp
+
+Right below the list, where you can customize the default colors of the palette, you also find variables where you can customize the name of the color palette comp and the project bin, where it is located.
+<RetinaImg src="/img/tutorials-ae/colorPaletteChangeCompName.png" alt="Custom Color Palette Name"/>
+
+To store the color palette in a different bin, for example, just enter the name of that bin (or a path like `/bin/subbin`), or select an existing bin in your project and click the *refresh* icon of the [Project Bin](../block-reference/aeProjectItems.mdx##ae_itembin_path) block.
+
+
+:::tip Keyboard Shortcut
+
+If you use this script a lot, note that you can link Automation Blocks scripts also to a keyboard shortcut.
+
+:::
+

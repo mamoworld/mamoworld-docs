@@ -1,0 +1,72 @@
+---
+sidebar_position: 26
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Ae Rendering
+
+If you want to render some comps, the typical workflow is to
+1. [Clear the queue](#ae_renderqueue_clear)
+2. [Add Comps to the queue](#ae_renderqueue_add_comp) which you want to render
+3. [start the render queue](#ae_renderqueue_start) or [send it to Adobe Media Encoder](#ae_renderqueue_queue_in_ame)
+
+The first step is optional, but it ensures that the queue does not contain any old enties that would otherwise be rendered, too.
+
+## Clear Ae Render Queue {#ae_renderqueue_clear}
+
+<RetinaImg src="/img/blockScreenshots/AeRendering/ae_renderqueue_clear.png" alt="Block ae_renderqueue_clear"/>
+
+This block removes all entries from After Effects' render queue.
+
+## Add to Ae Render Queue {#ae_renderqueue_add_comp}
+
+<RetinaImg src="/img/blockScreenshots/AeRendering/ae_renderqueue_add_comp.png" alt="Block ae_renderqueue_add_comp"/>
+
+This block adds a [Composition](aeComp.mdx#accessComp) to the render queue. 
+
+
+**Render Settings & Output Modules**
+
+You can choose the *render settings* and *output module* you want to use.
+You can also add additional output modules using the blue cog wheel icon in the top left corner of the block. This is useful, if you want to export the same comp in multiple formats.
+
+**Output Files**
+
+For each output module you also need to specify an output [file](files.mdx#accessFile). In the file name you can use the placeholders like `[compName]` or `[fileextension]`, which are supported by After Effects.
+To find all supported placeholders, open the dialog for custom output templates as shown here:
+<Anigif src={useBaseUrl('/img/blockOther/ae_renderqueue_add_comp_placeholders.gif')} width="698px" />
+
+
+
+## Start Ae Render Queue {#ae_renderqueue_start}
+
+<RetinaImg src="/img/blockScreenshots/AeRendering/ae_renderqueue_start.png" alt="Block ae_renderqueue_start"/>
+
+This block starts After Effects' render queue, exactly as if you would click the *"render"* button of the render queue.
+
+<RetinaImg src="/img/blockOther/ae_renderqueue_start_screenshot.png" alt="Render Button After Effects Scripting"/>
+
+
+
+## Send queued items to Adobe Media Encoder{#ae_renderqueue_queue_in_ame}
+
+<RetinaImg src="/img/blockScreenshots/AeRendering/ae_renderqueue_queue_in_ame.png" alt="Block ae_renderqueue_queue_in_ame"/>
+
+This block has the same effect as if you click the button *"Queue in AME"* in the render queue:
+It sends the queued items from After Effects's render queue to Adobe Media Encoder. 
+
+<RetinaImg src="/img/blockOther/ae_renderqueue_queue_in_ame_screenshot.png" alt="After Effects Scripting: Queue in AME"/>
+
+If you enable the checkbox *"render immediately"*, the block also starts the rendering process of Adobe Media Encoder.
+
+When Adobe Media receives the queued items, it applies the most recently used encoding preset. If the *"render immediately"* option is set to true, you will not have an opportunity to change the encoding settings.
+
+:::danger Compatibility
+
+This block requires Adobe Media Encoder CC 2017 11.0) and After Effects CC 2017 (14.0) or later.
+
+:::
+

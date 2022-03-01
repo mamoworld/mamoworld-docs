@@ -1,0 +1,192 @@
+---
+sidebar_position: 8
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Files
+
+### Accessing a Particular File (or Folder) {#accessFile}
+
+Automation Blocks represents files (and folders) with a text which corresponds to the full path to the file on your hard-drive. So whenever a block requires you to provide a file, just give it the path of that file.
+
+The [File block](#block_extendscript_file) and the [Folder block](#block_extendscript_folder) offer a convenient method to create such a file path text, but you can use any other method you want to to create this text when you want to access a file. A simple text block would work, too - the following two blocks have exactly the same result:
+
+<RetinaImg src="/img/blockOther/block_extendscript_file_example.png" alt="File Block vs Text Block"/>
+
+
+If you want the user to choose a file, you can use the [Open File Dialog](userInterfaceAndComments#block_extendscript_open_file_dlg) and [Save File Dialog](userInterfaceAndComments#block_extendscript_save_file_dlg). If you want to create or modify file names, the blocks in the [File Names & Path Chapter](filesNameAndPath) will help you to tinker with your path texts.
+
+### Opening & Closing Files
+
+You don't need to worry about the details of opening or closing files - Automation Blocks handles all of this for you in the background.
+When you try to read from or write to a file, Automation Blocks checks if it's already opened the file before, and if so continues the reading or writing from that position. It also makes sure that all files are closed properly again when the script execution is finished.
+
+For performance reasons, read and write operations on spreadsheet files are cached. So when you first read a value from a spreadsheet, the entire spreadsheet is read and all subsequent read or write operations use that cache. The cache is then written into the file again when the script is finished. Usually, you don't need to worry about these details, but for long running scripts this means that you'll see changes in the spreadsheet file only after the script is finished, not while it is still running.
+
+
+## File {#block_extendscript_file}
+
+<RetinaImg src="/img/blockScreenshots/Files/block_extendscript_file.png" alt="Block block_extendscript_file"/>
+
+
+This block represents a file on your hard-drive. In Automation Blocks, a file is just the absolute path of a file represented as a text, so technically this block is the same as a normal text block. But it has this extra folder icon at the end, which allows you to choose a file more conveniently. If you click the icon, an Open File dialog opens and the text of the block is replaced with whatever file you have chosen.
+
+:::tip Open and Save File Dialogs
+
+If you want to give the user the freedom to choose a file each time the script is executed, you can use the [Open File Dialog](userInterfaceAndComments#block_extendscript_open_file_dlg) or the [Save File Dialog](userInterfaceAndComments#block_extendscript_save_file_dlg) instead of the File block.
+
+:::
+
+
+## Embedded File {#block_extendscript_embedded_file}
+
+<RetinaImg src="/img/blockScreenshots/Files/block_extendscript_embedded_file.png" alt="Block block_extendscript_embedded_file"/>
+
+Embedded files can be used exactly as normal [File](#block_extendscript_file) blocks, but the actual contents of the file will be saved as part of your block script. That way, you can ensure that the file is always available, also if you run the script on other machines, for example.
+
+### Size Limit
+
+For performance reasons, embedded files may not be larger than 2MB. They are great to embedd 
+- [Ae Preset Files](aeLayer.mdx#ae_layer_apply_preset), 
+- [Media Encoder Preset Files](prRendering.mdx#block_media_encoder_render) 
+- [Premiere Pro Sequence Presets](prSequence#block_pr_new_sequence)
+- or even small image files.
+
+But they are not suited to embedd large video files, for example.
+
+### Technical Background
+
+Say you create an *Embedded File* block and select the file `myText.txt` in your documents folder. Then the block saves the entire contents of the file as part of your blockscript and when the script is executed, it creates a copy of that file in the following folder
+
+- *Mac OS*: `~/Library/Application Support/aescripts/automationblocks/`
+- *Windows*: `%AppData%/aescripts/automationblocks/`
+
+Then the script uses this copy of the file, instead of the original from your documents folder. 
+
+To open the folder, where the *Embedded File* block creates its files, you can right-click the block and choose *"Open Embedded Files Folder"*.
+
+
+
+
+## Folder {#block_extendscript_folder}
+
+<RetinaImg src="/img/blockScreenshots/Files/block_extendscript_folder.png" alt="Block block_extendscript_folder"/>
+
+
+This block represents a folder on your hard-drive. In Automation Blocks, a folder is just the absolute path of a folder represented as a text, so technically this block is the same as a normal text block. But it has this extra folder icon at the end which allows you to choose a folder more conveniently. If you click the icon, an Open Folder dialog opens and the text of the block is replaced with whatever folder you have chosen.
+
+:::tip Open Folder Dialog
+
+If you want to give the user the freedom to choose a folder each time the script is executed, you can use the [Open Folder Dialog](userInterfaceAndComments#block_extendscript_open_folder_dlg) instead of the Folder block.
+
+:::
+
+## List of Files {#block_extendscript_get_files_in_folder}
+
+<RetinaImg src="/img/blockScreenshots/Files/block_extendscript_get_files_in_folder.png" alt="Block block_extendscript_get_files_in_folder"/>
+
+
+Creates a list of all files (and/or folders) inside the given folder of your hard drive.
+
+
+
+## Execute File {#block_extendscript_execute_file}
+
+<RetinaImg src="/img/blockScreenshots/Files/block_extendscript_execute_file.png" alt="Block block_extendscript_execute_file"/>
+
+
+This block executes the chosen file. This is the same as double-clicking the file in a file browser like Windows Explorer or Mac OS Finder.
+
+You can use this to execute bat files in Windows, for example, or to open images in the system default program for that image type.
+
+## Delete File {#block_extendscript_delete_file}
+
+<RetinaImg src="/img/blockScreenshots/Files/block_extendscript_delete_file.png" alt="Block block_extendscript_delete_file"/>
+
+
+Deletes a file from your hard-drive. The file is **not** put in the trash.
+
+If you enable the `simulate only` option, instead of really deleting the file, the script just writes a message on the console mentioning the file it would have deleted. This is very useful for testing your script during development to ensure you don't delete any files accidentally.
+
+:::danger Cannot be undone!
+
+You cannot undo the operation and the deleted file will not be in the trash.
+It is recommended that you prompt the user for permission before deleting (by using the delete *after confirm* option) and that you use the "simulate only" option while developing your script.
+
+:::
+
+:::tip Delete before writing to files
+
+The blocks which write content to text or spreadsheet files normally append new data to the existing file. If you want to overwrite the existing file's content instead, simply use this Delete File block before you start writing to the file. 
+
+:::
+
+
+## Copy File or Folder{#block_extendscript_copy_file}
+
+<RetinaImg src="/img/blockScreenshots/Files/block_extendscript_copy_file.png" alt="Block block_extendscript_copy_file"/>
+
+
+Copies a single file or the entire contents of a folder to a new location. In the example above, the file `~/Desktop/myFile.png` will be copied to `~/Desktop/target/myFile.png`.
+
+If you copy a folder, note that the contents of the folder is copied, not the folder itself. 
+
+<RetinaImg src="/img/blockOther/block_extendscript_copy_file_example_copy_folder.png" alt="copy folder example"/>
+
+
+That means that in this example, if you have a file `~/Desktop/src/myFile.txt`, it will be copied to `~/Desktop/target/myFile.txt` and not to `~/Desktop/target/src/myFile.txt`. 
+
+If you copy a single file, as destination you can either give a [File](files#block_extendscript_file) or a [Folder](files#block_extendscript_folder). If you provide a folder, the file is copied to that location and keeps its existing filename. If you provide a file, the copy is renamed accordingly. 
+
+<RetinaImg src="/img/blockOther/block_extendscript_copy_file_example_rename.png" alt="rename example"/>
+
+
+In this example, the file `myFile.png` on the desktop is copied into the sub-folder `target` of the desktop and the copy is named `newName.png`.
+
+#### if target folder does not exist
+
+Here you have the following options:
+
+1. *create folder*: the target folder and any parent folders are created if necessary
+2. *do nothing*: if the target folder does not exist, nothing is copied and the script continues
+3. *stop with error*: if the target folder does not exist, nothing is copied and the script stops with an error
+
+#### if a file exists
+
+If a file already exists in the target location, you have the following options:
+1. replace with new file
+2. keep existing file
+3. keep both (the new copy of an existing file `myFile.png` will be named `myFile copy.png` and if that file exists, too, it will be named `myFile copy 2.png` etc.)
+
+If you copy an entire folder, note that if the target folder exists, the copied content is combined with the existing content and the old content is **not** deleted before the new content is copied (although individual files in the target folder might be overwritten if you choose the *replace with new file* option).
+
+## File Exists {#block_extendscript_exists_file}
+
+<RetinaImg src="/img/blockScreenshots/Files/block_extendscript_exists_file.png" alt="Block block_extendscript_exists_file"/>
+
+This block returns a [logic value](logic.mdx) which is `true`, if the file or folder with the given path exists on the harddrive. If you choose the option *"file"* and the path exists but is actually a folder, it returns `false` (and analogously the *"folder"* option is only `true` if the path really corresponds to an existing folder and not a file).
+
+## File has Type {#block_extendscript_file_has_type}
+
+<RetinaImg src="/img/blockScreenshots/Files/block_extendscript_file_has_type.png" alt="Block block_extendscript_file_has_type"/>
+
+
+Checks if the given file has any of the following types (based on the file extension)
+- **video:** 'mov', 'avi', 'mpg', 'mpeg', 'mpe', 'dv', 'qt', 'mp4', 'mxf', 'r3d', 'm1v', 'm2v', 'm4v', 'm2t', 'm2ts', 'mts', 'wmv', 'hvec', 'mkv', 'mk3d', '3gp', 'asf', 'f4v', 'vob', 'cine'
+- **image (bitmap):** 'ptl', 'prtl', 'psd', 'bmp', 'dib', 'rle', 'ico', 'gif', 'cin', 'dpx', 'exr', 'mxr', 'sxr', 'jpeg', 'jpg', 'png', 'iris', 'bw', 'rgb', 'rgba', 'sgi', 'bpx', 'ivb', 'pix', 'targa', 'tga', 'tig', 'tif', 'tiff', 'tim', 'dng', 'psq'
+- **image (vector):** 'ai', 'eps', 'svg', 'pict', 'pct', 'pic', 'pdf'
+- **audio**: 'mp3', 'wav', 'aif', 'aiff', 'ogg', 'wma', 'bwf', 'm4a', 'mka', 'ac3', 'asnd', 'aac'
+- **any media**: any of the above (video, image or audio)
+- **Premiere Pro project**: 'prproj'
+- **After Effects project**: 'aep'
+
+
+## Create Folder {#block_extendscript_create_folder}
+
+<RetinaImg src="/img/blockScreenshots/Files/block_extendscript_create_folder.png" alt="Block block_extendscript_file_has_type"/>
+
+
+Creates the given folder on your hard-drive, if it does not yet exist. It also creates the parent folders, if needed.

@@ -1,0 +1,62 @@
+---
+sidebar_position: 2
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Variables
+
+## Overview
+
+Variables allow you to store values and reuse them in later blocks of your script. They are also an essential ingredient for loops. 
+
+Here is an example:
+
+<RetinaImg src="/img/blockOther/variables_introduction_example.png" alt="Block variables_set"/>
+
+
+In the first line, the script gives the variable `name` the value `my awesome project`. In the next lines, it first creates a new project with project file `~/Desktop/my awesome project/my awesome project.prproj` and then creates in that project a sequence with the name `awesome project`.
+
+The great benefit of using variables is that when you want to run the script with another project name, you just need to replace `my awesome project` in the very first line. Once you've done that, any block using the variable `name` will use the new value you assigned to the variable.
+
+
+
+For a more detailed explanation of variables, see the tutorial [Search & Replace in Project Items](../tutorials-pr/searchReplaceProjectItems#variables).
+
+
+## Set Variable {#variables_set}
+
+<RetinaImg src="/img/blockScreenshots/Variables/variables_set.png" alt="Block variables_set"/>
+
+
+With this block you can assign a value to a variable. All variables of your current script are listed in the dropdown; just choose the one you want and set its value. The value can be anything: a number, text, logic value, list and even any more complex data like a sequence, markers or clip parameter, for example.
+
+Often, you set variable values at the very beginning of your script. But you can also set variable values at any later point, and multiple times (to overwrite the previous value). Loops set the variables they provide themselves, so for loop variables you only need the [Get Variable](#variables_get) block and never the Set Variable block.
+
+
+## Change Variable {#math_change}
+
+<RetinaImg src="/img/blockScreenshots/Variables/math_change.png" alt="Block math_change"/>
+
+
+This block is only useful for variables whose value is a number. The block allows you to increase the value of a variable (or decrease it, if you provide a negative number). The same can also be done with the [Set Variable block](#variables_set), but with the Change Variable block the code is a bit more compact. 
+
+
+Both these blocks increase the value of the variable `my number` by 2:
+
+<RetinaImg src="/img/blockOther/math_change_example_1.png" alt="Block variables_set"/>
+
+
+
+
+## Get Variable {#variables_get}
+
+<RetinaImg src="/img/blockScreenshots/Variables/variables_get.png" alt="Block variables_get"/>
+
+
+The round purple block, which just consists of the variable name, returns the value of the variable. If you execute this block before you've set the value of the variable, it will return `undefined` (unless it is a loop variable, in which case the loop itself takes care of setting the variable value before each loop iteration).
+
+Also note that in the dropdown you cannot just pick any variable of your script, but you also have the option to delete or rename a variable. These operations affect not just this block, but all occurrences of the variable in your script. So, if you rename the variable, for example, the name is updated throughout your entire script.
+

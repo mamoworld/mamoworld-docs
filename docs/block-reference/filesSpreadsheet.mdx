@@ -1,0 +1,70 @@
+---
+sidebar_position: 11
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Files Spreadsheet
+
+These blocks allow you to read and write spreadsheet files. We currently support two formats: 
+- csv (supported by all major spreadsheet applications like Microsoft Excel, Open Office, Apple Numbers and Google Docs)
+- Excel XML 
+
+Whenever you read or write a spreadsheet file, make sure it has either the file extension .csv or .xml. Based on this file extension, Automation Blocks will decide whether it treats the file as csv or Excel XML file.
+
+
+## Add Row/Column to Spreadsheet {#spreadsheet_add_row}
+
+<RetinaImg src="/img/blockScreenshots/FilesSpreadsheet/spreadsheet_add_row.png" alt="Block spreadsheet_add_row"/>
+
+
+Adds a new row (or column) to a spreadsheet file.
+
+By default, the values for the first two cells (cell A and cell B) in the new row are written. You can add more cells by clicking on the blue cog wheel icon in the top left corner of the block.
+
+:::tip Creating New Files
+
+If the spreadsheet file already exists, this block will append a new row/column to it. If you want to start a new file, just [delete the existing file](files#block_extendscript_delete_file) before this block. 
+
+:::
+
+
+## For Each Row/Column of Spreadsheet {#spreadsheet_for_each_row}
+
+<RetinaImg src="/img/blockScreenshots/FilesSpreadsheet/spreadsheet_for_each_row.png" alt="Block spreadsheet_for_each_row"/>
+
+
+Reads an entire spreadsheet file row by row (or column by column).
+
+With the optional `from row` and `to row` parameters you can limit the range of rows that is read. If the first row of your spreadsheet contains a title, for example, that you want to skip, just set `from row` to `2` (Cell indices start at 1 for the first row).
+
+By default, from each row the first two cells are read (cell A and cell B), but if you click on the cog wheel icon in the top left corner of the block, you can add more cells.
+
+The blocks that you nest inside this block are executed once for each row of the spreadsheet. During that execution, the content of each cell in that row is stored in a [variable](variables.mdx) (`my cell 1`, `my cell 2` etc.) so that you can easily access the content of these cells.
+
+## Set Spreadsheet Cell {#spreadsheet_set_cell}
+
+<RetinaImg src="/img/blockScreenshots/FilesSpreadsheet/spreadsheet_set_cell.png" alt="Block spreadsheet_set_cell"/>
+
+
+Writes a single cell to a spreadsheet.
+If the file already exists, the content of this cell will be replaced. 
+
+Cell indices start at 1 for the first row/column.
+
+## Get Spreadsheet Cell {#spreadsheet_get_cell}
+
+<RetinaImg src="/img/blockScreenshots/FilesSpreadsheet/spreadsheet_get_cell.png" alt="Block spreadsheet_get_cell"/>
+
+
+Reads a single cell from a spreadsheet. If the cell is empty, the empty text will be returned. 
+
+Cell indices start at 1 for the first row/column.
+
+## Get Size of Spreadsheet {#spreadsheet_get_cell}
+
+<RetinaImg src="/img/blockScreenshots/FilesSpreadsheet/spreadsheet_get_size.png" alt="Block spreadsheet_get_size"/>
+
+Returns the number of rows or the number of columns of the spreadsheet file.

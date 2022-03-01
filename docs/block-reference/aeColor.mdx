@@ -1,0 +1,21 @@
+---
+sidebar_position: 28
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Ae Color
+
+## Color values returned by blocks
+
+Blocks return label colors as hex strings (like #ff0000 for red), but color values of properties as a [list](lists.mdx) of four numbers in the range 0 to 1 (representing, r,g,b,a such that `[1,0,0.5,1]` is 100% red, 0% green, 50% blue)
+
+## Specifying Time Values
+
+If you need to pass a time value as an argument to a block, you can specify it in one of the following formats:
+
+- hex string (like #ff0000 or short form #f00)
+-  a [list](lists.mdx) of three numbers in the range 0 to 1 (representing, r,g,b, such that `[1,0,0.5]` is 100% red, 0% green, 50% blue)
+- a color name like `red`, `sandstone`. In addition to the default label color names of Ae, also css color names like `aliceblue` are supported. 
