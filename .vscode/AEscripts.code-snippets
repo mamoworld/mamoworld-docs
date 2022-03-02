@@ -64,7 +64,7 @@
         "scope": "markdown",
         "prefix": "logic value (docusaurus)",
         "body": [
-            "[logic value](logic.mdx) `true` or `false`"
+            "[logic value](/block-reference/logic.mdx) `true` or `false`"
 		],
         "description": " { kind:category...}"
     },
@@ -73,7 +73,7 @@
         "scope": "markdown",
         "prefix": "null value (docusaurus)",
         "body": [
-            "[null](logic.mdx#logic_null)"
+            "[null](/block-reference/logic.mdx#logic_null)"
 		],
         "description": " { kind:category...}"
     },
@@ -82,7 +82,7 @@
         "scope": "markdown",
         "prefix": "text (docusaurus)",
         "body": [
-            "[text](text.mdx)"
+            "[text](/block-reference/text.mdx)"
 		],
         "description": " { kind:category...}"
     },
@@ -91,7 +91,7 @@
         "scope": "markdown",
         "prefix": "file (docusaurus)",
         "body": [
-            "[file](files.mdx#accessFile)"
+            "[file](/block-reference/files.mdx#accessFile)"
 		],
         "description": " { kind:category...}"
     },
@@ -99,7 +99,7 @@
         "scope": "markdown",
         "prefix": "list (docusaurus)",
         "body": [
-            "[list](lists.mdx) (array)"
+            "[list](/block-reference/lists.mdx) (array)"
 		],
         "description": " { kind:category...}"
     },
@@ -108,7 +108,7 @@
         "scope": "markdown",
         "prefix": "time value (Ae, docusaurus)",
         "body": [
-            "[time](aeTime.mdx)"
+            "[time](/block-reference/aeTime.mdx)"
 		],
         "description": " { kind:category...}"
     },
@@ -126,7 +126,7 @@
         "scope": "markdown",
         "prefix": "project item (docusaurus)",
         "body": [
-            "[Project Item](aeProjectItems.mdx#accessProjectItem)"
+            "[Project Item](/block-reference/aeProjectItems.mdx#accessProjectItem)"
 		],
         "description": " { kind:category...}"
     },
@@ -135,7 +135,7 @@
         "scope": "markdown",
         "prefix": "layer value (docusaurus)",
         "body": [
-            "[Layer](aeLayer.mdx#accessLayer)"
+            "[Layer](/block-reference/aeLayer.mdx#accessLayer)"
 		],
         "description": " { kind:category...}"
     },
@@ -144,7 +144,7 @@
         "scope": "markdown",
         "prefix": "comp value (docusaurus)",
         "body": [
-            "[Composition](aeComp.mdx#accessComp)"
+            "[Composition](/block-reference/aeComp.mdx#accessComp)"
 		],
         "description": " { kind:category...}"
     },
@@ -153,7 +153,7 @@
         "scope": "markdown",
         "prefix": "property value (Ae Layer, docusaurus)",
         "body": [
-            "[Layer Property](aeLayerProperties.mdx#ae_layer_properties_access)"
+            "[Layer Property](/block-reference/aeLayerProperties.mdx#ae_layer_properties_access)"
 		],
         "description": " { kind:category...}"
     },
@@ -162,7 +162,7 @@
         "scope": "markdown",
         "prefix": "variable (docusaurus)",
         "body": [
-            "[variable](variables.mdx)"
+            "[variable](/block-reference/variables.mdx)"
 		],
         "description": " { kind:category...}"
     },
