@@ -37,7 +37,8 @@ If you are using GitHub pages for hosting, this command is a convenient way to b
 ## Auto Crop Block Screenshots
 
 If you want to include screenshots of individual blocks or entire block stacks, we have a Photoshop action for you that crops the image automatically and removes the white background.
-![](utilities/photoshop actions/how_to_crop_block_screenshots.png)
+
+![Autocrop Action](utilities/photoshop actions/how_to_crop_block_screenshots.png)
 
 ### Installation:
 you find the necessary files in the folder `utilities/photoshop actions`
