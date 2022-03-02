@@ -65,6 +65,30 @@ That way, the newly inserted keyframes and the existing keyframes after them are
 :::
 
 
+### Pasting Keys to Multiple Properties
+
+Instead of providing the block a single property and a single list of keyframes, you can also pass it lists of those.
+
+Here, we paste keyframes both on the position and on the scale of a layer:
+
+<RetinaImg src="/img/blockOther/ae_keyframes_apply_example_multiple_props.png" alt="pasting keyframes on multiple properties"/>
+
+As the orange arrows indicate, the first keyframe list is applied to the first property and the second keyframe list to the second property.
+
+At first sight this seems to be the same as if you would simply use two copies of the *"add keyframes"* block (first one to paste the position keyframes and then one to paste the scale keyframes). However, there is one important difference:
+The behavior of the **at time** parameter. If you give the block an entire list of keyframe lists, it will look at all of them and offset all keyframe times such that the very first one of them is at the given time. If this sounds strange - it is best explained with an example:
+
+**Example**
+
+Say you read keyframe data for both scale and position from a layer and the first scale keyframe is at 1s and the first position keyframe at 2s. 
+Now you paste those keys to another layer with the *at time* parameter set to 5s. If you just paste the position keyframes alone, the first position keyframe will be at 5s.
+However, if you past both scale and position at once, the block notices that the scale keyframes start 1s earlier than the position keyframes. Hence, it pastes the keyframes such that the first scale keyframe is at 5s, but the first position keyframes is at 6s.
+
+Note that this behavior is identical to what After Effects does when you cut and paste keyframes manually in the user interface.
+
+
+
+
 ## Static Keyframe List {#ae_keyframe_json_const}
 
 <RetinaImg
