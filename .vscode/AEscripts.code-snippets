@@ -1,0 +1,502 @@
+{
+    // Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+    // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+    // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+    // used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+    // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+    // Placeholders with the same ids are connected.
+    // Example:
+    // "Print to console": {
+    // 	"scope": "javascript,typescript",
+    // 	"prefix": "log",
+    // 	"body": [
+    // 		"console.log('$1');",
+    // 		"$2"
+    // 	],
+    // 	"description": "Log output to console"
+    // }
+
+	"Docusaurus Anigif": {
+        "scope": "markdown",
+        "prefix": "docusaurus Anigif",
+        "body": [
+            "<Anigif src={useBaseUrl('/img/blockOther/$1.gif')} width=\"$2px\" />"
+        ],
+        "description": "Animated Gif (optional width)"
+    },
+
+	"Docusaurus Retina Image": {
+        "scope": "markdown",
+        "prefix": "docusaurus Retina Image",
+        "body": [
+            "<RetinaImg src=\"/img/blockOther/$1.png\" alt=\"$2\"/>"
+        ],
+        "description": "Retina Image"
+    },
+
+	"Docusaurus Tip": {
+        "scope": "markdown",
+        "prefix": "docusaurus tip",
+        "body": [
+            ":::tip $1",
+            "",
+            "$2",
+            "",
+            ":::"
+        ],
+        "description": " { kind:category...}"
+    },
+
+	"Docusaurus Danger": {
+        "scope": "markdown",
+        "prefix": "docusaurus danger",
+        "body": [
+            ":::danger $1",
+            "",
+            "$2",
+            "",
+            ":::"
+        ],
+        "description": " { kind:category...}"
+    },
+
+	"Docusaurus Logic Value": {
+        "scope": "markdown",
+        "prefix": "logic value (docusaurus)",
+        "body": [
+            "[logic value](logic.mdx) `true` or `false`"
+		],
+        "description": " { kind:category...}"
+    },
+
+	"Docusaurus Null Value": {
+        "scope": "markdown",
+        "prefix": "null value (docusaurus)",
+        "body": [
+            "[null](logic.mdx#logic_null)"
+		],
+        "description": " { kind:category...}"
+    },
+
+	"Docusaurus Text Value": {
+        "scope": "markdown",
+        "prefix": "text (docusaurus)",
+        "body": [
+            "[text](text.mdx)"
+		],
+        "description": " { kind:category...}"
+    },
+
+	"Docusaurus File Value": {
+        "scope": "markdown",
+        "prefix": "file (docusaurus)",
+        "body": [
+            "[file](files.mdx#accessFile)"
+		],
+        "description": " { kind:category...}"
+    },
+	"Docusaurus List Value": {
+        "scope": "markdown",
+        "prefix": "list (docusaurus)",
+        "body": [
+            "[list](lists.mdx) (array)"
+		],
+        "description": " { kind:category...}"
+    },
+
+	"Docusaurus Ae Time Value": {
+        "scope": "markdown",
+        "prefix": "time value (Ae, docusaurus)",
+        "body": [
+            "[time](aeTime.mdx)"
+		],
+        "description": " { kind:category...}"
+    },
+
+	"Docusaurus Ae Color Value": {
+        "scope": "markdown",
+        "prefix": "color value (docusaurus)",
+        "body": [
+            "For details on color values see [Ae Color](aeColor.mdx)"
+		],
+        "description": " { kind:category...}"
+    },
+
+	"Docusaurus Project Item Value": {
+        "scope": "markdown",
+        "prefix": "project item (docusaurus)",
+        "body": [
+            "[Project Item](aeProjectItems.mdx#accessProjectItem)"
+		],
+        "description": " { kind:category...}"
+    },
+
+	"Docusaurus Ae Layer Value": {
+        "scope": "markdown",
+        "prefix": "layer value (docusaurus)",
+        "body": [
+            "[Layer](aeLayer.mdx#accessLayer)"
+		],
+        "description": " { kind:category...}"
+    },
+
+	"Docusaurus Ae Comp Value": {
+        "scope": "markdown",
+        "prefix": "comp value (docusaurus)",
+        "body": [
+            "[Composition](aeComp.mdx#accessComp)"
+		],
+        "description": " { kind:category...}"
+    },
+
+	"Docusaurus Ae Layer Property Value": {
+        "scope": "markdown",
+        "prefix": "property value (Ae Layer, docusaurus)",
+        "body": [
+            "[Layer Property](aeLayerProperties.mdx#ae_layer_properties_access)"
+		],
+        "description": " { kind:category...}"
+    },
+
+	"Docusaurus Variable": {
+        "scope": "markdown",
+        "prefix": "variable (docusaurus)",
+        "body": [
+            "[variable](variables.mdx)"
+		],
+        "description": " { kind:category...}"
+    },
+
+
+    /////////////////////////////////////// iExpressions JSON
+    "iExpression category json": {
+        "scope": "json",
+        "prefix": "category",
+        "body": [
+            "{",
+            "\"kind\": \"category\",",
+            "\"name\": \"$1\",",
+            "\"entries\": [$2]",
+            "}"
+        ],
+        "description": " { kind:category...}"
+    },
+
+    "iExpression expression json": {
+        "scope": "json",
+        "prefix": "expression",
+        "body": [
+            "{",
+            "\"kind\":\"expression\",",
+            "\"name\": \"$1\",",
+            "\"url\": \"$2\",",
+            "\"license\": {",
+            "  \"copyRight\": \"Copyright (c) 2010 - BUILD:REPLACE{{year}} BUILD:REPLACE{{pkg.author}}\"",
+            "},",
+            "\"target\": {",
+            "  \"acceptedTypes\": [",
+            "\t\"OneD\",",
+            "\t\"TwoD\",",
+            "\t\"TwoD_SPATIAL\",",
+            "\t\"ThreeD\",",
+            "\t\"ThreeD_SPATIAL\",",
+            "\t\"COLOR\"",
+            "\t\"SHAPE\"",
+            "  ],",
+            "  \"defaultProperties\": [",
+            "\t\"position\"",
+            "  ]",
+            "},",
+            "\"description\": \"$3\",",
+            "\"body\": ",
+            "\t// #include \"$1.jsxinc\"",
+            ",",
+            "\"variables\": [$4",
+            "]",
+            "}"
+        ],
+        "description": " { kind:expression...}"
+    },
+
+    "iExpression variable float json": {
+        "scope": "json",
+        "prefix": "variable",
+        "body": [
+            "{",
+            "    \"kind\": \"variable\",",
+            "    \"name\": \"$1\",",
+            "    \"id\": \"$2\",",
+            "    \"defaultValue\": $3,",
+            "    \"type\": {",
+            "        \"name\": \"float\",",
+            "        \"minValue\": $4,",
+            "        \"maxValue\": $5",
+            "    },",
+            "    \"description\": \"$6\"",
+            "}",
+        ],
+        "description": "{ kind:variable ->type float...}"
+    },
+
+    "iExpression variable int json": {
+        "scope": "json",
+        "prefix": "variable",
+        "body": [
+            "{",
+            "    \"kind\": \"variable\",",
+            "    \"name\": \"$1\",",
+            "    \"id\": \"$2\",",
+            "    \"defaultValue\": $3,",
+            "    \"type\": {",
+            "        \"name\": \"int\",",
+            "        \"minValue\": $4,",
+            "        \"maxValue\": $5",
+            "    },",
+            "    \"description\": \"$6\"",
+            "}",
+        ],
+        "description": "{ kind:variable ->type int...}"
+    },
+
+    "iExpression variable bool": {
+        "scope": "json",
+        "prefix": "variable",
+        "body": [
+            "{",
+            "\t\"kind\": \"variable\",",
+            "\t\"name\": \"$1\",",
+            "\t\"id\": \"$2\",",
+            "\t\"defaultValue\": false,",
+            "\t\"type\": {",
+            "\t  \"name\": \"bool\"",
+            "\t},",
+            "\t\"description\": \"$3\"",
+            "},"
+        ],
+        "description": "{ kind:variable ->type bool...}"
+    },
+
+    "iExpression variable propertyLink": {
+        "scope": "json",
+        "prefix": "variable",
+        "body": [
+            "{",
+            "    \"kind\": \"variable\",",
+            "    \"name\": \"$1\",",
+            "    \"id\": \"$2\",",
+            "    \"defaultValue\": null,",
+            "    \"type\": {",
+			"        \"name\": \"propertyLink\",",
+			"        \"connectToSliderByDefault\": true",
+			"        \"optional\": true,",
+            "        \"acceptedPropertyValueTypes\": [\"OneD\", \"TwoD\", \"TwoD_SPATIAL\", \"SHAPE\"]",
+            "    },",
+            "    \"description\": \"$3\"",
+            "}"
+        ],
+        "description": "{ kind:variable ->type propertyLink...}"
+    },
+
+    "iExpression variable layer": {
+        "scope": "json",
+        "prefix": "variable",
+        "body": [
+            "{",
+            "    \"kind\": \"variable\",",
+            "    \"name\": \"$1\",",
+            "    \"id\": \"$2\",",
+            "    \"defaultValue\": null,",
+            "    \"type\": {",
+            "        \"name\": \"layer\"",
+            "    },",
+            "    \"description\": \"$3\"",
+            "}",
+        ],
+        "description": "{ kind:variable ->type layer...}"
+    },
+
+    "iExpression variable enum": {
+        "scope": "json",
+        "prefix": "variable",
+        "body": [
+            "{",
+            "\t\"kind\": \"variable\",",
+            "\t\"name\": \"$1\",",
+            "\t\"id\": \"$2\",",
+            "\t\"defaultValue\": \"$3\",",
+            "\t\"type\": {",
+            "\t  \"name\": \"enum\",",
+            "\t  \"options\":[\"$3\"]",
+            "\t},",
+            "\t\"description\": \"$4\"",
+            "}",
+        ],
+        "description": "{ kind:variable ->type enum...}"
+    },
+
+    "iExpression variable color": {
+        "scope": "json",
+        "prefix": "variable",
+        "body": [
+            "{",
+            "    \"kind\": \"variable\",",
+            "    \"name\": \"$1\",",
+            "    \"id\": \"$2\",",
+            "    \"defaultValue\": [1 ,1 ,1 , 1],",
+            "    \"type\": {",
+            "        \"name\": \"color\"",
+            "    },",
+            "    \"description\": \"$3\",",
+            "},",
+        ],
+        "description": "{ kind:variable ->type color...}"
+    },
+
+
+    "iExpression showOnlyIf": {
+        "scope": "json",
+        "prefix": "showOnlyIf",
+        "body": [
+            "\"showOnlyIf\": {",
+            "\t\"id\": \"$1\",",
+            "\t\"hasValue\": [$2]",
+            "}",
+        ],
+        "description": "{ variable.showOnlyIf...}"
+    },
+
+    "iExpression vargroup": {
+        "scope": "json",
+        "prefix": "vargroup",
+        "body": [
+			"{",
+			"    \"kind\": \"vargroup\",",
+			"    \"id\": \"MAKE SURE WE HAVE AN ID - AT LEAST IF WE USE SHOW ONLY IF\",",
+			"    \"name\": \"$1\",",
+            "    \"entries\": [$2]",
+            "}"
+        ],
+        "description": "{ kind:vargroup...}"
+    },
+
+    ////////////////////////////////////////// iExpressions PegJS
+    "pegjs iExpressions rule": {
+        "scope": "pegjs",
+        "prefix": "aaaa",
+        "body": [
+            "/ n:\"$1\" {return {name:n, params: ['$2'$3]}}",
+        ],
+        "description": "pegjs iExpressions rule"
+    },
+
+    /////////////////////////////////////// Javascript
+    "ifndef": {
+        "scope": "javascript,typescript",
+        "prefix": "ifndef",
+        "body": [
+            "//#ifndef $1",
+            "//#define $1"
+        ],
+        "description": "//#ifndef statement"
+    },
+    "endif": {
+        "scope": "javascript,typescript",
+        "prefix": "endif",
+        "body": [
+            "//#endif"
+        ],
+        "description": "//#endif statement"
+    },
+    "include": {
+        "scope": "javascript,typescript",
+        "prefix": "include",
+        "body": [
+            "//#include \"$1\""
+        ],
+        "description": "//#include"
+    },
+    "global": {
+        "scope": "javascript,typescript",
+        "prefix": "global",
+        "body": [
+            "/* global $1 */",
+            "$0"
+        ],
+        "description": "eslint global comment"
+    },
+    "eslint cep": {
+        "scope": "javascript,typescript",
+        "prefix": "eslint cep",
+        "body": [
+            "/* eslint-env node, jquery, extendscript/cep */"
+        ],
+        "description": "/* eslint for CEP */"
+    },
+    "eslint extendscript Ae": {
+        "scope": "javascript,typescript",
+        "prefix": "eslint ae",
+        "body": [
+            "/* eslint-env extendscript/es, extendscript/ae */"
+        ],
+        "description": "/* eslint for ExtendScript/Ae */"
+    },
+    "eslint expressions": {
+        "scope": "javascript,typescript",
+        "prefix": "eslint expressions",
+        "body": [
+            "/* eslint-env extendscript/expressions */"
+        ],
+        "description": "eslint for expressions"
+    },
+    "eslint no-unused-vars": {
+        "scope": "javascript,typescript",
+        "prefix": "eslint no-unused-vars",
+        "body": [
+            "/* eslint no-unused-vars: [\"error\", { \"varsIgnorePattern\": \"^($1)$\" }] */"
+        ],
+        "description": "add unused vars to eslint"
+    },
+    "log": {
+        "scope": "javascript,typescript",
+        "prefix": "log",
+        "body": [
+            "console.log($0);"
+        ],
+        "description": "console log"
+    },
+    "pattern module": {
+        "scope": "javascript,typescript",
+        "prefix": "pattern module",
+        "body": [
+            "var ${1:MODULENAME} = (function(){",
+            "",
+            "\t$0/*implementation*/",
+            "",
+            "\treturn {",
+            "\t\t/*API*/",
+            "\t};",
+            "})();",
+        ],
+        "description": "module pattern"
+    },
+    "pattern closure": {
+        "scope": "javascript,typescript",
+        "prefix": "pattern closure",
+        "body": [
+            "var ${1:FUNCTION} = (function(){",
+            "\tfunction $1($2){",
+            "\t\t$0",
+            "\t}",
+            "\treturn $1;",
+            "})();"
+        ],
+        "description": "closure pattern"
+    },
+    "jspConstructor": {
+        "prefix": "jspConstructor",
+        "body": "\nvar ${1:ConstructorName} = (function() {\n\t'use strict';\n\n\tfunction ${1:ConstructorName}(${2:args}) {\n\t\t// enforces new\n\t\tif (!(this instanceof ${1:ConstructorName})) {\n\t\t\treturn new ${1:ConstructorName}(${2:args});\n\t\t}\n\t\t${3:// constructor body}\n\t}\n\n\t${4:${1:ConstructorName}.prototype.${5:methodName} = function(${6:args}) {\n\t\t${7:// method body}\n\t\\}};\n\n\treturn ${1:ConstructorName};\n}());",
+        "description": "JS constructor pattern",
+        "scope": "javascript,typescript"
+    },
+
+}
