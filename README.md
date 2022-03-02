@@ -41,7 +41,7 @@ If you want to include screenshots of individual blocks or entire block stacks, 
 ![Autocrop Action](./utilities/photoshopActions/how_to_crop_block_screenshots.gif)
 
 ### Installation:
-you find the necessary files in the folder `utilities/photoshop actions`
+you find the necessary files in the folder `utilities/photoshopActions`
 1. Install the action Automation Blocks.atn in Photoshop
 2. copy the script mm_crop_to_selections.jsx to the folder `Presets/Scripts/` inside the folder of your Photoshop installation (like `/Applications/Adobe Photoshop 2022/Presets/Scripts/` for Ps 2022 on Mac OS, for example)
 
@@ -52,3 +52,13 @@ After you opened the screenshot, make sure the only layer it contains is selecte
 ## Retina Images
 
 If you have a High DPI monitor, please make the screenshots in high resolution and save both a file `myImage.png` with normal DPI resolution and `myImage@2x.png` with high DPI resolution.
+
+## Code Snippets
+
+![Code Snippets](./static/img/other/autocompletionExample.gif)
+
+The project contains code snippets for VS Code. If you type `list`, for example, in the auto completion and entry `list (docusaurus)` will appear, which creates the text `list (array)` with a link poiting to the Automation Blocks documentation for lists. Use these snippets to create cross links in the code consistently and feel free to add more snippets.
+
+
+
+ 
