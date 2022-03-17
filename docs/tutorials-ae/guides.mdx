@@ -1,0 +1,90 @@
+---
+sidebar_position: 6
+---
+
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import Anigif from "../../src/components/Anigif";
+import RetinaImg from "../../src/components/RetinaImg";
+
+# Guides
+
+Automation Blocks contains an entire collection of scripts to simplify the work with guides.
+
+## Create
+
+You can use this script to create guides in the active composition.
+
+Just execute the following script:
+
+-   **Guides - Create**
+
+When you execute the script, a dialog pops up where you can chose the orientation of the guides,
+and define at which positions they should be created.
+
+The values should be comma separated and can be in pixels (px) and percentage (%).
+If no unit is defined the default is pixels.
+
+<RetinaImg
+	src="/img/tutorials-ae/guideCreateDialog.png"
+	alt="After Effects Script: Guides - Create - Dialog"
+/>
+
+### Examples of valid values
+
+-   100, 200, 300, 400
+-   10px, 100px, 1000px
+-   10%, 90%
+-   10, 20px, 30%, -40, -50px, -60%
+
+## Save
+
+You can use this script to save the guides in the active composition as a preset.
+
+Just execute the following script:
+
+-   **Guides - Save**
+
+When you execute the script, a dialog pops up where you can chose the preset name, the orientation of the guides,
+and define as which unit they should be saved.
+
+<RetinaImg
+	src="/img/tutorials-ae/guideSaveDialog.png"
+	alt="After Effects Script: Guides - Save - Dialog"
+/>
+
+:::tip Units
+
+A guide saved at 100px will always be in the same position independent of the composition dimensions,
+but a guide at 10% will be dinamically positioned related to the composition dimensions
+
+:::
+
+## Load
+
+You can use this script to load a guides preset into the active composition.
+
+Just execute the following script:
+
+-   **Guides - Load**
+
+When you execute the script, a dialog pops up where you can select a preset and the orientation of the guides you want to load.
+
+<RetinaImg
+	src="/img/tutorials-ae/guideLoadDialog.png"
+	alt="After Effects Script: Guides - Load - Dialog"
+/>
+
+## Mirror
+
+You can use this script to mirror guides from the active composition.
+
+Just execute the following script:
+
+-   **Guides - Mirror**
+
+When you execute the script, a dialog pops up where you can select which guides you want to mirror.
+
+<RetinaImg
+	src="/img/tutorials-ae/guideMirrorDialog.png"
+	alt="After Effects Script: Guides - Mirror - Dialog"
+/>
