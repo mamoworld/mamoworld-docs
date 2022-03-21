@@ -126,3 +126,34 @@ The dropdown option of the block allows you to specify which keyframes of the pr
 - **selected keyframes**
 - **keyframes in workarea**
 - **keyframes in time range** (if you choose this, two more options appear to select a start and end time)
+
+
+## Delete Keyframes {#ae_keyframes_delete}
+
+<RetinaImg
+  src="/img/blockScreenshots/AeKeyframes/ae_keyframes_delete.png"
+  alt="Block ae_keyframes_delete"
+/>
+
+Deletes keyframes on the given property (or if you give it a list of properties, the keyframes of all those properties are deleted).
+With the additional (and optional) parameters you can specify a min/max range and only delete the keyframes within that range.
+
+## Nearest Keyframe Time {#ae_nearest_keyframe_time}
+
+<RetinaImg
+  src="/img/blockScreenshots/AeKeyframes/ae_nearest_keyframe_time.png"
+  alt="Block ae_nearest_keyframe_time"
+/>
+
+Returns the time of the keyframe that is closest to the given time or [null](/block-reference/logic.mdx#logic_null) if no such keyframe exists.
+
+Optionally, the block can look only at keyframes before or only at keyframes after the given time.
+
+### Example: Loop over keyframes
+
+This block script writes all points in time to the console, where at least one property of the active comp has a keyframe:
+
+<RetinaImg
+  src="/img/blockOther/ae_nearest_keyframe_time_example.png"
+  alt="After Effects script: Loop over Keyframes"
+/>
