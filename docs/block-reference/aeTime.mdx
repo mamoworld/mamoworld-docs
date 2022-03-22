@@ -13,7 +13,7 @@ import RetinaImg from '../../src/components/RetinaImg'
 Time values are always returns as (floating point) numbers representing the number of seconds. In a composition these times are always measured relative to the start of the composition such that the beginning of the comp is always 0 (even if the [display start time](aeComp.mdx#ae_comp_set_attribute_display_start_time) of the comp is not 0). 
 For most scenarios, this is a very simple solution. But if you need to work with comps whose display start time is not 0, you need to add the display start time to the value returned by a block, to obtain the time shown in the Ae user interface.
 
-## Specifying Time Values
+## Specifying Time Values {#specify_time_values}
 
 If you need to pass a time value as an argument to a block, you can specify it in one of the following formats:
 - a simple number like `12.4`is interpreted as a time given in seconds
@@ -27,3 +27,16 @@ If you need to pass a time value as an argument to a block, you can specify it i
 <RetinaImg src="/img/blockOther/layer_times.png" alt="Layer Times: In Point, Out Point and Start Time"/>
 
 The [start time](aeLayer.mdx#ae_layer_set_attribute_start_time), [in point](aeLayer.mdx#ae_layer_set_attribute_in_point) and [out point](aeLayer.mdx#ae_layer_set_attribute_out_point) of a layer are all specified in composition time, where a value of 0 corresponds to the beginning of the composition.
+
+
+## Convert Time {#ae_time_converter}
+
+<RetinaImg src="/img/blockScreenshots/AeTime/ae_time_converter.png" alt="Block ae_time_converter"/>
+
+With this block you can convert a time value given in [any format](#specify_time_values) to another format.
+
+### frame rate
+
+The optional frame rate parameter is used to convert between values given in frames and other values. If neither the source nor the target format is frames, the frame rate is ignored.
+If you want to use the frame rate of a composition, footage item or layer, you can simply pass this object as frame rate parameter.
+If you don't specify a frame rate parameter, the frame rate of the active composition is used.

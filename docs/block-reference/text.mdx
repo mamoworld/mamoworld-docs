@@ -145,8 +145,13 @@ This example checks if the name of the active sequence contains `final` and then
 
 <RetinaImg src="/img/blockOther/text_indexOf_example.png" alt="Block text_indexOf"/>
 
+## Search in Text {#string_search_mm}
 
+<RetinaImg src="/img/blockScreenshots/Text/string_search_mm.png" alt="Block string_search_mm"/>
 
+This is an advanced version of the block [Find In Text](#text_indexOf). It has an option to search case-sensitive or even using a regular expression. Regular expressions allow to search not only for a single text, but for complex patterns. If you don't know what regular expressions are, I recommend [this article](https://www.codemag.com/article/0305041/Getting-Started-With-Regular-Expressions) to get started.
+
+If it finds the text, it returns the position where it was found. If the hit already starts at the very first letter, it returns 1, for example. If it does not find the word, it returns 0.
 
 
 ## Get Letter {#text_charAt}
