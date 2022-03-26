@@ -1,0 +1,71 @@
+---
+sidebar_position: 7
+---
+
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import Anigif from "../../src/components/Anigif";
+import RetinaImg from "../../src/components/RetinaImg";
+
+# Keyframes
+
+Automation Blocks contains an entire collection of scripts to simplify the work with keyframes.
+
+## Copy, Paste & Fit Keyframes {#CopyPasteFit}
+
+TODO
+
+## Save Preset {#SavePreset}
+
+You can use this script to save keyframe presets to your Automation Blocks Keyframes Library.
+It will save all keyframes from the currently selected properties.
+
+Just execute the following script:
+
+-   **Keyframes Library - Save Preset**
+
+When you execute the script, a dialog pops up where you can set the name of the preset that will be saved:
+
+<RetinaImg
+	src="/img/tools-ae/keyframesLibrarySavePresetDialog.png"
+	alt="After Effects Script: Keyframes Library - Save Preset - Dialog"
+/>
+
+:::danger Selection
+
+Make sure you have at least one property that has keyframes selected.
+
+:::
+
+## Load Preset {#LoadPreset}
+
+You can use this script to load keyframe presets from your Automation Blocks Keyframes Library.
+
+Just execute the following script:
+
+-   **Keyframes Library - Load Preset**
+
+It will load all keyframes from the selected preset to: all layers, selected layers or selected properties
+When you execute the script, a dialog pops up where you can selects the preset that will be applied and to which layers/properties.
+
+<RetinaImg
+	src="/img/tools-ae/keyframesLibraryLoadPresetDialog.png"
+	alt="After Effects Script: Keyframes Library - Save Preset - Dialog"
+/>
+
+If you are targeting the preset to multiple layers/properties the keyframes will be applied to every property that matches the property the keyframes were saved from.
+
+For example, a preset that was saved from the Transform/Opacity property will be pasted into every Transform/Opacity property within the targeted layers/properties.
+
+Selection when preset was created:
+
+<RetinaImg
+	src="/img/tools-ae/keyframesLibraryMultiplePropsSelected.png"
+	alt="After Effects Script: Keyframes Library - Multiple properties selected"
+/>
+
+Loaded preset result:
+
+<RetinaImg
+	src="/img/tools-ae/keyframesLibraryLoadToMultipleProps.png"
+	alt="After Effects Script: Keyframes Library - Keyframes loaded to multiple properties"
+/>
