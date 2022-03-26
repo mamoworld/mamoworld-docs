@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -11,7 +11,7 @@ import RetinaImg from '../../src/components/RetinaImg'
 ## Overview
 
 YouTube has this great new feature to show chapters right inside the player. To add this to your video, you need to put chapter information right inside the video description. Here is what I am talking about:
-<Anigif src={useBaseUrl('/img/examples-pr/youtubeChapters/step_1_what_are_chapters.gif')} />
+<Anigif src={useBaseUrl('/img/tools-pr/youtubeChapters/step_1_what_are_chapters.gif')} />
 
 Since typing the chapter info for the video description manually is tedious and error prone, let's create this with the help of markers in Premiere Pro!
 
@@ -19,7 +19,7 @@ Since typing the chapter info for the video description manually is tedious and 
 
 First, you put a sequence marker (Premiere Pro menu command Markers->Add Marker or keyboard shortcut `M`) wherever a new chapter should start. Make sure to also include one at the very beginning (where the first chapter starts). Then you open the marker panel (Premiere Pro menu command Window->Markers) and enter as marker names the names of your chapters. Be careful, to really enter them as marker names and not in the big marker comment boxes in the marker panel.
 
-<Anigif src={useBaseUrl('/img/examples-pr/youtubeChapters/step_2_create_markers.gif')} />
+<Anigif src={useBaseUrl('/img/tools-pr/youtubeChapters/step_2_create_markers.gif')} />
 
 :::tip Marker Types
 
@@ -31,7 +31,7 @@ Premiere Pro supports different marker types, including a dedicated type **Chapt
 
 To turns your markers into the text you need, all you have to do is launch the sample script `export markers to YouTube chapter text` of Automation Blocks. It will export all markers of the active sequence into a text file with exactly the formatting that YouTube requires.
 
-<Anigif src={useBaseUrl('/img/examples-pr/youtubeChapters/step_3_export.gif')} />
+<Anigif src={useBaseUrl('/img/tools-pr/youtubeChapters/step_3_export.gif')} />
 
 ## Customization Tips
 
@@ -44,11 +44,11 @@ Think about it: When it's time to export your YouTube chapter markers, isn't tha
 
 We can achieve that by adding a [Add To Adobe Media Encoder Queue block](../block-reference/prRendering#block_media_encoder_render) at the very bottom of our script: 
 
-<RetinaImg src="/img/examples-pr/youtubeChapters/customize_add_media_encoder.png" alt="preselect a file"/>
+<RetinaImg src="/img/tools-pr/youtubeChapters/customize_add_media_encoder.png" alt="preselect a file"/>
 
 To make sure the video file has the same name as our marker text file, we just drag our [variable](../block-reference/variables.mdx) `my file` onto the output file parameter of the block (`my file` represents the text file in our script, which ends with .txt, but the media encoder is clever enough to replace the file extension .txt by .mp4).
 
-<Anigif src={useBaseUrl('/img/examples-pr/youtubeChapters/step_4_customize_render.gif')} />
+<Anigif src={useBaseUrl('/img/tools-pr/youtubeChapters/step_4_customize_render.gif')} />
 
 ### Preselect File {#preselectFile}
 
@@ -56,19 +56,19 @@ We all know how anoying it is when a *Save File* dialog starts on your Desktop o
 
 #### Preselect Some File
 
-<RetinaImg src="/img/examples-pr/youtubeChapters/customize_preselect_file.png" alt="preselect a file"/>
+<RetinaImg src="/img/tools-pr/youtubeChapters/customize_preselect_file.png" alt="preselect a file"/>
 
 To preselect a particular file, just drag a [File block](../block-reference/files#block_extendscript_file) onto the *preselected file* parameter of the *Save File* dialog and choose the file you want. From now on, the Save dialog always preselects that file.
 
-<Anigif src={useBaseUrl('/img/examples-pr/youtubeChapters/step_5_customize_preselect_file.gif')} />
+<Anigif src={useBaseUrl('/img/tools-pr/youtubeChapters/step_5_customize_preselect_file.gif')} />
 
 #### Preselect File in Project Folder
 
-<RetinaImg src="/img/examples-pr/youtubeChapters/customize_preselect_project.png" alt="preselect a file in project folder"/>
+<RetinaImg src="/img/tools-pr/youtubeChapters/customize_preselect_project.png" alt="preselect a file in project folder"/>
 
 You often want to keep your exported files in the same folder as your project, so let's preselect a file in the project folder.
 We can combine the [Project File block](../block-reference/prProject#block_pr_project_file) with the [Replace in File Path block](../block-reference/filesNameAndPath#block_extendscript_file_path_replace_part) to obtain a file that is identical to your Premeire Pro project file, but with the extension `.txt` instead of `.prproj`. Just plug this into the *Save File* dialog, and the dialog will always start in the project folder and preselect a file name that is identical to your project name (but with the `.txt` extension).
 
-<Anigif src={useBaseUrl('/img/examples-pr/youtubeChapters/step_6_customize_preselect_project.gif')} />
+<Anigif src={useBaseUrl('/img/tools-pr/youtubeChapters/step_6_customize_preselect_project.gif')} />
 
 Did you like these customizations and want to learn more about writing your own Automation Blocks scripts? Then it's about time to read the tutorial [First Steps with Automation Blocks](../tutorials-pr/firstSteps)!

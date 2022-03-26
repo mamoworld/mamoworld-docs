@@ -10,7 +10,7 @@ import RetinaImg from "../../src/components/RetinaImg";
 
 Automation Blocks contains an entire collection of scripts to simplify the work with guides.
 
-## Create
+## Create {#guidesCreate}
 
 You can use this script to create guides in the active composition.
 
@@ -25,7 +25,7 @@ The values should be comma separated and can be in pixels (px) and percentage (%
 If no unit is defined the default is pixels.
 
 <RetinaImg
-	src="/img/tutorials-ae/guideCreateDialog.png"
+	src="/img/tools-ae/guideCreateDialog.png"
 	alt="After Effects Script: Guides - Create - Dialog"
 />
 
@@ -36,7 +36,30 @@ If no unit is defined the default is pixels.
 -   10%, 90%
 -   10, 20px, 30%, -40, -50px, -60%
 
-## Save
+## Create Grid {#guidesCreateGrid}
+
+<RetinaImg
+	src="/img/tools-ae/guidesCreateGrid.png"
+	alt="After Effects Script: Guides - Create Grid"
+/>
+
+This script creates a grid of guides in the active composition. You can specify the widht and height of the cells, as well as an optional gutter (set gutter to 0, to disable it).
+If you enable the center option, the grid will be aligned to the center of the composition. Otherwise, the grid is aligned to the top left corner of the composition.
+
+Note that the script does not delete existing guides (but you can do that with the Ae menu View->Clear Guides before running the script).
+
+## Create Around Selected Layers {#guidesAroundSelectedLayers}
+
+<RetinaImg
+	src="/img/tools-ae/guidesCreateAroundSelectedLayers.png"
+	alt="After Effects Script: Guides - Create Around Selected Layers"
+/>
+
+This script creates guides along the bounding box of the selected layers. If creates either guides around each of the selected layers individually, or it calculates a single bounding box that includes all selected layers and then creates guides for this one.
+
+The script can create guides at the top/bottm and right/left edges of the bounding box, and optionally also at the center. With the margin option you can control that the box formed by the guides is a bit bigger than the actual bounding box of the layer(s).
+
+## Save {#guidesSave}
 
 You can use this script to save the guides in the active composition as a preset.
 
@@ -48,7 +71,7 @@ When you execute the script, a dialog pops up where you can chose the preset nam
 and define as which unit they should be saved.
 
 <RetinaImg
-	src="/img/tutorials-ae/guideSaveDialog.png"
+	src="/img/tools-ae/guideSaveDialog.png"
 	alt="After Effects Script: Guides - Save - Dialog"
 />
 
@@ -59,7 +82,16 @@ but a guide at 10% will be dinamically positioned related to the composition dim
 
 :::
 
-## Load
+:::tip Customize Preset Folder
+
+By default, the presets are stored in the folder `~/Documents/Automation Blocks/Guides Library/`. If you prefer a different location, you can customize that easily in the block code:
+
+<RetinaImg src="/img/tools-ae/guidesSaveCustomizeFolder.png" alt="choose custom folder for guides presets"/>
+
+If you do that, make sure to change the folder in both the scripts "Guides - Load" and "Guides - Save".
+:::
+
+## Load {#guidesLoad}
 
 You can use this script to load a guides preset into the active composition.
 
@@ -70,11 +102,11 @@ Just execute the following script:
 When you execute the script, a dialog pops up where you can select a preset and the orientation of the guides you want to load.
 
 <RetinaImg
-	src="/img/tutorials-ae/guideLoadDialog.png"
+	src="/img/tools-ae/guideLoadDialog.png"
 	alt="After Effects Script: Guides - Load - Dialog"
 />
 
-## Mirror
+## Mirror {#guidesMirror}
 
 You can use this script to mirror guides from the active composition.
 
@@ -85,6 +117,6 @@ Just execute the following script:
 When you execute the script, a dialog pops up where you can select which guides you want to mirror.
 
 <RetinaImg
-	src="/img/tutorials-ae/guideMirrorDialog.png"
+	src="/img/tools-ae/guideMirrorDialog.png"
 	alt="After Effects Script: Guides - Mirror - Dialog"
 />

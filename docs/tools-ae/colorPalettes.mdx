@@ -21,7 +21,7 @@ The Automation Blocks script **link to color palette** offers a very easy and po
 
 Just select some color properties or Text or Solid layers in your project and run the script. A dialog pops up where you can pick the color to which you want to link: 
 
-<RetinaImg src="/img/tutorials-ae/colorPaletteLinkDialog.png" alt="After Effects Script: Link to Color Palette"/>
+<RetinaImg src="/img/tools-ae/colorPaletteLinkDialog.png" alt="After Effects Script: Link to Color Palette"/>
   
 After you chose a color, two things will happen:
 
@@ -45,12 +45,12 @@ The color theme comp contains a shape layer with (by default) five shapes - each
 
 If you open the block code of the script, at the very beginning you see a list of the default colors of the color palette. You can change those default colors and even add more colors to the list. After you did that, please delete the color palette comp from your project (if it already has one), such that with the next execution of the script a new color palette comp with the new colors is created.
 
-<Anigif src={useBaseUrl('/img/tutorials-ae/colorPaletteChangeColors.gif')} width="650px" />
+<Anigif src={useBaseUrl('/img/tools-ae/colorPaletteChangeColors.gif')} width="650px" />
 
 ### Customizing Name & Location of Color Palette Comp
 
 Right below the list, where you can customize the default colors of the palette, you also find variables where you can customize the name of the color palette comp and the project bin, where it is located.
-<RetinaImg src="/img/tutorials-ae/colorPaletteChangeCompName.png" alt="Custom Color Palette Name"/>
+<RetinaImg src="/img/tools-ae/colorPaletteChangeCompName.png" alt="Custom Color Palette Name"/>
 
 To store the color palette in a different bin, for example, just enter the name of that bin (or a path like `/bin/subbin`), or select an existing bin in your project and click the *refresh* icon of the [Project Bin](../block-reference/aeProjectItems.mdx##ae_itembin_path) block.
 

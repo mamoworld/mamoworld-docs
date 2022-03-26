@@ -10,7 +10,7 @@ import RetinaImg from '../../src/components/RetinaImg'
 
 ## Overview
 
-<RetinaImg src="/img/tutorials-ae/compSpreadsheetWorkflowTitle.png" alt=""/>
+<RetinaImg src="/img/tools-ae/compSpreadsheetWorkflowTitle.png" alt=""/>
 
  You need to create 100 duplictes of composition in After Effects and customize texts, videos, images, colors, etc in each of them?
 
@@ -33,7 +33,7 @@ import RetinaImg from '../../src/components/RetinaImg'
 
 First, in the composition which you want to duplicate (and any precomps) you need to anotated everything, which you want to customize with the spreadsheet. In a nutshell, you just put a `$` followed by the name or number of a spreadsheet column at the beginning of the name of everything that should show up in the spreadsheet:
 
-<RetinaImg src="/img/tutorials-ae/compSpreadsheetWorkflowAnnotations.png" alt="Annotate Ae Comp for Spreadsheet Export"/>
+<RetinaImg src="/img/tools-ae/compSpreadsheetWorkflowAnnotations.png" alt="Annotate Ae Comp for Spreadsheet Export"/>
 
 :::danger space behind $ annotation
 
@@ -87,14 +87,23 @@ If you don't want a particular precomp to be duplicated, you can simply lock the
 
 After you did all annotations, make sure the  active composition is the main composition of your template and then run the script **export spreadsheet from template comp**. It first asks where to save the spreadsheet (choose a filename ending with `.csv`) and then creates a spreadsheet based on the annotations you did. If the template comp (or any precomp) contains a text layer with name `$A Dog Name` and text `Daisy`, for example, the column A will have the title `Dog Name` and a first entry with text `Daisy` is placed below it. 
 
-<RetinaImg src="/img/tutorials-ae/compSpreadsheetWorkflowSpreadsheetEmpty.png" alt="Spreadsheet created by 'export spreadsheet from template comp'"/>
+<RetinaImg src="/img/tools-ae/compSpreadsheetWorkflowSpreadsheetEmpty.png" alt="Spreadsheet created by 'export spreadsheet from template comp'"/>
 
 You can open this spreadsheet in the spreadsheet app of your choice (Excel, Apple Numbers, Open Office, Google Docs) and add the data for all the comp variants you want to create:
 
-<RetinaImg src="/img/tutorials-ae/compSpreadsheetWorkflowSpreadsheetFilled.png" alt="Spreadsheet created by 'spreadsheet with data for all comps'"/>
+<RetinaImg src="/img/tools-ae/compSpreadsheetWorkflowSpreadsheetFilled.png" alt="Spreadsheet created by 'spreadsheet with data for all comps'"/>
 
 ### Step 3: Import Spreadsheet 
 
 After you filled the spreadsheet with data, save it and make sure to keep the format as `.csv`.
 Now make sure the active composition is the main composition of your template and then run the Automation Blocks script **create comp duplicates from spreadsheet**. In the dialog that pops up, choose the spreadsheet file and then the script creates one duplicate of the comp (and precomps) for each row of the spreadsheet.
 
+## See also
+
+### Comp Duplicator
+
+If you want to just create a duplicate of a composition including all precomps, but don't want to customize anything in the duplicate, you can use the Automation Blocks script "Comp Duplicator" instead.
+
+### Import/Export Texts from Spreadsheet
+
+If you just want to replace texts in a composition the [Text from/to Spreadsheet](textFromToSpreadsheet) tools are also an alternative.
