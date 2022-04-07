@@ -12,27 +12,24 @@ Automation Blocks contains an entire collection of scripts to simplify the work 
 
 You can use this script to create guides in the active composition.
 
-Just execute the following script:
-
--   **Guides - Create**
-
-When you execute the script, a dialog pops up where you can chose the orientation of the guides,
-and define at which positions they should be created.
-
-The values should be comma separated and can be in pixels (px) and percentage (%).
-If no unit is defined the default is pixels.
+Just execute the script **Guides - Create** and the following dialog will show up:
 
 <RetinaImg
 	src="/img/tools-ae/guideCreateDialog.png"
 	alt="After Effects Script: Guides - Create - Dialog"
 />
 
+Chose the orientation of the guides, and define at which positions they should be created.
+
+The values can be in pixels (px) and percentage (%). If no unit is defined the default is pixels.
+To create multiple guides at once, you can enter multiple values separated by a comma.
+
 ### Examples of valid values
 
--   100, 200, 300, 400
--   10px, 100px, 1000px
--   10%, 90%
--   10, 20px, 30%, -40, -50px, -60%
+-   100, 200  (create guides at 100px and 200px)
+-   10px (create guides at 10px)
+-   10%, 90%  (create guides at 10% and 90% of the comp size)
+-   10, 20px, 30%, -40, -50px, -60%  (you can mix percentage and px values)
 
 ## Create Grid {#guidesCreateGrid}
 
@@ -106,15 +103,24 @@ When you execute the script, a dialog pops up where you can select a preset and 
 
 ## Mirror {#guidesMirror}
 
-You can use this script to mirror guides from the active composition.
+Use this script to mirror guides from the active composition.
 
-Just execute the following script:
+<RetinaImg
+	src="/img/tools-ae/guideMirrorExample.png"
+	alt="After Effects Script: Mirror Guides Example"
+/>
 
--   **Guides - Mirror**
-
-When you execute the script, a dialog pops up where you can select which guides you want to mirror.
+Just execute the script **Guides - Mirror** to open this dialog:
 
 <RetinaImg
 	src="/img/tools-ae/guideMirrorDialog.png"
 	alt="After Effects Script: Guides - Mirror - Dialog"
 />
+
+In the dialog you can select which guides you want to mirror. You can mirror 
+- all horizontal guides, 
+- all vertical guides,
+- all vertical and horizontal guides, or
+- choose an invididual guide.
+
+

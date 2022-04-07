@@ -8,19 +8,12 @@ import RetinaImg from "../../src/components/RetinaImg";
 
 Automation Blocks contains an entire collection of scripts to simplify the work with keyframes.
 
-## Copy, Paste & Fit Keyframes {#CopyPasteFit}
-
-TODO
 
 ## Save Preset {#SavePreset}
 
-You can use this script to save keyframe presets to your Automation Blocks Keyframes Library.
-It will save all keyframes from the currently selected properties.
+You can use this script to save keyframe presets to your Automation Blocks Keyframes Library which you can then apply to other layers using the [Apply Preset](#ApplyPreset) script. 
 
-Just execute the following script:
-
--   **Keyframes Library - Save Preset**
-
+Just select some keyframed properties and execute the script **Keyframes Library - Save Preset**.
 When you execute the script, a dialog pops up where you can set the name of the preset that will be saved:
 
 <RetinaImg
@@ -34,21 +27,69 @@ Make sure you have at least one property that has keyframes selected.
 
 :::
 
-## Load Preset {#LoadPreset}
+### Renaming & Deleting Presets
+The preset saves all keyframes of all selected properties to a file in the folder `~/Documents/Automation Blocks/Keyframes Library/`. To remove or rename presets later, you can simple delete or rename these files.
 
-You can use this script to load keyframe presets from your Automation Blocks Keyframes Library.
+### Choosing a Different Preset Folder
 
-Just execute the following script:
+If you want to save your preset files in a different location, you can simply adjust the path in the block script:
 
--   **Keyframes Library - Load Preset**
+<RetinaImg src="/img/tools-ae/keyframePresetsLibraryFolderPath.png" alt="Configure a different preset folder"/>
 
-It will load all keyframes from the selected preset to: all layers, selected layers or selected properties
-When you execute the script, a dialog pops up where you can selects the preset that will be applied and to which layers/properties.
+:::danger Same Preset Folder for Save and Apply Preset
+
+If you change the preset folder, make sure to change it in both the *Save Preset* and the *Apply Preset* script, because otherwise the *Apply Preset* script is looking for presets in the wrong location.
+
+
+:::
+
+## Apply Preset {#ApplyPreset}
+
+To apply a preset, which you saved in your Automation Blocks Keyframes Library, execute the script **Keyframes Library - Apply Preset**.
 
 <RetinaImg
-	src="/img/tools-ae/keyframesLibraryLoadPresetDialog.png"
-	alt="After Effects Script: Keyframes Library - Save Preset - Dialog"
+	src="/img/tools-ae/keyframesLibrarApplyPresetDialog.png"
+	alt="After Effects Script: Keyframes Library - Apply Preset - Dialog"
 />
+
+In the dialog you can choose the preset you want to apply and a target, which can be one of the following options 
+
+- selected layers
+- selected properties
+- all layers
+
+### Automatic Adjustment of Keyframes {#AutomaticKeyframeAdjustment}
+
+Applying a preset is very similar to pasting the keyframes via cut & paste. The keyframes are pasted such that the first one starts at the current time. Any existing keyframes of the properties are preserved (as long as they don't overlap with the preset) - and even adjusted to fit seamlessly to the inserted keys.
+
+#### Automatic Adjustment of Preset Keys
+
+What makes the presets much more powerful than normal cut & paste of keyframes, is that the keyframe values are adjusted to fit to the existing keys: When you apply a keyframe preset to a property which already has keyframes **before the current time* then the value of the  keyframes of the preset is adjusted such that the pasted animation starts exactly at the current property value.
+
+*Example Position Animation*
+
+Say the preset is a position animation and in the original animation of the preset the layer moves from `[500,500]` to `[600,500]`, i.e. 100px to the right. If you apply the preset now to a layer which has position keyframes and at the current time the layer is at position `[200,200]`, then we don't want it to jump to `[500,500]` when we apply the preset, but instead want the preset animation to start at `[200,200]`. Hence the preset is adjusted such that it now starts at `[200,200]` and ends at `[300,200]` i.e. it starts where the layer currently is and still moves 100px to the right.
+
+Note that **if the layer has not keyframes**, the preset animation will not be adjusted. If your layer has no keyframes, but you still want the preset to start at the layer's current position, you can simply insert a single keyframe (say 1 frame before the current time) before applying the preset.
+
+*Example Opactiy Animation*
+
+The adjustment does not only work for position animations, but also for other properties. Say the preset animates the opacity of a layer to changefrom 100% to 50%. If you then apply this preset to a layer whose opacity already has keyframes and whose opacity is 80% at the current time, then the preset is adjusted such that it animates from 80% to 30% instead of from 100% to 50% (i.e. the opacity is still decrease by an amount of 50, but now starting at 80 instead of 100).
+
+#### Automatic Adjustment of Keys After Preset
+
+As described in the previous section, the keyframes of the preset are adjusted to fit to the keyframes *before* the preset. If the property also has keyframes *after* the time span, where the preset was applied, then those keys are adjusted to fit to the keyframes of the preset in the same way.
+
+*Example*
+
+If the preset moves the layer 100px upwards, then all keyframes after the preset are moved upwards 100px, too.
+
+### To Which Properties are the Keyframes Applied?
+
+The presets contain the keyframes plus the the property to which they belong (technically speaking, the match name of the property is saved). This means, the preset knows, if the keyframes belong to the position or scale of a layer, for example, or maybe to the *Blurriness* slider of a *Gaussian Blur* effect. 
+When you apply a preset, it will be applied to all properties that fit. I.e. keyframes which belong to the layer position are applied to the layer position (of course...) and keyframes which belong to a *Blurriness* slider are applied to all *Gaussian Blur* effects that the script can find - or are ignored, if no such effect exists on the target.
+
+### Presets & Multiple Layers
 
 If you are targeting the preset to multiple layers/properties the keyframes will be applied to every property that matches the property the keyframes were saved from.
 
@@ -67,3 +108,25 @@ Loaded preset result:
 	src="/img/tools-ae/keyframesLibraryLoadToMultipleProps.png"
 	alt="After Effects Script: Keyframes Library - Keyframes loaded to multiple properties"
 />
+
+
+
+## Copy, Paste & Fit Keyframes {#CopyPasteFit}
+
+For a quick cut & paste of keyframes, it is too cumbersome to save a preset each time. Hence, with this script you can cut & paste keyframes with the extra power of the [Automatic Adjustment of Keyframes](#AutomaticKeyframeAdjustment) but without the need to [save a preset](#SavePreset).
+
+<div class="video-container"><iframe src="https://www.youtube.com/embed/lo5nWQTFmgQ?rel=0"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+</div>
+
+This tool has no user interface. Instead you need to adjust the block code of the script, but don't worry, it is very easy:
+
+<RetinaImg src="/img/tools-ae/copyPasteFitKeyframesOverview.png" alt="Copy & Paste keyframes with After Effects script"/>
+
+Here is a detailed description of the steps:
+
+1. In the first step, you load the selected keyframes into the block. They are stored as part of the script now. So if you save a copy of the block script now and load it any time later, the keys will still be there.
+
+2. Compared to a normal cut & paste operation of keyframes, the extra power of this tool is that the keyframes can be adjusted to fit seamlessly into the existing keyframes on the layer (and even those can be adjusted, too). You can control the exact behavior with the two dropdown option at the bottom of the block. For details see the [description of the Add Keyframes block](/block-reference/aeKeyframes#adjustment-of-sourrounding-keyframes), that we are actually using here.
+
+3. When you run the script now, it will paste the keyframes to all selected layers (and such that the first keyframe starts at the current time).
+

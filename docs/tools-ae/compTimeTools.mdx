@@ -41,11 +41,11 @@ Did you ever need to add some additional frames at the beginning of a compositio
 
 <RetinaImg src="/img/tools-ae/compAddLeadingHandleDialog.png" alt="Add frames at beginning of Ae comp"/>
 
-Just tell the tool, how much time you want to add and it will
-- changes the duration and start time code of the active comp
-- shifts all layers in time as needed
-- if a precomp starts at the beginning of the comp, also extra frames are inserted at the beginning of the precomp to make sure it still starts at the beginning of the comp after the duration change.
-- if the active comp is used as precomp in other comps, those precomp layers are adjusted to make sure everything stays where it was after inserting the frames. More precisely the precomp layers are shifted in time and any keyframes and markers on them are shifted in the opposite direction, such that they stay in place.
+Just tell the tool, how much time you want to add and it does the following:
+- It changes the duration and start time code of the active comp
+- It shifts all layers in time as needed
+- It also inserts extra frames at the beginning of precomps if those precomps start at the beginning of the comp
+- If the active comp is used as precomp in other comps, those precomp layers are adjusted to make sure everything stays where it was after inserting the frames. More precisely the precomp layers are shifted in time and any keyframes and markers on them are shifted in the opposite direction, such that they stay in place.
 
 :::tip Differences to *Insert Frames at Current Time*
 
