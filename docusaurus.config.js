@@ -10,6 +10,7 @@ module.exports = {
   organizationName: 'mamoworld', // Usually your GitHub org/user name.
   projectName: 'Automation Blocks for Adobe After Effects and Premiere Pro', // Usually your repo name.
   themeConfig: {
+	hideableSidebar: true,
     navbar: {
       title: 'Automation Blocks for Adobe After Effects and Premiere Pro',
       logo: {

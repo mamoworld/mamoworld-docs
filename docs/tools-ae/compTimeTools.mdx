@@ -1,0 +1,80 @@
+
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Comp Time Tools
+
+## Insert Frames at Current Time {#insertFramesAtCurrentTime}
+
+<Anigif src={useBaseUrl('/img/tools-ae/insertFramesAtCurrentTime.gif')} width="450px" />
+
+Did you ever want to make some part of your animation longer and wondered how to shift everything in time as needed?
+
+This tool offers an easy dialog to insert extra frames in the active composition at the current time:
+
+<RetinaImg src="/img/tools-ae/insertFramesAtCurrentTimeDialog.png" alt="Insert Extra Frames In After Effects Comp At Current Time"/>
+
+After you entered the time it will
+- change the duration of the active composition
+- shift all keyframes and markers in time as needed, if they are on layers which overlap with the current time
+- shift all layers in time as needed, if they start after the current time
+- also insert extra frames in any precomps (and their precomps), if they overlap with the current time
+
+
+:::danger Custom Value Keyframes are not shifted in time
+
+For all keyframed properties, which overlap with the current time, the tool shifts the keyframes after the current time as needed. For properties with normal property values like numbers, texts, drop-down options or colors this works fine. But if you keyframed a custom value like the *histogram* of the *Levels* effect or the *curves* of the *Curves* effect property, these cannot be shifted in time, due to a limitation of the Ae scripting API.
+
+Note that this is only an issue for layers, which overlap with the current time. Keyframes of layers before the current time don't need to be shifted anyway, and for layers which start after the current time, the tool shifts the entire layer instead of the keyframes.
+
+If some keyframes could not be moved, a warning message is written to the console of Automation Blocks. If you see any warnings there, just move the keyframes of the mentioned properties manually.
+
+:::
+
+## Insert Leading Handle Frames {#insertLeadingHandleFrames}
+
+<Anigif src={useBaseUrl('/img/tools-ae/insertLeadingCompHandle.gif')} width="650px" />
+
+Did you ever need to add some additional frames at the beginning of a composition? With this tool there is no need to move layers around manually or to fiddle with the timing of precomps.
+
+<RetinaImg src="/img/tools-ae/compAddLeadingHandleDialog.png" alt="Add frames at beginning of Ae comp"/>
+
+Just tell the tool, how much time you want to add and it does the following:
+- It changes the duration and start time code of the active comp
+- It shifts all layers in time as needed
+- It also inserts extra frames at the beginning of precomps if those precomps start at the beginning of the comp
+- If the active comp is used as precomp in other comps, those precomp layers are adjusted to make sure everything stays where it was after inserting the frames. More precisely the precomp layers are shifted in time and any keyframes and markers on them are shifted in the opposite direction, such that they stay in place.
+
+:::tip Differences to *Insert Frames at Current Time*
+
+This tool is similar to the [Insert Frames at Current Time](#insertFramesAtCurrentTime) tool, but:
+- it inserts the extra frames at the beginning of the composition instead of the current time.
+- it adjusts comps which use the active comp as precomps
+- it processes a bit faster (since inserting frames at the beginning of the comp always just requires to shift layers and never individual keyframes)
+- if changes the *start time code* of the comp
+:::
+
+
+
+## Set Comp Duration Dialog {#SetCompDurationDialog}
+
+<RetinaImg src="/img/tools-ae/compDurationDialog.png" alt="Comp Duration Dialog"/>
+
+This script offers a dialog to quickly change the duration of the active comp. This is very similar to changing the comp duration in the comp settings dialog, except that you can enter the duration in all kinds of formats like:
+
+- `10` (for 10 seconds)
+- `10s`
+- `0:10`
+- `0:00:10`
+- `250 frames`
+- `1m 3s`
+
+### Customize: Change Other Comp Properties
+
+You can customize the dialog to change all kinds of other comp properties instead of the duration. Just choose a different property in the two dropdowns:
+
+<RetinaImg src="/img/tools-ae/setCompDurationDialogCustomize.png" alt="Customize Script to Change Comp Properties"/>
+
+
