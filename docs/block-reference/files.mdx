@@ -12,7 +12,7 @@ import RetinaImg from '../../src/components/RetinaImg'
 
 Automation Blocks represents files (and folders) with a text which corresponds to the full path to the file on your hard-drive. So whenever a block requires you to provide a file, just give it the path of that file.
 
-The [File block](#block_extendscript_file) and the [Folder block](#block_extendscript_folder) offer a convenient method to create such a file path text, but you can use any other method you want to to create this text when you want to access a file. A simple text block would work, too - the following two blocks have exactly the same result:
+The [File block](#block_extendscript_file) and the [Folder block](#block_extendscript_folder) offer a convenient method to create this type of file path text, but you can use any other method you want to to create this text when you want to access a file. A simple text block would work, too - the following two blocks have exactly the same result:
 
 <RetinaImg src="/img/blockOther/block_extendscript_file_example.png" alt="File Block vs Text Block"/>
 
@@ -24,7 +24,7 @@ If you want the user to choose a file, you can use the [Open File Dialog](userIn
 You don't need to worry about the details of opening or closing files - Automation Blocks handles all of this for you in the background.
 When you try to read from or write to a file, Automation Blocks checks if it's already opened the file before, and if so continues the reading or writing from that position. It also makes sure that all files are closed properly again when the script execution is finished.
 
-For performance reasons, read and write operations on spreadsheet files are cached. So when you first read a value from a spreadsheet, the entire spreadsheet is read and all subsequent read or write operations use that cache. The cache is then written into the file again when the script is finished. Usually, you don't need to worry about these details, but for long running scripts this means that you'll see changes in the spreadsheet file only after the script is finished, not while it is still running.
+For performance reasons, read and write operations on spreadsheet files are cached. So, when you first read a value from a spreadsheet, the entire spreadsheet is read and all subsequent read or write operations use that cache. The cache is then written into the file again when the script is finished. Usually, you don't need to worry about these details, but for long running scripts this means that you'll see changes in the spreadsheet file only after the script is finished, not while it is still running.
 
 
 ## File {#block_extendscript_file}
@@ -45,21 +45,21 @@ If you want to give the user the freedom to choose a file each time the script i
 
 <RetinaImg src="/img/blockScreenshots/Files/block_extendscript_embedded_file.png" alt="Block block_extendscript_embedded_file"/>
 
-Embedded files can be used exactly as normal [File](#block_extendscript_file) blocks, but the actual contents of the file will be saved as part of your block script. That way, you can ensure that the file is always available, also if you run the script on other machines, for example.
+Embedded files can be used exactly as normal [File](#block_extendscript_file) blocks, but the actual contents of the file will be saved as part of your block script. This way, you can ensure that the file is always available, as well as if you run the script on other machines, for example.
 
 ### Size Limit
 
-For performance reasons, embedded files may not be larger than 2MB. They are great to embedd 
+For performance reasons, embedded files cannot be larger than 2MB. They are great to embed 
 - [Ae Preset Files](aeLayer.mdx#ae_layer_apply_preset), 
 - [Media Encoder Preset Files](prRendering.mdx#block_media_encoder_render) 
 - [Premiere Pro Sequence Presets](prSequence#block_pr_new_sequence)
 - or even small image files.
 
-But they are not suited to embedd large video files, for example.
+But they are not suited to embed large video files, for example.
 
 ### Technical Background
 
-Say you create an *Embedded File* block and select the file `myText.txt` in your documents folder. Then the block saves the entire contents of the file as part of your blockscript and when the script is executed, it creates a copy of that file in the following folder
+Say you create an *Embedded File* block and select the file `myText.txt` in your documents folder. The block then saves the entire contents of the file as part of your blockscript and when the script is executed, it creates a copy of that file in the following folder
 
 - *Mac OS*: `~/Library/Application Support/aescripts/automationblocks/`
 - *Windows*: `%AppData%/aescripts/automationblocks/`
@@ -109,7 +109,7 @@ You can use this to execute bat files in Windows, for example, or to open images
 
 Deletes a file from your hard-drive. The file is **not** put in the trash.
 
-If you enable the `simulate only` option, instead of really deleting the file, the script just writes a message on the console mentioning the file it would have deleted. This is very useful for testing your script during development to ensure you don't delete any files accidentally.
+If you enable the `simulate only` option, then instead of truly deleting the file, the script just writes a message on the console mentioning the file it would have deleted. This is very useful for testing your script during development to ensure you don't delete any files accidentally.
 
 :::danger Cannot be undone!
 
@@ -159,7 +159,7 @@ Here you have the following options:
 If a file already exists in the target location, you have the following options:
 1. replace with new file
 2. keep existing file
-3. keep both (the new copy of an existing file `myFile.png` will be named `myFile copy.png` and if that file exists, too, it will be named `myFile copy 2.png` etc.)
+3. keep both (the new copy of an existing file `myFile.png` will be named `myFile copy.png`, and if that file also exists, it will be named `myFile copy 2.png` etc.)
 
 If you copy an entire folder, note that if the target folder exists, the copied content is combined with the existing content and the old content is **not** deleted before the new content is copied (although individual files in the target folder might be overwritten if you choose the *replace with new file* option).
 
@@ -167,7 +167,7 @@ If you copy an entire folder, note that if the target folder exists, the copied 
 
 <RetinaImg src="/img/blockScreenshots/Files/block_extendscript_exists_file.png" alt="Block block_extendscript_exists_file"/>
 
-This block returns a [logic value](logic.mdx) which is `true`, if the file or folder with the given path exists on the harddrive. If you choose the option *"file"* and the path exists but is actually a folder, it returns `false` (and analogously the *"folder"* option is only `true` if the path really corresponds to an existing folder and not a file).
+This block returns a [logic value](logic.mdx) which is `true`, if the file or folder with the given path exists on the hard-drive. If you choose the option *"file"* and the path exists but is actually a folder, it returns `false` (and analogously the *"folder"* option is only `true` if the path really corresponds to an existing folder and not a file).
 
 ## File has Type {#block_extendscript_file_has_type}
 

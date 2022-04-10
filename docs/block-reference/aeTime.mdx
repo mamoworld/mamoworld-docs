@@ -10,16 +10,16 @@ import RetinaImg from '../../src/components/RetinaImg'
 
 ## Time values returned by blocks
 
-Time values are always returns as (floating point) numbers representing the number of seconds. In a composition these times are always measured relative to the start of the composition such that the beginning of the comp is always 0 (even if the [display start time](aeComp.mdx#ae_comp_set_attribute_display_start_time) of the comp is not 0). 
+Time values are always returned as (floating point) numbers representing the number of seconds. In a composition, these times are always measured relative to the start of the composition so that the beginning of the comp is always 0 (even if the [display start time](aeComp.mdx#ae_comp_set_attribute_display_start_time) of the comp is not 0). 
 For most scenarios, this is a very simple solution. But if you need to work with comps whose display start time is not 0, you need to add the display start time to the value returned by a block, to obtain the time shown in the Ae user interface.
 
 ## Specifying Time Values {#specify_time_values}
 
-If you need to pass a time value as an argument to a block, you can specify it in one of the following formats:
+If you need to send a time value as an argument to a block, you can specify it in one of the following formats:
 - a simple number like `12.4`is interpreted as a time given in seconds
 - strings containing minutes and seconds like `1:22`, `1m 22s`, `82s`, `82 secs` or `82 seconds`
 - string values containing hours, minutes and seconds like `3h 3m 2s`
-- string values containing timecodes like `00:00:00:00` or `00:00:00;00` (the latter with semicolon will be interpreted as drop-frame timecode)
+- string values containing timecodes like `00:00:00:00` or `00:00:00;00` (the latter with semicolon will be interpreted as a drop-frame timecode)
 - strings like `frame 10` or `10 frames`
 
 ## Comp Time vs. Source Clip Time {#comp_time}
@@ -35,8 +35,8 @@ The [start time](aeLayer.mdx#ae_layer_set_attribute_start_time), [in point](aeLa
 
 With this block you can convert a time value given in [any format](#specify_time_values) to another format.
 
-### frame rate
+### framerate
 
-The optional frame rate parameter is used to convert between values given in frames and other values. If neither the source nor the target format is frames, the frame rate is ignored.
-If you want to use the frame rate of a composition, footage item or layer, you can simply pass this object as frame rate parameter.
-If you don't specify a frame rate parameter, the frame rate of the active composition is used.
+The optional framerate parameter is used to convert between values given in frames and other values. If neither the source nor the target format is in frames, the framerate is ignored.
+If you want to use the framerate of a composition, footage item or layer, you can simply pass this object as a framerate parameter.
+If you don't specify a framerate parameter, the framerate of the active composition is used.

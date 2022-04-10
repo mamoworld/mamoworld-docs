@@ -10,7 +10,7 @@ import RetinaImg from "../../src/components/RetinaImg";
 
 ## Overview
 
-Functions allow you to structure your block program. In the same way as a precomp wraps an entire collection of layers into a single layer, a function can wrap a stack of blocks into a single block.
+Functions allow you to structure your block program. Just as a precomp wraps an entire collection of layers into a single layer, a function can wrap a stack of blocks into a single block.
 
 <RetinaImg
   src="/img/blockOther/procedures_defnoreturn_example.png"
@@ -33,13 +33,13 @@ With the _Create Function_ block you can make create your own function. Just rep
   alt="Creating a function in Automation Blocks"
 />
 
-Here we replaced _"do something"_ with _"create my usual bins"_ and plugged the blocks inside, which create project bins for audio, video and precomps. As a result, among the blocks in the category "functions" you now find a new block called _"create my usual bins"_, which creates all these bins. You can think of this little block as a shorthand for the three blocks that you have plugged into the function definition.
+Here we replaced _"do something"_ with _"create my usual bins"_ and plugged the blocks inside which create project bins for audio, video and precomps. As a result, among the blocks in the category "functions" you now find a new block called _"create my usual bins"_, which creates all these bins. You can think of this little block as a shorthand for the three blocks that you have plugged into the function definition.
 
 :::tip Structure Your Scripts
 
-If your scripts tend to become long, it can help to structure them into individual parts using functions. Say you need to first import some footage, then create some comps and finally put something in the render queue. Then you can wrap each of these three tasks into a separate function, such that your main script just consists of three function calls.
+If your scripts tend to be long, it can help to structure them into individual parts using functions. Say you need to first import some footage, then create some comps, and finally put something in the render queue. You can wrap each of these three tasks into a separate function, so that your main script just consists of three function calls.
 
-This is a very good way of documenting, what your script is doing. If you wrap a part of your code into a function, you effectively give that part of your code a descriptive name and isolate it from other parts.
+This is a very good way of documenting   what your script is doing. If you wrap a part of your code into a function, you effectively give that part of your code a descriptive name and isolate it from other parts.
 
 :::
 
@@ -51,23 +51,23 @@ You can right-click on a "Create Function" block and choose "collapse". That way
 
 ### Functions with Arguments
 
-If you think of functions as precomps, then arguments are your master properties. With master properties you can use the same precomp many times, but customize it each time you use it by setting the master properties to a different value. In the same way, a function can have arguments and each time you call the function you can pass it a different value for that argument.
+If you think of functions as precomps, then arguments are your master properties. With master properties you can use the same precomp many times, but customize it each time you use it by setting the master properties to a different value. In the same way, a function can have arguments and each time you call the function you can give it a different value for that argument.
 
-You can add, remove and rename arguments by clicking on the blue cog wheel icon of the block which defines the function. Here we added an argument with name "my argument" to a function:
+You can add, remove and rename arguments by clicking on the blue cog wheel icon of the block which defines the function. Here, we added an argument with the name "my argument" to a function:
 
 <RetinaImg
   src="/img/blockOther/procedures_defnoreturn_example_with_argument.png"
   alt="Creating a function with an Arguments"
 />
 
-For each argument the function block creates a [variable](variables.mdx) and when the function is executed, the variable will have the value that you passed as argument to the function call.
+For each argument, the function block creates a [variable](variables.mdx) and when the function is executed, the variable will have the value that you gave as an argument to the function call.
 
 <RetinaImg
   src="/img/blockOther/procedures_defnoreturn_example_with_argument_2.png"
   alt="Creating a function with an Arguments 2"
 />
 
-In this example the function "say hello" is called two times, one time with argument "Victoria" and one time with argument "Sue". Hence, during the first execution the function alerts the message "Hello Victoria!" and during the second execution the message "Hello Sue!"
+In this example the function "say hello" is called two times, once with the argument "Victoria" and again with the argument "Sue". So, during the first execution the function gives the message "Hello Victoria!" and during the second execution the message is "Hello Sue!"
 
 ### Return in Functions {#procedures_ifreturn}
 
@@ -85,13 +85,13 @@ This function shows two messages using an [alert](userInterfaceAndComments.mdx#b
 
 ### Functions with Return Values {#procedures_defreturn}
 
-In the category "Functions" of the block library, you also find a block to create functions with an extra return parameter:
+In the category "Functions" of the block library, you'll also find a block to create functions with an extra return parameter:
 <RetinaImg
   src="/img/blockScreenshots/Functions/procedures_defreturn.png"
   alt="Block procedures_defreturn"
 />
 
-These functions have corresponding function call blocks with a round shape, which indicates that they actually return a value. The functions work exactly in the same way, except that after all blocks you pluged into the function have been executed, the value you specify in the *"return"* parameter is used as end result.
+These functions have corresponding function call blocks with a round shape, which indicates that they actually return a value. The functions work in exactly the same way, except that after all blocks you've plugged in to the function have been executed, the value you specify in the *"return"* parameter is used as the end result.
 
 **Example**
 
@@ -104,8 +104,8 @@ This "get random label color index"
 block returns a different random number
 in the range 1-16 each time it is
 called. Note that in this case, the main
-code block of the funciton definition is
+code block of the function definition is
 empty. But if the calculation of the
-random number would require any
-preparational steps, then you could plug
-those into the function definition.
+random number required any
+preparational steps, you could plug
+these into the function definition.

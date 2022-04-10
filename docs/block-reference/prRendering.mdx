@@ -13,7 +13,7 @@ import RetinaImg from '../../src/components/RetinaImg'
 <RetinaImg src="/img/blockScreenshots/PrRendering/block_media_encoder_render.png" alt="Block block_media_encoder_render"/>
 
 
-This block adds the given sequence or project item to Adobe Media Encoder's render queue. This block does not start the render queue, yet. You can do that with the [Start Render Queue Block](prRendering#block_media_encoder_start_render_queue).
+This block adds the given sequence or project item to Adobe Media Encoder's render queue. This block does not yet start the render queue. You can do that with the [Start Render Queue Block](prRendering#block_media_encoder_start_render_queue).
 
 
 #### sequence or project item 
@@ -22,7 +22,7 @@ You can provide any sequence or project item here, from which a frame should be 
 
 #### format preset
 
-Here you can either choose one of the export presets from the dropdown, or specify a Media Encoder Preset file (*.epr). The dropdown just includes the most popular presets - if you want something more special, you can drag a [File block](files#block_extendscript_file)  or [Embedded File block](files#block_extendscript_embedded_file) on top of the dropdown to load a custom epr preset file:
+Here you can either choose one of the export presets from the dropdown, or specify a Media Encoder Preset file (*.epr). The dropdown just includes the most popular presets - if you want something more special, you can drag a [File block](files#block_extendscript_file) or [Embedded File block](files#block_extendscript_embedded_file) on top of the dropdown to load a custom epr preset file:
 
 <RetinaImg src="/img/blockOther/epr_file_example.png" alt="Using custom epr preset"/>
 
@@ -36,12 +36,12 @@ You can create this type of epr file as follows.
 <RetinaImg src="/img/blockOther/block_media_encoder_render_save_preset.png" alt="Save Preset"/>
 
 
-4. In the dialog that opens, choose a name for the preset. Then a preset file with the same name (and extension .epr) will be created in your **documents folder** in the subfolder `Adobe/Adobe Media Encoder/VERSION_NUMBER/Presets`.
+4. In the dialog that opens, choose a name for the preset. Then a preset file with the same name (and the extension .epr) will be created in your **documents folder** in the subfolder `Adobe/Adobe Media Encoder/VERSION_NUMBER/Presets`.
 
 
 #### output file
 
-Here you need to specify the file path of the resulting image file. See [Accessing a Particular File](files#accessFile) for all kinds of ways to specify a file.
+Here you need to specify the file path of the resulting image file. See [Accessing a Particular File](files#accessFile) for all the ways you can specify a file.
 
 #### range
 
@@ -69,7 +69,7 @@ If you choose the property *preview file format* in the [Get Property of Sequenc
 <RetinaImg src="/img/blockScreenshots/PrRendering/block_media_encoder_render_still.png" alt="Block block_media_encoder_render_still"/>
 
 
-This block adds to Adobe Media Encoder's render queue a job to render a single still image of the given sequence or project item. This block does not start the render queue, yet. You can do that with the [Start Render Queue Block](prRendering#block_media_encoder_start_render_queue).
+This block adds to Adobe Media Encoder's render queue a job to render a single still image of the given sequence or project item. This block does not yet start the render queue. You can do that with the [Start Render Queue Block](prRendering#block_media_encoder_start_render_queue).
 
 #### sequence or project item 
 
@@ -93,14 +93,14 @@ If you enable this option, the entry will be removed from Adobe Media Encoder's 
 
 #### output file
 
-Here you need to specify the file path of the resulting image file. See [Accessing a Particular File](files#accessFile) for all kinds of ways to specify a file.
+Here you need to specify the file path of the resulting image file. See [Accessing a Particular File](files#accessFile) for all the ways you can specify a file.
 
 ## Start Render Queue {#block_media_encoder_start_render_queue}
 
 <RetinaImg src="/img/blockScreenshots/PrRendering/block_media_encoder_start_render_queue.png" alt="Block block_media_encoder_start_render_queue"/>
 
 
-This block tells Adobe Media Encoder to start the render queue. The program continues immediately and does **not wait** until the render queue is finished. If you want to do things after the render queue is done, use the [After Media Encoder Queue is Done Rendering Block](prRendering#block_media_encoder_on_rendering_done) for that.
+This block tells Adobe Media Encoder to start the render queue. The program continues immediately and does **not wait** until the render queue is finished. If you want to do things after the render queue is done, use the [After Media Encoder Queue is Done Rendering Block](prRendering#block_media_encoder_on_rendering_done).
 
 
 ## After Media Encoder Queue is Done Rendering {#block_media_encoder_on_rendering_done}
@@ -114,7 +114,7 @@ The blocks you nest inside this block are executed as soon as the render queue o
 
 <RetinaImg src="/img/blockScreenshots/PrRendering/block_media_encoder_get_preset.png" alt="Block block_media_encoder_get_preset"/>
 
-This block gives you access to the export preset files that are included in Automation Blocks. Usually, this block is only used as part of the [Add to Media Encoder Queue block](prRendering#block_media_encoder_render), but you can use it also as a standalone block. This is useful, for example, if you want to choose an export preset at the top of your script and then use the chosen preset for any *Add to Media Encoder Queue* blocks later in the script. 
+This block gives you access to the export preset files that are included in Automation Blocks. Usually, this block is only used as part of the [Add to Media Encoder Queue block](prRendering#block_media_encoder_render), but you can also use it as a standalone block. This is useful, for example, if you want to choose an export preset at the top of your script and then use the chosen preset for any *Add to Media Encoder Queue* blocks later in the script. 
 
 Here is a basic example, where we store a preset in a [variable](variables.mdx) in the first line and then use it in the second block below:
 

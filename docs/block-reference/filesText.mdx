@@ -9,11 +9,11 @@ import RetinaImg from '../../src/components/RetinaImg'
 # Files Text
 
 These blocks read and write text files from your hard-drive.
-You don't need to worry about details like opening or closing files. Automation Blocks opens the files when you try to read/write them the first time and closes them automatically when the script is done.
+You don't need to worry about details like opening or closing files. Automation Blocks opens the files when you try to read/write them for the first time and closes them automatically when the script is done.
 
 :::tip Text Formats
 
-These blocks just support the simple text format (.txt) and cannot parse rich text (.rtf)
+These blocks only support the simple text format (.txt) and cannot parse rich text (.rtf)
 
 :::
 
@@ -28,7 +28,7 @@ If the file does not yet exist, it will be created.
 
 #### Create Folder if Not Existing 
 
-If this option is enabled, the folder where the text file is located (and any of its parent folders) are created if they don't exist, yet. This means if you want to create the file in a new folder, you don't have to worry about creating the folder before writing the file.
+If this option is enabled, the folder where the text file is located (and any of its parent folders) are created if they don't yet exist. This means if you want to create the file in a new folder, you don't have to worry about creating the folder before writing the file.
 
 :::tip format with pattern
 
@@ -50,7 +50,7 @@ The blocks that you nest inside this block are executed once for each line of th
 <RetinaImg src="/img/blockScreenshots/FilesText/extendscript_text_file_read.png" alt="Block extendscript_text_file_read"/>
 
 
-Reads either the entire contents of a text file, or just a single line. If you choose to read a single line, it will start with the first line and each subsequent call will read the next line. However, to read the entire file line by line, the [For All Lines of Text File Block](filesText#extendscript_text_file_for_all_lines) is the better option.
+Reads either the entire contents of a text file, or just a single line. If you choose to read a single line, it will start with the first line and each subsequent call will read the next line. However, to read the entire file line by line, the [For All Lines of Text File Block](filesText#extendscript_text_file_for_all_lines) is a better option.
 
 ## End of File {#extendscript_text_file_eof}
 

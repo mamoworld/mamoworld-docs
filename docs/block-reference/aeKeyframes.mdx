@@ -17,19 +17,19 @@ The blocks in this category allow you to work with keyframes on [properties](aeL
   alt="Block ae_keyframes_apply"
 />
 
-This block can create keyframes on any keyframeable property. It is your keyframe copy and paste operation on steriods. If the property already has keyframes, it can even adjust those for you - say you add keyframes which move the layer 100 pixels downwards, then it can move all keyframes after the newly inserted ones 100 pixels down, too.
+This block can create keyframes on any keyframeable property - it is your keyframe copy and paste operation on steriods. If the property already has keyframes, it can even adjust them for you - if, for example, you add keyframes which move the layer 100 pixels downwards, then it can move all keyframes after the newly inserted ones 100 pixels down, too.
 
 To use the block, you need to specify the following parameters
 
-**keyframe list**: tell your block script, which keyframes you want to add, you can either us a [Static Keyframe List](#ae_keyframe_json_const) or a [Dynamic Keyframe List](#ae_keyframe_json_from_prop). By default, the *Add Keyframes* block comes with a static keyframe list. If you want to use a dynamic one instead, just create a *Dynamic Keyframe List* block and drag it ontop of the static list to replace it.
+**keyframe list**: to tell your block script which keyframes you want to add, you can either us a [Static Keyframe List](#ae_keyframe_json_const) or a [Dynamic Keyframe List](#ae_keyframe_json_from_prop). By default, the *Add Keyframes* block comes with a static keyframe list. If you want to use a dynamic one instead, just create a *Dynamic Keyframe List* block and drag it on top of the static list to replace it.
 
-**property**: choose the [Layer Property](aeLayerProperties.mdx#ae_layer_properties_access) to which the keyframes should be applied
+**property**: choose the [Layer Property](aeLayerProperties.mdx#ae_layer_properties_access) to which the keyframes should be applied.
 
 **time**: the [time](aeTime.mdx) where the first new keyframe should be located (the distance of the other keyframes depends on the keyframe data you provide).
 
 ### Adjustment of Sourrounding Keyframes
 
-The two dropdowns at the bottom of the block allow you to adjust the existing keyframes to the newly inserted ones - or also vice versa! The first dropdown controls the behavior of the keyframes before the newly inserted ones and the second dropdown controls the behavior of the keyframes after the newly inserted ones.
+The two dropdowns at the bottom of the block allow you to adjust the existing keyframes to the newly inserted ones - or also vice versa! The first dropdown controls the behavior of the keyframes before the newly inserted ones, and the second dropdown controls the behavior of the keyframes after the newly inserted ones.
 
 #### Adjust Keyframes before newly inserted ones
 
@@ -37,10 +37,10 @@ The two dropdowns at the bottom of the block allow you to adjust the existing ke
 
 Here you have the following options:
 - **don't change:** keeps all keyframes before the new ones exactly as they are and pastes the new keyframes without modifying them in any way.
-- **offset (to fit seamlessly):** offsets all the keyframes before the new ones such that the last one of them ends exactly at the value, where the first newly inserted keyframe is. Example: Say you already have two scale keyframes on your layer, which scale it from 20% to 50% and now you want to append after that two keyframes which scale from 60% to 80%. Then this option will change the first to keyframes to 30% and 60%, i.e. add 10 to them to ensure they end at 60%, which is exactly the value with which the new inserted keyframes start.
-- **offset new keyframes to fit seamlessly to:** This option adjusts the newly inserted keyframes such that they start exactly where the last keyframe before the new ones ends. Example: If you already have two scale keyframes which animate the layer from 20% scale to 50% and you insert new keyframes with an animation from 60% to 80% after that, then those new keyframes will be changed to 50% and 70% to make sure they start exactly at the 50% where the animation of the existing keyframes ended.
+- **offset (to fit seamlessly):** offsets all the keyframes before the new ones so that the last one ends up exactly at the value where the first newly inserted keyframe is. Example: say you already have two scale keyframes on your layer, which scale it from 20% to 50%, and now after that you want to add two keyframes which scale from 60% to 80%. This option will then change the first two keyframes to 30% and 60%, i.e. add 10 to them to ensure they end at 60%, which is exactly the value that the new inserted keyframes start with.
+- **offset new keyframes to fit seamlessly to:** This option adjusts the newly inserted keyframes so they start exactly where the last keyframe before the new ones ends. Example: If you already have two scale keyframes which animate the layer from 20% scale to 50% and you insert new keyframes with an animation from 60% to 80% after that, then those new keyframes will be changed to 50% and 70% to make sure they start exactly at the 50% where the animation of the existing keyframes ended.
 
-- **hold last** this option just turns the last existing keyframe before the new ones into a hold keyframe. That way you can ensure that the transition from the previous keys to the start of the new keys happens appruptly at the first new key.
+- **hold last** this option just turns the last existing keyframe before the new ones into a hold keyframe. This way you can ensure that the transition from the previous keys to the start of the new keys happens abruptly at the first new key.
 
 #### Adjust Keyframes after newly inserted ones
 
@@ -49,9 +49,9 @@ Here you have the following options:
 Here you have the following options:
 
 - **don't change:** keeps all keyframes before the new ones exactly as they are and pastes the new keyframes without modifying them in any way.
-- **offset (to fit seamlessly):** offsets all the keyframes after the new ones such that the first of them starts exactly at the value, where the last newly inserted keyframe iends. Example: Say you already have two scale keyframes on your layer, which scale it from 20% to 50% and now you want to insert BEFORE those existing keys two keyframes which scale from 60% to 80%. Then this option will change the old keyframes to 80% and 110%, i.e. i.e. they still scale up by 30% but instead of starting from 20% now they start from the 80%, where the newly inserted keyframes end.
+- **offset (to fit seamlessly):** offsets all the keyframes after the new ones so the first of them starts exactly at the value where the last newly inserted keyframe ends. Example: Say you already have two scale keyframes on your layer, which scale it from 20% to 50% and now you want to insert two keyframes which scale from 60% to 80% BEFORE those existing keys. This option will change the old keyframes to 80% and 110%, i.e. they will still scale up by 30%, but instead of starting from 20% they now start from 80%, where the newly inserted keyframes end.
 
-- **hold first** this option just turns the first existing keyframe after the new ones into a hold keyframe. That way you can ensure that the transition from the last newly inserted key to the next key happens abruptly immediately after the last newly inserted key.
+- **hold first** this option just turns the first existing keyframe after the new ones into a hold keyframe. That way you can ensure that the transition from the last newly inserted key to the next key happens abruptly, immediately after the last newly inserted key.
 
 :::tip Seamless Animation
 
@@ -67,22 +67,22 @@ That way, the newly inserted keyframes and the existing keyframes after them are
 
 ### Pasting Keys to Multiple Properties
 
-Instead of providing the block a single property and a single list of keyframes, you can also pass it lists of those.
+Instead of providing the block a single property and a single list of keyframes, you can also pass it lists of them.
 
-Here, we paste keyframes both on the position and on the scale of a layer:
+Here, we paste keyframes on both the position and the scale of a layer:
 
 <RetinaImg src="/img/blockOther/ae_keyframes_apply_example_multiple_props.png" alt="pasting keyframes on multiple properties"/>
 
 As the orange arrows indicate, the first keyframe list is applied to the first property and the second keyframe list to the second property.
 
-At first sight this seems to be the same as if you would simply use two copies of the *"add keyframes"* block (first one to paste the position keyframes and then one to paste the scale keyframes). However, there is one important difference:
-The behavior of the **at time** parameter. If you give the block an entire list of keyframe lists, it will look at all of them and offset all keyframe times such that the very first one of them is at the given time. If this sounds strange - it is best explained with an example:
+At first sight, this seems to be the same as if you simply used two copies of the *"add keyframes"* block (the first to paste the position keyframes and the second to paste the scale keyframes). However, there is one important difference:
+The behavior of the **at time** parameter. If you give the block an entire list of keyframe lists, it will look at all of them and offset all keyframe times so that the very first one is at the given time. If this sounds strange, it's best explained with an example:
 
 **Example**
 
-Say you read keyframe data for both scale and position from a layer and the first scale keyframe is at 1s and the first position keyframe at 2s. 
+Say you read keyframe data for both scale and position from a layer and the first scale keyframe is at 1s, and the first position keyframe at 2s. 
 Now you paste those keys to another layer with the *at time* parameter set to 5s. If you just paste the position keyframes alone, the first position keyframe will be at 5s.
-However, if you past both scale and position at once, the block notices that the scale keyframes start 1s earlier than the position keyframes. Hence, it pastes the keyframes such that the first scale keyframe is at 5s, but the first position keyframes is at 6s.
+However, if you paste both scale and position at once, the block notices that the scale keyframes start 1s earlier than the position keyframes. So, it pastes the keyframes so that the first scale keyframe is at 5s, but the first position keyframes is at 6s.
 
 Note that this behavior is identical to what After Effects does when you cut and paste keyframes manually in the user interface.
 
@@ -96,7 +96,7 @@ Note that this behavior is identical to what After Effects does when you cut and
   alt="Block ae_keyframe_json_const"
 />
 
-Static Keyframe lists save the keyframe data inside the block - in other words, they contain one hard-coded list of keyframes (including all easing information). 
+Static Keyframe lists save the keyframe data inside the block - in other words, they contain a hardcoded list of keyframes (including all easing information). 
 
 <Anigif src={useBaseUrl('/img/blockOther/ae_keyframe_json_const_load_keys.gif')} width="378px" />
 
@@ -117,7 +117,7 @@ Technically, the result of this block is a text in a json format (which is ident
 />
 
 This block reads keyframe data from a [Layer Property](aeLayerProperties.mdx#ae_layer_properties_access) and returns it as a json string.
-In contrast to the [Static Keyframe List](#ae_keyframe_json_const), this block does not store any keyframe data, but just stores in information from which property the keyframe data should be retrieved. In other words, instead of saving a fixed set of keyframes with your script, this block reads keyframe data from the currently open Ae project in real time, each time the block is executed.
+In contrast to the [Static Keyframe List](#ae_keyframe_json_const), this block does not store any keyframe data, but just stores the information from which property the keyframe data should be retrieved. In other words, instead of saving a fixed set of keyframes with your script, this block reads keyframe data from the currently open Ae project in real time, each time the block is executed.
 
 
 
@@ -145,7 +145,7 @@ With the additional (and optional) parameters you can specify a min/max range an
   alt="Block ae_nearest_keyframe_time"
 />
 
-Returns the time of the keyframe that is closest to the given time or [null](/block-reference/logic.mdx#logic_null) if no such keyframe exists.
+Returns the time of the keyframe that is closest to the given time, or [null](/block-reference/logic.mdx#logic_null) if no such keyframe exists.
 
 Optionally, the block can look only at keyframes before or only at keyframes after the given time.
 

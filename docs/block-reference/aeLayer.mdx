@@ -9,12 +9,12 @@ import RetinaImg from "../../src/components/RetinaImg";
 # Ae Layer
 
 The blocks in this section allow you to do all kinds of things with the layers of a composition.
-You can create, copy, move or delete layers, apply effects of presets to them and change their attributes, for example.
+You can create, copy, move or delete layers, apply effects or presets to them, and change their attributes, for example.
 If you want to manipulate an individual property of a layer (like the position property or any effect control), you need to use the blocks in the categories [Layer Properties](aeLayerProperties.mdx#ae_layer_properties_access) and [Ae Keyframes](aeKeyframes.mdx).
 
 ## Accessing a Particular Layer {#accessLayer}
 
-Whenever a block requires a layer as argument, Automation Blocks represents the layer as a [text](text.mdx), which is similar to a file path. You can create those texts manually using a [Text block](text.mdx#text), for example, but usually it is more convenient to use a [Layer](#ae_layer_path) block, which will create the text for you.
+Whenever a block requires a layer as an argument, Automation Blocks represents the layer as a [text](text.mdx), which is similar to a file path. You can create those texts manually using a [Text block](text.mdx#text), for example, but usually it is more convenient to use a [Layer](#ae_layer_path) block, which will create the text for you.
 
 ### By Layer Name
 
@@ -23,7 +23,7 @@ The following blocks all reference the layer `White Solid 1` in the composition 
 <RetinaImg src="/img/blockOther/access_layer_example_1.png" alt="accessing a layer with After Effect scripting"/>
 
 As you can see, the path of a layer is composed of a [name or path for the composition](aeProjectItems.mdx#accessProjectItem), followed by a `::` and then the name (or index) of the layer itself.
-The biggest different between the first two is that when you click the *refresh* icon of the layer block, it will fill all its text fields automatically based on the layer that is currently selected in the Timeline panel. With the "root composition", in addition the text is split into one component for the layer and one for the containing comp, such that you can manipulate each of them individually.
+The biggest different between the first two is that when you click the *refresh* icon of the layer block, it will fill all its text fields automatically based on the layer that is currently selected in the Timeline panel. With the "root composition", however, the text is also split into one component for the layer and one for the containing comp, so you can manipulate each of them individually.
 
 ### By Layer Index**
 
@@ -33,7 +33,7 @@ You can also use negative indices, which will count the layers from the end of t
 
 ### In the Active Composition
 
-To specify a layer in the active composition, you can simply skip the part of the path, which specifies the composition itself. Here are three different ways to choose the layer "White Solid 1" in the active composition:
+To specify a layer in the active composition, you can simply skip the part with the path, which specifies the composition itself. Here are three different ways to choose the layer "White Solid 1" in the active composition:
 
 <RetinaImg src="/img/blockOther/access_layer_example_active_comp_by_name.png" alt="layer path for first layer in active comp"/>
 
@@ -41,15 +41,15 @@ Of course, this also works in combination with layer indices. Here are three dif
 
 <RetinaImg src="/img/blockOther/access_layer_example_active_comp.png" alt="layer path for first layer in active comp"/>
 
-If you skip the comp name, you can usually also skip the `::` separator. However, you can also keep the `::` before the layer name to tell Automation Blocks explicitly that this text describes a layer. Let's take a look at these examples:
+If you skip the comp name, you can usually also skip the `::` separator. However, you can also keep the `::` before the layer name to explicitly tell Automation Blocks that this text describes a layer. Let's take a look at these examples:
 
 <RetinaImg src="/img/blockOther/access_layer_example_active_comp_colons.png" alt="layer path vs project item path"/>
 
-Note that the first one uses the block [Get Attribute of Layer](aeLayer.mdx#ae_layer_get_attribute), whereas the second and third one use the block [Get Attribute of Project Item](aeProjectItems.mdx#ae_item_get_attribute). Hence, the first example retrieves the label color name of the layer with name `my video` (of the active comp), whereas the second example retieves the label color of a project item with name `my video`. In the third example, we put the colons in front of the name to make clear that this should actually be a layer name. Hence, Automation Blocks searches for the layer with name `my video` (in the active composition) and because the block expects a project item as argument, it then attempts to convert the layer to a project item. For details about this, see the section about [accessing a project item using a layer or property](aeProjectItems#accessProjectItem).
+Note that the first one uses the block [Get Attribute of Layer](aeLayer.mdx#ae_layer_get_attribute), whereas the second and third one use the block [Get Attribute of Project Item](aeProjectItems.mdx#ae_item_get_attribute). Hence, the first example retrieves the label color name of the layer with name `my video` (from the active comp), whereas the second example retieves the label color of a project item with name `my video`. In the third example, we put the colons in front of the name to make it clear that this should actually be a layer name. So, Automation Blocks searches for the layer with name `my video` (in the active composition) and because the block expects a project item as argument, it then attempts to convert the layer into a project item. For details about this, see the section about [accessing a project item using a layer or property](aeProjectItems#accessProjectItem).
 
 ### (Not) Unique Layer Names
 
-We recommend that you make sure that each layer of a composition has a unique name. But if you have multiple layers with name `White Solid 1`, then `Comp 1::White Solid 1` will refer to the first one of those. If you want to access another one, you can append a number in square brackets to the name. To obtain the second layer with name `White Solid 1` you can use `White Solid 1[2]`, for example.
+We recommend you make sure that each layer of a composition has a unique name. However, if you have multiple layers with the name `White Solid 1`, then `Comp 1::White Solid 1` will refer to the first of these. If you want to access another one, you can append a number in square brackets to the name. To obtain the second layer with name `White Solid 1` you can use `White Solid 1[2]`, for example.
 
 ### Using Blocks
 
@@ -62,7 +62,7 @@ Of course you can also access a layer with the [Only Selected Layer](#ae_only_se
   alt="Block ae_layer_path"
 />
 
-This block is build into many other blocks as parameter - in every situation where you need to choose a layer, you will most likely find this block. Picking a particular layer is very easy: Just select the layer and click the *refresh* icon of this block.
+This block is built into many other blocks as a parameter - in every situation where you need to choose a layer, you will most likely find this block. Picking a particular layer is very easy: Just select the layer and click the *refresh* icon of this block.
 
 **root**
 
@@ -74,11 +74,11 @@ If you change the option `without root` to `with root composition` the block cha
 
 <RetinaImg src="/img/blockOther/ae_layer_path_example_root_comp.png" alt="Layer path with root"/>
 
-As you can see, the text, which specifies the layer has now been split into two parts: one for the layer itself and one for the composition, to which the layer belongs. The result of the block is still the same - it still represents the layer `My Title Text` of the composition `Comp 1`. But now you can change these two parts independently. You can, for example, drag an [Active Composition](aeComp.mdx#ae_active_comp) block onto the `Comp 1` text:
+As you can see, the text specifies that the layer has now been split into two parts: one for the layer itself and one for the composition to which the layer belongs. The result of the block is still the same - it still represents the layer `My Title Text` of the composition `Comp 1`. But now you can change these two parts independently. You can, for example, drag an [Active Composition](aeComp.mdx#ae_active_comp) block onto the `Comp 1` text:
 
 <RetinaImg src="/img/blockOther/ae_layer_path_example_root_active_comp.png" alt="Layer path in active composition"/>
 
-Now this blocks does not represent the layer `My Title Text` of the comp `Comp 1` anymore; instead it represents the layer `My Title Text` of the active composition.
+Now this block no longer represents the layer `My Title Text` of the comp `Comp 1`; instead, it represents the layer `My Title Text` of the active composition.
 
 ## Only Selected Layer {#ae_only_selected_layer}
 
@@ -87,9 +87,9 @@ Now this blocks does not represent the layer `My Title Text` of the comp `Comp 1
   alt="Block ae_only_selected_layer"
 />
 
-This block returns the only selected layer, if exactly one layer is selected and stops with an error otherwise.
+This block returns the only selected layer, if exactly one layer is selected and otherwise stops with an error.
 
-This is very useful, if you want to write a script, which assumes that the user has selected a single layer and don't want to worry about dealing with a [List of Layers](#ae_layer_list) and a check if that list has length 1.
+This is very useful if you want to write a script which assumes that the user has selected a single layer and doesn't want to worry about dealing with a [List of Layers](#ae_layer_list) and check if that list has length 1.
 
 
 ## List of Layers {#ae_layer_list}
@@ -101,7 +101,7 @@ This is very useful, if you want to write a script, which assumes that the user 
 
 This block creates a [list](lists.mdx) (array) of all layers a composition. Optionally, it can also just put the selected layers into the list and also limit the list to a specific layer type.
 
-For examples of using this block see the blocks [Delete Layer](#ae_layer_remove), [Select Layers](#block_ae_layer_select), and [Select Project Items](aeProjectItems#block_ae_item_select_example).
+For examples of using this block, see the blocks [Delete Layer](#ae_layer_remove), [Select Layers](#block_ae_layer_select), and [Select Project Items](aeProjectItems#block_ae_item_select_example).
 
 ## For Each Layer {#ae_layer_for_all}
 
@@ -110,19 +110,19 @@ For examples of using this block see the blocks [Delete Layer](#ae_layer_remove)
   alt="Block ae_layer_for_all"
 />
 
-This block is a [loop](loops.mdx) which allows to do something with all layers, or all selected layers of a composition. You can also select only a particular type of layer that should be considered.
+This block is a [loop](loops.mdx) which allows you to do something with all layers, or all the selected layers of a composition. You can also select only a particular type of layer that should be considered.
 
 **selected layers**
 
-If you choose to iterate over the selected layers only, you can either choose `selected layers` or `selected layers (sorted by index)`. In the first case, the layers will be processed in the same order in which you selected them. In the second case they will be processed from top to bottom.
+If you choose to iterate over the selected layers only, you can either choose `selected layers` or `selected layers (sorted by index)`. In the first case, the layers will be processed in the same order in which you selected them. In the second case, they will be processed from top to bottom.
 
 **my layer variable**
 
-The block executes all the blocks which you plug inside of it many times - namely one time for each of the layers. And while these blocks are executed, the variable **my layer** always contains that respective layer. In other words, you can use **my layer** as a placeholder for the layers over which the block loops.
+This block executes all the blocks which you plug inside of it many times - namely once for each of the layers. And while these blocks are executed, the variable **my layer** always contains that respective layer. In other words, you can use **my layer** as a placeholder for the layers over which the block loops.
 
 **example**
 
-This example sets the label color of all currently selected text layers
+This example sets the label color of all currently selected text layers:
 
 <RetinaImg src="/img/blockOther/ae_layer_for_all_example.png" alt="After Effects Script: Loop over Layers Example"/>
 
@@ -135,7 +135,7 @@ This example sets the label color of all currently selected text layers
 
 This block creates a new layer. In the first row you can choose what kind of layer you want to create and choose the [Composition](aeComp.mdx#accessComp) in which it should be created. 
 
-The new layer is always inserted as first layer of the comp (you can change its [index](#ae_layer_set_attribute_index) with the [Set Attribute of Layer](#ae_layer_set_attribute) block).
+The new layer is always inserted as the first layer of the comp (you can change its [index](#ae_layer_set_attribute_index) with the [Set Attribute of Layer](#ae_layer_set_attribute) block).
 
 **my layer variable**
 
@@ -147,12 +147,12 @@ After the layer has been created, the block saves it in the [variable](variables
 
 ### New Footage Layer (Video/Audio/Precomp)
 
-If you want to create a new footage layer, you need to  specify the name for the new layer and the project item, which should be used as the footage of the layer.
-Note that the project item can also be a composition; in that case the new layer will be precomp. 
+If you want to create a new footage layer, you need to specify the name of the new layer and the project item, which should be used as the footage of the layer.
+Note that the project item can also be a composition; in that case, the new layer will be a precomp. 
 
 **Example**
 
-This script first imports the file `test.mp4` from the desktop into the After Effects project and then inserts it as new layer into the active composition. Note that the [Import File](aeProject.mdx#block_ae_import_file) block saves the project item of the imported file in the [variable](variables.mdx) `project item var` and then the *New Layer* block uses this variable to create a layer with that new project item.
+This script first imports the file `test.mp4` from the desktop into the After Effects project and then inserts it as a new layer into the active composition. Note that the [Import File](aeProject.mdx#block_ae_import_file) block saves the project item of the imported file in the [variable](variables.mdx) `project item var` and then the *New Layer* block uses this variable to create a layer with that new project item.
 
 <RetinaImg src="/img/blockOther/ae_new_layer_example_footage_import.png" alt="After Effects Script: Import Footage and New Layer"/>
 
@@ -172,13 +172,13 @@ If you want to create a new solid, you need to specify the name of the new layer
 
 <RetinaImg src="/img/blockOther/ae_new_layer_type_solid.png" alt="After Effects Script: Create New Solid Layer"/>
 
-If you want to create a new solid, you need to specify the name of the new solid, its size (in pixels), its pixel aspect ratio (1 for the usual square pixels) and its color. For details on color values see [Ae Color](aeColor.mdx).
+If you want to create a new solid, you need to specify the name of the new solid, its size (in pixels), its pixel aspect ratio (1 for the usual square pixels) and its color. For details on color values, see [Ae Color](aeColor.mdx).
 
 ### New Camera Layer
 
 <RetinaImg src="/img/blockOther/ae_new_layer_type_camera.png" alt="After Effects Script: Create New Camera Layer"/>
 
-To create  a new camera layer, in addition to the layer name, you can specify the zoom and the camera type.
+To create a new camera layer, in addition to the layer name, you can specify the zoom and the camera type.
 If you need to set any of the additional parameters of a camera, you can use the block [Set Attribute of Property](#ae_property_set_attribute), to set the [value](#ae_property_set_attribute_value) of that property. Here is an example, where we set the "Depth of Field" property of the camera to *On* after we created it:
 
 <Anigif src={useBaseUrl('/img/blockOther/ae_new_layer_example_camera_dof.gif')} width="1180px" />
@@ -193,7 +193,7 @@ To create  a new light layer, in addition to the layer name, you can specify the
 
 <RetinaImg src="/img/blockOther/ae_new_layer_type_shape.png" alt="After Effects Script: Create New Shape Layer"/>
 
-If you want to create a shape layer, the only parameter you need to specify is the *name* of the layer. The block will create an empty shape layer for you and you need to use the [Add Effect/Mask/Shape](#ae_apply_effect) block, to add shapes to that layer. Here is an example, which first creates the layer and then adds an ellipse path with a red fill to it:
+If you want to create a shape layer, the only parameter you need to specify is the *name* of the layer. The block will then create an empty shape layer for you, and you'll need to use the [Add Effect/Mask/Shape](#ae_apply_effect) block to add shapes to that layer. Here is an example, which first creates the layer and then adds an ellipse path with a red fill to it:
 
 <RetinaImg src="/img/blockOther/ae_new_layer_shape_example_ellipse.png" alt="After Effects Script: Create Shape Layer and Fill"/>
 
@@ -206,11 +206,11 @@ If you want to create a shape layer, the only parameter you need to specify is t
 
 This block can create effects, masks or shapes on an existing layer. The block is highly dynamic and changes its content depending on the options you choose. 
 
-In the first row of the block, you can choose the kind of effect/mask/shape you want to create as well as the [Layer](aeLayer.mdx#accessLayer) on which it should be created. The block also creates a variable `my variable` and assigns the [Layer Property](aeLayerProperties.mdx#ae_layer_properties_access) of the newly created effect/mask/layer to it. That way, you can easily access it other blocks of your script, after it has been created.
+In the first row of the block, you can choose the kind of effect/mask/shape you want to create, as well as the [Layer](aeLayer.mdx#accessLayer) on which it should be created. The block also creates a variable `my variable` and assigns the [Layer Property](aeLayerProperties.mdx#ae_layer_properties_access) of the newly created effect/mask/layer to it. That way, you can easily access it from other blocks of your script, after it has been created.
 
 ### Adding Effects 
 
-To create an effect, use the drop downs in the first row of the block to first choose the effect category and then the effect in that category. Once you've chosen an effect, the block contents updates and shows exactly the same parameters as the respective effect has in the Effect Controls panel. Here we've chosen the "Gaussian Blur" effect from the category "Blur & Sharpen":
+To create an effect, use the dropdowns in the first row of the block to first choose the effect category and then the effect within that category. Once you've chosen an effect, the block contents updates and shows exactly the same parameters as the respective effect has in the Effect Controls panel. Here we've chosen the "Gaussian Blur" effect from the category "Blur & Sharpen":
 <RetinaImg src="/img/blockOther/ae_apply_effect_example.png" alt="After Effects scripting create fast blur effect"/>
 
 You can set all effect parameters to the values you want and when the effect is created, it is initialized directly with these values.
@@ -222,7 +222,7 @@ The following video shows how to create a Gaussian Blur effect using this block:
 
 <RetinaImg src="/img/blockOther/ae_apply_effect_example_mask.png" alt="Creat Mask After Effects Scripting"/>
 
-If you choose to create a mask (using the first dropdown of the block), the blocks shows you the following parameters:
+If you choose to create a mask (using the first dropdown of the block), the block shows you the following parameters:
 
 **Mask Path:** A [Property Value](aeLayerProperties.mdx#ae_property_value_json), which must be a path value. The easiest way to choose a path is to select a mask or shape path in the Timeline panel and click the *refresh* icon of the *property value* input to load the path into the block.
 
@@ -236,15 +236,15 @@ If you choose to create a mask (using the first dropdown of the block), the bloc
 
 <RetinaImg src="/img/blockOther/ae_apply_effect_example_shape.png" alt="Creating Shapes with After Effects script"/>
 
-If you choose to create a shape (using the first dropdown of the block), in a second dropdown you can choose the type of shape, or shape modifier you want to create.
+If you choose to create a shape (using the first dropdown of the block), in a second dropdown you can choose the type of shape, or shape modifier, that you want to create.
 
-Exactly as for effects or masks, the block then shows the parameters of the respective shape type (or shape modifier) such that you can adjust them as needed.
+Exactly as for effects or masks, the block then shows the parameters of the respective shape type (or shape modifier) so you can adjust them as needed.
 
 **Creating Shapes inside Groups**
 
-Whereas effects and masks are always applied to a layer, shapes can be added either to the top level (i.e to the "Contents" group) or to sub-groups. If you want to use a subgroup, you need to drag a [Layer Property block](aeLayerProperties.mdx##ae_property_path) on top of the layer input (since groups are also layer properties). In that block you can then connect the subgroup, into which the new shape (or shape modifier) should be inserted.
+Whereas effects and masks are always applied to a layer, shapes can be added either to the top level (i.e to the "Contents" group) or to subgroups. If you want to use a subgroup, you need to drag a [Layer Property block](aeLayerProperties.mdx##ae_property_path) on top of the layer input (since groups are also layer properties). In that block, you can then connect the subgroup that the new shape (or shape modifier) should be inserted into.
 
-This video shows how to create a rectangle path first on the top level and then inside a sub-group.
+This video shows how to create a rectangle path first at the top level and then inside a subgroup.
  
 <Anigif src={useBaseUrl('/img/blockOther/ae_apply_effect_create_shape_in_group.gif')} width="1315px" />
 
@@ -260,19 +260,19 @@ This block applies an After Effects preset to a single [Layer](aeLayer.mdx#acces
 
 **Preset Files**
 
-After Effects saves presets in `.ffx` files. If you click on the _Open_ icon of the _Preset File_ it shows the folder where After Effects saves those files by default, such that you can pick the one you want to use.
+After Effects saves presets in `.ffx` files. If you click on the _Open_ icon of the _Preset File_ it shows the folder where After Effects saves these files by default, so you can pick where you'd like to save it.
 
 **Embedding Preset Files**
 
-Note that by default, the chosen preset file is not saved as part of your script. That means if you run your block script on another machine, which does not have the preset file installed, the block script will fail.
+Note that by default, the chosen preset file is not saved as part of your script. That means if you run your block script on another machine which does not have the preset file installed, the block script will fail.
 
-To avoid that issue, you can include the preset file as embedded file into your block script as follows:
+To avoid that issue, you can include the preset file as an embedded file into your block script as follows:
 
 1. Create a new [Embedded File](files.mdx#block_extendscript_embedded_file) block (which you find in the _File_ category).
 2. In the _Embedded File_ block choose the preset file you want to use .
 3. Drag the _Embedded File_ block over the _Preset File_ parameter of the _Apply Preset_ block.
 
-Now your script uses an embedded file whose contents is saved with your blockscript such that it is always available when you run the block script, no matter if the preset file is installed on the machine or not.
+Now your script uses an embedded file whose contents is saved with your blockscript so that it is always available when you run the block script, whether the preset file is installed on the machine or not.
 
 ## Get Attribute of Layer {#ae_layer_get_attribute}
 
@@ -281,7 +281,7 @@ Now your script uses an embedded file whose contents is saved with your blockscr
   alt="Block ae_layer_get_attribute"
 />
 
-Returns one of the attributes of the given composition, like its active camera, number of layers or motion blur settings. For a description of all available attributes see [Set Attribute of Layer](#ae_comp_set_attribute). Note the [difference between layer attributes and layer properties](aeLayerProperties.mdx#ae_layer_properties_vs_attributes) - to change things like the position of a layer or effect controls, see the section [Layer Properties](aeLayerProperties.mdx#ae_layer_properties_access).
+Returns one of the attributes of the given composition, like its active camera, number of layers, or motion blur settings. For a description of all available attributes, see [Set Attribute of Layer](#ae_comp_set_attribute). Note the [difference between layer attributes and layer properties](aeLayerProperties.mdx#ae_layer_properties_vs_attributes) - to change things like the position of a layer or effect controls, see the section [Layer Properties](aeLayerProperties.mdx#ae_layer_properties_access).
 
 ## Set Attribute of Layer {#ae_layer_set_attribute}
 
@@ -305,7 +305,7 @@ A [logic value](logic.mdx) `true` or `false` corresponding to the _3D Layer_ swi
 
 ### 3D per character
 
-For text layers only - a [logic value](logic.mdx) which is `true` if the `3D per character` option is enabled or the character animators.
+For text layers only - a [logic value](logic.mdx) which is `true` if the `3D per character` option is enabled for the character animators.
 
 ### adjustment layer
 
@@ -333,7 +333,7 @@ The type of automatic orientation to perform for the layer. If you get this valu
 3. `CAMERA_OR_POINT_OF_INTEREST`
 4. `CHARACTERS_TOWARD_CAMERA`
 
-If you set this value, you can either set it to one of the texts above, or to one of the numbers 1-4. Upper/lower case is ignored and instead of underscores you can also use spaces. So instead of the text `ALONG_PATH`, you can also use the number 2, or the text `along path`.
+If you set this value, you can either set it to one of the texts above, or to one of the numbers 1-4. Upper/lower case is ignored and instead of underscores you can also use spaces. So, instead of the text `ALONG_PATH`, you can also use the number 2, or the text `along path`.
 
 ### blending mode
 
@@ -379,7 +379,7 @@ The blending mode of the layer. If you get this value, it will be one of the fol
 38. `SUBTRACT`
 39. `VIVID_LIGHT`
 
-If you set this value, you can either set it to one of the texts above, or to one of the numbers 1-39. Upper/lower case is ignored and instead of underscores you can also use spaces. So instead of the text `LINEAR_DODGE`, you can also use the number 22, or the text `linear dodge`.
+If you set this value, you can either set it to one of the texts above, or to one of the numbers 1-39. Upper/lower case is ignored and instead of underscores you can also use spaces. So, instead of the text `LINEAR_DODGE`, you can also use the number 22, or the text `linear dodge`.
 
 ### can set collapse transformation (read-only) {#ae_layer_set_attribute_can_set_collapse_transformation}
 
@@ -395,7 +395,7 @@ A [logic value](logic.mdx) which corresponds to the *Collapse Transformation* sw
 
 <RetinaImg src="/img/blockOther/layer_attribute_collapse_transformations.png" alt="After Effects Attribute Collapse Transformation"/>
 
-You can only set this attribute, if the attribute [Can Set Collapse Transformation](#ae_layer_set_attribute_can_set_collapse_transformation) is `true`. If you attempt to change it for other layers, Automation Blocks prints a warning in the console and continues with the block script (i.e. does not stop with an error).
+You can only set this attribute if the attribute [Can Set Collapse Transformation](#ae_layer_set_attribute_can_set_collapse_transformation) is `true`. If you attempt to change it for other layers, Automation Blocks prints a warning in the console and continues with the block script (i.e. does not stop with an error).
 
 ### comment
 
@@ -416,13 +416,13 @@ A [logic value](logic.mdx) `true` or `false` indicating whether the effects on t
 
 ### environment layer
 
-A [logic value](logic.mdx) value, which is `true`, if this layer is an environment layer. Setting this value to `true` or `false` has the same effect as if you right-click on the layer and enable/diable the option *Environement Layer* in the context menu.
+A [logic value](logic.mdx) value, which is `true` if this layer is an environment layer. Setting this value to `true` or `false` has the same effect as if you right-click on the layer and enable/disable the option *Environment Layer* in the context menu.
 
 ### eyeball icon
 
 <RetinaImg src="/img/blockOther/layer_attribute_eyeball_icon.png" alt="After Effects Attribute Eyeball Icon"/>
 
-A [logic value](logic.mdx) which you can set to `true` or `false` to turn the eyeball icon of the layer. Set it to `false` to hide the layer or to `true`to make it visible.
+A [logic value](logic.mdx) which you can set to `true` or `false` to turn on/off the eyeball icon of the layer. Set it to `false` to hide the layer or `true`to make it visible.
 
 ### frame blending type
 
@@ -433,11 +433,11 @@ The frame blending type is a [text](text.mdx) which is one of the following valu
  2. `FRAME_MIX`
  3. `PIXEL_MOTION`
 
-If you want to set this value, you can either set it to one of those texts or one of the numbers 1-3. Upper/lower case of the texts is ignored, and instead of underscores you can also use spaces. Hence, setting this value to `NO_FRAME_BLEND`, to `1`, or to `no frame blend` gives exactly the same result.
+If you want to set this value, you can either set it to one of those texts, or one of the numbers 1-3. Upper/lower case of the texts is ignored, and instead of underscores you can also use spaces. So, setting this value to `NO_FRAME_BLEND`, to `1`, or to `no frame blend` gives exactly the same result.
 
 ### guide layer
 
-A [logic value](logic.mdx) `true` or `false` indicating if the *guide layer* option is enabled for this layer. Setting this value to `true` has the same effects as if you right-click on the layer and activate the *Guide Layer* option.
+A [logic value](logic.mdx) `true` or `false` indicating if the *guide layer* option is enabled for this layer. Setting this value to `true` has the same effect as if you right-click on the layer and activate the *Guide Layer* option.
 
 ### has audio (read-only)
 
@@ -475,16 +475,16 @@ See also [out point](#ae_layer_set_attribute_out_point) and [start time](#ae_lay
 The index of the layer, which determines where the layer is located in the layer stack. The first layer has index 1. You can set this value to a new number to move the layer to a different location in the layer stack:
 
 *positive number*
-If you set the value to `8`, it will become the 8th layer of the comp (unless the comp has less than 8 layers: in that case it will become the last layer. If you set the value to `0` the result is the same as if you set it to `1` (it will become the first layer of the comp)
+If you set the value to `8`, it will become the 8th layer of the comp (unless the comp has less than 8 layers: in that case it will become the last layer. If you set the value to `0` the result is the same as if you set it to `1` (it will become the first layer of the comp).
 
 *negative number*
-If you set this value to a negative number, the index is counted from the end of the composition. Hence, if you set the value to `-1`, it will become the last layer of the comp and if you set it to `-2`, it will become the last but one.
+If you set this value to a negative number, the index is counted from the end of the composition. So, if you set the value to `-1`, it will become the last layer of the comp and if you set it to `-2`, it will become the last but one.
 
 ### is name set
 
 A [logic value](logic.mdx) which is `true` if the value of the name attribute has been set explicitly, rather than automatically from the source.
 
-If this value is `false`, the layer name is identical to the name of the corresponding project item **and when the name of the project item is changed, the layer name changes with it**. Changing layer names can cause a lot of trouble, since Automation Blocks accesses layers by their name. Hence, a layer that is bound to a [variable](variables.mdx), cannot be found by Automation Blocks anymore, if you change the layer name.
+If this value is `false`, the layer name is identical to the name of the corresponding project item **and when the name of the project item is changed, the layer name changes with it**. Changing layer names can cause a lot of trouble, since Automation Blocks accesses layers by their name. So, a layer that is bound to a [variable](variables.mdx), cannot be found by Automation Blocks anymore if you change the layer name.
 
 **Text Layer Names**
 
@@ -493,9 +493,9 @@ Unfortunately (due to a limitation in Ae's scripting API), this attribute is alw
 
 **Avoiding Accidental Name Changes**
 
-To prevent layer name changes when a project item is renamed or when the text of a text layer is changed, you can set this attribute to `true`. If you do that, Automation Blocks will manually rename the layer (actuall to its current name, such that the name does not really change). After this renaming operation, the layer name will be independent of the project item's name and the layer's source text.
+To prevent layer name changes when a project item is renamed or when the text of a text layer is changed, you can set this attribute to `true`. If you do this, Automation Blocks will manually rename the layer (actually to its current name, so that the name does not really change). After this renaming operation, the layer name will be independent of the project item's name and the layer's source text.
 
-Note that you cannot set this property to `false`. In other words, this is a one way street: Whenever a layer has been renamed once, it cannot go back to its default naming.
+Note that you cannot set this property to `false`. In other words, this is a one-way street: Whenever a layer has been renamed once, it cannot go back to its default name.
 
 ### label color HexCode (read-only)
 
@@ -512,9 +512,9 @@ The ID of the label color (0 for None, or 1 to 16 for one of the preset colors i
 
 The label color name of the project item as configured in the *Labels* preferences (like `Red`, `Sea Foam`, or `None`). 
 
-By default, the block to set the label color name shows a convenient dropdown where you can pick any of the default label colors. Note that this dropdown does not update, when you have configured custom label color names. If you have configured custom label colors in the preferences, you can either drag a [Text](text.mdx#text) block on top of the dropdown and enter the custom label name manually, or you set the label color using the [color id](#ae_layer_set_attribute_label_color_id).
+By default, the block to set the label color name shows a convenient dropdown where you can pick any of the default label colors. Note that this dropdown does not update when you have configured custom label color names. If you have configured custom label colors in the preferences, you can either drag a [Text](text.mdx#text) block on top of the dropdown and enter the custom label name manually, or you can set the label color using the [color id](#ae_layer_set_attribute_label_color_id).
 
-For an example see the [label color name of Project Items](aeProjectItems#ae_item_set_attribute_label_color_name), which works in exactly the same way.
+For an example, see the [label color name of Project Items](aeProjectItems#ae_item_set_attribute_label_color_name), which works in exactly the same way.
 
 ### light type (only for light layers)
 
@@ -530,13 +530,13 @@ If you set this value, you can either set it to one of the texts above, or to on
 
 <RetinaImg src="/img/blockOther/layer_attribute_locked.png" alt="After Effects Attribute Locked"/>
 
-A [logic value](logic.mdx) which corresponds to the *locked* switch of the layer. Note that also scripts can only change layers if they are unlocked.
+A [logic value](logic.mdx) which corresponds to the *locked* switch of the layer. Note that scripts can also only change layers if they are unlocked.
 
 ### motion blur {#ae_layer_set_attribute_motion_blur}
 
 <RetinaImg src="/img/blockOther/layer_attribute_motion_blur.png" alt="After Effects Attribute Motion Blur"/>
 
-A [logic value](logic.mdx) which corresponds to the motion blur switch of the layer. Note that After Effects only calculates motion blur, if it is activated for both the layer and [for the comp](aeComp.mdx#ae_comp_set_attribute_motion_blur).
+A [logic value](logic.mdx) which corresponds to the motion blur switch of the layer. Note that After Effects only calculates motion blur if it is activated for both the layer and [for the comp](aeComp.mdx#ae_comp_set_attribute_motion_blur).
 
 ### name {#ae_layer_set_attribute_name}
 
@@ -628,7 +628,7 @@ See also [in point](#ae_layer_set_attribute_in_point) and [out point](#ae_layer_
 
 A [logic value](logic.mdx) `true` or `false` indicating if time remapping is enabled for this layer. You can only set this attribute for a layer if the attribute [can set time remap enabled](#ae_layer_set_attribute_can_set_time_remap_enabled) is `true`. If you attempt to set it for other layers, the attempt will be ignored and a warning is printed to the console (but the script does *not* stop with an error).
 
-Setting this value to true, has the same effect as if you would right-click on the layer and choose *"Time->Enable Time Remapping"* in the context menu.
+Setting this value to true has the same effect as if you right-click on the layer and choose *"Time->Enable Time Remapping"* in the context menu.
 
 ### track matte type {#ae_layer_set_attribute_track_matte_type}
 
@@ -642,7 +642,7 @@ A [text](text.mdx) value which is one of the following:
 4. `LUMA_INVERTED`
 5. `LUMA`
 
-If you want to set this value, you can either set it to one of those texts or one of the numbers 1-5. Upper/lower case of the texts is ignored, and instead of underscores you can also use spaces. Hence, setting this value to `NO_TRACK_MATTE`, to `1`, or to `no track matte` gives exactly the same result.
+If you want to set this value, you can either set it to one of these texts, or one of the numbers 1-5. Upper/lower case of the texts is ignored, and instead of underscores you can also use spaces. Hence, setting this value to `NO_TRACK_MATTE`, to `1`, or to `no track matte` gives exactly the same result.
 
 If you just want to check if this value is set to `NO_TRACK_MATTE` you can also use the attribute [has track matte](#ae_layer_set_attribute_has_track_matte).
 
@@ -671,7 +671,7 @@ The width of the layer in pixels. See also the [height](#ae_layer_set_attribute_
 
 This block duplicates the given [Layer](aeLayer.mdx#accessLayer) like the After Effects menu command _Edit->Duplicate_.
 
-The duplicate is saved in the [variable](variables.mdx) `new layer var`, such that you can easily access the layer in subsequent blocks of your script. For an example how this works, see the block [Copy Layer](#ae_layer_copy_to_comp).
+The duplicate is saved in the [variable](variables.mdx) `new layer var`, so that you can easily access the layer in subsequent blocks of your script. For an example of how this works, see the block [Copy Layer](#ae_layer_copy_to_comp).
 
 ## Copy Layer {#ae_layer_copy_to_comp}
 
@@ -680,9 +680,9 @@ The duplicate is saved in the [variable](variables.mdx) `new layer var`, such th
   alt="Block ae_layer_copy_to_comp"
 />
 
-Copies a single [Layer](aeLayer.mdx#accessLayer) to a different [Composition](aeComp.mdx#accessComp). The layer in the new composition is saved in the [variable](variables.mdx) `new layer var`, such that you can easily access the layer in subsequent blocks of your script.
+Copies a single [Layer](aeLayer.mdx#accessLayer) to a different [Composition](aeComp.mdx#accessComp). The layer in the new composition is saved in the [variable](variables.mdx) `new layer var`, so that you can easily access the layer in subsequent blocks of your script.
 
-The layer is inserted above the first currently selected layer or as first layer of the comp if nothing is selected.
+The layer is inserted above the first currently selected layer or as the first layer of the comp if nothing is selected.
 To change the layer order, you can [set the index](#ae_layer_set_attribute_index) of the layer.
 
 ### Example
@@ -698,7 +698,7 @@ This example
 2. [sets the name](#ae_layer_set_attribute_name) of this newly inserted layer to `my text layer` and
 3. [sets the index](#ae_layer_set_attribute_index) of it to 1, to ensure it is the topmost layer in the active comp, even if other layers have been selected.
 
-Note how we use the [variable](variables.mdx) `new layer var` that is created by the first block in the second and third block to access the newly created layer.
+Note how we use the [variable](variables.mdx) `new layer var`, which is created by the first block, in the second and third blocks to access the newly created layer.
 
 ## Delete Layer {#ae_layer_remove}
 
@@ -707,7 +707,7 @@ Note how we use the [variable](variables.mdx) `new layer var` that is created by
   alt="Block ae_layer_remove"
 />
 
-Deletes the given [Layer(s)](#accessLayer). You can give this block either a single layer as argument, or also a [list](lists.mdx) (array) of layers do delete all of them.
+Deletes the given [Layer(s)](#accessLayer). You can give this block either a single layer as an argument, or also a [list](lists.mdx) (array) of layers to delete all of them.
 
 ### Example
 
@@ -725,7 +725,7 @@ This example deletes all currently selected layers (retrieved by the block [List
   alt="Block block_ae_layer_select"
 />
 
-Selects or deselects the given [Layer(s)](#accessLayer). You can give this block either a single layer as argument, or also a [list](lists.mdx) (array) of layers do (de)select all of them.
+Selects or deselects the given [Layer(s)](#accessLayer). You can give this block either a single layer as an argument, or also a [list](lists.mdx) (array) of layers to (de)select all of them.
 
 If you just want to get or set the selected status of a single layer, you can also [get](#ae_layer_get_attribute) or [set](#ae_layer_set_attribute) the [selected attribute](#ae_layer_set_attribute_selected) instead of using this block.
 
@@ -776,9 +776,9 @@ The Automation Blocks library contains a ready to use example _"Layers->Select L
   alt="Block ae_layer_precompose"
 />
 
-Precomposes the given layers. You can give either a single layer or an entire [list](lists.mdx) (array) of layers as argument.
+Precomposes the given layers. You can give either a single layer or an entire [list](lists.mdx) (array) of layers as an argument.
 
-If you give an entire list of layers, they are all precomposed together into a single comp. Also, in that case the *"move all attributes"* option is ignored, since it always needs to be *true*, if multiple layers are precomposed.
+If you give an entire list of layers, they are all precomposed together into a single comp. Also, in this case the *"move all attributes"* option is ignored, since it always needs to be *true*, if multiple layers are precomposed.
 
 **precomp layer var**
 
@@ -790,11 +790,11 @@ Is the same option as in the menu command *Layer->Pre-compose*
 
 **Adjust comp duration to time span of layers**
 
-Adjusts the precomp duration such that it starts at the eariest in point and ends at the latest out point of the precomposed layers.
+Adjusts the precomp duration so that it starts at the eariest in point and ends at the latest out point of the precomposed layers.
 
 **crop to source rect**
 
-Here you can pass a [list](lists.mdx) (array) with values `[top, left, width, height]` to crop the precomp to that area of the original comp. If you plug the [Get Source Rect of Layer(s)](#ae_layer_source_rect) block here, for example, the precomp will be cropped to the area covered by these layers (make sure to get the value in *Comp Space*, not *Layer Space*).
+Here you can pass a [list](lists.mdx) (array) with values `[top, left, width, height]` to crop the precomp to the area of the original comp. If you plug the [Get Source Rect of Layer(s)](#ae_layer_source_rect) block in here, for example, the precomp will be cropped to the area covered by these layers (make sure to get the value in *Comp Space*, not *Layer Space*).
 
 ## Get Source Rect of Layer(s) {#ae_layer_source_rect}
 
@@ -803,7 +803,7 @@ Here you can pass a [list](lists.mdx) (array) with values `[top, left, width, he
   alt="Block ae_layer_source_rect"
 />
 
-This block returns a [list](lists.mdx) (array) with values `[left, top, width, height]`, which describe the area covered by the layer. This is similar to the layer attributes [width](#ae_layer_set_attribute_width), [height](#ae_layer_set_attribute_height) and [size](#ae_layer_set_attribute_size), but with two major differences:
+This block returns a [list](lists.mdx) (array) with the values `[left, top, width, height]`, which describe the area covered by the layer. This is similar to the layer attributes [width](#ae_layer_set_attribute_width), [height](#ae_layer_set_attribute_height) and [size](#ae_layer_set_attribute_size), but with two major differences:
 1. For text and shape layers, their width and height is always the same as the composition, whereas the source rect represents the actual area covered by texts/shapes.
 2. The source rect changes over time (if shapes animate or texts change, for example), whereas the width and height of the layer does not.
 
@@ -817,9 +817,9 @@ If you give this block an entire [list](lists.mdx) (array) of layers, the return
 
 **comp space vs layer space**
 
-The source rect can be returned in comp space or in layer space. "Comp space" means that the positions are measured as pixel values of the composition (like the X/Y coordinates shown in the Info panel, when you hover with the mouse over the Composition panel). "Layer space" means, that the coordinates are given measured in the coordinates of the individual layer (like the X/Y coordinates shown in the Info panel, when you hover with the mouse over a Layer panel instead of the Composition panel). The source rect in layer space only changes, if you actually change the content of the layer, whereas the source rect in comp space also changes, when you move, scale or rotate the layer, for example.
+The source rect can be returned in comp space or in layer space. "Comp space" means that the positions are measured as pixel values of the composition (like the X/Y coordinates shown in the Info panel when you hover the mouse over the Composition panel). "Layer space" means that the coordinates are given measured in the coordinates of the individual layer (like the X/Y coordinates shown in the Info panel when you hover the mouse over a Layer panel instead of the Composition panel). The source rect in layer space only changes if you actually change the contents of the layer, whereas the source rect in comp space also changes when you move, scale or rotate the layer, for example.
 
-In this example, the source rect of the text in layer space is visualized in red, and the source rect in comp space in dark grey:
+In this example, the source rect of the text in layer space is visualized in red, and the source rect in comp space is dark grey:
 <RetinaImg
   src="/img/blockOther/ae_layer_source_rect_example_2.png"
   alt="Source Rect Layer Space vs Comp Space"

@@ -12,7 +12,7 @@ These blocks allow you to read and write spreadsheet files. We currently support
 - csv (supported by all major spreadsheet applications like Microsoft Excel, Open Office, Apple Numbers and Google Docs)
 - Excel XML 
 
-Whenever you read or write a spreadsheet file, make sure it has either the file extension .csv or .xml. Based on this file extension, Automation Blocks will decide whether it treats the file as csv or Excel XML file.
+Whenever you read or write a spreadsheet file, make sure it has either the file extension .csv or .xml. Based on this file extension, Automation Blocks will decide whether it treats the file as a csv or an Excel XML file.
 
 
 ## Add Row/Column to Spreadsheet {#spreadsheet_add_row}
@@ -38,11 +38,11 @@ If the spreadsheet file already exists, this block will append a new row/column 
 
 Reads an entire spreadsheet file row by row (or column by column).
 
-With the optional `from row` and `to row` parameters you can limit the range of rows that is read. If the first row of your spreadsheet contains a title, for example, that you want to skip, just set `from row` to `2` (Cell indices start at 1 for the first row).
+With the optional `from row` and `to row` parameters you can limit the range of rows that is read. If the first row of your spreadsheet contains a title that you want to skip, for example, just set `from row` to `2` (cell indices start at 1 for the first row).
 
-By default, from each row the first two cells are read (cell A and cell B), but if you click on the cog wheel icon in the top left corner of the block, you can add more cells.
+By default, from each row the first two cells are read (cell A and cell B), but if you click on the cogwheel icon in the top left corner of the block, you can add more cells.
 
-The blocks that you nest inside this block are executed once for each row of the spreadsheet. During that execution, the content of each cell in that row is stored in a [variable](variables.mdx) (`my cell 1`, `my cell 2` etc.) so that you can easily access the content of these cells.
+The blocks that you nest inside this block are executed once for each row of the spreadsheet. During that execution, the contents of each cell in that row is stored in a [variable](variables.mdx) (`my cell 1`, `my cell 2` etc.) so that you can easily access the contents of these cells.
 
 ## Set Spreadsheet Cell {#spreadsheet_set_cell}
 

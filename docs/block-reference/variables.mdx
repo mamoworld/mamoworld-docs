@@ -31,7 +31,7 @@ For a more detailed explanation of variables, see the tutorial [Search & Replace
 <RetinaImg src="/img/blockScreenshots/Variables/variables_set.png" alt="Block variables_set"/>
 
 
-With this block you can assign a value to a variable. All variables of your current script are listed in the dropdown; just choose the one you want and set its value. The value can be anything: a number, text, logic value, list and even any more complex data like a sequence, markers or clip parameter, for example.
+With this block, you can assign a value to a variable. All variables of your current script are listed in the dropdown; just choose the one you want and set its value. The value can be anything: a number, text, logic value, list and even any more complex data like a sequence, markers or clip parameter, for example.
 
 Often, you set variable values at the very beginning of your script. But you can also set variable values at any later point, and multiple times (to overwrite the previous value). Loops set the variables they provide themselves, so for loop variables you only need the [Get Variable](#variables_get) block and never the Set Variable block.
 
@@ -41,7 +41,7 @@ Often, you set variable values at the very beginning of your script. But you can
 <RetinaImg src="/img/blockScreenshots/Variables/math_change.png" alt="Block math_change"/>
 
 
-This block is only useful for variables whose value is a number. The block allows you to increase the value of a variable (or decrease it, if you provide a negative number). The same can also be done with the [Set Variable block](#variables_set), but with the Change Variable block the code is a bit more compact. 
+This block is only useful for variables whose value is a number. It allows you to increase the value of a variable (or decrease it, if you give a negative number). The same can also be done with the [Set Variable block](#variables_set), but with the Change Variable block the code is a bit more compact. 
 
 
 Both these blocks increase the value of the variable `my number` by 2:
@@ -58,5 +58,5 @@ Both these blocks increase the value of the variable `my number` by 2:
 
 The round purple block, which just consists of the variable name, returns the value of the variable. If you execute this block before you've set the value of the variable, it will return `undefined` (unless it is a loop variable, in which case the loop itself takes care of setting the variable value before each loop iteration).
 
-Also note that in the dropdown you cannot just pick any variable of your script, but you also have the option to delete or rename a variable. These operations affect not just this block, but all occurrences of the variable in your script. So, if you rename the variable, for example, the name is updated throughout your entire script.
+Also note that in the dropdown, you cannot just pick any variable of your script, but you also have the option to delete or rename a variable. These operations affect not just this block, but all occurrences of the variable in your script. So, if you rename the variable, for example, the name is updated throughout your entire script.
 

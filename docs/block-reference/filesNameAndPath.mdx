@@ -8,9 +8,8 @@ import RetinaImg from '../../src/components/RetinaImg'
 
 # Files Name & Path
 
-Files (and also Folders) in Automation Blocks are just a text representing the full path of the file.
-The following blocks help you to manipulate these paths, which is very helpful to create new filenames,
-rename files, etc. 
+Files (and also Folders) in Automation Blocks are just texts representing the full path of the file.
+The following blocks will help you to manipulate these paths, which is very helpful for creating new filenames, renaming files, etc. 
 
 The blocks have been created to manipulate file paths, but of course they work on any text - so you can also use them to manipulate other texts, too.
 
@@ -35,13 +34,13 @@ When you replace the suffix and your new suffix does not have a dot at the begin
 <RetinaImg src="/img/blockScreenshots/FilesNameAndPath/string_tinker_path.png" alt="Block string_tinker_path"/>
 
 
-This block is your swiss army knife when it comes to manipulating a file path. It's like an advanced version of the [Replace in File Path block](filesNameAndPath#block_extendscript_file_path_replace_part). It decomposes a file path into its ingredients - like splitting `/path/to/myFile001.jpg` into `/path/to`,`/` `myFile`, `001` and `.jpg`. Then you can recombine those parts however you like. 
+This block is your Swiss army knife when it comes to manipulating a file path. It's like an advanced version of the [Replace in File Path block](filesNameAndPath#block_extendscript_file_path_replace_part). It decomposes a file path into its ingredients - like splitting `/path/to/myFile001.jpg` into `/path/to`,`/`, `myFile`, `001` and `.jpg`. You can then recombine those parts however you like. 
 
 The block extracts the following parts from the path:
 
 - **$FOLDER** the folder where the file is located.
 - **$NAME** the name of the file without numbers at the end (if the file is part of an image sequence, for example) and without the extension
-- **$NUMBERS** the numbers at the end of the file name (for an image sequence, for example). If the filename has no numbers at the end, this is empty.
+- **$NUMBERS** the numbers at the end of the filename (for an image sequence, for example). If the filename has no numbers at the end, this is empty.
 - **$EXT** The file extension, i.e. the suffix like `.mp4`or `.mov` including the dot.
 - **$SEP** the separator symbol used in the path - either `/` or `\`.
 
@@ -52,7 +51,7 @@ The example above turns the file name `path/to/my/file012.jpg` into the result `
 #### number of digits in $NUMBERS
 
 You can change the number of digits in `$NUMBERS` by adding the number of desired digits in square brackets.
-So if `$NUMBERS` is `0123`, for example, then `$NUMBERS[5]` is `00123` to result in 5 digits. This function only adds or removes zeros, but no other digits, so `$NUMBERS[1]` will give `123` and not `3`.
+So if `$NUMBERS` is `0123`, for example, then `$NUMBERS[5]` is `00123`, resulting in 5 digits. This function only adds or removes zeros, but no other digits, so `$NUMBERS[1]` will give `123` and not `3`.
 
 #### parent folders
 
@@ -61,7 +60,7 @@ So if `$FOLDER` is `C:\path\to\my` then `$FOLDER[1]` is `C:\path\to` and `$FOLDE
 
 #### More Examples
 
-The following block constructs a new path from the project file path pointing to a folder `footage`, that is a sibling of the folder where the project is created.
+The following block constructs a new path from the project file path pointing to a folder `footage`, which is a sibling of the folder where the project is created.
 
 <RetinaImg src="/img/blockOther/string_tinker_path_example.png" alt="Project File Example"/>
 
@@ -70,4 +69,4 @@ So if the project is `C:\my\project\pr\myproject.prproj`, for example, then the 
 
 ## Text Pattern {#string_pattern}
 
-The Text Pattern block is very useful to create file paths, but also for all kinds of other strings. For this reason, it's [documented in the Text category](text#string_pattern).
+The Text Pattern block is very useful for creating file paths, but also for all kinds of other strings. For this reason, it's [documented in the Text category](text#string_pattern).

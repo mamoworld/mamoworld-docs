@@ -9,7 +9,7 @@ import RetinaImg from '../../src/components/RetinaImg'
 
 # Pr Project
 
-These blocks allow you to work with Premiere Pro projects. Open, save and close projects, import footage into a project, iterate over project items and more.
+These blocks allow you to work with Premiere Pro projects. Open, save and close projects, import footage into a project, iterate over project items, and more.
 
 ### Accessing a Particular Project {#accessProject}
 
@@ -17,7 +17,7 @@ Usually, you do all your actions on the [active project](prProject#pr_project_ac
 
 - use a text block with the name of the project: <RetinaImg src="/img/blockOther/project_text.png" alt="myProject.prproj"/>
 
-- use a block that represents a project item, sequence, or clip of a sequence. If these are used in a context where a project is expected, they will be converted to the project that contains the project item, sequence or clip.
+- use a block that represents a project item, sequence, or clip within a sequence. If these are used in a context where a project is expected, they will be converted to the project that contains the project item, sequence or clip.
 - you can iterate over all open projects with the [For All Open Projects block](prProject#block_pr_for_all_open_projects), to do something with each of them.
 
 
@@ -39,7 +39,7 @@ This block creates a new bin in the project. In the example above, the bin with 
 <RetinaImg src="/img/blockOther/pr_project_item_create_bin_example.png" alt="Block pr_project_item_create_bin"/>
 
 
-This example also creates the bin `subbin` inside the bin `bin`, but this time, if `bin` does not exist yet, the script stops with an error. Note that this time it will also search for a bin with name `bin` inside all subbins of the project if it does not find it at the root bin (see [Accessing a Particular Project Item](prProjectItems#accessProjectItem) for details of all possibilities to specify a parent bin).
+This example also creates the bin `subbin` inside the bin `bin`, but this time, if `bin` does not exist yet, the script stops with an error. Note that this time it will also search for a bin with the name `bin` inside all sub-bins of the project if it does not find it in the root bin (see [Accessing a Particular Project Item](prProjectItems#accessProjectItem) for details of all possibilities to specify a parent bin).
 
 
 
@@ -54,9 +54,9 @@ If you import images, you can
 - **import as normal footage**: if there is an image in your list of files to import, it just imports that single image
 - **import as image sequence**: if there is an image in your list of files to import, it assumes that it is the first image of an image sequence and imports the entire sequence as a single project item.
 
-:::tip syncing folders
+:::tip Syncing folders
 
-If you want to import all files in a particular folder, the [Sync Folder with Project Bin Block](prProject#block_pr_sync_project_bin_with_folder) is the more powerful and convenient choice.
+If you want to import all the files in a particular folder, the [Sync Folder with Project Bin Block](prProject#block_pr_sync_project_bin_with_folder) is the most powerful and convenient choice.
 
 :::
 
@@ -86,7 +86,7 @@ If you want to import a lot of comps, it's better to put them in a list and impo
 
 
 This block imports all files from the chosen folder into the given bin of your Premiere Pro Project. Even better: it checks if some of these files have already been imported into that bin before and if so, it does not import them a second time.
-So whenever you added some new files to the folder, you can run the block again to import only the new files.
+So whenever you add some new files to the folder, you can run the block again to import only the new files.
 
 If the bin does not exist in your project yet, it will be created.
 
@@ -112,7 +112,7 @@ Here you have three options:
 
 :::tip Don't Sync Root Bin
 
-It is good practice to always sync with a subbin of your project and not the root bin `\`: Since your project also contains other items like sequences (which have no corresponding file on your hard-drive), those would be lost if you sync with the *delete other items* option enabled. 
+It is good practice to always sync with a subbin of your project and not the root bin `\`: Since your project also contains other items like sequences (which have no corresponding file on your hard-drive), these would be lost if you sync with the *delete other items* option enabled. 
 
 :::
 
@@ -126,7 +126,7 @@ It is good practice to always sync with a subbin of your project and not the roo
 <RetinaImg src="/img/blockScreenshots/PrProject/block_pr_project_name.png" alt="Block block_pr_project_name"/>
 
 
-This block returns the file name of the given project. It returns either the full name like `myProject.prproj` or, if you choose the option **without extension**, the name without the file suffix, i.e. just `myProject`.
+This block returns the filename of the given project. It returns either the full name like `myProject.prproj` or, if you choose the option **without extension**, the name without the file suffix, i.e. just `myProject`.
 
 By default, the block uses the active project. See [Accessing a Particular Project](prProject#accessProject) for how to use another currently open project instead.
 
@@ -158,14 +158,14 @@ The block will give an error if the file path has a different file extension tha
 
 #### allow to overwrite if file exists
 
- If this option is enabled, the block deletes the project file before creating a new one. If the option is disabled, the block throws an error if the project file already exists.
+ If this option is enabled, the block deletes the project file before creating a new one. If the option is disabled, the block gives an error if the project file already exists.
 
 #### create folder if not existing
 
- If this option is enabled, the block creates the folder on your harddrive where the project should be located (and its parent folders) if needed. If the option is disabled, the block throws an error if the folder does not exist yet.
+ If this option is enabled, the block creates the folder on your hard-drive where the project should be located (and its parent folders) if needed. If the option is disabled, the block gives an error if the folder does not exist yet.
 
 
-See [Accessing a Particular File](files#accessFile) for all ways to specify a file.
+See [Accessing a Particular File](files#accessFile) for all the ways to specify a file.
 
 ## Open Project {#pr_project_open}
 
@@ -202,7 +202,7 @@ With this option, you can save the project to a new folder that does not exist y
 
 See [Accessing a Particular File](files#accessFile) for all the ways to specify a project file.
 
-By default, the block uses the active project. See [Accessing a Particular Project](prProject#accessProject) how to use another currently open project instead.
+By default, the block uses the active project. See [Accessing a Particular Project](prProject#accessProject) for how to use another currently open project instead.
 
 ## Close Project {#pr_project_close}
 
@@ -219,7 +219,7 @@ By default, the block uses the active project. See [Accessing a Particular Proje
 <RetinaImg src="/img/blockScreenshots/PrProject/block_pr_for_all_open_projects.png" alt="Block block_pr_for_all_open_projects"/>
 
 
-This block iterates over all projects that are currently opened in Premiere Pro. The blocks you nest inside this block are executed once for each open project. During the execution of these blocks, the project itself is saved in the [variable](variables.mdx) `my project`.
+This block iterates over all projects that are currently open in Premiere Pro. The blocks you nest inside this block are executed once for each open project. During the execution of these blocks, the project itself is saved in the [variable](variables.mdx) `my project`.
 
 For an example of how to use this block, see the script **save and close all projects except active one**.
 

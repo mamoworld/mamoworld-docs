@@ -14,7 +14,7 @@ Loops allow you to repeat a particular task many times. For a more detailed expl
 
 ## Specialized Loops
 
-The blocks in this section are general purpose loops, but you find some more specialized loops in other sections:
+The blocks in this section are general purpose loops, but you'll find some more specialized loops in other sections:
 
 - [loop over all lines of a text file](../block-reference/filesText#extendscript_text_file_for_all_lines)
 - [loop over all rows/columns of a spreadsheet](../block-reference/filesSpreadsheet#spreadsheet_for_each_row)
@@ -41,7 +41,7 @@ The blocks in this section are general purpose loops, but you find some more spe
 <RetinaImg src="/img/blockScreenshots/Loops/controls_repeat_ext.png" alt="Block controls_repeat_ext"/>
 
 
-This loop just executes the blocks you plug inside of it as many times as you want. It is the most simple loop and therefore useful to understand the concept of loop blocks. However, in practice you will use the [For Loop](loops#controls_forcontrols_for) much more often, which is very similar, but more powerful.
+This loop just executes the blocks you plug inside it as many times as you want. It is the simplest loop and therefore useful to understand the concept of loop blocks. However, in practice you will use the [For Loop](loops#controls_forcontrols_for) much more often, which is very similar, but more powerful.
 
 ### Example
 
@@ -58,7 +58,7 @@ this block is repeated
 I am last
 ```
 
-As you can see, the block that is plugged inside the block is executed three times, whereas the other blocks above and below are just executed once. 
+As you can see, the block that is plugged into the block is executed three times, whereas the other blocks above and below are just executed once. 
 
 
 ## While/Until Loop {#controls_whileUntil}
@@ -67,20 +67,20 @@ As you can see, the block that is plugged inside the block is executed three tim
 
 
 In the top row of this loop you need to put a condition (a [logic value](logic) that evaluates to either `true` or `false`).
-The loop executes the blocks you plug inside it again and again, but before it starts a new round of the loop, it checks the condition, and if this condition evaluates to `false` it stops looping. In other words, the While/Until loop repeats until the condition is not `true` anymore. 
+The loop executes the blocks you plug into it again and again, but before it starts a new round of the loop, it checks the condition, and if this condition evaluates to `false` it stops looping. In other words, the While/Until loop repeats until the condition is not `true` anymore. 
 
 ### While vs Until 
-In the dropdown of the block you can choose between "while" and "until". The only difference is that for "while" the condition is also evaluated before the very first loop execution. In other words, the "until" loop always executes at least once, whereas the "while" loop does not execute at all if the condition already evaluates to `false` at the very beginning.
+In the dropdown of the block you can choose between "while" and "until". The only difference is that for "while", the condition is also evaluated before the very first loop execution. In other words, the "until" loop always executes at least once, whereas the "while" loop does not execute at all if the condition already evaluates to `false` at the very beginning.
 
 ### Example - Import Multiple Folders
 
 <RetinaImg src="/img/blockOther/controls_whileUntil_example.png" alt="Block controls_whileUntil"/>
 
 
-This script imports multiple footage folders into your Premiere Pro project. The blocks plugged inside the loop first show a "Choose Folder" dialog and then import the folder that the user has chosen.
-Since we plugged the blocks into the loop, after that the script asks "Do you want to import more footage?" and as long as the user chooses "yes", the script repeats the process. Note that we have chosen the "until" option, so that the question is not asked before the first folder import.
+This script imports multiple footage folders into your Premiere Pro project. The blocks plugged into the loop first show a "Choose Folder" dialog and then import the folder that the user has chosen.
+Since we plugged the blocks into the loop, the script then asks "Do you want to import more footage?" and as long as the user chooses "yes", the script repeats the process. Note that we have chosen the "until" option, so that the question is not asked before the first folder import.
 
-By the way, if you're wondering what the [Tinker File Path block](filesNameAndPath#string_tinker_path) here does: from the full path (say `C:\projects\myProject\footage`), it just takes the name (like `footage` in our example) and puts a `\` in front of it to indicate that we want to import it to a bin in the root bin of the project (`\footage` denotes a bin "footage" in the root bin, whereas `footage` denotes a bin with name "footage" that could be anywhere - so Automation Blocks would search your project to see if it can find a bin of that name).
+By the way, if you're wondering what the [Tinker File Path block](filesNameAndPath#string_tinker_path) here does: from the full path (say `C:\projects\myProject\footage`), it just takes the name (like `footage` in our example) and puts a `\` in front of it to indicate that we want to import it into a bin in the root bin of the project (`\footage` denotes a bin "footage" in the root bin, whereas `footage` denotes a bin with name "footage" that could be anywhere - so Automation Blocks would search your project to see if it can find a bin of that name).
 
 
 ## Count With {#controls_for}
@@ -92,7 +92,7 @@ The "Count With" loop is similar to the simple [Repeat Loop](loops#controls_repe
 
 :::danger Count with is NOT a real For loop
 
-If you know a `for(...)` loop, you might get the impression that "Count with" is the same, but there is a subtle difference: When you "count from x to y" and y is smaller than x, then the count goes backwards (whereas the *for* loop would not execute at all). To achieve the usual *for* loop behavior, better use a *while* loop:
+If you know a `for(...)` loop, you might get the impression that "Count with" is the same, but there is a subtle difference: When you "count from x to y" and y is smaller than x, then the count goes backwards (whereas the *for* loop would not execute at all). To achieve the usual *for* loop behavior, it's better to use a *while* loop:
 
 <RetinaImg src="/img/blockOther/controls_for_example.png" alt="Count with is not a for loop"/>
 
@@ -153,12 +153,12 @@ If you prefer frame numbers or timecodes instead of seconds in the file names, y
 <RetinaImg src="/img/blockScreenshots/Loops/controls_forEach.png" alt="Block controls_forEach"/>
 
 
-The *For Each* loop takes a list and then executes the blogs you plug inside of it once for each list element. The list element is stored in the [variable](variables.mdx) `j`.
+The *For Each* loop takes a list and then executes the blocks you plug into it once for each list element. The list element is stored in the [variable](variables.mdx) `j`.
 
 <RetinaImg src="/img/blockOther/controls_forEach_example_1.png" alt="for each example 1"/>
 
 
-This example calls the "write to console" block three times. The first time j is `Monday` the second time `Tuesday`and the third time `3`. Hence, the script writes the following on the console:
+This example calls the "write to console" block three times. The first time j is `Monday`, the second time `Tuesday`, and the third time `3`. So, the script writes the following on the console:
 
 ```
 Monday
@@ -171,14 +171,14 @@ Tuesday
 <RetinaImg src="/img/blockOther/controls_forEach_example_2.png" alt="for each example 2"/>
 
 
-This scripts adds the sequences with names `very first draft`, `my sequence final` and `final final 03` to the render queue. Note that the variable `j` is both used for the sequence name that is rendered and for the output file.
+This scripts adds the sequences with names `very first draft`, `my sequence final` and `final final 03` to the render queue. Note that the variable `j` is used both for the sequence name that is rendered and for the output file.
 
 ## Loop Break/Continue {#controls_flow_statements}
 
 <RetinaImg src="/img/blockScreenshots/Loops/controls_flow_statements.png" alt="Block controls_flow_statements"/>
 
 
-The break/continue block can be plugged inside any loop block to stop its execution early. Here is a basic example, where the loop is configured to repeat ten times, but inside the loop we check if the 5th repetition has been reached, and if so break out of the loop:
+The break/continue block can be plugged into any loop block to stop its execution early. Here is a basic example, where the loop is configured to repeat ten times, but inside the loop, we check if the 5th repetition has been reached, and if so we break out of the loop:
 
 <RetinaImg src="/img/blockOther/controls_flow_statements_example_1.png" alt="break example 1"/>
 

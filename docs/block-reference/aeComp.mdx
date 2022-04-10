@@ -10,7 +10,7 @@ import RetinaImg from "../../src/components/RetinaImg";
 
 ### Accessing a Particular Composition {#accessComp}
 
-Comps are project items. Hence, if you need to give a block a comp as argument, you can access the exactly in the same way as you [access any other project items](aeProjectItems.mdx#accessProjectItem). To access the currently active composition, you can use the block [Active Compositon](#ae_active_comp).
+Comps are project items. So, if you need to give a block a comp as argument, you can access it in exactly the same way as you [access any other project items](aeProjectItems.mdx#accessProjectItem). To access the currently active composition, you can use the block [Active Compositon](#ae_active_comp).
 
 
 ## Active Composition {#ae_active_comp}
@@ -20,7 +20,7 @@ Comps are project items. Hence, if you need to give a block a comp as argument, 
   alt="Block ae_active_comp"
 />
 
-Returns the active composition of the project or throws an error if there is no active composition.
+Returns the active composition of the project or gives an error if there is no active composition.
 
 ## Has Active Composition {#ae_has_active_comp}
 
@@ -29,7 +29,7 @@ Returns the active composition of the project or throws an error if there is no 
   alt="Block ae_has_active_comp"
 />
 
-Returns the [Logic value](logic.mdx) `true` or `false` indicating if there is an active composition or not. You can use it with an [If Block](logic.mdx/#controls_if) to execute some code only if there is an active composition. This script shows an alert message with the name of the active composition if ther is one and shows the message `there is no active composition` otherwise:
+Returns the [Logic value](logic.mdx) `true` or `false` indicating if there is an active composition or not. You can use this with an [If Block](logic.mdx/#controls_if) to execute some code only if there is an active composition. This script shows an alert message with the name of the active composition if there is one; otherwise it shows the message `there is no active composition`:
 
 <RetinaImg
   src="/img/blockOther/ae_has_active_comp_example.png"
@@ -38,8 +38,8 @@ Returns the [Logic value](logic.mdx) `true` or `false` indicating if there is an
 
 ## New Composition {#ae_new_comp}
 
-This block creates a new composition in the project and saves it in the [variable](variables.mdx) myComp (such that you can easily access it for subsequent operations on the comp).
-There are two ways to create a new composition with this block - either you create an empty comp or create it with the help of some clips.
+This block creates a new composition in the project and saves it in the [variable](variables.mdx) myComp (so that you can easily access it for subsequent operations on the comp).
+There are two ways to create a new composition with this block - either create an empty comp, or create it with the help of some clips.
 
 ### Creating an Empty Comp
 
@@ -54,7 +54,7 @@ If you choose the option `empty composition`, you can specify
 - **target bin** inside the Ae project where the new comp should be placed (see the [Project Bin Block](aeProjectItems.mdx#ae_itembin_path) for details)
 - **width** and **height** of the new comp in pixels
 - **pixel aspect** (use 1 for square pixels)
-- **duration** of the new comp (like `10s` or `100 frames`, if you specify just a number it will be treated as number of seconds)
+- **duration** of the new comp (like `10s` or `100 frames`; if you specify just a number it will be treated as number of seconds)
 - **frame rate** - the number of frames per second
 
 ### Creating a Comp with Clips
@@ -70,15 +70,15 @@ You can specify the following parameters:
 
 - **name** of the new comp,
 - **target bin** inside the Ae project where the new comp should be placed (see the [Project Bin Block](aeProjectItems.mdx#ae_itembin_path) for details)
-- **source clip(s) or bin(s)** here you can specify either a single [project item](#ae_item_path) or [bin](aeProjectItems.mdx#ae_itembin_path) or also entire [lists](lists.mdx) of them. If you specify a bin, it will use all project items inside the bins (but not items included in subbins). The created comp will include all provided clips and will have the width, height, pixel aspect and frame rate of the first video clip.
+- **source clip(s) or bin(s)** here you can specify either a single [project item](#ae_item_path) or [bin](aeProjectItems.mdx#ae_itembin_path) or also entire [lists](lists.mdx) of them. If you specify a bin, it will use all project items inside the bins (but not items included in subbins). The comp created will include all provided clips and will have the width, height, pixel aspect and frame rate of the first video clip.
 - **layer order** must be one of
   - `stack`: each clip starts at the beginning of the comp
   - `sequence`: each clip starts where the previous clip ends
   - `sequence reverse`: like `sequence` except that the layer order is reversed (i.e layer 1 will be the last clip)
-  - `sequence (audio and video separately)`: like `sequence` except that if you have both audio and video (or image) files, those will be treated as separate groups. Example: If you want to create an image slideshow with music, you can use this option. It will sequence the image files such that they show up one after the other and will sequence the music files such that they play one after the other while the images are shown.
+  - `sequence (audio and video separately)`: like `sequence` except that if you have both audio and video (or image) files, those will be treated as separate groups. Example: If you want to create an image slideshow with music, you can use this option. It will sequence the image files so they show up one after the other and will sequence the music files so they play one after the other while the images are shown.
   - `sequence (audio and video separately)`: a combination of `sequence reverse` and `sequence (audio and video separately)`
-- **still image duration** is only used if your clips contain still images. You can use values like `10s` or `100 frames`, if you specify just a number it will be treated as number of seconds.
-- **overlap duration** is only used if you choose one of the `Sequence`options as _Layer Order_. In that case, it speficies how much two adjacent clips overlap in time.Use values like `10s` or `100 frames`, if you specify just a number it will be treated as number of seconds)
+- **still image duration** is only used if your clips contain still images. You can use values like `10s` or `100 frames`; if you specify only a number it will be treated as a number of seconds.
+- **overlap duration** is only used if you choose one of the `Sequence`options, such as _Layer Order_. In that case, it specifies how much two adjacent clips overlap in time.Use values like `10s` or `100 frames`; if you specify just a number, it will be treated as a number of seconds)
 
 ## Get Attribute of Comp {#ae_comp_get_attribute}
 
@@ -87,7 +87,7 @@ You can specify the following parameters:
   alt="Block ae_comp_get_attribute"
 />
 
-Returns one of the attributes of the given composition, like its active camera, number of layers or motion blur settings. For a description of all available attributes see [Set Attribute of Comp](#ae_comp_set_attribute). Note that compositions are also project items. To access properties that are available on all project items (like the project bin where it is located) you need to use the block [Get Attribute of Project Item](aeProjectItems#ae_item_get_attribute) (which also accepts comps as argument).
+Returns one of the attributes of the given composition, like its active camera, number of layers or motion blur settings. For a description of all available attributes see [Set Attribute of Comp](#ae_comp_set_attribute). Note that compositions are also project items. To access properties that are available on all project items (like the project bin where it is located) you need to use the block [Get Attribute of Project Item](aeProjectItems#ae_item_get_attribute) (which also accepts comps as arguments).
 
 ## Set Attribute of Comp {#ae_comp_set_attribute}
 
@@ -97,13 +97,13 @@ Returns one of the attributes of the given composition, like its active camera, 
 />
 
 Sets any of the available attributes of a composition. After you choose an attribute, the inputs of the block change as needed for that attribute.
-Note that compositions are also project items. To set properties that are available on all project items (like the project bin where it is located) you need to use the block [Set Attribute of Project Item](aeProjectItems#ae_item_set_attribute) (which also accepts comps as argument).
+Note that compositions are also project items. To set properties that are available on all project items (like the project bin where it is located) you need to use the block [Set Attribute of Project Item](aeProjectItems#ae_item_set_attribute) (which also accepts comps as arguments).
 
 The available attributes of comps are listed below. If an attribute is marked as read-only, you can only get but not set this attribute.
 
 ### active camera (read-only) {#ae_comp_set_attribute_active_camera}
 
-The layer that is the active camera of the given composition. If the composition has no active camera, it throws an error. TO check if the composition has an active camera, use the attribute [has active camera](#ae_comp_set_attribute_has_active_camera).
+The layer that is the active camera of the given composition. If the composition has no active camera, it gives an error. TO check if the composition has an active camera, use the attribute [has active camera](#ae_comp_set_attribute_has_active_camera).
 
 ### background color
 
@@ -117,13 +117,13 @@ If your comp starts with a different time than 0 and you want to take that into 
 
 ### display start frame {#ae_comp_set_attribute_start_frame}
 
-Returns the frame number of the first frame of the composition (as configured by the _start timecode_ in the composition settings). Note that this value is a frame number and not a time code.
+Returns the frame number of the first frame of the composition (as configured by the _start timecode_ in the composition settings). Note that this value is a frame number and not a timecode.
 
 ### display start time (s) {#ae_comp_set_attribute_display_start_time}
 
 Same as [display start frame](#ae_comp_set_attribute_start_frame) but the result is a time in seconds instead of frames.
 
-### down sample factor (resolution)
+### downsample factor (resolution)
 
 <RetinaImg src="/img/blockOther/comp_attribute_down_sampling_factor.png" alt="After Effects Down Sampling Factor"/>
 
@@ -133,13 +133,13 @@ You can specify either a single number, or a [list](lists.mdx) (array) of two nu
 
 **Examples:** 
 
-To do all calculations in full resolution, you can either pass `1` or a list `[1,1]`. A value of `4` sets the resolution to *Quarter*.
+To do all calculations in full resolution, you can either parse `1` or a list `[1,1]`. A value of `4` sets the resolution to *Quarter*.
 
 The list `[1,4]` calculates every pixel in x dimension (100%) but only every 4th pixel in y dimention (25%).
 
 ### duration
 
-The duration of the composition in seconds. For details on time values see [Ae Time](aeTime.mdx).
+The duration of the composition in seconds. For details on time values, see [Ae Time](aeTime.mdx).
 
 ### Essential Graphics name
 
@@ -223,7 +223,7 @@ If you get this value, the name will be one of the following internal names:
 - `ADBE Advanced 3d` for the Classic 3D Renderer
 - `ADBE Ernst` for the Cinema 4D Renderer
 
-If you want to set this value, by default the block shows a convenient drop down where you can pick the renderer. But if you want to read the rendere name from a [variable](variables.mdx), for example, you can simply drag the variable on top of the dropdown to replace it . In that case, your variable should contain a string with either an internal name (`ADBE Advanced 3d`, `ADBE Ernst`) or the normal renderer name (`Classic 3D` or `Cinema 4D`). Upper/lower case and spaces in the names are ignored.
+If you want to set this value, by default the block shows a convenient drop down where you can pick the renderer. However, if you want to read the renderer name from a [variable](variables.mdx), for example, you can simply drag the variable on top of the dropdown to replace it. In that case, your variable should contain a string with either an internal name (`ADBE Advanced 3d`, `ADBE Ernst`) or the normal renderer name (`Classic 3D` or `Cinema 4D`). Upper/lower case and spaces in the names are ignored.
 
 ### size \[w,h] {#ae_comp_set_attribute_size}
 
@@ -236,20 +236,20 @@ A [logic value](logic.mdx) `true` or `false` representing the "Drop Frame/Non-Dr
 
 ### width {#ae_comp_set_attribute_width}
 
-The width of the compsition in pixels (see also attribute [height](#ae_comp_set_attribute_height) and [size](#ae_comp_set_attribute_size).
+The width of the composition in pixels (see also attribute [height](#ae_comp_set_attribute_height) and [size](#ae_comp_set_attribute_size).
 
 ### work area duration
 
-The duration of the workarea. For details on time values see [Ae Time](aeTime.mdx).
-If you change the duration, the start of the workarea will stay where it is and the end will update according to the new duration.
+The duration of the work area. For details on time values see [Ae Time](aeTime.mdx).
+If you change the duration, the start of the work area will stay where it is and the end will update according to the new duration.
 
 ### work area end
 
-The end of the workarea. For details on time values see [Ae Time](aeTime.mdx). If you set the end of the workarea, the duration will update accordingly. If the new end is before the current start, the start will update, too (such that the workarea will have a duration of 0).
+The end of the work area. For details on time values see [Ae Time](aeTime.mdx). If you set the end of the work area, the duration will update accordingly. If the new end is before the current start, the start will update too (so the work area will have a duration of 0).
 
 ### work area start
 
-The start of the workarea. For details on time values see [Ae Time](aeTime.mdx). If you set th start, the end won't change with it (unless the new start is behind the old end, which will result in a workarea with duration 0)
+The start of the work area. For details on time values see [Ae Time](aeTime.mdx). If you set the start, the end won't change with it (unless the new start is behind the old end, which will result in a work area with duration 0)
 
 
 
@@ -261,14 +261,14 @@ The start of the workarea. For details on time values see [Ae Time](aeTime.mdx).
   alt="Block for_each_frame"
 />
 
-This block is a [loop](loops.mdx) which allows to do something on each frame of the given composition or each frame of the workarea.
+This block is a [loop](loops.mdx) which allows you to do something on each frame of the given composition or each frame of the work area.
 The blocks that you nest inside this block are executed many times, namely one time for each frame. During each round the [variable](variables.mdx) `my frame time` is set to the time (in seconds) of the respective frame.
 
-**comp/layers** if you choose the option `layers`instead of `comp` you can replace the parameter `active composition` by either a single layer or a [list](lists.mdx) (array) of layers. This is similar to the work area option, except that the time range is limited to the area of the given layers instead of the work area. More precisely, in that case the block will only iterate over the frames which are in-between the earliest of the in points of the given layers and the latest of their out points. 
+**comp/layers** if you choose the option `layers` instead of `comp` you can replace the parameter `active composition` with either a single layer or a [list](lists.mdx) (array) of layers. This is similar to the work area option, except that the time range is limited to the area of the given layers instead of the work area. More precisely, in that case the block will only iterate over the frames which are in between the earliest of the in points of the given layers and the last of their out points. 
 
-**only in workarea** is a [logic value](logic.mdx) (`true` or `false`), which allows to only loop over the frames of the workarea instead of all frames of the comp.
+**only in work area** is a [logic value](logic.mdx) (`true` or `false`), which allows you to only loop over the frames of the work area instead of all frames in the comp.
 
-**step size** allows you to skip frames. Hence, for a value of `10 frames`, the nested blocks will only be executed once for every 10th frame and the fames in-between are skipped.
+**step size** allows you to skip frames. Hence, for a value of `10 frames`, the nested blocks will only be executed once for every 10th frame and the frames in between are skipped.
 
 ## Duplicate Comp {#ae_comp_duplicate}
 
@@ -294,7 +294,7 @@ Note how the second block, which does the renaming, uses `new comp var` to acces
 
 **duplicate precomps**
 
-If this[logic value](logic.mdx) is `true`, the block will check, if the composition has any precomps. If it has precomps, not only the composition, but also those precomps will be duplicated. The block makes sure that if the same precomp is used multiple times, that it is duplicated only once.
+If this[logic value](logic.mdx) is `true`, the block will check if the composition has any precomps. If it has precomps, then not only the composition but also those precomps will be duplicated. The block makes sure that if the same precomp is used multiple times, that it is duplicated only once.
 
 **fix expressions**
 
@@ -309,7 +309,7 @@ Note that this option only touches expressions in the newly created comps. In al
   alt="Block ae_comp_clear_guides"
 />
 
-Removes all guides (in horizontal or vertical direction or both) from the given composition. You can also give an entire [list](lists.mdx) (array) of compositions as argument. In that case, the guides of all those comps are removed.
+Removes all guides (in horizontal or vertical direction, or both) from the given composition. You can also give an entire [list](lists.mdx) (array) of compositions as argument. In that case, the guides of all those comps are removed.
 
 ## Add Guides {#ae_comp_add_guides}
 
@@ -318,11 +318,11 @@ Removes all guides (in horizontal or vertical direction or both) from the given 
   alt="Block ae_comp_add_guides"
 />
 
-Add horizontal or vertical guides to the given comp. You can also give an entire [list](lists.mdx) (array) of compositions as argument. In that case, the guides are added to all those comps.
+Add horizontal or vertical guides to the given comp. You can also give an entire [list](lists.mdx) (array) of compositions as an argument. In that case, the guides are added to all those comps.
 
 ### Adding multiple guides
 
-Instead of a single position, you can also give a [list](lists.mdx) (array) of numbers as position argument. In that case, one new guides is added for each list entry.
+Instead of a single position, you can also give a [list](lists.mdx) (array) of numbers as a position argument. In that case, one new guide is added for each list entry.
 
 ## List of Guides {#ae_comp_get_guides}
 
@@ -331,4 +331,4 @@ Instead of a single position, you can also give a [list](lists.mdx) (array) of n
   alt="Block ae_comp_get_guides"
 />
 
-Returns a [list](lists.mdx) (array) of numbers containing the positions of all vertical or horizontal guides of the given composition. The list is sorted. Note that the positions are no points, but single numbers - for vertical guides, they represent the position of the guide in x direction and for horizontal guides the position of the guide in y direction.
+Returns a [list](lists.mdx) (array) of numbers containing the positions of all vertical or horizontal guides of the given composition. The list is sorted. Note that the positions are not points, but single numbers - for vertical guides, they represent the position of the guide in the x direction and for horizontal guides the position of the guide in the y direction.

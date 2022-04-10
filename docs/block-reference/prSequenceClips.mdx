@@ -8,14 +8,14 @@ import RetinaImg from '../../src/components/RetinaImg'
 
 # Pr Sequence Clips
 
-In contrast to [Project Items](prProjectItems) (or short: items), which denote an item in the project panel, sequence clips (or short: clips) denote an occurrence of such an item inside a sequence. If some footage is used several times in a sequence, you can have multiple clips using the same item.
+In contrast to [Project Items](prProjectItems) (or short: items), which denote an item in the project panel, sequence clips (or short: clips) denote whenm this type of item occurs inside a sequence. If some footage is used several times in a sequence, you can have multiple clips using the same item.
 
 ### Accessing a Particular Sequence Clip {#accessSequenceClip}
 
 
 **For Each Clip Block:** Usually the best way to access a sequence clip is to use the [For Each Clip Block](prSequenceClips#block_pr_for_all_sequence_items). This comes with very powerful filtering features to select all kinds of different clips, like only clips in a particular track, only selected clips, or only tracks at the current time.
 
-**Path texts** like project items and sequences, clips are also represented by texts in Automation blocks. These texts consist of two parts separated by `::`. The part before `::` describes the sequence in which the clip is contained, and the part after it describes where exactly it is located in that sequence.
+**Path texts** like project items and sequences, clips are also represented by texts in Automation blocks. These texts consist of two parts separated by `::`. The part before `::` describes the sequence in which the clip is contained, and the part after it describes exactly where it is located in that sequence.
 
 A typical path looks like this:
 `my bin\my sequence name::V1\3`
@@ -26,18 +26,18 @@ To specify a sequence name (the part of the text before the `::`), you can do ev
 
 `::A2\1` denotes the first clip in the audio track 2 of the active sequence.
 
-To specify the exact location of the clip, you first need to specify a track which can be done by index (like `V1`, `V2`,... for the video tracks or `A1`, `A2`,... for the audio tracks) or by name, like `Video 3`. Note that track names are usually only shown when the track is expanded. See here [how to rename tracks](https://community.adobe.com/t5/premiere-pro/how-to-rename-video-track/m-p/10910015). 
+To specify the exact location of the clip, you first need to specify a track, which can be done by index (like `V1`, `V2`... for the video tracks or `A1`, `A2`... for the audio tracks) or by name, like `Video 3`. Note that track names are usually only shown when the track is expanded. See here [how to rename tracks](https://community.adobe.com/t5/premiere-pro/how-to-rename-video-track/m-p/10910015). 
 
-The track is followed by a backslash and after it you can put the index or name of a clip. So `::V1\3` denotes the third clip in the track V1 of the active sequence and `::V1\my title` denotes the clip with name `my title` in the track V1. Note that by default, clips have the same name as the project item they correspond to - so all clips using the same item have the same name. To give your clips in Premiere Pro unique names, you can right-click on a clip in the sequence and choose **rename...** in the menu that pops up. This will only rename the clip in the sequence and not the corresponding project item in the project panel.
+The track is followed by a backslash and after it you can put the index or name of a clip. So `::V1\3` denotes the third clip in the track V1 of the active sequence and `::V1\my title` denotes the clip with the name `my title` in the track V1. Note that by default, clips have the same name as the project item they correspond to - so all clips using the same item have the same name. To give your clips in Premiere Pro unique names, you can right-click on a clip in the sequence and choose **rename...** in the menu that pops up. This will only rename the clip in the sequence and not the corresponding project item in the project panel.
 
 ## For Each Clip {#block_pr_for_all_sequence_items}
 
 <RetinaImg src="/img/blockScreenshots/PrSequenceClips/block_pr_for_all_sequence_items.png" alt="Block block_pr_for_all_sequence_items"/>
 
 
-This block iterates over clips in in the given sequence. The blocks you nest inside this block are executed one time for each of those clips. During the execution, the respective clip is stored in the [variable](variables.mdx) `my clip`. 
+This block iterates over clips in in the given sequence. The blocks you nest inside this block are executed once for each of those clips. During the execution, the respective clip is stored in the [variable](variables.mdx) `my clip`. 
 
-With the following options you can configure over which clips you want to iterate:
+With the following options you can configure which clips you want to iterate over:
 
 #### For Each Clip
 
@@ -49,7 +49,7 @@ Here you have the following options:
 
 #### Tracks
 
-You can limit the block to only the items of a particular track. You options are
+You can limit the block to only the items of a particular track. Your options are
 - all tracks
 - all video tracks
 - all audio tracks
@@ -57,13 +57,13 @@ You can limit the block to only the items of a particular track. You options are
 
 #### Sequence
 
-By default, this block iterates over clips of the active sequence. For all possible ways to specify a sequence see [Accessing a Particular Sequence](prSequence#accessSequence).
+By default, this block iterates over the clips of the active sequence. For all possible ways to specify a sequence see [Accessing a Particular Sequence](prSequence#accessSequence).
 
 
 :::tip Selecting a single clip
 
-You can easily create selections that always just consist of (at most) one clip, like "for each clip at current time in track V1".
-In those cases you can be sure that the iteration is executed only one time (or not at all, if the track is empty at the current time). 
+You can easily create selections that always consist only of (at most) one clip, like "for each clip at current time in track V1".
+In those cases you can make sure that the iteration is executed only once (or not at all, if the track is empty at the current time). 
 
 :::
 
@@ -73,11 +73,11 @@ In those cases you can be sure that the iteration is executed only one time (or 
 <RetinaImg src="/img/blockScreenshots/PrSequenceClips/pr_track_item_get_property.png" alt="Block pr_track_item_get_property"/>
 
 
-Returns one of the following properties of the given sequence clip (for all ways to specify a clip, see [Accessing a Particular Sequence Clip](prSequenceClips#accessSequenceClip))
+Returns one of the following properties of the given sequence clip (for all the ways you can specify a clip, see [Accessing a Particular Sequence Clip](prSequenceClips#accessSequenceClip))
 
 ### name
 
-The name of the clip. Note that this is not the same as the name of the project item of this clip. By default these two are identical, but you can right-click on a clip in your sequence and rename it. That will not rename the project item, but only the sequence clip.
+The name of the clip. Note that this is not the same as the name of the project item of this clip. By default these two are identical, but you can right-click on a clip in your sequence and rename it. This will not rename the project item, only the sequence clip.
 
 ### media type
 
@@ -85,31 +85,31 @@ A text, either `Audio` or `Video`. (read only)
 
 ### start time in sequence
 
-The time in the sequence where the clip starts (in seconds, a value of 0 corresponds to the beginning of the sequence). At this time, the frame of the footage given by [in point](prSequenceClips#in-point) is visible. 
+The time in the sequence where the clip starts (in seconds; a value of 0 corresponds to the beginning of the sequence). At this time, the frame of the footage given by [in point](prSequenceClips#in-point) is visible. 
 
 For a detailed explanation of in point, out point, sequence start and end time, see the [Convert Time Between Sequence and Clip Block](prTime#pr_clip_time_to_sequence_time)
 
 ### end time in sequence
 
-The time in the sequence where the clip ends (in seconds, a value of 0 corresponds to the beginning of the sequence). At this time, the frame of the footage given by [out point](prSequenceClips#out-point) is visible.
+The time in the sequence where the clip ends (in seconds; a value of 0 corresponds to the beginning of the sequence). At this time, the frame of the footage given by [out point](prSequenceClips#out-point) is visible.
 
 For a detailed explanation of in point, out point, sequence start and end time, see the [Convert Time Between Sequence and Clip Block](prTime#pr_clip_time_to_sequence_time)
 
 ### in point
 
-The in point of this clip (in seconds, a value of 0 corresponds to the beginning of the footage). Note that this is not the same as the in point of the project item (which you can get by using this clip with the [Get Property of Project Item Block](prProjectItems#pr_item_get_property)) instead of the *Get Property of Clip* Block. Each clip that uses a project item has its own in and out points, which correspond to the section of the footage that this clip uses. The project item itself has yet another in and out point, which corresponds to the in out points you choose in the source monitor.
+The in point of this clip (in seconds; a value of 0 corresponds to the beginning of the footage). Note that this is not the same as the in point of the project item (which you can get by using this clip with the [Get Property of Project Item Block](prProjectItems#pr_item_get_property)) instead of the *Get Property of Clip* Block. Each clip that uses a project item has its own in and out points, which correspond to the section of the footage that this clip uses. The project item itself has yet another in and out point, which corresponds to the in and out points you choose in the source monitor.
 
 For a detailed explanation of in point, out point, sequence start and end time, see the [Convert Time Between Sequence and Clip Block](prTime#pr_clip_time_to_sequence_time)
 
 ### out point
 
-The out point of this clip (in seconds, a value of 0 corresponds to the beginning of the footage). Note that this is not the same as the out point of the project item (which you can get by using this clip with the [Get Property of Project Item Block](prProjectItems#pr_item_get_property)) instead of the *Get Property of Clip* Block. Each clip that uses a project item has its own in and out points, which correspond to the section of the footage that this clip uses. The project item itself has yet another in and out point, which corresponds to the in out points you choose in the source monitor.
+The out point of this clip (in seconds; a value of 0 corresponds to the beginning of the footage). Note that this is not the same as the out point of the project item (which you can get by using this clip with the [Get Property of Project Item Block](prProjectItems#pr_item_get_property)) instead of the *Get Property of Clip* Block. Each clip that uses a project item has its own in and out points, which correspond to the section of the footage that this clip uses. The project item itself has yet another in and out point, which corresponds to the in and out points you choose in the source monitor.
 
 For a detailed explanation of in point, out point, sequence start and end time, see the [Convert Time Between Sequence and Clip Block](prTime#pr_clip_time_to_sequence_time)
 
 ### duration
 
-Duration of the clip in the sequence in seconds. This is the duration from in- to out point. If you need the full length of the footage instead, use the [Get Property of Project Item Block](prProjectItems#pr_item_get_property) (read only)
+Duration of the clip in the sequence in seconds. This is the duration from in to out point. If you need the full length of the footage instead, use the [Get Property of Project Item Block](prProjectItems#pr_item_get_property) (read only)
 
 ### speed factor
 
@@ -124,6 +124,6 @@ The name of the track in which the item is located (read only)
 <RetinaImg src="/img/blockScreenshots/PrSequenceClips/pr_track_item_set_property.png" alt="Block pr_track_item_set_property"/>
 
 
-Sets any property of the given sequence clip (for all the ways to specify a clip, see [Accessing a Particular Sequence Clip](prSequenceClips#accessSequenceClip))
+Sets any property of the given sequence clip (for all the ways you can specify a clip, see [Accessing a Particular Sequence Clip](prSequenceClips#accessSequenceClip))
 
 For a description of the available properties, see the [Get Clip Property Block](prSequenceClips#pr_track_item_get_property). Properties which are read only are only available in *Get Clip Property*, not in *Set Clip Property*. 

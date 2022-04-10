@@ -14,7 +14,7 @@ The blocks in this this section help you to convert time and timecode values fro
 
 In general, Automation Blocks returns any time values as a point number in seconds. However, if a block expects a value to be a time, Automation Blocks does its best to also convert any other values into that format.
 
-In particular, it does the following:
+Specifically, it does the following:
 - if you provide a number, Automation Blocks assumes that this is a value in seconds and uses it as is
 - texts which look like numbers are converted to a number in seconds. This works for texts like `14` or `14.3` and numbers followed by a label like `14s`, `14 secs`, or `14 seconds`
 - texts of the form `00:00`, `3m 4s`, `3 min 4 secs` etc. are converted from minutes and seconds to a value in seconds
@@ -29,7 +29,7 @@ If you work with frame numbers, Automation Blocks does not convert these automat
 
 :::danger timecode
 
-Like frame numbers, timecodes also cannot be automatically converted into a value in seconds. The reason is that the timecode `00:00:00:01`, for example, can mean different times - depending on the framerate of the sequence! Therefore, you need to convert timecode values to time using the [Convert Timecode to Time Block](prTime#pr_time_from_timecode) in which you can specify the frame rate that should be used.
+Like frame numbers, timecodes also cannot be automatically converted into a value in seconds. The reason is that the timecode `00:00:00:01`, for example, can mean different times - depending on the framerate of the sequence! Therefore, you need to convert timecode values to time using the [Convert Timecode to Time Block](prTime#pr_time_from_timecode), which you can use to specify the framerate that should be used.
 
 :::
 
@@ -64,7 +64,7 @@ Note that by converting values to these formats, you lose accuracy - even with t
 
 
 This block converts the time to any timecode format. 
-For most timecode formats, only the time value - no additional information - is needed for the conversion. But for some timecode formats like `frames` (which just outputs a frame number), you need to provide the framerate that should be used for this conversion. An extra framerate input appears when you choose one of these formats:
+For most timecode formats, only the time value - no additional information - is needed for the conversion. But for some timecode formats, like `frames` (which just outputs a frame number), you need to provide the framerate that should be used for this conversion. An extra framerate input appears when you choose one of these formats:
 
 <RetinaImg src="/img/blockOther/pr_time_to_timecode_example_framerate.png" alt="example framerate"/>
 
@@ -101,7 +101,7 @@ This block converts texts of any of the following formats into a time value in s
 - `frame 0`
 - `0 frames`
 
-Note that texts of the form `1234` are considered to be a value in seconds, but texts of the form `frame 1234` are considered to be a frame number. Hence, if you have a frame number value, just put the text `frame ` before it to make sure they are interpreted correctly. You can use the [Text Pattern](text#string_pattern), for example, to add such a prefix. The following example converts the frame number `123` to a value in seconds (assuming the frame rate of the active sequence)
+Note that texts of the form `1234` are considered to be a value in seconds, but texts of the form `frame 1234` are considered to be a frame number. Hence, if you have a frame number value, just put the text `frame ` before it to make sure it is interpreted correctly. You can use the [Text Pattern](text#string_pattern), for example, to add such a prefix. The following example converts the frame number `123` to a value in seconds (assuming the framerate of the active sequence)
 
 <RetinaImg src="/img/blockOther/pr_time_from_timecode_frame_number_example.png" alt="convert frame number to time"/>
 

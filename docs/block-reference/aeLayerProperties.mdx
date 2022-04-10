@@ -10,7 +10,7 @@ import RetinaImg from '../../src/components/RetinaImg'
 
 ### Layer Properties vs Layer Attributes {#ae_layer_properties_vs_attributes}
 
-Layer properties are the parameters of a layer which are listed in the After Effects timeline panel and which can usually be keyframed. There are many other things that belong to a layer, like its name, motion blur setting, parent layer or in point, for example - and we call those *attributes*. This chapter is only about layer properties, the blocks to [get](aeLayer.mdx#ae_layer_get_attribute) or [set a layer attribute](aeLayer.mdx#ae_layer_set_attribute) are described in the section [Layers](aeLayer.mdx).
+Layer properties are the parameters of a layer which are listed in the After Effects timeline panel and that can usually be keyframed. There are many other things that belong to a layer, like its name, motion blur setting, parent layer or in point, for example - and we call those *attributes*. This chapter is only about layer properties - the blocks to [get](aeLayer.mdx#ae_layer_get_attribute) or [set a layer attribute](aeLayer.mdx#ae_layer_set_attribute) are described in the section [Layers](aeLayer.mdx).
 
 <RetinaImg src="/img/blockOther/layer_properties_vs_attributes.png" alt="Properties vs Attributes of Layers"/>
 
@@ -22,11 +22,11 @@ Whenever a block requires a layer property as argument, Automation Blocks repres
 
 A property path string is identical to a [layer path string](aeLayer.mdx#accessLayer), except that you need to append the match name or name of the property and all its parent properties (i.e. groups that it is included in).
 
-The position is inside the Transform group, for example, hence, the path for the position of the layer *"White Solid 1"* in *"Comp 1"* is 
+The position is inside the Transform group, for example, so the path for the position of the layer *"White Solid 1"* in *"Comp 1"* is 
 
 `Comp 1::White Solid 1/Transform/Position`
 
-Note that this will only work in the English version of Ae, and in other language versions you have to use the translated terms for "Transform" and "Position". To be language independent, each property in Ae also has a [match name](#ae_property_set_attribute_match_name). The match name for *"Position"* is  *"ADBE Position"* and the one for *"Transform"* is *"ADBE Transform Group"*. Hence, you can access the position also as:
+Note that this will only work in the English version of Ae, and in other language versions you have to use the translated terms for "Transform" and "Position". To be language independent, each property in Ae also has a [match name](#ae_property_set_attribute_match_name). The match name for *"Position"* is  *"ADBE Position"* and the one for *"Transform"* is *"ADBE Transform Group"*. So you can also access the position as:
 
 `/Comp 1::White Solid 1/ADBE Transform Group/ADBE Position`
 
@@ -35,7 +35,7 @@ However, the good news is that you rarely need to create these paths yourself. U
 
 <RetinaImg src="/img/blockScreenshots/AeLayerProperties/ae_property_path.png" alt="Block ae_property_path"/>
 
-This block will create the path strings for you, that you need to access a particular property. If you select the position property of the layer "White Solid 1" of the comp "Comp 1", for example, and then click the *refresh* icon of the block, it will create this path for you:
+This block will create the path strings for you, which you need to access a particular property. If you select the position property of the layer "White Solid 1" of the comp "Comp 1", for example, and then click the *refresh* icon of the block, it will create this path for you:
 
 `/Comp 1::White Solid 1/ADBE Transform Group/ADBE Position`
 
@@ -46,7 +46,7 @@ which is exactly the path you need to access this property.
 
 <RetinaImg src="/img/blockScreenshots/AeLayerProperties/ae_property_value_json.png" alt="Block ae_property_value_json"/>
 
-If you want to [set a property value](#ae_property_set_attribute_value), this value can be as simply as a single number (for the *Opacticy* property), or as complex as a shape or mask path). With this block you can store all kinds of property values as part of your script. Just select a property and click the *refresh* button of the block. It will read the property value and store it in the block as a string in JSON format. Now you can use it to set a the value of a property using the  block [Set Attribute of Property](#ae_property_set_attribute) for example.
+If you want to [set a property value](#ae_property_set_attribute_value), this value can be as simple as a single number (for the *Opacticy* property), or as complex as a shape or mask path). With this block you can store all kinds of property values as part of your script. Just select a property and click the *refresh* button of the block. It will read the property value and store it in the block as a string in JSON format. Now you can use it to set the value of a property using the block [Set Attribute of Property](#ae_property_set_attribute) for example.
 
 Note that the block creates a string in JSON format. If you feel adventurous, you can copy and paste this data to a code editor of your choice and understand its structure. Then you can also create and manipulate these json texts with the blocks in the [text](text.mdx) category.
 
@@ -68,7 +68,7 @@ You can choose to only include certain kinds of properties into the list. For a 
 
 <RetinaImg src="/img/blockScreenshots/AeLayerProperties/ae_property_for_all.png" alt="Block ae_property_for_all"/>
 
-This block is a [loop](loops.mdx) which allows to do something with all (or some of the) properties of the given layer(s) or comp(s). The blocks you plug inside this block are executed many times - namely one time for each of the considered properties. In the first row, you find various filter options to choose which properties should be considered. 
+This block is a [loop](loops.mdx) which allows you to do something with all (or some of) the properties of the given layer(s) or comp(s). The blocks you plug into this block are executed many times - namely once for each of the considered properties. In the first row, you'll find various filter options to choose which properties should be considered. 
 
 **my property variable**
 
@@ -80,18 +80,18 @@ At this parameter, which is set to the [active comp](aeComp.mdx#ae_active_comp) 
 
 **each**
 
-In the first drop-down list of the block you have the option to loop over `each` or `each selected` property.
+In the first dropdown list of the block you have the option to loop over `each` or `each selected` property.
 
 **property type filter**
 
-In the second drop-down list of the block you can limit the loop to different kinds of properties:
-- `property and property group` loops over all properties, including the groups, which contain other properties (Example: the loop is not just executed for properties like the *Position* or *Scale* property inside the *Transform* group, but also for the *Transform* group itself).
-- `property` loops over all properties except groups (Example: the loop is executed for *Position* and *Scale* inside the *Transform* group, but not for the *Transform* group itself)
-- **Type Filter:** For each [property value type](#ae_property_set_attribute_property_value_type) there is a separate entry in the drop-down which allows to loop only over properties with that type (like for each `color property` or `2D spatial property`, for example).
+In the second dropdown list of the block you can limit the loop to different kinds of properties:
+- `property and property group` loops over all properties, including the groups which contain other properties (example: the loop is not just executed for properties like the *Position* or *Scale* property inside the *Transform* group, but also for the *Transform* group itself).
+- `property` loops over all properties except groups (example: the loop is executed for *Position* and *Scale* inside the *Transform* group, but not for the *Transform* group itself)
+- **Type Filter:** For each [property value type](#ae_property_set_attribute_property_value_type) there is a separate entry in the dropdown which allows you to loop only over properties with that type (like for each `color property` or `2D spatial property`, for example).
 - `keyframed property` loops only over properties which currently have keyframes.
-- `keyframeable property` loops only over properties which can be keyframed (no matter if they currently [have keyframes](#ae_property_set_attribute_num_keys) or not).
+- `keyframeable property` loops only over properties which can be keyframed (whether they currently [have keyframes](#ae_property_set_attribute_num_keys) or not).
 - `property with expression` loops only over properties which have a (non-empty) expression
-- `property to which expressions can be applied` loops only over properties to which expressions can be applied (no matter if they currently have an expression or not)
+- `property to which expressions can be applied` loops only over properties to which expressions can be applied (whether they currently have an expression or not)
 
 ## For Each Effect {#for_each_effect}
 
@@ -134,7 +134,7 @@ A [logic value](logic.mdx) `true` or `false`. When true, the property's dimensio
 
 ### enabled {#ae_property_set_attribute_enabled}
 
-A [logic value](logic.mdx) `true` or `false`. For layer, this corresponds to the video switch state of the layer in the Timeline panel. For an effect and other properties, it corresponds to the setting of the eyeball icon, if there is one.
+A [logic value](logic.mdx) `true` or `false`. For a layer, this corresponds to the video switch state of the layer in the Timeline panel. For an effect and other properties, it corresponds to the setting of the eyeball icon, if there is one.
 
 If you try to set this attribute for a property whose [can set enabled](#ae_property_set_attribute_can_set_enabled) attribute is `false`, Automation Blocks writes a warning to the console and ignores the request (but continues the script execution and does *not* stop with an error).
 
@@ -143,10 +143,10 @@ If you try to set this attribute for a property whose [can set enabled](#ae_prop
 The expression (as a [text](text.mdx)) which is applied to this property (or the empty text, if there is no expression).
 
 
-If you set this value the following happens:
+If you set this value, the following happens:
 -  If the text contains a valid expression, [expression enabled](#ae_property_set_attribute_expression_enabled) becomes `true`.
 - If the text does not contain a valid expression, an [error](#ae_property_set_attribute_expression_error) is generated, and [expression enabled](#ae_property_set_attribute_expression_enabled) becomes `false`.
-- If you set the attribute to the empty text, [expression enabled](#ae_property_set_attribute_expression_enabled) becomes `false` but no error is generated
+- If you set the attribute to the empty text, [expression enabled](#ae_property_set_attribute_expression_enabled) becomes `false` but no error is generated.
 
 
 If you try to set this attribute for a property whose [can set expression](#ae_property_set_attribute_can_set_expression) attribute is `false`, Automation Blocks writes a warning to the console and ignores the request (but continues the script execution and does *not* stop with an error).
@@ -163,11 +163,11 @@ Contains the error message [text](text.mdx), if any, generated by evaluation of 
 
 A [logic value](logic.mdx) which is `true` if the property has a maximum value (i.e. its [max value](#ae_property_set_attribute_max_value) attribue is not [null](logic.mdx#logic_null).
 
-Note that when you attempt to set a value, Automation Blocks clips it to the min-max range of the property, if it has one. Hence, you usually don't need to bother about them.
+Note that when you attempt to set a value, Automation Blocks clips it to the min-max range of the property, if it has one. So, you usually don't need to worry about these.
 
 ### has index (read-only) {#ae_property_set_attribute_has_index}
 
-A [logic value](logic.mdx) `true` or `false` which determined whether this property is part of an "indexed group", i.e. if it can be moved up or down among its sibling properties. Effects have an index, for example (you can move an effect up or down in the effect stack), but the "Transform" group or the "Effects" groups, which contains all the effects have a fixed place and cannot be moved. Hence, they have no index.
+A [logic value](logic.mdx) `true` or `false` which determined whether this property is part of an "indexed group", i.e. if it can be moved up or down among its sibling properties. Effects have an index, for example (you can move an effect up or down in the effects stack), but the "Transform" group or the "Effects" groups, which contains all the effects, has a fixed place and cannot be moved, so they have no index.
 
 If a property has an index, you can get or set it using the [index](#ae_property_set_attribute_index) attribute.
 
@@ -182,7 +182,7 @@ This attribute is [null](logic.mdx#logic_null) if this property has no maximum v
 
 **min/max for array values**
 
-Also some array values have minimal or maximal values. The size of a rectangle shape is a 2D value, for example, and has a minumum of 0. Note that the minimum is just a single number and applies to all components of the array, i.e. both the width and the height may not be smaller than zero.
+Also, some array values have minimal or maximal values. The size of a rectangle shape is a 2D value, for example, and has a minumum of 0. Note that the minimum is just a single number and applies to all components of the array, i.e. neither the width nor the height can be smaller than zero.
 
 ### min value (read-only) {#ae_property_set_attribute_min_value}
 
@@ -196,7 +196,7 @@ The index of the property, which determines where the index is located among its
 You can set this value to a new number to move the property up and down. Setting the index of an effect to 1, for example, makes it the first effect on that layer, but you can also use it on masks or shape groups, for example.
 
 *positive number*
-If you set the value to `8`, it will become the 8th property of the group (unless the group has less than 8 layers: in that case it will become the last property. If you set the value to `0` the result is the same as if you set it to `1` (it will become the first property of the group)
+If you set the value to `8`, it will become the 8th property of the group (unless the group has less than 8 layers: in that case it will become the last property). If you set the value to `0` the result is the same as if you set it to `1` - it will become the first property of the group.
 
 *negative number*
 If you set this value to a negative number, the index is counted from the end of the group. Hence, if you set the value to `-1`, it will become the last property of the group and if you set it to `-2`, it will become the last but one.
@@ -211,14 +211,14 @@ A [logic value](logic.mdx) `true` or `false`. When `true`, the property is time 
 
 ### name
 
-The name of the property. Note that not all names can be set. You can, for example, rename an effect, that you applied to the layer, but you cannot rename the group `Effects`, in which it is contained:
+The name of the property. Note that not all names can be set. You can, for example, rename an effect that you applied to a layer, but you cannot rename the group `Effects` in which it is contained:
 
 <RetinaImg src="/img/blockOther/ae_property_set_attribute_name_rename.png" alt="After Effects scripting rename property"/>
 
 If you attempt to rename a property which cannot be renamed, Automation Blocks ignores the request, prints a warning to the console and continues with the execution of the script (and does *not* stop with an error).
 ### name (unique match name) (read-only) {#ae_property_set_attribute_match_name}
 
-A special name for the property used to [build unique naming paths](#ae_layer_properties_access). The match name is not displayed, but you can refer to it in scripts. Every property has a unique match-name identifier. Match names are stable from version to version regardless of the display name (the name attribute value) or any changes to the application. Unlike the display name, it is not localized. An indexed group may not have a name value, but always has a matchName value.
+A special name for the property is used to [build unique naming paths](#ae_layer_properties_access). The match name is not displayed, but you can refer to it in scripts. Every property has a unique match-name identifier. Match names are stable from version to version regardless of the display name (the name attribute value) or any changes to the application. Unlike the display name, it is not localized. An indexed group may not have a name value, but always has a matchName value.
 
 ### num keys (read-only) {#ae_property_set_attribute_num_keys}
 
@@ -226,7 +226,7 @@ The number of keyframes of this property (0 if the property is not keyframed).
 
 ### num properties (read-only) {#ae_property_set_attribute_num_properties}
 
-If this property is a group, this is the number of properties that are contained in it. For the property `::1/ADBE Effect Parade` (which is the *Effects* group of the first layer of the active comp) it returns the number of effects on that layer. If the property is no group, the value is 0.
+If this property is a group, this is the number of properties that are contained within it. For the property `::1/ADBE Effect Parade` (which is the *Effects* group of the first layer of the active comp), it returns the number of effects on that layer. If the property is no group, the value is 0.
 
 ### property value type (read-only) {#ae_property_set_attribute_property_value_type}
 
@@ -248,9 +248,9 @@ A [text](text.mdx) describing the kind of [value](#ae_property_set_attribute_val
 
 **spatial vs non-spatial**
 
-One difference between spatial and non-spatial values is, that spatial values are usually visualized as points in the *Composition* panel (you can click and drag a point control in the comp viewer, for example). But the most important difference is that the interpolation between keyframes is very different for spatial and non-spatial properties. Non-spatial properties only have temporal interpolation - they are interpolated exactly as if they where two (or three) independent 1D properties. In contrast to that, spatial properties have a spatial interpolation, which defines along which path the value travels from keyframe to keyframe. Temporal interpolation then is not performed for each dimension individually, but only once, along the path.
+One difference between spatial and non-spatial values is that spatial values are usually visualized as points in the *Composition* panel (you can click and drag a point control in the comp viewer, for example). But the most important difference is that the interpolation between keyframes is very different for spatial and non-spatial properties. Non-spatial properties only have temporal interpolation - they are interpolated exactly as if they where two (or three) independent 1D properties. By contrast, spatial properties have a spatial interpolation, which defines the path along which the value travels from keyframe to keyframe. Temporal interpolation thus is not performed for each dimension individually, but only once, along the path.
 
-You can see the difference, when you separate the dimensions of the position property, because this effectively switches from spatial interpolation to non-spatial interpolation:
+You can see the difference when you separate the dimensions of the position property, because this effectively switches from spatial interpolation to non-spatial interpolation:
 
 <div class="video-container"><iframe src="https://www.youtube.com/embed/iMPpT7iBQUg?rel=0"  frameborder="0" allowfullscreen="allowfullscreen"></iframe>
 </div>
@@ -274,7 +274,7 @@ A [logic value](logic.mdx) which is `true`, if the property is selected.
 
 The value of the property. If the property has keyframes, this value is ignored.
 See the [Property Value Type](#ae_property_set_attribute_property_value_type) to figure out what kind of value a property has.
-If you want to set the value of a property, you can create such a value with the [Property Value](#ae_property_value_json) block.
+If you want to set the value of a property, you can create this value with the [Property Value](#ae_property_value_json) block.
 
 If you want to keyframe a value, see the block [Add Keyframes](aeKeyframes.mdx#ae_keyframes_apply)
 
@@ -285,27 +285,27 @@ If you want to keyframe a value, see the block [Add Keyframes](aeKeyframes.mdx#a
 
 <RetinaImg src="/img/blockScreenshots/AeLayerProperties/ae_property_rebase.png" alt="Block ae_property_rebase"/>
 
-This block allows to replace the comp or layer part of a layer property string. In other words, it returns the same property, but on a different layer or on the same layer in a different comp. 
+This block allows you to replace the comp or layer with part of a layer property string. In other words, it returns the same property, but on a different layer or on the same layer in a different comp. 
 
-If you access a property with the [Layer Property](#ae_property_path) block, for example, it contains the full path for the property like
+If you access a property with the [Layer Property](#ae_property_path) block, for example, it contains the full path for the property, like
 
 `comp 1::my text layer/transform/position`
 
-for the position property of the layer *"my text layer"* in the composition *"comp 1"*. If you want to access the position of another layer, you can take this path and rebase it to the other layer, which will effectively replace the part `comp 1::my text layer` from the path with the respective path of the new layer.
+for the position property of the layer *"my text layer"* in the composition *"comp 1"*. If you want to access the position of another layer, you can take this path and replace it with the other layer, which will effectively replace the `comp 1::my text layer` part of the path with the respective path from the new layer.
 
-After you rebased a property, you often want to check if the [property exists](#ae_property_exists), because not all layers have the same properties. 
+After you have replaced a property, you'll often want to check if the [property exists](#ae_property_exists), because not all layers have the same properties. 
 
 ## Property Exists {#ae_property_exists}
 
 <RetinaImg src="/img/blockScreenshots/AeLayerProperties/ae_property_exists.png" alt="Block ae_property_exists"/>
 
-This block returns a [logic value](logic.mdx) which is `true`, if the given property exists. You can always assume that a video layer has a position property, for example, but if you want to access a property of an effect, which may or may not be applied to the layer, you should check if the property actually exists, before you try to [get an attribute](#ae_property_get_attribute) of it, for example.
+This block returns a [logic value](logic.mdx) which is `true` if the given property exists. You can always assume that a video layer has a position property, for example, but if you want to access a property of an effect, which may or may not be applied to the layer, you should check if the property actually exists before you try to [get an attribute](#ae_property_get_attribute) from it, for example.
 
 See also the [Project Item Exists](aeProjectItems#ae_item_exists) block.
 
 :::tip Check if layer exists
 
-Since layers are also properties, you can use the *Property Exists* block also to check if a particular layer exists.
+Since layers are also properties, you can also use the *Property Exists* block to check if a particular layer exists.
 
 :::
 
