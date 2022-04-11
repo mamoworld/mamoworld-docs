@@ -285,15 +285,15 @@ If you want to keyframe a value, see the block [Add Keyframes](aeKeyframes.mdx#a
 
 <RetinaImg src="/img/blockScreenshots/AeLayerProperties/ae_property_rebase.png" alt="Block ae_property_rebase"/>
 
-This block allows you to replace the comp or layer with part of a layer property string. In other words, it returns the same property, but on a different layer or on the same layer in a different comp. 
+This block allows you to replace the comp or layer of a layer property string. In other words, it returns the same property, but on a different layer or on the same layer in a different comp. 
 
 If you access a property with the [Layer Property](#ae_property_path) block, for example, it contains the full path for the property, like
 
 `comp 1::my text layer/transform/position`
 
-for the position property of the layer *"my text layer"* in the composition *"comp 1"*. If you want to access the position of another layer, you can take this path and replace it with the other layer, which will effectively replace the `comp 1::my text layer` part of the path with the respective path from the new layer.
+for the position property of the layer *"my text layer"* in the composition *"comp 1"*. If you want to access the position of another layer, you can take this path and replace the layer, which will effectively replace the `comp 1::my text layer` part of the path with the respective path from the new layer.
 
-After you have replaced a property, you'll often want to check if the [property exists](#ae_property_exists), because not all layers have the same properties. 
+After you have used the *Rebase Property* block, you'll often want to check if the [property exists](#ae_property_exists), because not all layers have the same properties. 
 
 ## Property Exists {#ae_property_exists}
 
