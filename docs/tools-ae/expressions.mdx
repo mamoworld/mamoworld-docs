@@ -10,7 +10,27 @@ Automation Blocks contains various tools to work with expressions more effective
 
 ## Apply Expressions {#ApplyExpressions}
 
-TODO
+Applying an expression to multiple properties can be tedious - you always have to first write the expression on one layer and then copy & paste it to the others. Instead, with Automation Blocks you can simply launch the tool **Apply Expression to All Selected Props**, enter the expression in the dialog and it will be applied to all selected properties instantly.
+
+<RetinaImg src="/img/tools-ae/ApplyExpressionToAllSelectedPropsUI.png" alt="apply After Effects expression to all selected properties"/>
+
+
+:::tip editing expressions
+
+The dialog always remembers the expression you entered the last time. Hence, if you want to change the expression that you just applied, simply run the tool again and the dialog still contains all the code you entered, such that you can edit it easily.
+
+:::
+
+## Sync Expressions {#SyncExpressions}
+
+Do you sometimes apply expressions to a layer and then duplicate the layer many times? Great, but what if you want to change the expression later? 
+
+<Anigif src={useBaseUrl('/img/tools-ae/ExpressionSyncToDuplicates.gif')} width="862px" />
+
+The **Sync Expressions to Duplicate Layers** tool offers an easy solution for that. Just change the expression(s) in one of the layers, select that one layer and run the tool. It will find all other layers in the comp which have (almost) the same name and copy all expressions off the selected layer to those layers to.
+
+I said "almost the same name" since the layers may have a different number at
+the end, i.e. if you select a layer with name "Red Solid 1" also layers like "Red Solid 5" will be processed. 
 
 ## Enable/Disable Expressions {#EnableDisableExpressions}
 
@@ -44,8 +64,15 @@ Regular Expressions allow to search for a pattern instead of a single search ter
 
 If you don't know, yet, what regular expressions are, I recommend to [get started here](https://www.regular-expressions.info/).
 
-The pattern must be in Javascript Regular Expression notation and also supports capturing groups. 
+The pattern must be in Javascript Regular Expression notation and also supports capturing groups. In the replace string you can use the placeholder $0, $1, $2,... where $0 represents the full match, $1 the content of the first capturing group, $2 the content of the second capturing group etc.
 
-In the replace string you can use the placeholder $0, $1, $2,... where $0 represents the full match, $1 the content of the first capturing group, $2 the content of the second capturing group etc.
+#### example
+
+- search: `Arm (\d+)`
+- replace `Leg $1`
+
+This operation would replace `Arm 1` by `Leg 1` and `Arm 2` by `Leg 2`, etc. but would ignore any occurrence of "Arm" that is not followed by a space and digits. The `\d+` is the regular expression for "one or several digits" and the parenteses around it indicate, that you want to store this part of the match in a capturing group. In the replace text, the `$1` indicates, that the content of the first capturing group should in inserted at that position.
+
+
 
 
