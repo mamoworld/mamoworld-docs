@@ -8,17 +8,55 @@ import RetinaImg from "../../src/components/RetinaImg";
 
 Automation Blocks has a collection of tools to randomly distribute layers and randomize the values of all kinds of properties quickly and even to create random shapes!
 
+## Randomize Property Values {#RandomPropertyValues}
+
+<Anigif src={useBaseUrl('/img/tools-ae/RandomizeSelectedPropsExampleCrab.gif')} width="980px" />
+
+
+
+With the **Set Selected Props to Random Values** tools, you can quickly set the values of all selected properties to random values in a customizable range. There exist three different variants of the tool - for 1D, 2D and 3D properties. The only difference is that for 1D you can only specify a single min and max value, whereas for 2D and 3D you have a min & max for x and y (or x,y and z) separately.
+
+<RetinaImg src="/img/tools-ae/RandomizeSelectedPropsUI.png" alt="Set selected properties to random values"/>
+
+If you run the 1D variant, for example, all selected properties which don't have 1D values, are ignored.
+
+:::tip Position and Scale is always 3D
+
+Note that internally in Ae layer position and scale values are always 3D values. Hence, you have to use the 3D variant of the tool for these values. If the 3D switch for the layer is not enabled, the z component of the layer is simply ignored.
+
+Alernatively, if you want to set the position, you can also use the tool [Distribute Layers Randomly](#DistributeLayersRandomly)
+
+:::
+
+
+### Add to Current Value
+
+If you enable the "Add to current value" option, the existing value of the property is not replaced. Instead, the random value is added to the existing value. This is useful, for example, if you want to keep the existing values and just add a little bit of randomness on top.
+
+### Keyframes
+
+Note that this tool does not support keyframes. Any keyframed selected properties are ignored.
+
+
 ## Distribute Layers Randomly {#DistributeLayersRandomly}
 
-TODO
+This tool is very similar to the tool [Randomize Property Values](#RandomPropertyValues) with the only difference that you don't need to select the position property of the layers. The tool will randomize the position properties of all selected layers. Also, for 2D layers you can use the 2D variant of the tool, whereas for the *"Randomize Property Values"* tool always the 3D variant has to be used for position properties.
 
 ## Replace Layer Source Randomly {#ReplaceLayerSourceRandomly}
 
-TODO
+<Anigif src={useBaseUrl('/img/tools-ae/RandomizeLayerSourceExample.gif')} width="860px" />
 
-## Randomize Property Values {#RandomPropertyValues}
 
-TODO
+In After Effects you can replace the source of a layer by selecting the layer and then alt-dragging an item from the project panel onto the layer. But what if you want to replace the sources of many layers at once?
+
+The tool ** Replace Layer Source Randomly** allows to replace the source item of many layers at once by random project items. Just do the following:
+
+1. select in the timeline the layers whose source should be replaced.
+2. select in the project panel the footage items you want to use as source
+3. run the tool
+
+Each of the selected layers now obtains one of the selected project items as source.
+
 
 ## Create Random Background Shapes {#RandomBackgroundShapes}
 
