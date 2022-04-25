@@ -34,6 +34,15 @@
         "description": "Retina Image"
     },
 
+	"Docusaurus Youtube Video": {
+        "scope": "markdown",
+        "prefix": "docusaurus YouTube Vid",
+        "body": [
+            "<Youtube id=\"$1\" square />"
+        ],
+        "description": "embed youtube video"
+    },
+
 	"Docusaurus Tip": {
         "scope": "markdown",
         "prefix": "docusaurus tip",
@@ -163,6 +172,15 @@
         "prefix": "variable (docusaurus)",
         "body": [
             "[variable](/block-reference/variables.mdx)"
+		],
+        "description": " { kind:category...}"
+    },
+
+	"Docusaurus Community Library": {
+        "scope": "markdown",
+        "prefix": "community library (docusaurus)",
+        "body": [
+            "[Community Library](/intro.mdx#CommunityLibrary)"
 		],
         "description": " { kind:category...}"
     },

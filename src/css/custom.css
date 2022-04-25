@@ -24,10 +24,18 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
+.video-container {
+    padding-bottom: 56.25%;
+}
+
+.video-container.square {
+	padding-bottom: min(100%,640px);
+	max-height: 640px;
+	max-width: 640px;
+}
 
 .video-container {
     position: relative;
-    padding-bottom: 56.25%;
     padding-top: 0;
     height: 0;
     overflow: hidden;

@@ -57,9 +57,11 @@ This block is your smart file importer. It syncs a bin in the project panel with
 - `exclude`: ignores all content of subfolders
 - `flatten`: imports files from subfolders directly into the main bin instead of creating sub-bins for them.
 
-**import multi-layer files as** allows you to import those as `footage`, `comp` or `comp (cropped layers)`. These are exactly the same options as those provided by Ae's normal import dialog.
+To set this value, you can either choose a value in the dropdown list or drag a [text](/block-reference/text.mdx) value on top of the dropdown. This text then must contain exactly one of the three words `include`, `exclude`, or `flatten`.
 
-**import numbered images as** allows you to import images as `still image` or `image sequence`. Note that images, which have no number at the end of their file name, are always imported as `still image`. So, if you set this option to `image sequence`, a file *myImage.png* will still be imported as a still image, but an image *myImage000.png* or *myImage004.png* will be treated as part of an image sequence.
+**import multi-layer files as** allows you to import those as `footage`, `comp` or `comp (cropped layers)`. These are exactly the same options as those provided by Ae's normal import dialog. To set this value, you can either choose a value in the dropdown list or drag a [text](/block-reference/text.mdx) value on top of the dropdown. This text then must contain one of the three words `footage`, `comp`, or `comp (cropped layers)`.
+
+**import numbered images as sequence** enables the import of image sequences. If it is disabled, each image is imported as an individual project item. Note that images, which have no number at the end of their file name, are always imported as a single still image and not an image sequence of length 1. So, if you enable the image sequence option, a file *myImage.png* will still be imported as a still image, but an image *myImage000.png* or *myImage004.png* will be treated as part of an image sequence.
 
 **delete other items** enables a check if the synced project bin in the project panel contains other items, which are not included in the folder on your hard-drive. Note that this option deletes all other items (also comps etc), to ensure that the contents of the folder and the synced project bin are 100% identical.
 

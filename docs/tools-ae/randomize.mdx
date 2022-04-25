@@ -3,6 +3,7 @@
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import Anigif from "../../src/components/Anigif";
 import RetinaImg from "../../src/components/RetinaImg";
+import Youtube from '../../src/components/YouTube'
 
 # Randomize
 
@@ -60,4 +61,23 @@ Each of the selected layers now obtains one of the selected project items as sou
 
 ## Create Random Background Shapes {#RandomBackgroundShapes}
 
-TODO
+The *Create Random Background Shapes* tool creates a shape layer for you with random shapes. In the dialog you can customize the number of random shapes, as well as their position, scale, rotation and opacity:
+
+<RetinaImg src="/img/tools-ae/randomBackgroundShapesUI.png" alt="After Effects script: Create shape layer with random background shapes"/>
+
+Instead of specifying a single value for each of position, scale, rotation and opacity, you specify min and max values and for each shape a random value within that range is chosen.
+
+### Custom Shapes & Colors
+
+The colors and shapes used by the tool cannot be changed in the dialog, but they can easily be customized in the block code of the tool. This allows you to create custom variants of the tool for specific shapes:
+
+<RetinaImg src="/img/tools-ae/randomBackgroundShapesExamples.png" alt="Create Different Random Shapes with Ae Script"/>
+
+By default, the *Random Background Shapes* tool creates shapes as shown on the left of this image and you find the two other variants with the wave shapes and the stars in the [Community Library](/intro.mdx#CommunityLibrary). 
+
+The following tutorial shows how to customize the colors and shapes yourself:
+
+<Youtube id="9BMxM_cxIUU" />
+
+
+
