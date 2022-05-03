@@ -6,19 +6,39 @@ import RetinaImg from '../../src/components/RetinaImg'
 
 # Text from/to Spreadsheet
 
+These tools allow to export the texts of text layers (and also Essential Properties) of the After Effects project to a spreadsheet. The spreadsheet can be opened with applications like Microsoft Excel, Google Docs, Open Office or Apple Numbers. The import script also allows to replace texts based on a spreadsheet.
+
+
+
 ## Export Text to Spreadsheet
 
-TODO
+<RetinaImg src="/img/tools-ae/textExportExample.png" alt="Export After Effects Texts to a Spreadsheet"/>
 
-:::tip Essential Properties
+The **Export Texts to Spreadsheet** tool creates a spreadsheet file with all texts of the active comp and all its precomps.
+Just run this tool and in the *"Save File"* dialog that pops up enter a filename with the file extension *".csv"* or *".xml"*. 
 
-The script processes all text properties which it can find in the project. This does not only include the source text property of text layers, but also text properties in the "essential properties".
+The spreadsheet will include all source texts of text layers, as well as text properties in the Essential Properties of a layer.
 
-:::
+### Spreadsheet File Types 
 
-## Import text from Spreadsheet
+If you enter a file name with file extension *.csv*, a "Comma Separated Value" file is created. This format is supported by all spreadsheet applications and we recommend to use it. If you want to use Microsoft Excel, you can alternatively use the file extension *.xml*. In that case, the tool will create an Excel XML file. But since Excel also supports csv files, usually .csv is the best option.
 
-TODO
+### Limitations
+
+The tool also does not process keyframes on the source texts.
+
+## Import Text from Spreadsheet
+
+With the **Import Texts from Spreadsheet** tool, you can replace texts in After Effects with the help of a spreadsheet. This is useful, for example, to translate projects into different languages.
+
+The workflow is as follows:
+
+1. export the texts with the **Export Texts to Spreadsheet** tool
+2. add the texts, by which the original texts should be replaced in the second column of the spreadsheet
+3. import the new texts with the **Import Texts from Spreadsheet** tool
+
+<RetinaImg src="/img/tools-ae/textExportImportExample.png" alt="Replace Texts in After Effects Script by a Spreadsheet"/>
+
 
 ## See also
 
