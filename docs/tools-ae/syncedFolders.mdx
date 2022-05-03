@@ -1,0 +1,124 @@
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import Anigif from "../../src/components/Anigif";
+import RetinaImg from "../../src/components/RetinaImg";
+import Youtube from "../../src/components/YouTube";
+
+# Synced Folders
+
+Automation Blocks contains an entire collection of scripts to simplify synchronizing your system folders with your After Effects folders.
+
+## Import {#Import}
+
+You can use this script to create an After Effects folder with the same name as the system folder you selected and synchronize their contents.
+After that you can use the Update script to update the After Effects folder contents whenever you change something in your system folder.
+
+:::tip Folder Location
+
+If you selected an After Effects folder before running the script the new folder will be created inside that folder.
+Otherwise it is created in the root of your project.
+
+:::
+
+<RetinaImg
+	src="/img/tools-ae/syncedFoldersImportDialog.png"
+	alt="After Effects Script: Synced Folders - Import"
+/>
+
+### Import Options
+
+#### Select folder
+
+Select a system folder to import and sync with.
+
+#### Subfolders
+
+Let's you choose what to do with the subfolders within the selected folder:
+
+##### include
+
+Includes the subfolders contents creating new subfolders in After Effects to match the system folder structure.
+
+##### exclude
+
+Excludes the subfolders contents.
+
+##### flatten
+
+Includes the subfolders contents but does not create new subfolders in After Effects.
+
+#### Import multi-layers files as
+
+Let's you choose how to import multi-layer files.
+
+#### Import numbered still images as sequence
+
+Imports images as image sequences or single items.
+
+#### Delete other items
+
+Deletes items from the After Effects bin if needed to match the system folder.
+
+## Update {#Update}
+
+You can use this script to update the contents of all synced folders in the project.
+
+## Show List {#ShowList}
+
+You can use this script to show a list of all synced folders in the project.
+
+## Unsync {#Unsync}
+
+You can use this script to stop syncing folders in the project.
+It let's you choose to unsync all or the selected After Effects folders only.
+
+<RetinaImg
+	src="/img/tools-ae/syncedFoldersUnsyncDialog.png"
+	alt="After Effects Script: Synced Folders - Unsync"
+/>
+
+## Change Selected Bin Settings {#ChangeSelectedBinSettings}
+
+You can use this script to change the settings from an already synced bin.
+
+<RetinaImg
+	src="/img/tools-ae/syncedFoldersChangeSelectedBinSettingsDialog.png"
+	alt="After Effects Script: Synced Folders - Change Selected Bin Settings"
+/>
+
+### Sync Options
+
+#### Select folder
+
+Select a system folder to import and sync with.
+
+#### Subfolders
+
+Let's you choose what to do with the subfolders within the selected folder:
+
+##### include
+
+Includes the subfolders contents creating new subfolders in After Effects to match the system folder structure.
+
+##### exclude
+
+Excludes the subfolders contents.
+
+##### flatten
+
+Includes the subfolders contents but does not create new subfolders in After Effects.
+
+#### Import multi-layers files as
+
+Let's you choose how to import multi-layer files.
+
+#### Import numbered still images as sequence
+
+Imports images as image sequence or single items.
+
+#### Delete other items
+
+Deletes items from the After Effects bin if needed to match the system folder.
+
+#### Sync now
+
+Let's you sync the folder immediately using the new applied settings.
