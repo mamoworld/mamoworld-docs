@@ -13,7 +13,7 @@ If you run the **Auto Resizing Text Box Rig** tool, it will create a box around 
 
 <Anigif src={useBaseUrl('/img/tools-ae/rigAutoResizingTextBox.gif')} width="865px" />
 
-The box is created with effects and expressions on the layer itself. It will update its size instantly, when the text of the layer is changed. In case you want to delete the box later, just delete the effects on the text layer.
+The box is created with effects and expressions on the layer itself. It will update its size instantly when the text of the layer is changed. In case you want to delete the box later, just delete the effects on the text layer.
 
 :::tip Pins & Boxes
 
@@ -27,7 +27,7 @@ The block code of the *Auto Resizing Text Box Rig* tool consists of just this si
 
 <RetinaImg src="/img/tools-ae/rigAutoResizingTextBoxCode.png" alt="Apply Preset with Automation Blocks"/>
 
-All that this code does is to apply an After Effects preset named *"Text Box Rig.ffx"* to all selected text layers. If you have other After Effects presets and want to create Automation Blocks tools to apply those, just choose a different preset file in the block code and choose the layers to which the preset should be applied. 
+All this code does is apply an After Effects preset named *"Text Box Rig.ffx"* to all selected text layers. If you have other After Effects presets and want to create Automation Blocks tools to apply those, just choose a different preset file in the block code and then choose the layers that the preset should be applied to. 
 
 <RetinaImg src="/img/tools-ae/rigAutoResizingTextBoxCodeAnnotated.png" alt="Apply Preset with Automation Blocks"/>
 
@@ -35,7 +35,7 @@ For more details see the [Apply Preset](/block-reference/aeLayer#ae_layer_apply_
 
 ## Time-remapping properties {#TimeRemapProperties}
 
-Repeating or retiming an animation is usually very tedious, if the animation includes keyframes on many different properties. The **Time-Remap Selected Properties With a Slider** tool allows you to connect such an animation to a single slider. 
+Repeating or retiming an animation is usually very tedious, especially if the animation includes keyframes on many different properties. The **Time-Remap Selected Properties With a Slider** tool allows you to connect such an animation to a single slider. 
 
 <Anigif src={useBaseUrl('/img/tools-ae/rigTimeRemapProperties.gif')} width="300px" />
 
@@ -47,38 +47,38 @@ The slider is like a playback control for the animation: To play the animation, 
 
 ### Clean & Simple
 
-The created rig is very light-weight: There are no extra layers, no precomposing etc. The only things that the tool creates are
+The rig created is very lightweight: There are no extra layers, no precomposing etc. The only things that the tool creates are
  - the slider, which you use to control the animation and 
  - expressions on the keyframed properties, which should react to the slider.
 
 ### Adding More Properties Later
 
-If you already created a rig and want to add more keyframed properties later, just select those properties and run the tool again. In the dialog which asks for the slider name, make sure to enter the same name that you used before (unless those new properties should be controlled by a different slider).
+If you've already created a rig and want to add more keyframed properties later, just select those properties and run the tool again. In the dialog which asks for the slider name, make sure to enter the same name that you used before (unless those new properties should be controlled by a different slider).
 
 
 ### Time-Remapping Multiple Animations
 
-The Automation Blocks tool **Time-Remap Selected Properties With a Multiple Animations** is very similar to the basic variant of the tool, except that it uses two sliders in order to handle multiple animations. As in the basic variant the first slider controls the playback of the animation. The second slider allows to pick which of the animations should be played:
+The Automation Blocks tool **Time-Remap Selected Properties With Multiple Animations** is very similar to the basic variant of the tool, except that it uses two sliders in order to handle multiple animations. As in the basic variant, the first slider controls the playback of the animation. The second slider allows you to pick which of the animations should be played:
 
 <Anigif src={useBaseUrl('/img/tools-ae/rigTimeRemapPropertiesMulti.gif')} width="540px" />
 
-The workflow with this tool for multiple animations is exactly identical, except that before running the tool you need to create some markers on the layer to indicate, which keyframes should belong to which animation. Just create one layer marker for each animation and set the duration of the marker to the duration of the respective animation:
+The workflow with this tool for multiple animations is identical, except that before running it you need to create some markers on the layer, to indicate which keyframes should belong to which animation. Just create one layer marker for each animation and then set the duration of the marker to the duration of the respective animation:
 <RetinaImg src="/img/tools-ae/rigTimeRemapPropertiesMultiMarkers.png" alt="use markers to indicate which keyframes belong to which animation"/>
 
-The following tutorial shows the workflow in full detail:
+The following tutorial shows this workflow in detail:
 
 <Youtube id="IlYelOb4Ps0" />
 
 ## Import File, Apply Preset & Blending Mode {#importFileApplyPresetBlendingMode}
 
-Do you have some favorite texture or other footage that you are using all the time? Now you can do this in a single click:
+Do you have some favorite texture or other footage that you use all the time? Now you can do this in a single click:
 
 - import the footage file into your project if it has not been imported before
 - create a new layer with the file in the active comp
 - set a blending mode of your choice for the layer
 - apply any Ae preset to the layer (to apply effects, expressions and keyframes to it, for example)
 
-Consider this tool as a template to create your custom tool. The main part of the code consists of a single block, where you can choose the texture image, preset and blending mode easily. 
+Consider this tool as a template for creating your custom tool. The main part of the code consists of a single block, where you can easily choose the texture image, preset and blending mode. 
 
 <RetinaImg src="/img/tools-ae/rigImportFileApplyPresetParameters.png" alt="Create a custom texture tool"/>
 
@@ -91,7 +91,7 @@ To create a custom tool for your favorite texture, just change those values as d
 
 ## Repeat Animation on Selected Layers {#RepeatAnimationSelectedLayers}
 
-This tool allows to apply keyframes to many layers repeatedly. By default, the tool applies a step by step move downwards, but you can also use your own custom keyframes. On the left, you see the result with the default keyframes and on the right with custom keyframes:
+This tool allows you to repeatedly apply keyframes to many layers. By default, the tool applies a step by step move downwards, but you can also use your own custom keyframes. On the left is the result with the default keyframes, and on the right with custom keyframes:
 
 <Anigif src={useBaseUrl('/img/tools-ae/rigRepeatKeyframesExamples.gif')} width="300px" />
 
@@ -99,7 +99,7 @@ If you want to use a custom sequence of keyframes, you need to first load those 
 
 <RetinaImg src="/img/tools-ae/rigRepeatKeyframesTimeline.png" alt="repeat keyframes"/>
 
-The tool then pastes the loaded keyframes on all selected layers repeatedly. But in contrast to a normal cut & paste operation, the tool adjusts the pasted animation as needed, such that it continues seamlessly from the location where the layer currently is. Also, a *probability* parameter allows to skip the animation from time to time randomly, to create more variation.
+The tool then repeatedly pastes the loaded keyframes on all selected layers. However, in contrast to a normal cut & paste operation, the tool adjusts the pasted animation as needed, so it continues seamlessly from the location where the layer currently is. Also, a *probability* parameter gives the option of skipping the animation from time to time randomly, to create more variation.
 
 ### Loading Keyframes and Adjusting Parameters
 
@@ -107,20 +107,20 @@ To load keyframes into the tool or adjust any of the parameters, you need to edi
 
 <RetinaImg src="/img/tools-ae/rigRepeatKeyframesBlockParams.png" alt="customize code of repeat animation tool"/>
 
-To load custom keyframes, just select the property with those keyframes and then click the refresh button on the two first parameters of the block. The first parameter stores the actual keyframe data and the second one the property to which the keyframes should be applied (the tool does not only support position animations, but actually keyframes on any properties).
+To load custom keyframes, just select the property with those keyframes and then click the refresh button on the two first parameters of the block. The first parameter stores the actual keyframe data, and the second one the property that the keyframes should be applied to (the tool not only supports position animations, but also keyframes on any properties).
 
 ### Expression
 
-The last parameter of the block code is an expression that is applied on top of the pasted keyframes. By default, this expression makes sure that if a layer moves outside the comp, it appears at the other side again. If you don't want that, you can simply delete the expression parameter. If you want to use your own expression, you can right click on the expression parameter and choose *expand*, to edit the code of the expression.
+The last parameter of the block code is an expression that is applied on top of the pasted keyframes. By default, this expression ensures that if a layer moves outside the comp, it appears at the other side again. If you don't want this to happen, you can simply delete the expression parameter. If you want to use your own expression, you can right click on the expression parameter and choose *expand* to edit the code of the expression.
 
 ### Detailed Tutorial
 
-This detailed tutorial explains in full detail how to use and customize the tool. It also includes some advanced tricks, like using keyframes on multiple properties of the layer.
+This tutorial explains in detail how to use and customize the tool. It also includes some advanced tricks, like using keyframes on multiple properties of the layer.
 
 <Youtube id="nrJ2QVhJejY" />
 
 :::danger Preserving Position of Layers
 
-The tool adjusts the keyframes before pasting them to make sure the animations start at the current position of the layer. However, this is only the case, if the properties have at least one keyframe at or before the start of the workarea. Hence, if your layers don't have any keyframes, yet, add a keyframe at the beginning of the workarea before running the tool.
+This tool adjusts the keyframes before pasting them to make sure the animations start at the current position of the layer. However, this is only the case if the properties have at least one keyframe at or before the start of the workarea. So, if your layers don't have any keyframes yet, add a keyframe at the beginning of the workarea before running the tool.
 
 :::

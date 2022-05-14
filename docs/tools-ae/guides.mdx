@@ -6,22 +6,22 @@ import RetinaImg from "../../src/components/RetinaImg";
 
 # Guides
 
-Automation Blocks contains an entire collection of scripts to simplify the work with guides.
+Automation Blocks contains an entire collection of scripts to simplify working with guides.
 
 ## Create {#guidesCreate}
 
 You can use this script to create guides in the active composition.
 
-Just execute the script **Guides - Create** and the following dialog will show up:
+Just execute the script **Guides - Create** and the following dialog will appear:
 
 <RetinaImg
 	src="/img/tools-ae/guideCreateDialog.png"
 	alt="After Effects Script: Guides - Create - Dialog"
 />
 
-Chose the orientation of the guides, and define at which positions they should be created.
+Choose the orientation of the guides, and define where they should be created.
 
-The values can be in pixels (px) and percentage (%). If no unit is defined the default is pixels.
+The values can be in pixels (px) and percentages (%). If no unit is defined, the default is pixels.
 To create multiple guides at once, you can enter multiple values separated by a comma.
 
 ### Examples of valid values
@@ -33,7 +33,7 @@ To create multiple guides at once, you can enter multiple values separated by a 
 
 ### Mirror Option
 
-If you enable the mirror option, the tool creates a symmetric set of guides. If you enter a position of 100px, for example, it will create both a guide 100px away from the left (and/or top) and the right (and/or bottom) edge of the comp.
+If you enable the mirror option, the tool creates a symmetrical set of guides. If you enter a position of 100px, for example, it will create guides both 100px away from the left (and/or top) and the right (and/or bottom) edge of the comp.
 
 ## Create Grid {#guidesCreateGrid}
 
@@ -42,10 +42,10 @@ If you enable the mirror option, the tool creates a symmetric set of guides. If 
 	alt="After Effects Script: Guides - Create Grid"
 />
 
-This script creates a grid of guides in the active composition. You can specify the widht and height of the cells, as well as an optional gutter (set gutter to 0, to disable it).
+This script creates a grid of guides in the active composition. You can specify the width and height of the cells, as well as an optional gutter (set gutter to 0 to disable it).
 If you enable the center option, the grid will be aligned to the center of the composition. Otherwise, the grid is aligned to the top left corner of the composition.
 
-Note that the script does not delete existing guides (but you can do that with the Ae menu View->Clear Guides before running the script).
+Note that the script does not delete existing guides (but you can do this with the Ae menu View->Clear Guides before running the script).
 
 ## Create Around Selected Layers {#guidesAroundSelectedLayers}
 
@@ -54,9 +54,9 @@ Note that the script does not delete existing guides (but you can do that with t
 	alt="After Effects Script: Guides - Create Around Selected Layers"
 />
 
-This script creates guides along the bounding box of the selected layers. If creates either guides around each of the selected layers individually, or it calculates a single bounding box that includes all selected layers and then creates guides for this one.
+This script creates guides along the bounding box of the selected layers. If either creates guides around each of the selected layers individually, or calculates a single bounding box that includes all the selected layers and then creates guides for this one.
 
-The script can create guides at the top/bottm and right/left edges of the bounding box, and optionally also at the center. With the margin option you can control that the box formed by the guides is a bit bigger than the actual bounding box of the layer(s).
+The script can create guides at the top/bottom and right/left edges of the bounding box, and optionally also at the center. With the margin option, you can specify that the box formed by the guides is a little bigger than the actual bounding box of the layer(s).
 
 ## Save {#guidesSave}
 
@@ -66,8 +66,8 @@ Just execute the following script:
 
 -   **Guides - Save**
 
-When you execute the script, a dialog pops up where you can chose the preset name, the orientation of the guides,
-and define as which unit they should be saved.
+When you execute the script, a dialog pops up where you can choose the preset name, the orientation of the guides,
+and define which unit they should be saved as.
 
 <RetinaImg
 	src="/img/tools-ae/guideSaveDialog.png"
@@ -76,18 +76,18 @@ and define as which unit they should be saved.
 
 :::tip Units
 
-A guide saved at 100px will always be in the same position independent of the composition dimensions,
-but a guide at 10% will be dinamically positioned related to the composition dimensions
+A guide saved at 100px will always be in the same position, independent of the composition dimensions,
+but a guide at 10% will be dynamically positioned in relation to the composition dimensions.
 
 :::
 
 :::tip Customize Preset Folder
 
-By default, the presets are stored in the folder `~/Documents/Automation Blocks/Guides Library/`. If you prefer a different location, you can customize that easily in the block code:
+By default, the presets are stored in the folder `~/Documents/Automation Blocks/Guides Library/`. If you prefer a different location, you can customize it easily in the block code:
 
 <RetinaImg src="/img/tools-ae/guidesSaveCustomizeFolder.png" alt="choose custom folder for guides presets"/>
 
-If you do that, make sure to change the folder in both the scripts "Guides - Load" and "Guides - Save".
+If you do this, make sure to change the folder in both the scripts "Guides - Load" and "Guides - Save".
 :::
 
 ## Load {#guidesLoad}
@@ -107,7 +107,7 @@ When you execute the script, a dialog pops up where you can select a preset and 
 
 ## Mirror {#guidesMirror}
 
-Use this script to mirror guides from the active composition. This is useful to create symmetric guide setups. If you mirror a guide which is located 100px away from the left edge of the comp, for example, the result will be a guide that is 100px away from the right edge.
+Use this script to mirror guides from the active composition. This is useful to create symmetrical guide setups. If you mirror a guide that is 100px from the left edge of the comp, for example, the result will be a guide that is 100px away from the right edge.
 
 <RetinaImg
 	src="/img/tools-ae/guideMirrorExample.png"
@@ -125,6 +125,6 @@ In the dialog you can select which guides you want to mirror. You can mirror
 - all horizontal guides, 
 - all vertical guides,
 - all vertical and horizontal guides, or
-- choose an invididual guide.
+- choose one specific guide.
 
 

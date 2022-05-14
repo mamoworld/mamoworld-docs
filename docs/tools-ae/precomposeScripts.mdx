@@ -6,20 +6,20 @@ import RetinaImg from '../../src/components/RetinaImg'
 
 # Precompose Tools
 
-Automation Blocks contains an entire collection of scripts to simplify the work with precomps.
+Automation Blocks contains an entire collection of scripts to simplify working with precomps.
 
 ## Precompose & Crop {#precomposeAndCrop}
 
-When you create a precomp in Adobe After Effects, it usually has the same size as the composition. But with Automation Blocks, you can easily create precomps that are only as big as the actual content that you precompse:
+When you create a precomp in Adobe After Effects, it usually has the same size as the composition. But with Automation Blocks, you can easily create precomps that are only as big as the actual content that you precompose:
 <RetinaImg src="/img/tools-ae/precompAndCropExample.png" alt="After Effects Script: Precompose and Crop"/>
 
 
-Just execute one of the following scripts:
+Simply execute one of the following scripts:
 
 - **Precompose & Crop into Single Precomp**
 - **Precompose & Crop into Separate Precomps**
 
-As the names suggest, the first script creates a separate precomp for each of the selected layers, whereas the second one puts all of them togehter in a single precomp.
+As the names suggest, the first script creates a separate precomp for each of the selected layers, whereas the second one puts all of them together in a single precomp.
 
 When you execute the script, a dialog pops up where you can control the details of the precompose operation:
 <RetinaImg src="/img/tools-ae/precompAndCropUI.png" alt="After Effects Script: Precompose and Crop Dialog of Automation Blocks"/>
@@ -28,22 +28,22 @@ If you enable the option to crop the comp, you can also set a margin around the 
 
 :::danger Shape layer Stroke Width
 
-The SourceRectAtTime() function of After Effects, which Automation Blocks uses to measure the size of the content, is not able to take the stroke width of your shapes into account. Hence, if you precompose shape layers, make sure to add a margin that is big enough to compensate for that.
+The SourceRectAtTime() function of After Effects, which Automation Blocks uses to measure the size of the content, is not able to consider the stroke width of your shapes. So, if you precompose shape layers, make sure to add a margin that is big enough to compensate for that.
 
 :::
 
 ## Copy or Move to Precomp {#CopyOrMoveToPrecomp}
 
-You already created a precomp and decide later that you need to add some more layers to it? Sure, you can simply copy and paste the layers into the precomp, but then you have to deal with all the time and position offsets. The Automation Blocks script *Copy or Move Selected Layers to Precomp* takes care of that for you. Just select some layers and run the script. A dialog pops up, which lists all precomps of the active comp, such that you can choose to which one the layers should be moved or copied:
+Already created a precomp, and decide later that you need to add some more layers to it? No problem, simply copy and paste the layers into the precomp - but then you have to deal with all the time and position offsets. The Automation Blocks script *Copy or Move Selected Layers to Precomp* takes care of that for you. Just select some layers and run the script. A dialog pops up, which lists all precomps of the active comp, so you can choose which one the layers should be moved or copied to:
 
 <RetinaImg src="/img/tools-ae/precompMoveUI.png" alt="Copy Selected Layers to Precomp"/>
 
-If you enable the option *delete original*, the  selected layers are deleted, after they have been copied to the precomp.
+If you enable the option *delete original*, the selected layers will be deleted after they have been copied to the precomp.
 
 ## Copy of Move to Parent Comp {#CopyOrMoveToParentComp}
 
-If you precomposed a few layers and later noticed that some of those layers should better have stayed inside the parent comp, this script is your best friend. Just select the layers in the precomp and run the script. It will copy the layer back to the parent comp and deal with time and position offsets for you.
-In the dialog of the script, you can choose if you want to delete the original layer(s) in the precomp and in case the precomp is used in several other comps, you can choose to which of those parent comps the layer(s) should be copied.
+If you've precomposed a few layers and later noticed that some of those layers should have stayed inside the parent comp, this script is your best friend. Just select the layers in the precomp and run the script. It will copy the layer back to the parent comp, and again deal with the time and position offsets for you.
+In the dialog of the script, you can choose if you want to delete the original layer(s) in the precomp, and in case the precomp is used in several other comps, you can choose which of those parent comps the layer(s) should be copied to.
 
 ## Copy As Guide To All Precomps {#CopyAsGuideToAllPrecomps}
 
@@ -51,5 +51,5 @@ In the dialog of the script, you can choose if you want to delete the original l
 
 Sometimes you want a layer to be available in your main comp and all of its precomps. If you sync your animation to music, for example, you want to hear the music inside the precomp. Or if your animation is based on an animatics video or other reference footage, you might want to see that in precomps, too. 
 
-The Automation Blocks script **Copy as Guide to All Precomps** does exactly what its name suggests. It deals with time and position offsets among the precomps and also handles precomps inside of other precomps properly. Even if a precomp is used multiple times, only one copy of the layers will be placed in it.
+The Automation Blocks script **Copy as Guide to All Precomps** does exactly what its name suggests. It deals with time and position offsets among the precomps and also handles precomps inside of other precomps properly. Even if a precomp is used multiple times, only one copy of the layers will be placed inside it.
 

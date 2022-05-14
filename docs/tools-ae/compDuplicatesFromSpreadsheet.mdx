@@ -11,13 +11,13 @@ import Youtube from '../../src/components/YouTube'
 
 <RetinaImg src="/img/tools-ae/compSpreadsheetWorkflowTitle.png" alt=""/>
 
- You need to create 100 duplictes of composition in After Effects and customize texts, videos, images, colors, etc in each of them?
+ Need to create 100 duplicates of a composition in After Effects and customize the texts, videos, images, colors, etc in each of them?
 
- Automation Blocks includes a very efficient workflow to create custom comp duplicates based on a spreadsheet in three steps:
+ Automation Blocks includes a very efficient workflow for creating custom comp duplicates based on a spreadsheet in three steps:
 
- 1. annotate in your composition (and precomps) everything that should be customized
- 2. run the script **export spreadsheet from template comp** which generates a spreadsheet based on your annotations
- 3. after you filled the spreadsheet with data, run the script **create comp duplicates from spreadsheet**, which creates one copy of the comp for each row of the spreadsheet.
+ 1. annotate everything that you want to customize in your composition (and precomps) 
+ 2. run the script **export spreadsheet from template comp** to generate a spreadsheet based on your annotations
+ 3. after you've filled the spreadsheet with data, run the script **create comp duplicates from spreadsheet**, which creates one copy of the comp for each row of the spreadsheet.
 
 <Youtube id="5vXEFkFKjq4" square />
 
@@ -29,14 +29,14 @@ import Youtube from '../../src/components/YouTube'
 
 ### Step 1: Annotate Comp
 
-First, in the composition which you want to duplicate (and any precomps) you need to anotated everything, which you want to customize with the spreadsheet. In a nutshell, you just put a `$` followed by the name or number of a spreadsheet column at the beginning of the name of everything that should show up in the spreadsheet:
+First, in the composition that you want to duplicate (and any precomps) anotate everything that you want to customize with the spreadsheet. In a nutshell, you just put a `$` followed by the name or number of a spreadsheet column at the beginning of the name of anything you want to show up in the spreadsheet:
 
 <RetinaImg src="/img/tools-ae/compSpreadsheetWorkflowAnnotations.png" alt="Annotate Ae Comp for Spreadsheet Export"/>
 
 :::danger space behind $ annotation
 
-Make sure to keep a space or nother non-letter symbol after the $ annotation.
-Names `$A My Text` and `$A-My Text` are ok, but a name `$AMy Text` is interpreted as spreadsheet column `AMY` and not as spreadsheet column `A`.
+Make sure to leave a space (or another non-letter symbol) after the $ annotation.
+Names `$A My Text` and `$A-My Text` are ok, but a name `$AMy Text` is interpreted as a spreadsheet column `AMY` and not as spreadsheet column `A`.
 
 :::
 
@@ -50,29 +50,29 @@ To add the text of a text layer to the spreadsheet, just put `$A` at the beginni
 
 #### footage files
 
-To add the source file of a image/video/audio layer to the spreadsheet, just put `$A` at the beginning of the name of the layer.
-The spreadsheet will contain only the file name without the path. The other files that this file should be replaced by, must be located in the same folder of your hard-drive. The **create comp duplicates from spreadsheet** will import these files into your project when needed, but will also detect if they are already imported, such that they are not imported a second time.
+To add the source file of an image/video/audio layer to the spreadsheet, just put `$A` at the beginning of the name of the layer.
+The spreadsheet will contain only the file name, without the path. The other files that this file should be replaced by must be located in the same folder of your hard-drive. The **create comp duplicates from spreadsheet** will import these files into your project when needed, but will also detect if they are already imported, so they are not imported a second time.
 
 #### properties (sliders, colors, etc)
 
 You can customize properties like effect controls, layer transforms etc. But since those elements cannot be renamed directly (you cannot rename the `Position` of a layer to `$C Position`, for example), Automation Blocks uses a little workaround:
 
-After Effects has a category of Effects called *Expression Controls*. These effects just contain a single property - like a slider, a color picker, a point control etc. And since those effects (as any effect) can be renamed, Automation Blocks looks for $ annotations on these expression controls. Hence, if you need a slider value in your spreadsheet, for example, you need to: 
+After Effects has a category of Effects called *Expression Controls*. These effects just contain a single property - like a slider, a color picker, a point control etc. And since those effects (as with any effect) can be renamed, Automation Blocks looks for $ annotations on these expression controls. So, if you need a slider value in your spreadsheet, for example, you need to: 
 
 1. Create a slider control effect from the *Expression Controls* category
 2. Pick-whip the properties that you want to control to this slider (i.e. create an expression link that connects the property that you actually want to control to this slider)
-3. Change the name of the slider control effect such that it starts with an annotation like  `$A`.
+3. Change the name of the slider control effect so that it starts with an annotation like `$A`.
 
-This approach does not only work with sliders, but with all kinds of expression controls.
+This approach works not only with sliders, but with all types of expression controls.
 #### comp names
 
-You can also control the names of the comp duplicates. Here you can insert the $ annotation not only at the beginning, but anywhere in the comp name and you can also have multiple of them. If your comp name is `video $A with $C`, then both the content of column A and C is inserted in the comp name at the locations where the placeholders `$A` and `$C` are, respectively.
-Of course, also the names of precomps may inculde such placeholders.
+You can also control the names of the comp duplicates. Here you can not only insert the $ annotation at the beginning, but anywhere in the comp name, and you can also have many of them. If your comp name is `video $A with $C`, then both the contents of column A and C are inserted into the comp name at the locations where the placeholders `$A` and `$C` are, respectively.
+Of course, the names of precomps may also inculde such placeholders.
 
 
 :::tip Reusing the same placeholder multiple times
 
-You can use the same placeholder multiple times. If the content of column D should be used in both the comp name and the text of a text layer, for example, simply use `$D` in both of them.
+You can use the same placeholder multiple times. If the contents of column D should be used in both the comp name and the text of a text layer, for example, simply use `$D` in both of them.
 
 :::
 
@@ -83,7 +83,7 @@ If you don't want a particular precomp to be duplicated, you can simply lock the
 
 ### Step 2: Export Spreadsheet
 
-After you did all annotations, make sure the  active composition is the main composition of your template and then run the script **export spreadsheet from template comp**. It first asks where to save the spreadsheet (choose a filename ending with `.csv`) and then creates a spreadsheet based on the annotations you did. If the template comp (or any precomp) contains a text layer with name `$A Dog Name` and text `Daisy`, for example, the column A will have the title `Dog Name` and a first entry with text `Daisy` is placed below it. 
+After you've made all the annotations, make sure the  active composition is the main composition of your template and then run the script **export spreadsheet from template comp**. It first asks where to save the spreadsheet (choose a filename ending with `.csv`) and then creates a spreadsheet based on the annotations you've made. If the template comp (or any precomp) contains a text layer with name `$A Dog Name` and text `Daisy`, for example, then column A will have the title `Dog Name` and a first entry with the text `Daisy` is placed below it. 
 
 <RetinaImg src="/img/tools-ae/compSpreadsheetWorkflowSpreadsheetEmpty.png" alt="Spreadsheet created by 'export spreadsheet from template comp'"/>
 
@@ -93,7 +93,7 @@ You can open this spreadsheet in the spreadsheet app of your choice (Excel, Appl
 
 ### Step 3: Import Spreadsheet 
 
-After you filled the spreadsheet with data, save it and make sure to keep the format as `.csv`.
+After you've filled the spreadsheet with data, save it, making sure to keep the format as `.csv`.
 Now make sure the active composition is the main composition of your template and then run the Automation Blocks script **create comp duplicates from spreadsheet**. In the dialog that pops up, choose the spreadsheet file and then the script creates one duplicate of the comp (and precomps) for each row of the spreadsheet.
 
 ## See also
@@ -104,4 +104,4 @@ If you want to just create a duplicate of a composition including all precomps, 
 
 ### Import/Export Texts from Spreadsheet
 
-If you just want to replace texts in a composition the [Text from/to Spreadsheet](textFromToSpreadsheet) tools are also an alternative.
+If you just want to replace the texts in a composition, the [Text from/to Spreadsheet](textFromToSpreadsheet) tools are also a good alternative.

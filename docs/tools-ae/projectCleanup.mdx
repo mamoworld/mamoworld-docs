@@ -10,60 +10,60 @@ import RetinaImg from "../../src/components/RetinaImg";
 
 <RetinaImg src="/img/tools-ae/searchReplaceProjectItemsUI.png" alt="batch rename project items in Adobe After Effects"/>
 
-With this tool you can perform a search & replace in the names of all project items or only the currently selected project items.
-You also have an option to search case sensitive and an advanced option to use regular expressions.
+With this tool, you can perform a search & replace in the names of all project items, or only the currently selected project items.
+You also have the option to do a case sensitive search, and an advanced option to use regular expressions.
 
 ### Regular Expressions
 
-Regular Expressions allow to search for a pattern instead of a single search term. 
+Regular Expressions allow you to search for a pattern instead of a single search term. 
 
-If you don't know, yet, what regular expressions are, I recommend to [get started here](https://www.regular-expressions.info/).
+If you don't yet know what regular expressions are, I recommend [starting here](https://www.regular-expressions.info/).
 
-The pattern must be in Javascript Regular Expression notation and also supports capturing groups. In the replace string you can use the placeholders $0, $1, $2,... where $0 represents the full match, $1 the content of the first capturing group, $2 the content of the second capturing group etc.
+The pattern must be in Javascript Regular Expression notation and also supports capturing groups. In the replace string you can use the placeholders $0, $1, $2,... where $0 represents the full match, $1 the content of the first capturing group, $2 the content of the second capturing group, etc.
 
 #### example
 
 - search: `clip(.*)\.mp4`
 - replace: `camera A$1`
 
-Here are examples what a search & replace operation with this regular expression will do:
+Here are some examples of what a search & replace operation with this regular expression will do:
 - *"clip 001.mp4"* --> *"camera A 001"* 
 - *"clip 002.mp4"* --> *"camera A 002"* 
 - *"clip-test.mp4"* --> *"camera A-test"* 
 
 The regular expression searches for anything that starts with *"clip"* and ends with *".mp4"*.
 
-The `.*` in the middle of the search pattern matches any sequence of characters (the dot means any character and the star tells the regular expression that you allow an unlimited number of those). Note that the second dot in the search pattern is escaped with a backslash. Therefore `\.mp4` only matches exactly the text *".mp4"* whereas just `.mp4` without the backslash would mean any character followed by *"mp4"*.
+The `.*` in the middle of the search pattern matches any sequence of characters (the dot means any character, and the star tells the regular expression that you allow an unlimited number of these). Note that the second dot in the search pattern is ended with a backslash. Therefore `\.mp4` only matches exactly the text *".mp4"* whereas `.mp4` without the backslash would mean any character followed by *"mp4"*.
 
-The brackets around `.*` tell the regular expression to save this part of the search hit in a capturing group. Since it is the first pair of brackets, the group is stored in the placeholder $1. Therefore, the replace string `camera A$1` means *"replace the search hit by the text 'camera A' followed by the content of the first capturing group of the search hit"*.
+The brackets around `.*` tell the regular expression to save this part of the search hit in a capturing group. Since it is the first pair of brackets, the group is stored in the placeholder $1. Therefore, the replace string `camera A$1` means *"replace the search hit with the text 'camera A' followed by the content of the first capturing group of the search hit"*.
 
 ## Move Items of File Type to Bin {#MoveItemsOfFileTypeToBin}
 
 This tool helps you to structure your After Effects project by file types.
-Say you want to move all audio files with extension .wav to a project bin *"audio"*, then you can simply select the bin *"audio"* in your project panel and run the tool. In the dialog that opens just enter the file extension "wav" and then the tool will scan the entire project and move all items of that type to the selected folder.
+Say you want to move all audio files with the extension .wav to a project bin *"audio"* - you can simply select the bin *"audio"* in your project panel and run the tool. In the dialog that opens, just enter the file extension "wav" and the tool will scan the entire project and move all items of that type to the selected folder.
 
 <RetinaImg src="/img/tools-ae/MoveItemsOfFileTypesToBinUI.png" alt="Ae Script: Group Project Items by 
 Type"/>
 
 ### Custimize Code: Scanning Specific Folders
 
-By default, the tool searches in the entire project for files of the given file type. But the block code of the tool can also be customized, such that it only searches in a particular project bin. Just select the project bin that should be searched and then click the refresh button as indicated by the arrow here:
+By default, the tool searches within the entire project for files of the given file type. However, the block code of the tool can also be customized so that it only searches in a particular project bin. Just select the project bin that should be searched and then click the refresh button as indicated by the arrow here:
 
 <RetinaImg src="/img/tools-ae/MoveItemsOfFileTypesToBinCustomizeBin.png" alt="custimize to only search in a particular project bin"/>
 
 ### Custimize Code: Multiple File Types and no Dialog
 
-It is a good idea to have the same project structure for all of your projects. So instead of a script with a dialog that always asks where to put which type of file, wouldn't it be great to create a custom script that knows where you want all your usual file types to be?
+It is a good idea to have the same project structure for all of your projects. So, instead of a script with a dialog that always asks where to put which type of file, wouldn't it be great to create a custom script that knows where you want all your usual file types to be?
 
 Let's take a look at the main part of the script:
 <RetinaImg src="/img/tools-ae/MoveItemsOfFileTypesToBinCustomizeMultiple1.png" alt="custimize to only search in a particular project bin"/>
-The first few blocks deal with creating the user interface and the last block does the actual work. I thas three parameters:
-- the file type that we look for,
-- the project bin in which we search for that file type (the empty default means the entire project)
-- the project bin where the found project items should be placed
+The first few blocks deal with creating the user interface, and the last block does the actual work. It has three parameters:
+- the file type that we look for
+- the project bin where we search for that file type (the empty default means the entire project)
+- the project bin where the project items found should be placed
 
-To create your own custom script, you can now simply delete the blocks which create the user interface and 
-duplicate the block, which does the job (one copy for each file type that you want to process). In this example, we move all items of type *wav* to the project bin *"footage/audio"* and all *psd* files to the bin *"footage/psd"*
+To create your own custom script, you can now simply delete the blocks that create the user interface, and 
+duplicate the block that does the job (one copy for each file type that you want to process). In this example, we move all items of type *wav* to the project bin *"footage/audio"* and all *psd* files to the bin *"footage/psd"*
 
 <Anigif src={useBaseUrl('/img/tools-ae/MoveItemsOfFileTypesToBinCustomizeMultipleTut.gif')} width="960px" />
 
@@ -71,9 +71,9 @@ duplicate the block, which does the job (one copy for each file type that you wa
 
 ## Rename Project Item and All Layers Using it {#RenameProjectItemAndLayersUsingIt}
 
-When you rename a project item, After Effects renames all layers which are using this project item, too, unless you renamed those manually before. If you want to make sure that all layers using this project item are renamed, even if they where renamed manually before, you can use this tool.
+When you rename a project item, After Effects renames all layers that are also using this project item, unless you've manually renamed them before. If you want to make sure that all layers using this project item are renamed, even if they were renamed manually before, you can use this tool.
 
 <RetinaImg src="/img/tools-ae/renameProjectItemAndLayersUsingIt.png" alt="rename project item and layers using it"/>
 
-Just select a project item and run the "Rename Project Items and All Layers Using it" tool. In the dialog that pops up, you can enter a new name and the script will rename the selected project item accordingly and will also rename all layers which have this project item as source.
+Just select a project item and run the "Rename Project Items and All Layers Using it" tool. In the dialog that pops up, you can enter a new name - the script will rename the selected project item accordingly, and also rename all layers which have this project item as source.
 

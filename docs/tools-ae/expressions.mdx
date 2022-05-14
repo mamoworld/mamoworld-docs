@@ -10,14 +10,14 @@ Automation Blocks contains various tools to work with expressions more effective
 
 ## Apply Expressions {#ApplyExpressions}
 
-Applying an expression to multiple properties can be tedious - you always have to first write the expression on one layer and then copy & paste it to the others. Instead, with Automation Blocks you can simply launch the tool **Apply Expression to All Selected Props**, enter the expression in the dialog and it will be applied to all selected properties instantly.
+Applying an expression to multiple properties can be tedious - you always have to first write the expression on one layer, then copy & paste it to the others. Instead, with Automation Blocks you can simply launch the tool **Apply Expression to All Selected Props**, enter the expression in the dialog, and it will be applied to all selected properties instantly.
 
 <RetinaImg src="/img/tools-ae/ApplyExpressionToAllSelectedPropsUI.png" alt="apply After Effects expression to all selected properties"/>
 
 
 :::tip editing expressions
 
-The dialog always remembers the expression you entered the last time. Hence, if you want to change the expression that you just applied, simply run the tool again and the dialog still contains all the code you entered, such that you can edit it easily.
+The dialog always remembers the last expression you entered. So, if you want to change the expression that you just applied, simply run the tool again and the dialog will still contain all the code you entered, so you can edit it easily.
 
 :::
 
@@ -27,18 +27,18 @@ Do you sometimes apply expressions to a layer and then duplicate the layer many 
 
 <Anigif src={useBaseUrl('/img/tools-ae/ExpressionSyncToDuplicates.gif')} width="862px" />
 
-The **Sync Expressions to Duplicate Layers** tool offers an easy solution for that. Just change the expression(s) in one of the layers, select that one layer and run the tool. It will find all other layers in the comp which have (almost) the same name and copy all expressions off the selected layer to those layers to.
+The **Sync Expressions to Duplicate Layers** tool offers an easy solution for this. Just change the expression(s) on one of the layers, select that one layer, and run the tool. It will find all other layers in the comp which have (almost) the same name, and then copy all expressions from the first selected layer to the others.
 
-I said "almost the same name" since the layers may have a different number at
-the end, i.e. if you select a layer with name "Red Solid 1" also layers like "Red Solid 5" will be processed. 
+I said "almost the same name", since the layers may have a different number at
+the end, i.e. if you select a layer with name "Red Solid 1", then layers like "Red Solid 5" will also be processed. 
 
 ## Enable/Disable Expressions {#EnableDisableExpressions}
 
 <RetinaImg src="/img/tools-ae/expressionsEnableUI.png" alt="batch enable/disable expressions in After Effects"/>
 
-With the **Enable or Disable Expressions** tool you can enable or disable many expressions at once. In the dialog you have the option to do that for
+With the **Enable or Disable Expressions** tool you can enable or disable many expressions at once. In the dialog, you have the option to do this for
 
-- all expressions of the project
+- all expressions in the project
 - all expressions of the active comp
 - all expressions of the active comp and its precomps
 - all expressions on the selected layers of the active comp
@@ -49,20 +49,20 @@ With the **Enable or Disable Expressions** tool you can enable or disable many e
 
 <RetinaImg src="/img/tools-ae/expressionsSearchReplaceUI.png" alt="search/replace in expressions"/>
 
-With this tool you can perform a search & replace in
+With this tool, you can perform a search & replace in
 
-- all expressions of the project
+- all expressions in the project
 - all expressions of the active comp
 - all expressions of the active comp and its precomp
 - all currently selected expressions of the active comp
 
-You have an option to search case sensitive and an advanced option to use regular expressions.
+You have the option to search case sensitive, and an advanced option to use regular expressions.
 
 ### Regular Expressions
 
-Regular Expressions allow to search for a pattern instead of a single search term. 
+Regular Expressions allow you to search for a pattern instead of a single search term. 
 
-If you don't know, yet, what regular expressions are, I recommend to [get started here](https://www.regular-expressions.info/).
+If you don't yet know what regular expressions are, I recommend [starting here](https://www.regular-expressions.info/).
 
 The pattern must be in Javascript Regular Expression notation and also supports capturing groups. In the replace string you can use the placeholders $0, $1, $2,... where $0 represents the full match, $1 the content of the first capturing group, $2 the content of the second capturing group etc.
 
@@ -71,7 +71,7 @@ The pattern must be in Javascript Regular Expression notation and also supports 
 - search: `Arm (\d+)`
 - replace `Leg $1`
 
-This operation would replace `Arm 1` by `Leg 1` and `Arm 2` by `Leg 2`, etc. but would ignore any occurrence of "Arm" that is not followed by a space and digits. The `\d+` is the regular expression for "one or several digits" and the parenteses around it indicate, that you want to store this part of the match in a capturing group. In the replace text, the `$1` indicates, that the content of the first capturing group should in inserted at that position.
+This operation would replace `Arm 1` with `Leg 1` and `Arm 2` with `Leg 2`, etc. but would ignore any occurrence of "Arm" that is not followed by a space and digits. The `\d+` is the regular expression for "one or several digits", and the parenteses around it indicate that you want to store this part of the match in a capturing group. In the replace text, the `$1` indicates that the content of the first capturing group should be inserted in that position.
 
 
 

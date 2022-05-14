@@ -5,19 +5,19 @@ import Youtube from "../../src/components/YouTube";
 
 # Synced Folders
 
-Automation Blocks contains some tools to synchronize system directories with project bins, which you find in the section *Project->Footage->Synced Folders* of the library. The basic workflow is:
+Automation Blocks contains some tools to synchronize system directories with project bins, which you'll find in the section *Project->Footage->Synced Folders* of the library. The basic workflow is:
 
 1. Import entire folders into the After Effects project with the tool **Synced Folders - Import**.
-2. After you added new assets to a synced folder, just run the tool **Synced Folders - Update**. It will detect all changes in any of the synced folders, import all new assets and also delete project items of assets that have been deleted.
+2. After you've added new assets to a synced folder, just run the tool **Synced Folders - Update**. It will detect all changes in any of the synced folders, import all new assets, and also delete project items of assets that have been deleted.
 
 ## Import {#Import}
 
-Use this script to create an After Effects folder with the same name as the system folder you selected and synchronize their contents.
+Use this script to create an After Effects folder with the same name as the system folder you've selected and synchronize their contents.
 
 :::tip Folder Location
 
-If you selected an After Effects folder before running the script the new folder will be created inside that folder.
-Otherwise it is created in the root of your project.
+If you selected an After Effects folder before running the script, the new folder will be created inside that folder.
+Otherwise, it is created in the root of your project.
 
 :::
 
@@ -34,17 +34,17 @@ Select a system folder to import and sync with.
 
 #### Subfolders
 
-Let's you choose what to do with the subfolders within the selected folder:
+Lets you choose what to do with the subfolders within the selected folder:
 
-**include**: Includes the subfolders contents creating new subfolders in After Effects to match the system folder structure.
+**include**: Includes the subfolders' contents, creating new subfolders in After Effects to match the system folder structure.
 
-**exclude**: Excludes the subfolders contents.
+**exclude**: Excludes the subfolders' contents.
 
-**flatten**: Includes the subfolders contents but does not create new subfolders in After Effects.
+**flatten**: Includes the subfolders' contents but does not create any new subfolders in After Effects.
 
 #### Import multi-layers files as
 
-Let's you choose how to import multi-layer files (as footage, composition or composition with cropped layers).
+Lets you choose how to import multi-layer files (as footage, composition or composition with cropped layers).
 
 #### Import numbered still images as sequence
 
@@ -56,7 +56,7 @@ Deletes items from the After Effects bin if needed to match the system folder.
 
 ## Update {#Update}
 
-Run this script after any of the synced folders changed on disk. The script will detect all changes and update the contents of all synced folders in the project accordingly.
+Run this script after any of the synced folders are changed on disk. The script will detect all changes and update the contents of all synced folders in the project accordingly.
 
 ## Show List {#ShowList}
 
@@ -65,7 +65,7 @@ You can use this script to show a list of all synced folders in the project.
 ## Unsync {#Unsync}
 
 You can use this script to stop syncing folders in the project.
-It let's you choose to unsync all or the selected After Effects folders only.
+It lets you choose to unsync all folders, or only the selected After Effects folders.
 
 <RetinaImg
 	src="/img/tools-ae/syncedFoldersUnsyncDialog.png"
@@ -74,12 +74,12 @@ It let's you choose to unsync all or the selected After Effects folders only.
 
 ## Change Selected Bin Settings {#ChangeSelectedBinSettings}
 
-You can use this script to change the settings from an already synced bin.
+You can use this script to change the settings of an already synced bin.
 
 <RetinaImg
 	src="/img/tools-ae/syncedFoldersChangeSelectedBinSettingsDialog.png"
 	alt="After Effects Script: Synced Folders - Change Selected Bin Settings"
 />
 
-The options of the dialog are identical to the ones of the [Import tool](#Import), except for the additional *Sync now* option:
+The options of the dialog are identical to those of the [Import tool](#Import), except for the additional *Sync now* option:
 
