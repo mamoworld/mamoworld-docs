@@ -1,0 +1,41 @@
+---
+sidebar_position: 2
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+import Youtube from '../../src/components/YouTube'
+
+# Write Your Custom Template Tool
+
+Turn After Effects templates into tools with their own custom user interface! If you render many instances of After Effects templates frequently and want to optimize and automate your workflow, then this course is for you! Learn how to create a script with Automation Blocks for Ae to change texts, footage, color and more of a template in no time and also how to render it instantly - and you can do all of this with no programming skills required!
+
+<RetinaImg src="/img/tutorials-ae/writeCustomTemplateToolOverview.png" alt="user interface of the tool we create"/>
+
+If you want to follow along but don't want to write the block code yourself, you also find the block code in our [Community Library](intro.mdx#access-community-library) in the folder `Courses/Write Your Custom Template Tool`.
+
+### Class 1: Creating a User Interface
+
+<Youtube id="ikj6kveyGAA"/>
+
+In this class we use the [Modal Input Dialog](/block-reference/userInterfaceAndComments#modal_input_dialog) block to create a custom user interface for our tool, where the user can enter all the details he wants to customize in the template.
+
+### Class 2: Replacing Texts, Colors and Footage
+
+<Youtube id="us3g8X-lrG8"/>
+
+In this class you learn how to update texts, colors and footage files in the After Effects project. 
+
+### Class 3: Some Logic
+
+<Youtube id="twfkl3ozlGs"/>
+
+In this class you learn how to use math and logic in Automation Blocks. We use the math to calculate a scale factor. That way, the user can choose footage of any size and it will be scaled up or down automatically to the size that the Ae template requires. We also use logic such that a single *"color theme"* dropdown in the user interface can control many color properties at once.
+
+### Class 4: Rendering
+
+In this class you learn how to operate the After Effects render queue with Automation Blocks. We extend our tool, such that it does not only customize the template, but also renders it instantly.
+
+<Youtube id="t83c4MrsNcs"/>
+
