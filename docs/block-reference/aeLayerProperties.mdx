@@ -272,7 +272,8 @@ A [logic value](logic.mdx) which is `true`, if the property is selected.
 
 
 
-The value of the property. If the property has keyframes, this value is ignored.
+The value of the property. If the property has keyframes, the value at the current time is returned if you get the value and a keyframe is created at the current time if you set the value.
+
 See the [Property Value Type](#ae_property_set_attribute_property_value_type) to figure out what kind of value a property has.
 If you want to set the value of a property, you can create this value with the [Property Value](#ae_property_value_json) block.
 

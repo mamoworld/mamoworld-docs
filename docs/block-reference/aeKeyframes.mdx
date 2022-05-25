@@ -86,7 +86,11 @@ However, if you paste both scale and position at once, the block notices that th
 
 Note that this behavior is identical to what After Effects does when you cut and paste keyframes manually in the user interface.
 
+:::tip set value for keyframed property
 
+If you want to create a single keyframe at the current time, you can also use the block [Set Attribute of Property](aeLayerProperties#ae_property_set_attribute) to set the attribute "value". If the property already has keyframes, this will add a new keyframe at the current time (but if the property is not keyframed, this will change the value for all frames and will not insert a keyframe). 
+
+:::
 
 
 ## Static Keyframe List {#ae_keyframe_json_const}
