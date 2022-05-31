@@ -135,6 +135,19 @@ Note that compositions are also project items. To set properties that are specif
 
 The available attributes of project items are listed below. If an attribute is marked as read-only, you can only get but not set this attribute.
 
+
+### alpha mode
+
+The alpha mode of After Effects' Interpret Footage dialog. If you get this value, it will be one of the following [texts](text.mdx)
+
+1. `IGNORE`
+2. `STRAIGHT`
+3. `PREMULTIPLIED`
+
+If you set this value, you can either set it to one of the texts above, or to one of the numbers 1-3. Upper/lower case is ignored. So, instead of the text `IGNORE`, you can also use the number 1, or the text `ignore`.
+
+You can get and set this attribute for items of [type](#ae_item_set_attribute_type) `FootageNoSolidItem`, for other items it will produce an error.
+
 ### comment
 
 The comment text for a project item. To see the comments in the project panel, right-click on the title row of the project panel and choose `Columns->Comment` from the menu. This will reveal an extra column in the project panel which shows the item comment.
@@ -160,6 +173,19 @@ Don't use this value for items which have no video (like bins or still images).
 
 The number of frames per second of the project item. Don't use this value for items which have no video (like bins or still images).
 
+You can get and set this attribute for items of [type](#ae_item_set_attribute_type) `FootageNoSolidItem` and `CompItem`, for other items it will produce an error.
+
+Setting the `frame rate` attribute on footage items has the same effect as the "conform to frame rate" option of Ae's Interpret Footage dialog 
+
+### frame rate (native)
+
+Same as the `frame rate` attribute, unless you change the frame rate of a footage item using the "conform to frame rate" option of Ae's Interpret Footage dialog (or by setting the `frame rate` attribute with Automation Blocks).
+In that case, the `frame rate (native)` still contains the original frame rate of the footage file, whereas `frame rate` contains the conformed frame rate.
+
+### has alpha (read-only)
+
+A[logic value](/block-reference/logic.mdx) `true` or `false` indicating if the item has an alpha channel. This value is only relevant for items of [type](#ae_item_set_attribute_type) `FootageNoSolidItem`. For comps it is always `true` and for bins and solids it is always `false`.
+
 ### has audio (read-only)
 
 A [logic value](logic.mdx) `true` or `false` indicating if the project item has audio contents.
@@ -177,6 +203,16 @@ See also the attributes [width](#ae_item_set_attribute_width) and [size](#ae_ite
 
 A unique and persistent identification number used internally to identify an item between sessions. The value of the ID remains the same when the project is saved to a file and later reloaded. However, when you import this project into another project, new IDs are assigned to all items in the imported project. The ID is not displayed anywhere in the user interface.
 
+### invert alpha
+
+A[logic value](/block-reference/logic.mdx) `true` or `false` which corresponds to the "Invert Alpha" option of Ae's Interpret Footage dialog.
+You can get and set this attribute for items of [type](#ae_item_set_attribute_type) `FootageNoSolidItem`, for other items it will produce an error.
+
+
+### is still
+
+A[logic value](/block-reference/logic.mdx) `true` or `false` indicating if this item is a still image. This value is only relevant for items of [type](#ae_item_set_attribute_type) `FootageNoSolidItem`.It is always false for comps, bins and solid items.
+
 ### label color HexCode (read-only)
 
 The label color of the project item as hex color string (like `#ff0000` for 100% red, for example).
@@ -192,6 +228,11 @@ The label color name of the project item as configured in the *Labels* preferenc
 By default, the block to set the label color name shows a convenient dropdown where you can pick any of the default label colors. Note that this dropdown does not update when you have configured custom label color names. If you have configured custom label colors in the preferences, you can either drag a [Text](text.mdx#text) block on top of the dropdown and enter the custom label name manually, or you set the label color using the [color id](#ae_item_set_attribute_label_color_id).
 
 <Anigif src={useBaseUrl('/img/blockOther/ae_item_set_attribute_label_color_name.gif')} width="766px" />
+
+### loop
+
+A number corresponding to the loop option of Ae's Interpret Footage dialog.
+You can set this attribute for items of [type](#ae_item_set_attribute_type) `FootageNoSolidItem`, for other items it will produce an error.
 
 ### name
 
