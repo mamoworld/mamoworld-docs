@@ -65,12 +65,12 @@ Note that the new keys can either be adjusted to fit seamlessly to the existing 
 
 A very powerful combination for seamless animations is 
 
-- **adjust new keys to keys before** combined with
+- **adjust new keys to keys before or value** combined with
 - **adjust keys after to new keys**
 
-That way, the newly inserted keyframes and the existing keyframes after them are all shifted as needed to create a seamless animation.
+That way, the newly inserted keyframes and the existing keyframes after them are all shifted as needed to create a seamless animation which starts at the current position of the animation.
 
-If the newly inserted keyframes should animate a layer into the scene, you rather want to ignore keys before the animate in and want to make sure that the animation ends where the layer currently is. In that situation, you best set *"adjustment before"* to *"none"*  and *"adjustment after"* to *"adjust new keys to keys after"*.
+If the newly inserted keyframes should animate a layer into the scene, you typically want to preseve the position where the animation ends (and not where it starts). To achieve this, you can set *"adjustment before"* to *"none"*  and *"adjustment after"* to *"adjust new keys to keys after"*.
 
 :::
 
