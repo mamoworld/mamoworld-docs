@@ -25,22 +25,22 @@ To use the block, you need to specify the following parameters
 
 **property**: choose the [Layer Property](aeLayerProperties.mdx#ae_layer_properties_access) to which the keyframes should be applied.
 
-**time**: the [time](aeTime.mdx) where the first new keyframe should be located (the distance of the other keyframes depends on the keyframe data you provide).
+**time**: the [time](aeTime.mdx) where the first new keyframe should be located (the distance of the other keyframes depends on the keyframe data you provide). If you don't provide a value here, the keyframes are inserted at the time in the keyframe data (i.e. at the original time of the keyframes that you copied).
 
-### Adjustment of Sourrounding Keyframes
+### Automatic Keyframe Adjustment
 
-The two dropdowns at the bottom of the block allow you to adjust the existing keyframes to the newly inserted ones - or also vice versa! The first dropdown controls the behavior of the keyframes before the newly inserted ones, and the second dropdown controls the behavior of the keyframes after the newly inserted ones.
+The parameters "adjustment before" and "adjustment after" of the block allow you to adjust the existing keyframes to the newly inserted ones - or also vice versa! The first dropdown controls the behavior of the keyframes before the newly inserted ones, and the second dropdown controls the behavior of the keyframes after the newly inserted ones.
 
 #### Adjust Keyframes before newly inserted ones
 
 <RetinaImg src="/img/blockOther/ae_keyframes_apply_merge_option.png" alt="Merge Options Keys before"/>
 
 Here you have the following options:
-- **don't change:** keeps all keyframes before the new ones exactly as they are and pastes the new keyframes without modifying them in any way.
-- **offset (to fit seamlessly):** offsets all the keyframes before the new ones so that the last one ends up exactly at the value where the first newly inserted keyframe is. Example: say you already have two scale keyframes on your layer, which scale it from 20% to 50%, and now after that you want to add two keyframes which scale from 60% to 80%. This option will then change the first two keyframes to 30% and 60%, i.e. add 10 to them to ensure they end at 60%, which is exactly the value that the new inserted keyframes start with.
-- **offset new keyframes to fit seamlessly to:** This option adjusts the newly inserted keyframes so they start exactly where the last keyframe before the new ones ends. Example: If you already have two scale keyframes which animate the layer from 20% scale to 50% and you insert new keyframes with an animation from 60% to 80% after that, then those new keyframes will be changed to 50% and 70% to make sure they start exactly at the 50% where the animation of the existing keyframes ended.
+- **none:** keeps all keyframes before the new ones exactly as they are and pastes the new keyframes without modifying them in any way.
+- **adjust keys before to new keys:** offsets all the keyframes before the new ones so that the last one ends up exactly at the value where the first newly inserted keyframe is. Example: say you already have two scale keyframes on your layer, which scale it from 20% to 50%, and now after that you want to add two keyframes which scale from 60% to 80%. This option will then change the first two keyframes to 30% and 60%, i.e. add 10 to them to ensure they end at 60%, which is exactly the value that the new inserted keyframes start with.
+- **adjust new keys to keys before:** This option adjusts the newly inserted keyframes so they start exactly where the last keyframe before the new ones ends. Example: If you already have two scale keyframes which animate the layer from 20% scale to 50% and you insert new keyframes with an animation from 60% to 80% after that, then those new keyframes will be changed to 50% and 70% to make sure they start exactly at the 50% where the animation of the existing keyframes ended.
 
-- **hold last** this option just turns the last existing keyframe before the new ones into a hold keyframe. This way you can ensure that the transition from the previous keys to the start of the new keys happens abruptly at the first new key.
+- **adjust new keys to keys before or value:** This option is the same as *adjust new keys to keys before*, except that it also adjusts the new keyframes if there are no existing keyframes before the new ones at all. In other words, this option makes sure that the newly inserted keyframes start exactly at the current value, no matter if the property is already keyframed or not.
 
 #### Adjust Keyframes after newly inserted ones
 
@@ -48,19 +48,29 @@ Here you have the following options:
 
 Here you have the following options:
 
-- **don't change:** keeps all keyframes before the new ones exactly as they are and pastes the new keyframes without modifying them in any way.
-- **offset (to fit seamlessly):** offsets all the keyframes after the new ones so the first of them starts exactly at the value where the last newly inserted keyframe ends. Example: Say you already have two scale keyframes on your layer, which scale it from 20% to 50% and now you want to insert two keyframes which scale from 60% to 80% BEFORE those existing keys. This option will change the old keyframes to 80% and 110%, i.e. they will still scale up by 30%, but instead of starting from 20% they now start from 80%, where the newly inserted keyframes end.
+- **none:** keeps all keyframes before the new ones exactly as they are and pastes the new keyframes without modifying them in any way.
+- **adjust keys after to new keys:** offsets all the keyframes after the new ones so the first of them starts exactly at the value where the last newly inserted keyframe ends. Example: Say you already have two scale keyframes on your layer, which scale it from 20% to 50% and now you want to insert two keyframes which scale from 60% to 80% BEFORE those existing keys. This option will change the old keyframes to 80% and 110%, i.e. they will still scale up by 30%, but instead of starting from 20% they now start from 80%, where the newly inserted keyframes end.
 
-- **hold first** this option just turns the first existing keyframe after the new ones into a hold keyframe. That way you can ensure that the transition from the last newly inserted key to the next key happens abruptly, immediately after the last newly inserted key.
+- **adjust new keys to keys after:** This option adjusts the newly inserted keyframes so they end exactly where the first keyframe after the new ones ends. Example: If you already have two scale keyframes which animate the layer from 60% scale to 80% and you insert new keyframes with an animation from 80% to 100% before that, then those new keyframes will be changed to 40% and 60% to make sure they end exactly at the 60% where the animation of the existing keyframes starts.
+
+- **adjust new keys to keys after or value:** This option is the same as *adjust new keys to keys after*, except that it also adjusts the new keyframes if there are no existing keyframes after the new ones at all. In other words, this option makes sure that the newly inserted keyframes end exactly at the current value, no matter if the property is already keyframed or not.
+
+:::danger conflicting options
+
+Note that the new keys can either be adjusted to fit seamlessly to the existing keys before, or to the existing keys after, but not both. If you choose both options at the same time, the latter one is ignored.
+
+:::
 
 :::tip Seamless Animation
 
 A very powerful combination for seamless animations is 
 
-- **offset new keyframes to fit seamlessly to existing keyframes before new keyframes** combined with
-- **offset (to fit seamlessly) existing keyframes after new keyframes**
+- **adjust new keys to keys before** combined with
+- **adjust keys after to new keys**
 
 That way, the newly inserted keyframes and the existing keyframes after them are all shifted as needed to create a seamless animation.
+
+If the newly inserted keyframes should animate a layer into the scene, you rather want to ignore keys before the animate in and want to make sure that the animation ends where the layer currently is. In that situation, you best set *"adjustment before"* to *"none"*  and *"adjustment after"* to *"adjust new keys to keys after"*.
 
 :::
 
