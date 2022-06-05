@@ -7,14 +7,15 @@ import Youtube from '../../src/components/YouTube'
 
 # Keyframes
 
-Automation Blocks contains an entire collection of scripts to simplify working with keyframes.
+With Automation Blocks you can build your own library of keyframed animations and reuse them easily. The keyframes library does much more than a basic cut & paste - it automatically adjusts keyframes to the current context.
 
-
-## Save Preset {#SavePreset}
+## Overview
 
 This video gives a quick overview of the keyframe preset workflow:
 
-<Anigif src={useBaseUrl('/img/tools-ae/keyframesLibraryOverview.gif')} width="974px" />
+<Youtube id="FPUxgRTe9Jg" />
+
+## Save Preset {#SavePreset}
 
 You can use this script to save keyframe presets to your Automation Blocks Keyframes Library, which you can then apply to other layers using the [Apply Preset](#ApplyPreset) script. 
 
@@ -32,8 +33,14 @@ Make sure you have at least one property that has keyframes selected.
 
 :::
 
+### "Animate In" animations
+
+If your animation is intendet to let a layer appear in the scene, make sure to check the checkbox `is "animate in" animation`.
+This changes the behavior of the automatic keyframe adjustment. By default, it makes sure that the newly inserted animation starts at the current position. However to animate things into the scene, you want the inserted animation to end at the current position instead.
+
 ### Renaming & Deleting Presets
-The preset saves all keyframes of all selected properties to a file in the folder `~/Documents/Automation Blocks/Keyframes Library/`. To remove or rename presets later, you can simply delete or rename these files.
+
+Each preset is saved as a csv file in the folder `~/Documents/Automation Blocks/Keyframes Library/`. If you created a preset with name "my fancy move", for example, the folder will contain a file "my fancy move.csv". To remove or rename presets later, you can simply delete or rename these files.
 
 ### Choosing a Different Preset Folder
 
@@ -69,17 +76,15 @@ Applying a preset is very similar to pasting the keyframes via cut & paste. The 
 
 #### Automatic Adjustment of Preset Keys
 
-What makes the presets much more powerful than normal cut & paste of keyframes is that the keyframe values are adjusted to fit the existing keys: When you apply a keyframe preset to a property which already has keyframes **before the current time* then the value of the  keyframes of the preset is adjusted so that the pasted animation starts exactly at the current property value.
+What makes the presets much more powerful than normal cut & paste of keyframes is that the keyframe values are adjusted to fit the existing value or keyframes and even any already existing keyframes after the newly inserted ones are shifted to create a seamless animation.
 
 *Example Position Animation*
 
-Let's say the preset is a position animation, and in the original animation of the preset the layer moves from `[500,500]` to `[600,500]`, i.e. 100px to the right. If you now apply the preset to a layer which has position keyframes and at the current time the layer is at position `[200,200]`, then we don't want it to jump to `[500,500]` when we apply the preset, but instead want the preset animation to start at `[200,200]`. The preset is thus adjusted so that it now starts at `[200,200]` and ends at `[300,200]` i.e. it starts where the layer currently is and still moves 100px to the right.
-
-Note that **if the layer has no keyframes**, the preset animation will not be adjusted. If your layer has no keyframes, but you still want the preset to start at the layer's current position, you can simply insert a single keyframe (say 1 frame before the current time) before applying the preset.
+Let's say the preset is a position animation, and in the original animation of the preset the layer moves from `[500,500]` to `[600,500]`, i.e. 100px to the right. If you now apply the preset to a layer whose position at the current time is at `[200,200]`, then we don't want it to jump to `[500,500]` when we apply the preset, but instead want the preset animation to start at `[200,200]`. The preset is thus adjusted so that it now starts at `[200,200]` and ends at `[300,200]` i.e. it starts where the layer currently is and still moves 100px to the right.
 
 *Example Opacity Animation*
 
-This adjustment not only works for position animations, but also for other properties. Say the preset animates the opacity of a layer to change from 100% to 50%. If you then apply this preset to a layer whose opacity already has keyframes and whose opacity is 80% at the current time, then the preset will be adjusted so it animates from 80% to 30%, instead of from 100% to 50% (i.e. the opacity is still decreased by 50%, but now starting at 80 instead of 100).
+This adjustment not only works for position animations, but also for other properties. Say the preset animates the opacity of a layer to change from 100% to 50%. If you then apply this preset to a layer whose opacity is 80% at the current time, then the preset will be adjusted so it animates from 80% to 30%, instead of from 100% to 50% (i.e. the opacity is still decreased by 50%, but now starting at 80 instead of 100).
 
 #### Automatic Adjustment of Keys After Preset
 
