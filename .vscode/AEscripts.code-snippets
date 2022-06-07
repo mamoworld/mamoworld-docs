@@ -178,7 +178,7 @@
 
 	"Docusaurus Community Library": {
         "scope": "markdown",
-        "prefix": "community library (docusaurus)",
+        "prefix": "Community library (docusaurus)",
         "body": [
             "[Community Library](/intro.mdx#CommunityLibrary)"
 		],
