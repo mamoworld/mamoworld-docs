@@ -180,7 +180,7 @@
         "scope": "markdown",
         "prefix": "Community library (docusaurus)",
         "body": [
-            "[Community Library](/intro.mdx#CommunityLibrary)"
+            "[Community Library](/intro.mdx#access-community-library)"
 		],
         "description": " { kind:category...}"
     },

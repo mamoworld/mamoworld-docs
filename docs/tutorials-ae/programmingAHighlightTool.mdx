@@ -9,25 +9,28 @@ import Youtube from '../../src/components/YouTube'
 
 # Programming a Highlight Tool
 
-In this course you create an Automation Blocks tool which adds one of the following highlight shapes around each currently selected layer.
+In this course you will create an Automation Blocks tool that adds one of the following highlight shapes around each layer that you currently have selected.
 
 <Anigif src={useBaseUrl('/img/tutorials-ae/highlightPreviews.gif')} width="300px" />
 
-You learn 
+You will learn 
 - how to create shape layers
 - how to apply presets
 - how to loop over selected layers
 - how to set properties like the scale or position of a layer
 - how to measure the bounding box (source rect) of a layer
 
+### Using the Highlight Tools
+
+<Youtube id="t4Yg5HYBw60" square />
 
 ### Just Give Me These Tools!
 
-If you just want to use the highlight tools and don't want to learn how they are created, you can donwload them from our [Community Library](/intro.mdx#CommunityLibrary) in the folder `Rigs and Presets/Shapes/Burst and Highlight Shapes`. 
+If you just want to use the highlight tools and don't want to learn how they are created, you can download them from our [Community Library](/intro.mdx#access-community-library) in the folder `Rigs and Presets/Shapes/Burst and Highlight Shapes`. 
 
 ### Fast Track: Create Your Own Highlight Tool
 
-To create your own variant of the highlight tool with a custom design, there is no need to fully understand the code. Just start with one of the existing highlight shapes, change the shape layer however you want and save its contents & effects in a new animation preset. To create a new tool based on your new preset, you just need to customize three little things in the code:
+To create your own variant of the highlight tool with a custom design, there is no need to fully understand the code. Just start with one of the existing highlight shapes, change the shape layer however you want, and save its contents & effects in a new animation preset. To create a new tool based on your new preset, you just need to customize three small parts in the code:
 
 <RetinaImg src="/img/tutorials-ae/customizeHighlightTool.png" alt=""/>
 
@@ -38,10 +41,10 @@ If you want to fully undestand the code from start to finish, watch the followin
 <Youtube id="zJShXkkUVEQ"/>
 
 
-In this class, you learn how to create a new shape layer and apply a preset to it. This is the easiest way to create any custom shapes - and you can also add effects, keyframes and even expressions with that approach in no time.
+In this class, you'll learn how to create a new shape layer and apply a preset to it. This is the easiest way to create any custom shapes - you can also add effects, keyframes, and even expressions using this approach in no time.
 
 ### Class 2: Customizing the Preset for Each Selected Layer
 
 <Youtube id="jyU3gjAUL0Q"/>
 
-In this class we extend our tool such that it does not only create a single shape layer, but a separate one for each currently selected layer. We measure the size and location of all these selected layers such that we can adust the position and scale of the created hightlight shapes accordingly.
+In this class we extend our tool so that instead of creating a single shape layer, it creates a separate one for each currently selected layer. We measure the size and location of all these selected layers so we can adust the position and scale of the hightlight shapes we create accordingly.
