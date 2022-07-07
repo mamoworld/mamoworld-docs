@@ -10,6 +10,16 @@ import RetinaImg from "../../src/components/RetinaImg";
 
 The blocks in this category allow you to work with keyframes on [properties](aeLayerProperties.mdx) in After Effects. 
 
+## Add Single Keyframe {#ae_set_value_at_time}
+
+<RetinaImg
+  src="/img/blockScreenshots/AeKeyframes/ae_set_value_at_time.png"
+  alt="Block ae_set_value_at_time"
+/>
+
+This block creates a single keyframe - you just need to specify the [property](aeLayerProperties.mdx) on which the keyframe should be created, the [time](/block-reference/aeTime.mdx) and the [value](aeLayerProperties#ae_property_value_json) for the keyframe.
+
+
 ## Add Keyframes {#ae_keyframes_apply}
 
 <RetinaImg
@@ -17,7 +27,7 @@ The blocks in this category allow you to work with keyframes on [properties](aeL
   alt="Block ae_keyframes_apply"
 />
 
-This block can create keyframes on any keyframeable property - it is your keyframe copy and paste operation on steriods. If the property already has keyframes, it can even adjust them for you - if, for example, you add keyframes which move the layer 100 pixels downwards, then it can move all keyframes after the newly inserted ones 100 pixels down, too.
+This block can create multiple keyframes on any keyframeable property - it is your keyframe copy and paste operation on steriods. If the property already has keyframes, it can even adjust them for you - if, for example, you add keyframes which move the layer 100 pixels downwards, then it can move all keyframes after the newly inserted ones 100 pixels down, too.
 
 To use the block, you need to specify the following parameters
 

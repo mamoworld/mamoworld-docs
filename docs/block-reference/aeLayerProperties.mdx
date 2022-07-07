@@ -47,7 +47,7 @@ which is exactly the path you need to access this property.
 
 <RetinaImg src="/img/blockScreenshots/AeLayerProperties/ae_property_value_json.png" alt="Block ae_property_value_json"/>
 
-If you want to [set a property value](#ae_property_set_attribute_value), this value can be as simple as a single number (for the *Opacticy* property), or as complex as a shape or mask path). With this block you can store all kinds of property values as part of your script. Just select a property and click the *refresh* button of the block. It will read the property value and store it in the block as a string in JSON format. Now you can use it to set the value of a property using the block [Set Attribute of Property](#ae_property_set_attribute) for example.
+If you want to [set a property value](#ae_property_set_attribute_value) or a [keyframe](aeKeyframes#ae_set_value_at_time), this value can be as simple as a single number (for the *Opacticy* property), or as complex as a shape or mask path. With this block you can store all kinds of property values as part of your script. Just select a property and click the *refresh* button of the block. It will read the property value and store it in the block as a string in JSON format. Now you can use it to set the value of a property using the block [Set Attribute of Property](#ae_property_set_attribute) for example.
 
 Note that the block creates a string in JSON format. If you feel adventurous, you can copy and paste this data to a code editor of your choice and understand its structure. Then you can also create and manipulate these json texts with the blocks in the [text](text.mdx) category.
 
@@ -280,6 +280,12 @@ If you want to set the value of a property, you can create this value with the [
 If you want to keyframe a value, see the block [Add Keyframes](aeKeyframes.mdx#ae_keyframes_apply)
 
 
+## Delete Property {#ae_property_remove}
+
+<RetinaImg src="/img/blockScreenshots/AeLayerProperties/ae_property_remove.png" alt="Block ae_property_remove"/>
+
+
+Deletes the given property (or [list](/block-reference/lists.mdx) (array) of properties). If the property is a group, all child properties are removed as well. Note that not all properties can be deleted - you can delete an effect, for example, but you cannot delete an individual parameter of an effect or the transform group.
 
 
 ## Rebase Property {#ae_property_rebase}
