@@ -133,6 +133,15 @@ If you want to know if the property is actually varying over time, use the attri
 
 A [logic value](logic.mdx) `true` or `false`. When true, the property's dimensions are represented as separate properties. For example, if the layer's position is represented as X Position and Y Position properties in the Timeline panel, the Position property has this attribute set to true.
 
+### dropdown list entries (write only)
+
+A [list](/block-reference/lists.mdx) (array) of texts. This attribute can only be set for one property, namely the **Dropdown Menu Control** effect. It allows to set the labels for the dropdown options, in the same way as if you would click the *Edit* button of this effect.
+
+<RetinaImg src="/img/blockOther/ae_property_set_attribute_dropdown_list_entries.png" alt="Setting dropdown list entries of the Dropdown Menu Control"/>
+
+To insert an separator in the list, add an empty string to the like (or alternatively the text `(-`). The `|` symbol is not allowed in label names and will be removed.
+If you try to set the dropdown list entries for other properties than the *Dropdown Menu Control* effect, a warning is printed on the console and the request is ignored.
+
 ### enabled {#ae_property_set_attribute_enabled}
 
 A [logic value](logic.mdx) `true` or `false`. For a layer, this corresponds to the video switch state of the layer in the Timeline panel. For an effect and other properties, it corresponds to the setting of the eyeball icon, if there is one.
