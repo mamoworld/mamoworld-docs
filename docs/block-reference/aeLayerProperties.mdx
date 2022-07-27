@@ -75,9 +75,9 @@ This block is a [loop](loops.mdx) which allows you to do something with all (or 
 
 The block creates a [variable](variables.mdx) `my property` and during each execution of the loop, the variable contains the property that is currently considered.
 
-**comp(s) or layer(s)**
+**comp(s), layer(s) or group(s)**
 
-At this parameter, which is set to the [active comp](aeComp.mdx#ae_active_comp) by default, you can either specify a [single comp](aeComp.mdx#accessComp) or [layer](aeLayer.mdx#accessLayer) or a [list of layers](aeLayer.mdx#ae_layer_list) or [comps](aeProjectItems.mdx#block_ae_get_items_in_bin). For each given layer, all properties of that layer are considered - for each given composition, the properties of all layers in that comp are considered.
+At this parameter, which is set to the [active comp](aeComp.mdx#ae_active_comp) by default, you can either specify a [single comp](aeComp.mdx#accessComp) or [layer](aeLayer.mdx#accessLayer) or [Layer Property Group](#ae_property_path) or a [list of layers](aeLayer.mdx#ae_layer_list) or [comps](aeProjectItems.mdx#block_ae_get_items_in_bin). For each given layer, all properties of that layer are considered - for each given composition, the properties of all layers in that comp are considered. If you give a property group (like the *Transform* group of a layer, for example) only the properties contained in that group are considered.
 
 **each**
 
@@ -150,7 +150,7 @@ If you change the dropdown list entries, After Effects internally replaces the e
 
 #### example
 
-In this example we first create a dropdown list on the only selected layer. Then we set its dropdown list options, and after that change the name of the dropdown and choose the fourth of the new list options:
+In [this example](https://www.dropbox.com/s/fj2wxz56b1tgk9u/Create%20Dropdown%20Effect%2C%20Change%20Choices%20and%20Choose%20One.xml?dl=0) we first create a dropdown list on the only selected layer. Then we set its dropdown list options, and after that change the name of the dropdown and choose the fourth of the new list options:
 
 <RetinaImg src="/img/blockOther/ae_property_set_attribute_dropdown_list_entries_example.png" alt="Example: create dropdown effect, change its labels and pick one of them."/>
 
