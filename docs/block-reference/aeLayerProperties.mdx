@@ -142,6 +142,19 @@ A [list](/block-reference/lists.mdx) (array) of texts. This attribute can only b
 To insert an separator in the list, add an empty string to the like (or alternatively the text `(-`). The `|` symbol is not allowed in label names and will be removed.
 If you try to set the dropdown list entries for other properties than the *Dropdown Menu Control* effect, a warning is printed on the console and the request is ignored.
 
+:::danger Matchname Change
+
+If you change the dropdown list entries, After Effects internally replaces the effect by a new one with a new match name. As a result, any variable pointing to the effect becomes invalid. If you need to do multiple things with the effect (say setting its list entries AND changing its name, adding keyframes,...) best change the list entries after the other operations. If this is not possible, you can also save the name of the 
+
+:::
+
+#### example
+
+In this example we first create a dropdown list on the only selected layer. Then we set its dropdown list options, and after that change the name of the dropdown and choose the fourth of the new list options:
+
+<RetinaImg src="/img/blockOther/ae_property_set_attribute_dropdown_list_entries_example.png" alt="Example: create dropdown effect, change its labels and pick one of them."/>
+
+
 ### enabled {#ae_property_set_attribute_enabled}
 
 A [logic value](logic.mdx) `true` or `false`. For a layer, this corresponds to the video switch state of the layer in the Timeline panel. For an effect and other properties, it corresponds to the setting of the eyeball icon, if there is one.

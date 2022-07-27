@@ -25,11 +25,13 @@ The following blocks all reference the layer `White Solid 1` in the composition 
 As you can see, the path of a layer is composed of a [name or path for the composition](aeProjectItems.mdx#accessProjectItem), followed by a `::` and then the name (or index) of the layer itself.
 The biggest different between the first two is that when you click the *refresh* icon of the layer block, it will fill all its text fields automatically based on the layer that is currently selected in the Timeline panel. With the "root composition", however, the text is also split into one component for the layer and one for the containing comp, so you can manipulate each of them individually.
 
-### By Layer Index**
+### By Layer Index
 
 Instead of a name, you can also use the index of a layer. This is the path for the 3rd layer in the composition "Comp 1": `Comp 1::3`.
 
 You can also use negative indices, which will count the layers from the end of the composition. This is the path of the last layer in the comp with name `my comp` which is contained in the project bin `teaser`: `/teaser/my comp::-1`.
+
+[This tutorial video](https://www.youtube.com/watch?v=vLFNPX3Rgb8) shows a basic example how to access a layer of the active comp by index.
 
 ### In the Active Composition
 
