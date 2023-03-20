@@ -11,14 +11,44 @@ import RetinaImg from '../../src/components/RetinaImg'
 
 These blocks allow you to create user interfaces, like showing a message or asking the user to enter a value or confirm an action. There are also some blocks that help you to document your code and link to external resources.
 
+## Input {#input_arg}
+
+<RetinaImg src="/img/blockScreenshots/UserInterfaceAndComments/input_arg.png" alt="Block input_arg"/>
+
+With this block you can create all kinds of user interface elements in the inputs panel of Automation Blocks. Whenever you add an input block to your script, a corresponding input shows up in the inputs panel. When you run a tool, the values are retrieved from the inputs panel and inserted in the block code.
+
+These two blocks behave exactly identical, for example, except that the actual text of the green [Text block](text.mdx#text) can only be changed in the block editor, whereas the text of the red *Input* block can be changed in the inputs panel:
+<RetinaImg src="/img/blockOther/input_arg_example_string_constant.png" alt="Text Input vs Text Block"/>
+
+When you export a tool as jsx script, the values of the panel at the time of the export are used. If you want a jsx script to show a user interface when it is launched, you need to use a [modal input dialog](#modal_input_dialog) instead.
+
+This example shows all available UI elements and the panel elements, which they create:
+<RetinaImg src="/img/blockOther/input_arg_example_all.png" alt="List of all inputs which can be created"/>
+
+### File & Folder Inputs 
+
+The input types *open file*, *save file* and *choose folder* are very similar, since they all offer an auto-complete text field to enter a file or folder path.
+However, there are subtle differences:
+- **open file** allows the user to choose an existing file
+- **save file** allows the user to choose a file (either an existing one or one that does not exist, yet)
+- **choose folder** allows the user to choose a folder instead of a file
+
+### Binding Inputs to Variables
+
+If you need to use the value of an input multiple times in your script, you cannot duplicate the input block, since this would also duplicate the user interface in the inputs panel.
+Instead, we recommend to bind inputs to [variables](/block-reference/variables.mdx). Here we create a file input and store the file path which the user entered in the variable `my file path`:
+
+<RetinaImg src="/img/blockOther/input_and_variables_example.png" alt="binding inputs to variables"/>
+
 
 ## Modal Input Dialog {#modal_input_dialog}
 
 <RetinaImg src="/img/blockScreenshots/UserInterfaceAndComments/modal_input_dialog.png" alt="Block modal_input_dialog"/>
 
 Yes, this block might looks scary at first sight, but it is very easy to use and allows you to create a custom user interface for your block script!
+The user interface elements are very similar to the ones of the [Input](#input_arg) block, but they are shown in a popup dialog instead of the inputs panel.
 
-By default, it shows a user interface which demonstrates all the available elements:
+By default, the block shows a user interface which demonstrates all the available elements:
 
 <RetinaImg src="/img/blockOther/modal_input_dialog_ui.png" alt="Block modal_input_dialog"/>
 
