@@ -37,6 +37,10 @@ module.exports = {
 		[
 			'@docusaurus/preset-classic',
 			{
+				gtag: {
+					trackingID: 'G-DYFXE1G0TP',
+					anonymizeIP: true,
+				},
 				docs: {
 					sidebarPath: require.resolve('./sidebars.js'),
 					// Please change this to your repo.
@@ -55,12 +59,12 @@ module.exports = {
 		//require.resolve('./src/components/myFreezeFrameInit.js'),
 		//"https://unpkg.com/freezeframe/dist/freezeframe.min.js"
 		{
-		src: '/docs/automation-blocks/scripts/freezeframe.min.js',
-		 	async: false,
-		 },
-		 {
+			src: '/docs/automation-blocks/scripts/freezeframe.min.js',
+			async: false,
+		},
+		{
 			src: '/docs/automation-blocks/scripts//myFreezeFrameInit.js',
-				 async: false,
+			async: false,
 		},
 		{
 			src: '/docs/automation-blocks/scripts/retina.min.js',
