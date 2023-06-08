@@ -95,6 +95,13 @@ If you enable this option, the entry will be removed from Adobe Media Encoder's 
 
 Here you need to specify the file path of the resulting image file. See [Accessing a Particular File](files#accessFile) for all the ways you can specify a file.
 
+:::danger 0 at end of filename
+
+To export a single image, Automation Blocks needs to use a workaround to export image sequences with the duration of a single frame. As a side effect of that Premiere will always append a 0 to the end of the filename.
+
+:::
+
+
 ## Start Render Queue {#block_media_encoder_start_render_queue}
 
 <RetinaImg src="/img/blockScreenshots/PrRendering/block_media_encoder_start_render_queue.png" alt="Block block_media_encoder_start_render_queue"/>
