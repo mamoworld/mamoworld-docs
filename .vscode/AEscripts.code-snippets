@@ -15,9 +15,62 @@
     // 	],
     // 	"description": "Log output to console"
     // }
+    /////////////////////////////////////// Javascript
+    "ifdefdebugLua": {
+        "scope": "lua",
+        "prefix": "ifdef debug",
+        "body": [
+            "-- #ifdef debug $1",
+            "-- #endif"
+        ],
+        "description": "//#ifndef statement"
+    },
+	"ifndefLua": {
+        "scope": "lua",
+        "prefix": "ifndef",
+        "body": [
+            "-- #ifndef $1",
+            "-- #define $1"
+        ],
+        "description": "//#ifndef statement"
+    },
+    "endifLua": {
+        "scope": "lua",
+        "prefix": "endif",
+        "body": [
+            "-- #endif"
+        ],
+        "description": "//#endif statement"
+    },
+    "includeLua": {
+        "scope": "lua",
+        "prefix": "include",
+        "body": [
+            "-- #include \"$1\""
+        ],
+        "description": "//#include"
+    },
+	"localLua": {
+        "scope": "lua",
+        "prefix": "--local",
+        "body": [
+            "-- #text local"
+        ],
+        "description": "//#text local"
+    },
+	"obfuscateLua": {
+        "scope": "lua",
+        "prefix": "obfuscate",
+        "body": [
+            "--[[MMobfuscateLuaString]]"
+        ],
+        "description": "--[[MMobfuscateLuaString]]"
+    },
 
-	"Docusaurus Anigif": {
-        "scope": "markdown",
+    /////////////////////////////////////// Docusaurus
+
+    "Docusaurus Anigif": {
+        "scope": "markdown,mdx",
         "prefix": "docusaurus Anigif",
         "body": [
             "<Anigif src={useBaseUrl('/img/blockOther/$1.gif')} width=\"$2px\" />"
@@ -25,8 +78,8 @@
         "description": "Animated Gif (optional width)"
     },
 
-	"Docusaurus Retina Image": {
-        "scope": "markdown",
+    "Docusaurus Retina Image": {
+        "scope": "markdown,mdx",
         "prefix": "docusaurus Retina Image",
         "body": [
             "<RetinaImg src=\"/img/blockOther/$1.png\" alt=\"$2\"/>"
@@ -34,17 +87,8 @@
         "description": "Retina Image"
     },
 
-	"Docusaurus Youtube Video": {
-        "scope": "markdown",
-        "prefix": "docusaurus YouTube Vid",
-        "body": [
-            "<Youtube id=\"$1\" square />"
-        ],
-        "description": "embed youtube video"
-    },
-
-	"Docusaurus Tip": {
-        "scope": "markdown",
+    "Docusaurus Tip": {
+        "scope": "markdown,mdx",
         "prefix": "docusaurus tip",
         "body": [
             ":::tip $1",
@@ -56,8 +100,8 @@
         "description": " { kind:category...}"
     },
 
-	"Docusaurus Danger": {
-        "scope": "markdown",
+    "Docusaurus Danger": {
+        "scope": "mdx",
         "prefix": "docusaurus danger",
         "body": [
             ":::danger $1",
@@ -69,119 +113,110 @@
         "description": " { kind:category...}"
     },
 
-	"Docusaurus Logic Value": {
-        "scope": "markdown",
+    "Docusaurus Logic Value": {
+        "scope": "markdown,mdx",
         "prefix": "logic value (docusaurus)",
         "body": [
-            "[logic value](/block-reference/logic.mdx) `true` or `false`"
-		],
+            "[logic value](logic.mdx) `true` or `false`"
+        ],
         "description": " { kind:category...}"
     },
 
-	"Docusaurus Null Value": {
-        "scope": "markdown",
+    "Docusaurus Null Value": {
+        "scope": "markdown,mdx",
         "prefix": "null value (docusaurus)",
         "body": [
-            "[null](/block-reference/logic.mdx#logic_null)"
-		],
+            "[null](logic.mdx#logic_null)"
+        ],
         "description": " { kind:category...}"
     },
 
-	"Docusaurus Text Value": {
-        "scope": "markdown",
+    "Docusaurus Text Value": {
+        "scope": "markdown,mdx",
         "prefix": "text (docusaurus)",
         "body": [
-            "[text](/block-reference/text.mdx)"
-		],
+            "[text](text.mdx)"
+        ],
         "description": " { kind:category...}"
     },
 
-	"Docusaurus File Value": {
-        "scope": "markdown",
+    "Docusaurus File Value": {
+        "scope": "markdown,mdx",
         "prefix": "file (docusaurus)",
         "body": [
-            "[file](/block-reference/files.mdx#accessFile)"
-		],
+            "[file](files.mdx#accessFile)"
+        ],
         "description": " { kind:category...}"
     },
-	"Docusaurus List Value": {
-        "scope": "markdown",
+    "Docusaurus List Value": {
+        "scope": "markdown,mdx",
         "prefix": "list (docusaurus)",
         "body": [
-            "[list](/block-reference/lists.mdx) (array)"
-		],
+            "[list](lists.mdx) (array)"
+        ],
         "description": " { kind:category...}"
     },
 
-	"Docusaurus Ae Time Value": {
-        "scope": "markdown",
+    "Docusaurus Ae Time Value": {
+        "scope": "markdown,mdx",
         "prefix": "time value (Ae, docusaurus)",
         "body": [
-            "[time](/block-reference/aeTime.mdx)"
-		],
+            "[time](aeTime.mdx)"
+        ],
         "description": " { kind:category...}"
     },
 
-	"Docusaurus Ae Color Value": {
-        "scope": "markdown",
+    "Docusaurus Ae Color Value": {
+        "scope": "markdown,mdx",
         "prefix": "color value (docusaurus)",
         "body": [
             "For details on color values see [Ae Color](aeColor.mdx)"
-		],
+        ],
         "description": " { kind:category...}"
     },
 
-	"Docusaurus Project Item Value": {
-        "scope": "markdown",
+    "Docusaurus Project Item Value": {
+        "scope": "markdown,mdx",
         "prefix": "project item (docusaurus)",
         "body": [
-            "[Project Item](/block-reference/aeProjectItems.mdx#accessProjectItem)"
-		],
+            "[Project Item](aeProjectItems.mdx#accessProjectItem)"
+        ],
         "description": " { kind:category...}"
     },
 
-	"Docusaurus Ae Layer Value": {
-        "scope": "markdown",
+    "Docusaurus Ae Layer Value": {
+        "scope": "markdown,mdx",
         "prefix": "layer value (docusaurus)",
         "body": [
-            "[Layer](/block-reference/aeLayer.mdx#accessLayer)"
-		],
+            "[Layer](aeLayer.mdx#accessLayer)"
+        ],
         "description": " { kind:category...}"
     },
 
-	"Docusaurus Ae Comp Value": {
-        "scope": "markdown",
+    "Docusaurus Ae Comp Value": {
+        "scope": "markdown,mdx",
         "prefix": "comp value (docusaurus)",
         "body": [
-            "[Composition](/block-reference/aeComp.mdx#accessComp)"
-		],
+            "[Composition](aeComp.mdx#accessComp)"
+        ],
         "description": " { kind:category...}"
     },
 
-	"Docusaurus Ae Layer Property Value": {
-        "scope": "markdown",
+    "Docusaurus Ae Layer Property Value": {
+        "scope": "markdown,mdx",
         "prefix": "property value (Ae Layer, docusaurus)",
         "body": [
-            "[Layer Property](/block-reference/aeLayerProperties.mdx#ae_layer_properties_access)"
-		],
+            "[Layer Property](aeLayerProperties.mdx#ae_layer_properties_access)"
+        ],
         "description": " { kind:category...}"
     },
 
-	"Docusaurus Variable": {
-        "scope": "markdown",
+    "Docusaurus Variable": {
+        "scope": "markdown,mdx",
         "prefix": "variable (docusaurus)",
         "body": [
-            "[variable](/block-reference/variables.mdx)"
-		],
-        "description": " { kind:category...}"
-    },
-
-	"Docusaurus Community Library": {
-        "scope": "markdown",
-        "prefix": "Community library (docusaurus)",
-        "body": [
-            "[Community Library](/intro.mdx#access-community-library)"
-		],
+            "[variable](variables.mdx)"
+        ],
         "description": " { kind:category...}"
     },
 
@@ -304,9 +339,9 @@
             "    \"id\": \"$2\",",
             "    \"defaultValue\": null,",
             "    \"type\": {",
-			"        \"name\": \"propertyLink\",",
-			"        \"connectToSliderByDefault\": true",
-			"        \"optional\": true,",
+            "        \"name\": \"propertyLink\",",
+            "        \"connectToSliderByDefault\": true",
+            "        \"optional\": true,",
             "        \"acceptedPropertyValueTypes\": [\"OneD\", \"TwoD\", \"TwoD_SPATIAL\", \"SHAPE\"]",
             "    },",
             "    \"description\": \"$3\"",
@@ -387,10 +422,10 @@
         "scope": "json",
         "prefix": "vargroup",
         "body": [
-			"{",
-			"    \"kind\": \"vargroup\",",
-			"    \"id\": \"MAKE SURE WE HAVE AN ID - AT LEAST IF WE USE SHOW ONLY IF\",",
-			"    \"name\": \"$1\",",
+            "{",
+            "    \"kind\": \"vargroup\",",
+            "    \"id\": \"MAKE SURE WE HAVE AN ID - AT LEAST IF WE USE SHOW ONLY IF\",",
+            "    \"name\": \"$1\",",
             "    \"entries\": [$2]",
             "}"
         ],
