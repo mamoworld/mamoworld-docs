@@ -213,6 +213,21 @@ We reported this bug (bug DVAPR-4231653) to the Premiere Pro team and hope they 
 For everything else that this block has to offer - in particular how to access properties which are not listed in the dropdown by default - see the documentation of the [Set Clip Parameter Value Block](PrMogrtsAndClipParameters#pr_component_parameter_set_value), which is identical to this one, except for the missing time and easing controls.
 
 
+## Remove Keyframes {#pr_component_parameter_remove_key_range}
+
+<RetinaImg src="/img/blockScreenshots/PrMogrtsAndClipParameters/pr_component_parameter_remove_key_range.png" alt="Block pr_component_parameter_remove_key_range"/>
+
+By default, this block removes all keyframes from the given clip param between its in point and its out point. 
+
+#### start & end time
+You can specify the time range in which the keys should be deleted (both start and end time are inclusive, i.e. keys which are exactly at the start or end time are removed, too).
+For details how exactly the start and end time can be specified see the [Set Clip Parameter Value At Time block](PrMogrtsAndClipParameters#pr_component_parameter_set_value_at_time), which has the same options (i.e. the time can be specified relative to the in- or out-point, or in clip time or sequence time).
+
+#### other controls
+
+For everything else that this block has to offer - in particular how to access properties which are not listed in the dropdown by default - see the documentation of the [Set Clip Parameter Value Block](PrMogrtsAndClipParameters#pr_component_parameter_set_value), which is identical to this one, except for the missing time and easing controls.
+
+
 ## For Each Parameter of Clip {#block_pr_for_all_component_params_of_clip}
 
 <RetinaImg src="/img/blockScreenshots/PrMogrtsAndClipParameters/block_pr_for_all_component_params_of_clip.png" alt="Block pr_component_parameter_set_value_at_time"/>

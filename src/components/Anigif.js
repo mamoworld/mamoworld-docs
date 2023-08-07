@@ -15,7 +15,7 @@ class Anigif extends React.Component {
 		};
 	  }
 	render() {
-		return <div  style={{marginBottom: "20px", maxWidth:this.props.width}}><img  id={this.state.id} className="freezeframe"  src={this.props.src} onLoad={function(e){new Freezeframe({selector:e.target,  trigger:'click', overlay:true, responsive:true})}} /></div>;
+		return <div  class="mmanigif" style={{marginBottom: "20px", maxWidth:this.props.width}}><img  id={this.state.id} className="freezeframe"  src={this.props.src} onLoad={function(e){new Freezeframe({selector:e.target,  trigger:'click', overlay:true, responsive:true})}} /></div>;
 	}
   }
 

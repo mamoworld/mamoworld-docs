@@ -6,7 +6,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import Anigif from '../../src/components/Anigif'
 import RetinaImg from '../../src/components/RetinaImg'
 
-# [Pr] First Steps with Automation Blocks
+# Write Your First Custom Script with Automation Blocks
 
 Wow! So you've decided to take your workflows in Premiere Pro to the next level - great to have you on board! As with any tool that gives you superhero powers, Automation Blocks comes with a learning curve. But don't worry, this quick tutorial will teach you all the basics. Along the way, we'll also create a useful script that imports all your footage from a certain folder and inserts it into a new sequence.
 Time to get your superhero cape out of the closet!
@@ -16,11 +16,9 @@ Time to get your superhero cape out of the closet!
 
 First, open the Automation Blocks user interface with the menu command `Window->Extensions->Automation Blocks`. 
 
-<RetinaImg src="/img/tutorials-pr/firstSteps/launch_automation_blocks.png" alt="comment example"/>
+The user interface consists of several panels, which you can rearrange freely:
 
-Ignore the *Automation Blocks Launcher* for now. The launcher offers a quick way to just execute scripts, whereas the *Automation Blocks* main panel gives you the full editor. The editor looks like this:
-
-<RetinaImg src="/img/tutorials-pr/firstSteps/ui_overview@2x.png" alt="comment example"/>
+<RetinaImg src="/img/tutorials-pr/firstSteps/ui_overview.png" alt="comment example"/>
 
 
 - **Toolbar:** Here you can run the currently open script, and load and save scripts. On the far right side of the toolbar, you'll find the "Help" button, which opens the online help.
@@ -28,7 +26,7 @@ Ignore the *Automation Blocks Launcher* for now. The launcher offers a quick way
 - **Block Library:** Here you'll find all the blocks that are included in Automation Blocks. Since there are quite a few block types, they are grouped into categories. Just click on a category to see all the blocks included in it. To add a block to your script, just drag & drop it from the block library to the script panel.
 - **Script Library:** This is where you'll find all the example scripts that come with Automation Blocks. Once you've started creating your own scripts, they will show up here, too (in the *User Library* section).
 - **Console:** After you execute a script, the console shows if it was executed successfully, or if it failed (in which case you'll find an error message with more details, too). Scripts can also produce status output to explain what they are currently doing. All this output will show up in the console, too.
-
+- **Inputs Panel:** This is where the user interface of the currenty open script is shown (if the script has a custom UI created with the [input block](../block-reference/userInterfaceAndComments#input_arg)).
 ## Your First Script ##
 
 ### Adding a Block
@@ -134,14 +132,6 @@ In the block category "*User Interface & Comments*", you'll find the [Select Fol
 
 Thanks to the *Open Folder Dialog*, you don't need to modify the script itself anymore whenever you want to choose a new folder to import. This might seem like a minor difference - whether you enter a new file path right inside the block script, or use this kind of dialog instead - but imagine if you want to share your blocks with your colleagues. You won't need to explain to them anymore where exactly in your block code the folder path needs to be adjusted - the dialog just pops up whenever they run the script, so they won't have to touch your code at all.
 If you don't need to touch the code anymore, you can also execute your script with the Automation Blocks Launcher. 
-
-## The Launcher Panel
-
-The launcher panel can be opened with the Premiere Pro menu command 
-
-`Window->Extensions->Automation Blocks Launcher`. 
-
-This is like a compact version of the Automation Blocks panel, which allows you to execute any script in your library very quickly. Just double-click on any of the scripts to execute it (we made this a double-click to avoid you execute anything accidentally). Since the launcher panel does not show you the block code of the scripts, it's much more compact than the full Automation Blocks panel. This also has the advantage that you cannot change the scripts accidentally.
 
 ## Summary
 
