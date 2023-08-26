@@ -2,7 +2,7 @@
 module.exports = {
 	title: 'Automation Blocks',
 	tagline: 'Easy Automation of Workflows in Adobe After Effects & Premiere Pro',
-	url: 'https://docs.mamoworld.com',
+	url: process.env.AUTOMATION_BLOCKS_DOCS_URL || 'https://docs.mamoworld.com',
 	baseUrl: '/automation-blocks/',
 	onBrokenLinks: 'throw',
 	onBrokenMarkdownLinks: 'warn',
