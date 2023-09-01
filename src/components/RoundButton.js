@@ -1,11 +1,14 @@
 import React from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-const RoundButton = ({ label, url }) => {
+const RoundButton = ({ label, url, blank = false }) => {
   const finalUrl = useBaseUrl(url);
 
   return (
-    <div style={{marginBottom:'20px'}}><a href={finalUrl} target="_blank" rel="noopener noreferrer" style={{
+    <div style={{marginBottom:'20px'}}><a href={finalUrl} 
+                        target={blank ? '_blank' : '_self'} 
+                        rel={blank ? 'noopener noreferrer' : undefined} // Add noopener noreferrer only if blank is true
+                        style={{
                         backgroundColor: '#f3971b',
                         borderRadius: '20px',
                         color: '#fff',
