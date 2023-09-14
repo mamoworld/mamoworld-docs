@@ -23,71 +23,79 @@ Just select some clips in your sequence and run one of the tools in the section 
 
 <Anigif src={useBaseUrl('/img/tools-pr/keyframingTools/bouncingBall.gif')} width="300px" />
 
-To create a bouncing animation, just place the image (or other clip) you want to move at the location where the bounce should end. Then with the clip selected run the tool *"Selected Clips - Ball Bounce In"*.
-It will calculate a physics simulation and add keyframes to the position of the clip to animate it.
+Creating a dynamic bouncing animation is a snap! Begin by positioning the image or clip you want to animate at the final bounce destination within your project. With the clip selected, simply execute the "Selected Clips - Ball Bounce In" tool.
+
+This tool automates the process by conducting a physics simulation and placing keyframes on the clip's position, resulting in a captivating and natural bouncing animation.
 
 <Youtube id="LGiW3mItTPI" start="75"/>
 
-In the inputs panel you can set these parameters:
+Within the Inputs Panel, you have the flexibility to tailor your animation precisely to your liking by adjusting the following parameters:
 
-- **elasticity**: controls how much the animation bounces. For 50%, for example, the second bounce is half as high as the first one. For 90%, the second bounce has 90% of the height of the first one and hence, the object bounces much longer.
-- **move to the side**: if you enter a value of 100 for this parameter, the object will move 100 pixels to the right while it is bouncing. If you set it to 0, the object will fall vertically, without any lateral movement.
+- **Elasticity**: This parameter allows you to control the intensity of the animation's bounce. For instance, setting it to 50% results in the second bounce being half as high as the first one. On the other hand, a value of 90% extends the bounce duration as the second bounce reaches 90% of the first one's height, creating a prolonged bouncing effect.
 
-## Scale Bump
+- **Move to the Side**: This parameter enables you to introduce lateral movement to your animation. By entering a value of 100, the object will glide 100 pixels to the right during its bounce. Conversely, setting it to 0 ensures the object falls vertically without any horizontal displacement.
+
+## Create a Visual Focus with Scale Bump
 
 <Youtube id="LGiW3mItTPI" start="105"/>
 
-This tool is great to guide your viewers focus as if an object would should "Hey, look at me!"
+The Scale Bump tool is a powerful way to direct your viewers' attention, making an object shout, "Hey, look at me!"
 
 <Anigif src={useBaseUrl('/img/tools-pr/keyframingTools/scaleBump.gif')} width="300px" />
 
-Just place the current time indicator where the scale bump should be, select the clip which should be scaled and run the tool.
-In the inputs panel, you can 
-- set the duration of the animation
-- control how much the layer should be scaled up (or down for scale values less than 100%)
-- enable or disable overshooting, which makes the animation feel more elastic and natural
+Using this tool is as simple as positioning the current time indicator at the desired scale bump moment, selecting the clip you want to scale, and running the tool.
 
+In the Inputs Panel, you have control over:
 
+- **Scale Amount**: Define how much the layer should be scaled up (or down, for values less than 100%).
+- **Bump Duration**: Set the length of the animation.
+- **Overshooting**: Toggle this option to create a more elastic and natural feel to the animation, enhancing its visual impact.
 
 
 ## Remote Interview Tools
 
-Automation Blocks in Premiere Pro offers a powerful solution for editing remote interviews with ease. 
+Automation Blocks introduces a robust solution for effortlessly editing remote interviews in Premiere Pro.
 
 <Youtube id="uC5X8BVI0r8" />
 
 When dealing with remote interviews, the desire is often to display two videos side by side, each featuring one speaker. Additionally, animating the clips to highlight the current speaker by enlarging their video adds a professional touch. Thanks to Automation Blocks, accomplishing these transitions becomes a seamless process. With just a few clicks, you can create dynamic and engaging side-by-side videos, automatically resizing and animating the speaker's clip to draw the audience's attention to the current speaker, enhancing the overall viewing experience.
 
-## Removing Keyframes
+## Keyframe Removal
 
 <Youtube id="LGiW3mItTPI" start="152"/>
 
-With the keyfame tools you can animate lots of clips in no time, but sometimes you also want to get rid of animations again. For this you can use the following tools:
+While the keyframe tools empower you to animate multiple clips efficiently, there are times when you need to remove these animations. Automation Blocks offers the following tools for effortless keyframe removal:
 
 - **Remove All Keys:**
-This tool removes all keyframes from all selected clips in the timeline (this includes keyframes on the transform properties, but also keyframes on effect properties, for example). This tool comes with an option to only remove the keyframes in the in-out range of the sequence.
+   This tool erases all keyframes from the selected clips in your timeline. It covers not only keyframes on transform properties but also those on effect properties. Moreover, it provides an option to remove keyframes solely within the sequence's in-out range.
 
-- **Remove All Keys from Transform properties**
-This tool removes all keyframes only from the transform properties of the selected clips. It comes with options to process only specific transform properties like position or scale, for example.
+- **Remove All Transform Keys:**
+   Exclusively designed to target keyframes on transform properties, this tool clears all such keyframes from the selected clips. You can further refine the process by choosing specific transform properties to focus on, such as position or scale.
+
+These tools make the task of removing keyframes swift and precise, allowing you to maintain full control over your project's animation.
 
 ## Ken Burns Pan & Zoom
 
-The Ken Burns Pan & Zoom tool is great to add motion to your slideshows. Pan & Zoom all selected clips automatically in one click:
+Elevate your slideshows with the Ken Burns Pan & Zoom tool, designed to infuse dynamic motion into your presentations. With just a single click, you can effortlessly apply Pan & Zoom effects to all selected clips, transforming static images into captivating visual narratives.
 
 <Youtube id="hfN2D4aLIhw" />
 
 
-## Wiggle Animation
+## Add Playful Motion with Wiggle Animation
 
 <Youtube id="LGiW3mItTPI" start="194"/>
 
-The wiggle is one of the most used animations in Adobe After Effects, and with Automation Blocks you can also wiggle layers in Premiere Pro! The wiggle tool creates keyframes and also takes into account the motion created by existing position keyframes on the layer. The wiggle offers the following parameters in the input panel:
+The classic "wiggle" animation, widely popular in Adobe After Effects, is now at your fingertips in Premiere Pro, thanks to Automation Blocks! Our Wiggle tool simplifies the process by creating keyframes while taking into account any existing position keyframes on the layer.
 
-- *wiggles per second:* If you set this to 10, the tool creates 10 keyframes per second to wiggle the layer. The higher this number, the faster it wiggles.
-- *amount:* determines, how much it wiggles, i.e. up to how many pixels the layer can be moved away from its original position. This can be specified for x and y separately.
-- *In to Out only:* If this option is enabled, the layer is only wiggled within the current in-out range of the sequence.
+In the Input Panel, you have control over the following parameters:
 
-## Creating Custom Keyframing Tools
+- **Wiggles per Second:** Adjust this parameter to determine the animation's speed. Setting it to 10, for example, creates 10 keyframes per second, resulting in a quick wiggle effect. A higher value increases the speed.
+- **Amount:** Specify how much the layer wiggles, dictating the maximum distance the layer can move away from its original position. You can customize this for both the x and y axes independently.
+- **In to Out Only:** When enabled, this option restricts the wiggle animation to occur only within the current in-out range of the sequence.
+
+Explore the Wiggle Animation tool to inject playful motion into your projects, adding a touch of creativity and vibrancy to your scenes.
+
+## Craft Your Own Keyframing Tools
 
 <Youtube id="LGiW3mItTPI" start="222"/>
 
