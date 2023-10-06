@@ -1,0 +1,28 @@
+---
+sidebar_position: 9
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+import Youtube from '../../src/components/YouTube'
+import RoundButton from '../../src/components/RoundButton'
+
+# Export Tools
+
+## Export Footage List to Textfile {#export_list_of_footage_items_to_textfile}
+
+### Usage
+
+The tool **Export List of Footage Items to Textfile** exports the full media path of all footage items in your Premiere Pro project to a text file. You can also limit the export to only include
+- files in a particular project bin
+- selected files
+- used files
+
+<RetinaImg src="/img/tools-pr/exportTools/ExportListOfFootageToTextfile.png" alt="usage of the tool to export all Premiere Pro footage file paths to a text file"/>
+
+### Customizing the Block Code
+
+This tool is a good starting point if you want to export anything related to your footage items to a text file. In a nuttshell, the first big block creates the user interface and the second block implements the functionality:
+
+<RetinaImg src="/img/tools-pr/exportTools/ExportListOfFootageToTextfileBlocks.png" alt="customizing the default UI values"/>

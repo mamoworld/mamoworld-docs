@@ -1,0 +1,38 @@
+---
+sidebar_position: 11
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+import Youtube from '../../src/components/YouTube'
+import RoundButton from '../../src/components/RoundButton'
+
+# Sequence Tools
+
+## Deep Duplicate Sequence {#duplicate_active_sequence_including_nested_sequences}
+
+### Usage
+
+When you duplicate a sequence in Premiere Pro, which contains nested sequences, those nested sequences are not duplicated, which can cause a lot of confusion and frustration. With the Automation Blocks tool **Duplicate Active Sequence Including Nested Sequences** you create a duplicate of the active sequence and all nested sequences easily. Just choose a name for the duplicate and a bin where it should be placed and run the tool:
+<RetinaImg src="/img/tools-pr/sequenceTools/duplicateActiveSequenceToolUI.png" alt="Premiere Pro tool to duplicate the active sequence including nested sequences"/>
+
+**Extra tip**: In the parameter "name of duplicate" you can use the placeholder $1 for the name of the active sequence.
+
+### Customizing the Block Code
+
+This tool effectively just wraps a user interface around the [Clone Sequence Block](../block-reference/prSequence#block_pr_sequence_clone).
+The first four blocks create the user interface. Here you can easily adjust the default values for the different inputs, for example.
+
+<RetinaImg src="/img/tools-pr/sequenceTools/duplicateActiveSequenceToolBlocks.png" alt="customizing the block code"/>
+
+## Set In Out Range {#sequence_set_in_out_range}
+
+Automation Blocks contains two tools to sett the In-Out-Range of the active sequence:
+
+- **Set In Out to Selected Clips**
+- **Set In Out to Full Duration**
+
+<RetinaImg src="/img/tools-pr/sequenceTools/setInOutRangeToSelectedClips.png" alt="Premiere Pro tool to duplicate the active sequence including nested sequences"/>
+
+The two tools have no user interface - just select one of them, run it and you are done.
