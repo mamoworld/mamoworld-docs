@@ -3,15 +3,15 @@ sidebar_position: 1
 slug: /
 ---
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import Anigif from '../src/components/Anigif'
-import RetinaImg from '../src/components/RetinaImg'
-import Youtube from '../src/components/YouTube'
-import RoundButton from '../src/components/RoundButton'
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import Anigif from "../src/components/Anigif";
+import RetinaImg from "../src/components/RetinaImg";
+import Youtube from "../src/components/YouTube";
+import RoundButton from "../src/components/RoundButton";
 
 # Getting Started
 
-Automation Blocks is an infinite collection of premade, one-click tools for any task. With Automation Blocks, you can fully customize all the tools, and even create your own! It's currently available for Adobe After Effects, but we're also developing a version for Premiere Pro, and you'll already find some info about the Premiere Pro version in this documentation.
+Automation Blocks is an infinite collection of premade, one-click tools for any task in Adobe Premiere Pro and After Effects. With Automation Blocks, you can fully customize all the tools, and even create your own!
 
 <Youtube id="g2ZDwDXJv5Y" />
 
@@ -19,11 +19,15 @@ Automation Blocks is an infinite collection of premade, one-click tools for any 
 
 Automation Blocks is available at aescripts.com. You can download and install the free trial from the product page or install it using the [manager app](https://aescripts.com/learn/aescripts-aeplugins-manager-app/).
 
-<RoundButton url="https://aescripts.com/automation-blocks-for-after-effects/" label="Get Automation Blocks for Ae"/>
+<RoundButton
+  url="https://aescripts.com/automation-blocks-for-premiere-pro/"
+  label="Get Automation Blocks for Pr"
+/>
 
-<RoundButton label="Automation Blocks for Pr Coming Soon"/>
-
-
+<RoundButton
+  url="https://aescripts.com/automation-blocks-for-after-effects/"
+  label="Get Automation Blocks for Ae"
+/>
 
 ## First Steps
 
@@ -34,13 +38,19 @@ Automation Blocks is available at aescripts.com. You can download and install th
 Automation Blocks comes with many ready to use tools, which are all listed in the library panel.
 If you hover over any of the tools in the library it shows a short description which will give you a good idea what the tool is actually doing:
 
-<RetinaImg src="/img/overview/toolsHelpAndHelpTip.png" alt="help in the Automation Blocks library"/>
+<RetinaImg
+  src="/img/overview/toolsHelpAndHelpTip.png"
+  alt="help in the Automation Blocks library"
+/>
 
-Some tools are so easy that this short description is really all you need. But some of the more comprehensive tools also come with more documentation. To see this, just select a tool in the library, then click the "Help" button in the top right corner to open the in-depth documentation. You'll find all of these in-depth documentations in the section [Ae Tools](tools-ae/overviewToolsAe).
+Some tools are so easy that this short description is really all you need. But some of the more comprehensive tools also come with more documentation. To see this, just select a tool in the library, then click the "Help" button in the top right corner to open the in-depth documentation. You'll find all of these in-depth documentations in the sections [Pr Tools](tools-pr/overviewToolsPr) and [Ae Tools](tools-ae/overviewToolsAe).
 
 Most tools in Automation Blocks come with a user interface, which pops up when you run the tool. If a tool comes with a UI, this is indicated with a little dialog icon before the name of the tool:
 
-<RetinaImg src="/img/overview/libraryUiIconExplanation.png" alt="icon indicating that tool has a user interface"/>
+<RetinaImg
+  src="/img/overview/libraryUiIconExplanation.png"
+  alt="icon indicating that tool has a user interface"
+/>
 
 If a tool has no user interface, it usually means that it performs its job without the need for any further input. In some rare cases, a tool expects you to modify the block code before using it (like connecting a particular layer property to a block). However, in these rare cases, this is clearly described in the tool help.
 
@@ -48,10 +58,23 @@ If a tool has no user interface, it usually means that it performs its job witho
 
 ### Forum
 
-If you need help with customizing an existing Automation Blocks script, want to share a script with the community, or if you have a questions, please post in the [Adobe After Effects support forum](https://community.adobe.com/t5/after-effects/ct-p/ct-after-effects?page=1&sort=latest_replies&filter=unresolved&lang=all&tabid=discussions). 
-Your Adobe ID is already your user account for this forum, so you can start posting without any tedious registration. Just be sure to mention *"Automation Blocks"* in the subject and **add the topic "*Scripting*" to ensure that we see your post**. We'll then do our best to answer your questions.
+If you need help with customizing an existing Automation Blocks script, want to share a script with the community, or if you have a questions, please post in the [Adobe Premiere Pro support forum](https://community.adobe.com/t5/premiere-pro/ct-p/ct-premiere-pro) or the [Adobe After Effects support forum](https://community.adobe.com/t5/after-effects/ct-p/ct-after-effects?page=1&sort=latest_replies&filter=unresolved&lang=all&tabid=discussions).
+Your Adobe ID is already your user account for this forum, so you can start posting without any tedious registration. Just be sure to **mention _"Automation Blocks"_ in the subject** and add the **topic "_How to_" in the Pr or "_Scripting_" in the Ae forum** to ensure that we see your post. We'll then do our best to answer your questions.
 
-<a href="https://community.adobe.com/t5/forums/postpage/board-id/after-effects" style={{border: "2px solid", display: "block"}}><RetinaImg src="/img/overview/postAdobeForum.png" alt="post questions in the Adobe forum"/></a>
+<div className="two-column-layout">
+    <div className="left-column">
+        <strong>Premiere Pro</strong>
+        <a href="https://community.adobe.com/t5/forums/postpage/board-id/premiere-pro" style={{border: "2px solid", display: "block"}}>
+            <RetinaImg src="/img/overview/postAdobeForumPr.png" alt="post questions in the Premiere Pro forum"/>
+        </a>
+    </div>
+    <div className="right-column">
+        <strong>After Effects</strong>
+        <a href="https://community.adobe.com/t5/forums/postpage/board-id/after-effects"  style={{ border: "2px solid", display: "block" }}>
+            <RetinaImg src="/img/overview/postAdobeForumAe.png" alt="post questions in the After Effects forum"/>
+        </a>
+    </div>
+</div>
 
 ### Twitter & Instagram
 
@@ -59,11 +82,26 @@ We monitor the hashtag #automationblocksae on Twitter and Instagram. Feel free t
 
 ### Access Community Library {#access-community-library}
 
-We collect all Automation Blocks scripts that are shared in the community in a public folder, which you can access via Dropbox, Google Drive or GitHub. 
+We collect all Automation Blocks scripts that are shared in the community in a public folder, which you can access via Dropbox, Google Drive or GitHub.
 
-- [Community Library on Dropbox](https://www.dropbox.com/sh/1x8juwu30hf1p0o/AAA1nQmbqglqVu22bS5WEJPZa?dl=0)
-- [Community Library on Google Drive](https://drive.google.com/drive/folders/1-2VPXG_fsxyeNqVGBUEKI7eTd3e_n5qy?usp=sharing)
-- [Community Library on GitHub](https://github.com/mamoworld/automation-blocks-ae-community-library)
+<div className="two-column-layout">
+    <div className="left-column">
+        <strong>Premiere Pro</strong>
+        <ul>
+        <li><a href="https://www.dropbox.com/scl/fo/55q5ba1q262zr6j6zuc5t/h?rlkey=u5zukx7hthj0edmkj0t9zxojc&dl=0">Community Library on Dropbox</a></li>
+        <li><a href="https://drive.google.com/drive/folders/19hr4w7_jhnrrKKM_1ISUydsUjFcaXmx7?usp=sharing">Community Library on Google Drive</a></li>
+        <li><a href="https://github.com/mamoworld/automation-blocks-pr-community-library">Community Library on GitHub</a></li>
+        </ul>
+    </div>
+    <div className="right-column">
+        <strong>After Effects</strong>
+       <ul>
+        <li><a href="https://www.dropbox.com/sh/1x8juwu30hf1p0o/AAA1nQmbqglqVu22bS5WEJPZa?dl=0">Community Library on Dropbox</a></li>
+        <li><a href="https://drive.google.com/drive/folders/1-2VPXG_fsxyeNqVGBUEKI7eTd3e_n5qy?usp=sharing">Community Library on Google Drive</a></li>
+        <li><a href="https://github.com/mamoworld/automation-blocks-ae-community-library">Community Library on GitHub</a></li>
+        </ul>
+    </div>
+</div>
 
 Just download the folder right into your Automation Blocks user library, restart Automation Blocks, and you're ready to go.
 
@@ -72,17 +110,25 @@ If you've created a script that you think is useful for the community, please [g
 ### Where is the User Library?
 
 To copy tools from the community library to your user library, you need to know where the latter is located on your system.
-By default the user library is a subfolder with name *"Automation Blocks Ae Library"* inside your user's *Documents* folder.
+By default the user library is a subfolder with name _"Automation Blocks Pr Library"_ (or _"Automation Blocks Ae Library"_) inside your user's _Documents_ folder.
 You can also access the library from Automation Blocks preferences:
 
-<RetinaImg src="/img/overview/findUserLibraryFolder.png" alt="find Automation Blocks Ae Library folder"/>
+<RetinaImg
+  src="/img/overview/findUserLibraryFolder.png"
+  alt="find Automation Blocks Ae Library folder"
+/>
 
 After you copied new scripts to your user library, make sure to close and reopen the Automation Blocks panel, to force a reload of the library.
 
 ## Customize & Write Your Own Tools
 
-In Automation Blocks, you can fully customize all the tools, and even create your own! Instead of programming code, the tools are based on blocks - creating tools feels more like playing with Lego bricks than doing actual programming. It's when you start to customize the example scripts to do what you need, or even write your own scripts from scratch, that the magic really begins! 
+In Automation Blocks, you can fully customize all the tools, and even create your own! Instead of programming code, the tools are based on blocks - creating tools feels more like playing with Lego bricks than doing actual programming. It's when you start to customize the example scripts to do what you need, or even write your own scripts from scratch, that the magic really begins!
 
-<Anigif src={useBaseUrl('/img/overview/writeYourOwnToolsCreateBinsAndCompExample.gif')} width="792px" />
+<Anigif
+  src={useBaseUrl(
+    "/img/overview/writeYourOwnToolsCreateBinsAndCompExample.gif"
+  )}
+  width="792px"
+/>
 
-If you want to become a true Automation hero, let's not waste any time: To get started with writing your own block scripts in After Effects, watch the tutorial series [Write Your Custom Project Setup Script](tutorials-ae/writeCustomProjectSetupScript) and [Write Your Custom Template Tool](tutorials-ae/writeCustomTemplateTool).
+If you want to become a true Automation hero, let's not waste any time: If you want to create tools for Premiere Pro, start with [Write Your First Custom Script with Automation Blocks](tutorials-pr/firstSteps). To get started with writing your own block scripts in After Effects, watch the tutorial series [Write Your Custom Project Setup Script](tutorials-ae/writeCustomProjectSetupScript) and [Write Your Custom Template Tool](tutorials-ae/writeCustomTemplateTool).

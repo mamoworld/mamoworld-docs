@@ -61,3 +61,26 @@
 .newsidebargroup {
 	border-top: 1px #DDD solid;
 }
+
+.two-column-layout {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.left-column {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.right-column {
+  flex: 1;
+  margin-left: 20px;
+}
+
+@media (max-width: 996px) {
+  .left-column,
+  .right-column {
+    flex: 0 0 100%; /* Set both columns to take up 100% width */
+    margin: 0; /* Remove margin between columns */
+  }
+}
