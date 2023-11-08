@@ -31,33 +31,24 @@ The user interface consists of several panels, which you can rearrange freely:
 
 ### Adding a Block
 
-Let's first get rid of the default blocks in the script panel by clicking the "New" button of the toolbar. Now, in the block library, we open the category *Pr Project* and drag the *Sync Folder* block into the script panel 
+Let's first open the script panel and get rid of its default blocks by clicking the "New" button of the toolbar. Now, in the block library, we open the category *Pr Project* and drag the *Sync Folder* block into the script panel 
 (click on the image to play the screen recording):
 
-<Anigif src={useBaseUrl('/img/tutorials-pr/firstSteps/step_1_add_sync_block.gif')} />
+<Anigif src={useBaseUrl('/img/tutorials-pr/firstSteps/step_1.gif')} />
 
 
 This block can import an entire folder on your hard-drive into the currently open Premiere Pro project. If the folder contains subfolders, it will create subbins into the project, too. Even better: before importing anything, the block checks if the project bin already contains any of the files and if so, it won't import those a second time. So this block is like an intern that you can ask "Hey, could you please take a look at this folder and check if all of it is imported properly into that project bin?"
 
 Now I've told you what this block is doing, but in general, how do you figure out exactly what a block does? Just right-click on any block and choose "help" to get an in-depth documentation of what it does.
 
-<Anigif src={useBaseUrl('/img/tutorials-pr/firstSteps/step_2_access_help.gif')} />
+<Anigif src={useBaseUrl('/img/tutorials-pr/firstSteps/step_2.gif')} />
 
+### Customizinig Block Parameters
 
-Now let's adjust the block to our needs! All we need to do is choose the folder that you want to import. Just click on the folder icon at the top right of the block and then choose a folder in the "Open Folder" dialog that pops up. Make sure that the folder actually contains some footage, so we have something we can import.
+Now let's adjust the block to our needs! First we choose the folder that you want to import. Just click on the folder icon at the top right of the block and then choose a folder in the "Open Folder" dialog that pops up. Make sure that the folder actually contains some footage, so we have something we can import.
+Next, we also need to choose target bin in Premiere Pro's project panel, where the imported footage should be inserted. For this, we just select the desired target bin inside the project panel and then click on the *refresh icon* icon in the second line of the sync folder block. In our example, we select the bin "day 1" which is located inside the bin "footage". Automation Blocks describes this bin with the path `\footage\day1`. Instead of using the *refresh icon* you can  also enter these paths manually, if you like. This is useful, for example, if you want to use a bin which does not exist in the project, yet.
 
-<Anigif src={useBaseUrl('/img/tutorials-pr/firstSteps/step_3_choose_folder.gif')} />
-
-
-### Run the Script
-
-Now it's time to run your script! Just click the *Run Script* button and see what happens!
-
-<Anigif src={useBaseUrl('/img/tutorials-pr/firstSteps/step_4_run_script.gif')} />
-
-
-As you can see, in the project a bin "bin" appeared with another bin "subbin" inside - and this includes all the footage from the folder we chose!
-These bins have been created because we set the parameter *project bin* of the block to `bin\subbin`. Of course, you can enter a more meaningful name like `footage` here. If you work with subbins, make sure to use a "\" and not a "/"! 
+<Anigif src={useBaseUrl('/img/tutorials-pr/firstSteps/step_3.gif')} />
 
 :::danger Backslash vs Slash
 
@@ -68,34 +59,43 @@ For the path of a project item (i.e. a bin, sequence, footage etc. inside your p
 
 :::
 
+### Run the Script
+
+Now it's time to run your script! Just click the *Run Script* button and see what happens! Automation Blocks has two buttons for this: The "Run Script" button at the top left of the toolbar and the "Run" button in the library panel. Both buttons do exactly the same, so it does not matter, which one you use.
+
+<Anigif src={useBaseUrl('/img/tutorials-pr/firstSteps/step_4.gif')} />
+
+
+As you can see, the script imports all footage into the desired target bin successfully. Note the green "DONE" message next to the "Run" button, which indicates that the script execution was successful.
+
+
+
 ### The Console
 
-Please run the script again (or watch the animated gif above again) and focus on what happens in Automation Block's console.
-At the top of the console, you'll first see a blue `...still running...` message indicating that the script is still busy importing the footage. When you run the script for the first time, it can take a while - depending on how much footage you have in that folder. If you run the script a second time, the message will disappear very fast (since there is no new footage to import). When the green `DONE` message appears, you know that the script has finished its job without any errors.
+<Anigif src={useBaseUrl('/img/tutorials-pr/firstSteps/step_5.gif')} />
 
-<RetinaImg src="/img/tutorials-pr/firstSteps/console_done.png" alt="console done"/>
-
-
-The other text that shows up in the console is created by the blocks while they do their job. What exactly you see there depends on the block - our *sync folder* block, for example, prints a `check file` message whenever it checks if a particular file has been imported before. In case it found new files which need to be imported, it also prints an `import file` message for each of those files. Some other blocks don't write anything to the console, or only if they run into any issues.
+The console panel of Automation Blocks shows some additional information about the script execution, which is created by the blocks while they do their job. What exactly you see there depends on the block - our *sync folder* block, for example, prints a `check file` message whenever it checks if a particular file has been imported before. In case it found new files which need to be imported, it also prints an `import file` message for each of those files. For files which could not be imported, it also shows a `skip file` message. Some other blocks don't write anything to the console, or only if they run into any issues.
 
 These detailed outputs can be a lifesaver for troubleshooting, since they give you a good overview of what exactly a block is doing - it's like a logbook of the script execution. But as long as your script does what you want, you can ignore them.
 
-Now, let's provoke an error: we'll replace the folder path of the block with another text saying `whatever`. Assuming that you don't have a folder with that name in the root folder of your file system, the block should have trouble importing footage from that location. And as you can see, this time the console shows a red `ERROR` message with a helpful description:
+### Errors
 
-<Anigif src={useBaseUrl('/img/tutorials-pr/firstSteps/step_5_provoke_error.gif')} />
+Now, let's provoke an error: we'll replace the folder path of the block with another text saying `whatever`. Assuming that you don't have a folder with that name in the root folder of your file system, the block should have trouble importing footage from that location. And as you can see, the status message now shows a red text "ERROR" with a helpful description:
+
+<Anigif src={useBaseUrl('/img/tutorials-pr/firstSteps/step_6.gif')} />
 
 
 ### Saving Your Script
 
 Great work - you've just written your very first script! So let's save it by clicking on the *Save* button of the toolbar. After you've saved the script, it also shows up in the script library panel:
 
-<Anigif src={useBaseUrl('/img/tutorials-pr/firstSteps/step_6_save.gif')} />
+<Anigif src={useBaseUrl('/img/tutorials-pr/firstSteps/step_7.gif')} />
 
-Note that scripts are just simple, self-contained xml files. If you want to restructure your library, or delete or rename scripts, just open the library folder with Windows Explorer or Mac OS Finder and move/delete/rename the files to your liking. 
+Note that scripts are just simple, self-contained xml files. If you want to restructure your library, or delete or rename scripts, just open the library folder with Windows Explorer or Mac OS Finder and move/delete/rename the files to your liking. After you did that, make sure to restart Automation Blocks, such that it notices your changes.
 
 :::tip User Library Location
 
-By default, you'll find your user library in a folder `Automation Blocks Library` inside your documents folder. If you prefer to keep your scripts in some other location, you can change that in the Automation Blocks preferences. In the preferences, you'll also find a button to open the library folder in Windows Exploder or Mac OS Finder.
+By default, you'll find your user library in a folder `Automation Blocks Pr Library` inside your documents folder. If you prefer to keep your scripts in some other location, you can change that in the Automation Blocks preferences. In the preferences, you'll also find a button to open the library folder in Windows Exploder or Mac OS Finder.
 
 <RetinaImg src="/img/tutorials-pr/firstSteps/open_preferences.png" alt="preferences"/>
 
@@ -118,20 +118,20 @@ The other block, "*new sequence from preset file*", is useful if you need more c
 
 So let's go for the "*new sequence from clips*" block and add it to our script. We drag it into our awesome importer script and make sure it uses the same project bin as our sync folder block:
 
-<Anigif src={useBaseUrl('/img/tutorials-pr/firstSteps/step_7_create_sequence.gif')} />
+<Anigif src={useBaseUrl('/img/tutorials-pr/firstSteps/step_8.gif')} />
 
 
 ### Adding a User Interface
 
 Now our script is already pretty useful - whenever you start a new project, it imports your footage and creates a sequence in no time! But the folder from which you want to import the footage is probably different for each project you create, right? So wouldn't it be cool if the script asked you for the folder you want to import? 
 
-In the block category "*User Interface & Comments*", you'll find the [Select Folder Dialog block](../block-reference/userInterfaceAndComments#block_extendscript_open_folder_dlg). Just drag it into your script and replace the hard-coded folder block with it. Now, instead of using the same folder each time you run the script, a dialog pops up and asks you for the folder you want to use. In the *Open Folder* dialog, you can even preselect a folder. These are the little details that can save you so much time and allow you to focus on the creative part of your work!
+In the block category "*User Interface & Comments*", you'll find the [Select Folder Dialog block](../block-reference/userInterfaceAndComments#block_extendscript_open_folder_dlg). Just drag it into your script and replace the hard-coded folder block with it. Now, instead of using the same folder each time you run the script, a dialog pops up and asks you for the folder you want to use.
 
-<Anigif src={useBaseUrl('/img/tutorials-pr/firstSteps/step_8_open_folder_dialog.gif')} />
+<Anigif src={useBaseUrl('/img/tutorials-pr/firstSteps/step_9.gif')} />
 
+ In the *Open Folder* dialog, you can even preselect a folder. These are the little details that can save you so much time and allow you to focus on the creative part of your work!
 
 Thanks to the *Open Folder Dialog*, you don't need to modify the script itself anymore whenever you want to choose a new folder to import. This might seem like a minor difference - whether you enter a new file path right inside the block script, or use this kind of dialog instead - but imagine if you want to share your blocks with your colleagues. You won't need to explain to them anymore where exactly in your block code the folder path needs to be adjusted - the dialog just pops up whenever they run the script, so they won't have to touch your code at all.
-If you don't need to touch the code anymore, you can also execute your script with the Automation Blocks Launcher. 
 
 ## Summary
 
