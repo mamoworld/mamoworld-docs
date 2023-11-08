@@ -59,15 +59,15 @@ module.exports = {
 		//require.resolve('./src/components/myFreezeFrameInit.js'),
 		//"https://unpkg.com/freezeframe/dist/freezeframe.min.js"
 		{
-			src: '/docs/automation-blocks/scripts/freezeframe.min.js',
+			src: '/automation-blocks/scripts/freezeframe.min.js',
 			async: false,
 		},
 		{
-			src: '/docs/automation-blocks/scripts//myFreezeFrameInit.js',
+			src: '/automation-blocks/scripts//myFreezeFrameInit.js',
 			async: false,
 		},
 		{
-			src: '/docs/automation-blocks/scripts/retina.min.js',
+			src: '/automation-blocks/scripts/retina.min.js',
 			async: true,
 		},
 
