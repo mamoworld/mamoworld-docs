@@ -129,9 +129,13 @@ In the block category "*User Interface & Comments*", you'll find the [Select Fol
 
 <Anigif src={useBaseUrl('/img/tutorials-pr/firstSteps/step_9.gif')} />
 
- In the *Open Folder* dialog, you can even preselect a folder. These are the little details that can save you so much time and allow you to focus on the creative part of your work!
-
 Thanks to the *Open Folder Dialog*, you don't need to modify the script itself anymore whenever you want to choose a new folder to import. This might seem like a minor difference - whether you enter a new file path right inside the block script, or use this kind of dialog instead - but imagine if you want to share your blocks with your colleagues. You won't need to explain to them anymore where exactly in your block code the folder path needs to be adjusted - the dialog just pops up whenever they run the script, so they won't have to touch your code at all.
+
+### Inputs Panel
+
+Instead of showing a popup dialog where the user can choose a folder, you can also add a user interface element for this to the inputs panel. If you want to add something to the inputs panel, you always need to use the [Input block](../block-reference/userInterfaceAndComments#input_arg) for this. Just replace the *Select Folder Dialog block* by the *Input* block and choose a type of the input in the block parameters (in our case the type is "choose folder").
+
+<Anigif src={useBaseUrl('/img/tutorials-pr/firstSteps/step_10.gif')} />
 
 ## Summary
 
