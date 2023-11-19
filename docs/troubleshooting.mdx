@@ -1,0 +1,28 @@
+---
+sidebar_position: 5
+---
+
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import Anigif from "../src/components/Anigif";
+import RetinaImg from "../src/components/RetinaImg";
+import Youtube from "../src/components/YouTube";
+import RoundButton from "../src/components/RoundButton";
+
+# Troubleshooting
+
+## Automation Blocks does not launch
+
+If the Automation Blocks window does not open at all or opens with a blank window, please [try this solution](https://aescripts.com/knowledgebase/index/view/faq/zxp-cep-extension-won-t-open/).
+
+## Script Execution Never Finishes
+
+<RetinaImg src="/img/troubleshooting/troubleshooting_still_running.png" alt="Automation Blocks script still running"/>
+
+If the blue `... STILL RUNNING ...` message stays forever, often the script is waiting for an input from you. Maybe you overlooked a popup dialog, because it popped up on your second monitor? In some rare scenarios we've also heard from users that Ae or Pr put popup dialogs behind the main window, so it might be worth minimizing the main window to check what's behind it.
+
+If a script is still running, all other scripts you try to run after it will be blocked, too, until its execution is stopped. When in doubt restart your host application.
+
+If you are developing your own tools, another likely option is that you've created an endless loop in your program. If you keep the block code open, the block which is currently executed is always highlighted. That allows you to see which blocks are causing the trouble. To get a better picture of the program execution, you can also add [write to console blocks](block-reference/userInterfaceAndComments.mdx#block_extendscript_console_log) with infos what your script is currently doing and then check in the console window what happens during the script execution.
+
+
+
