@@ -14,21 +14,30 @@ You can also remote-execute Automation Blocks scripts from other  extensions (CE
 
 ## Run Script File
 
-To execute an Automation Blocks script, just send the event `com.aescripts.AutomationBlocksPr.runScriptFile` and provide as data the path of the xml file containing the block script you want to execute.
+To execute an Automation Blocks script, just send the event with type `com.aescripts.AutomationBlocksPr.runScriptFile` and provide as data the path of the xml file containing the block script you want to execute.
 
 ```
 // execute script test.xml without loading it into the UI
 var event = new CSEvent('com.aescripts.AutomationBlocksPr.runScriptFile', 'APPLICATION');
-event.data = "/path/to/file/test.xml";
+event.data = {
+    filePath: "/path/to/file/test.xml"
+};
 new CSInterface().dispatchEvent(event);
 ```
 In order to make this work, Automation Blocks needs to be installed (and licensed) on the machine, but the Automation Blocks user interface does not need to be open.
 
 If you run into any issues open http://localhost:2029/ with Chrome to see the debugger of the Automation Blocks API. Its console will contain helpful messages.
 
+### Callback
+
+If you [register a callback](#callbacks), the data sent with the callback event will contain the following properties:
+- **status** will be `ERROR` if loading or executing the script failed and `SUCCESS` otherwise.
+- **result** will be an error message if status is `ERROR`. Otherwise it will contain the result of the script execution.
+
+
 :::danger Input Blocks Limitation
 
-Since this event executes the block scripts without a user interface, it fails for block scripts which contain an [input block](../block-reference/userInterfaceAndComments.mdx#input_arg). If you need user input, use the other user interface blocks, which create popup dialogs.
+Since this event executes the block scripts without a user interface, [input blocks](../block-reference/userInterfaceAndComments.mdx#input_arg) will always use their default value. If you need user input, use the other user interface blocks, which create popup dialogs.
 
 :::
 
@@ -44,6 +53,12 @@ new CSInterface().dispatchEvent(event);
 This event is handled by the panel showing the Automation Blocks UI. Hence, it only works if the Automation Blocks UI is open.
 For debugging open the Automation Blocks panel at http://localhost:2026/.
 
+### Callback
+
+If you [register a callback](#callbacks), the data sent with the callback event will contain the following properties:
+- **status** will be `ERROR` if the script execution failed and `SUCCESS` otherwise.
+- **result** will be an error message if status is `ERROR`. Otherwise it will contain the result of the script execution.
+
 
 ##  Load Script File
 
@@ -52,9 +67,54 @@ If the user interface of Automation Blocks is open in Premiere Pro, you can also
 ```
 // load the block script test.xml into the Automation. Blocks UI
 var event = new CSEvent('com.aescripts.AutomationBlocksPr.loadScriptFile', 'APPLICATION');
-event.data = "/path/to/file/test.xml";
+event.data = {
+    filePath: "/path/to/file/test.xml"
+};
 new CSInterface().dispatchEvent(event);
 ```
 
 This event is handled by the panel showing the Automation Blocks UI. Hence, it only works if the Automation Blocks UI is open.
 For debugging open the Automation Blocks panel at http://localhost:2026/.
+
+### Callback
+
+If you [register a callback](#callbacks), the data sent with the callback event will contain the following properties:
+- **status** will be `ERROR` if loading the script failed and `SUCCESS` otherwise.
+- **result** will be an error message if status is `ERROR`. Otherwise it will be the empty string.
+
+
+## Callbacks {#callbacks}
+
+When you send an event to Automation Blocks, you can also request Automation Blocks to send an answer back to your CEP panel. 
+For this, just add an object `callbackData` to the event data with the following properties:
+- *eventType*: A string for the type of event you want to recieve. Make sure to choose a unique name, which does not overlap with events from other extensions.
+- *customData*: Here you can pass any json object. Automation Blocks will send this data back with the reply. You can use this to pass unique IDs for each event, for example, such that you know to which your your events the reply belongs.
+
+Here is an example:
+```
+// register an event handler to recieve the reply from Automation Blocks
+new CSInterface().addEventListener(
+  "my_reply_callback_unique_name",
+  function (event) {
+    var data = event.data;
+    console.log("recieved reply event:", event.data);
+  }
+);
+
+// now send your event
+var myEvent = new CSEvent(
+	"com.aescripts.AutomationBlocksPr.runScriptFile",
+	"APPLICATION"
+);
+myEvent.data = {
+	filePath: "path/to/test.xml",
+	callbackData: {
+	  eventType: "my_reply_callback_unique_name",
+	  customData: {
+		id: 1234,
+		whatever: "foo",
+	  },
+	},
+};
+new CSInterface().dispatchEvent(myEvent);
+```
