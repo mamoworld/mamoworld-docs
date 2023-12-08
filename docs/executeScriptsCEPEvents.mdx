@@ -1,20 +1,30 @@
 ---
-sidebar_position: 11
+sidebar_position: 5
 ---
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import Anigif from '../../src/components/Anigif'
-import RetinaImg from '../../src/components/RetinaImg'
-import Youtube from '../../src/components/YouTube'
-import RoundButton from '../../src/components/RoundButton'
+import Anigif from '../src/components/Anigif'
+import RetinaImg from '../src/components/RetinaImg'
+import Youtube from '../src/components/YouTube'
+import RoundButton from '../src/components/RoundButton'
 
 # Execute Scripts with CEP Events
 
 You can also remote-execute Automation Blocks scripts from other  extensions (CEP panels). If you develop your own extensions, there is no need to reinvent the wheel: Just use Automation Blocks inside your own extensions and speed up your development.
 
-## Run Script File
+:::tip new in Automation Blocks 1.0.012
 
-To execute an Automation Blocks script, just send the event with type `com.aescripts.AutomationBlocksPr.runScriptFile` and provide as data the path of the xml file containing the block script you want to execute.
+CEP events have been added in Autommation Blocks 1.0.012. If you use an older version, make sure to update!
+
+:::
+
+## Run Script File
+*Event for Pr: `com.aescripts.AutomationBlocksPr.runScriptFile`<br/>
+Event for Ae: `com.aescripts.AutomationBlocksAe.runScriptFile`*
+
+To execute an Automation Blocks script, just send a CSEvent with type `com.aescripts.AutomationBlocksPr.runScriptFile` in Premiere Pro or `com.aescripts.AutomationBlocksAe.runScriptFile` in After Effects.
+ 
+ In the event data, you need to provide a `filePath`, to specify the xml file containing the block script you want to execute:
 
 ```
 // execute script test.xml without loading it into the UI
@@ -26,24 +36,27 @@ new CSInterface().dispatchEvent(event);
 ```
 In order to make this work, Automation Blocks needs to be installed (and licensed) on the machine, but the Automation Blocks user interface does not need to be open.
 
-If you run into any issues open http://localhost:2029/ with Chrome to see the debugger of the Automation Blocks API. Its console will contain helpful messages.
+If you run into any issues open http://localhost:2029/ with Chrome to see the debugger of the Automation Blocks API. Automation Blocks prints status messages in this console when it receives the event and also shows the errors there, if something went wrong.
 
 ### Callback
 
-If you [register a callback](#callbacks), the data sent with the callback event will contain the following properties:
+If you [register a callback](#callbacks), then Automation Blocks will send an event back to you after it executed the script (or if that failed). The data sent with the callback event will contain the following properties:
 - **status** will be `ERROR` if loading or executing the script failed and `SUCCESS` otherwise.
 - **result** will be an error message if status is `ERROR`. Otherwise it will contain the result of the script execution.
 
 
 :::danger Input Blocks Limitation
 
-Since this event executes the block scripts without a user interface, [input blocks](../block-reference/userInterfaceAndComments.mdx#input_arg) will always use their default value. If you need user input, use the other user interface blocks, which create popup dialogs.
+Since this event executes the block scripts without a user interface, [input blocks](block-reference/userInterfaceAndComments.mdx#input_arg) will always use their default value. If you need user input, use the other user interface blocks, which create popup dialogs.
 
 :::
 
 ##  Run Current Script
 
-If the user interface of Automation Blocks is open in Premiere Pro, you can also ask it to run the tool, which is currently open in the UI:
+*Event for Pr: `com.aescripts.AutomationBlocksPr.runCurrentScript`<br/>
+Event for Ae: `com.aescripts.AutomationBlocksAe.runCurrentScript`*
+
+If the user interface of Automation Blocks is open , you can also ask it to run the block script, which is currently open in the UI:
 ```
 // run the script that is currently open in the Automation Blocks UI
 var event = new CSEvent('com.aescripts.AutomationBlocksPr.runCurrentScript', 'APPLICATION');
@@ -51,7 +64,7 @@ new CSInterface().dispatchEvent(event);
 ```
 
 This event is handled by the panel showing the Automation Blocks UI. Hence, it only works if the Automation Blocks UI is open.
-For debugging open the Automation Blocks panel at http://localhost:2026/.
+For debugging open the Automation Blocks panel at http://localhost:2026/ (note the 2026 instead of 2029!).
 
 ### Callback
 
@@ -61,8 +74,10 @@ If you [register a callback](#callbacks), the data sent with the callback event 
 
 
 ##  Load Script File
+*Event for Pr: `com.aescripts.AutomationBlocksPr.loadScriptFile`<br/>
+Event for Ae: `com.aescripts.AutomationBlocksAe.loadScriptFile`*
 
-If the user interface of Automation Blocks is open in Premiere Pro, you can also tell it to open a block script of your choice in the user interface:
+If the user interface of Automation Blocks is open, you can also tell it to open a block script of your choice in the user interface:
 
 ```
 // load the block script test.xml into the Automation. Blocks UI
