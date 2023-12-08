@@ -133,3 +133,27 @@ myEvent.data = {
 };
 new CSInterface().dispatchEvent(myEvent);
 ```
+
+## ExtendScript, Kbar & QuickMenu
+
+You can also send the events from After Effects scripts (ExtendScript). This is in particular useful, since launcher tools like [Kbar](https://aescripts.com/kbar/) or [QuickMenu](https://aescripts.com/quick-menu/) can execute custom scripts. 
+
+
+The syntax for ExtendScript is a little bit different, since you need to load the PlugPlugExternalObject library and also need to *JSON.stringify* your data. You can use the script code below to launch an Automation Blocks script from Kbar's "Run Scriptlet", for example. You can also save the code to a jsx file and run it from the Ae menu "File->Scripts->Run Script File" or from QuickMenu.
+
+```
+var xLib;
+try {
+    xLib = new ExternalObject("lib:\PlugPlugExternalObject");
+} catch(e) { alert("Missing ExternalObject: "+e); }
+
+if (xLib) {
+	var eventObj = new CSXSEvent();
+	eventObj.type = 'com.aescripts.AutomationBlocksAe.runScriptFile';
+	eventObj.data = JSON.stringify({
+		filePath: "/path/to/file/test.xml"
+	});
+	eventObj.dispatch();
+}
+```
+Just replace `"/path/to/file/test.xml"` by the file path of the block script you want to execute.
