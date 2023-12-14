@@ -17,7 +17,7 @@ The [File block](#block_extendscript_file) and the [Folder block](#block_extends
 <RetinaImg src="/img/blockOther/block_extendscript_file_example.png" alt="File Block vs Text Block"/>
 
 
-If you want the user to choose a file, you can use the [Open File Dialog](userInterfaceAndComments#block_extendscript_open_file_dlg) and [Save File Dialog](userInterfaceAndComments#block_extendscript_save_file_dlg). If you want to create or modify file names, the blocks in the [File Names & Path Chapter](filesNameAndPath) will help you to tinker with your path texts.
+If you want the user to choose a file, you can use the [Open File Dialog](userInterfaceAndComments.mdx#block_extendscript_open_file_dlg) and [Save File Dialog](userInterfaceAndComments.mdx#block_extendscript_save_file_dlg). If you want to create or modify file names, the blocks in the [File Names & Path Chapter](filesNameAndPath) will help you to tinker with your path texts.
 
 ### Opening & Closing Files
 
@@ -36,7 +36,7 @@ This block represents a file on your hard-drive. In Automation Blocks, a file is
 
 :::tip Open and Save File Dialogs
 
-If you want to give the user the freedom to choose a file each time the script is executed, you can use the [Open File Dialog](userInterfaceAndComments#block_extendscript_open_file_dlg) or the [Save File Dialog](userInterfaceAndComments#block_extendscript_save_file_dlg) instead of the File block.
+If you want to give the user the freedom to choose a file each time the script is executed, you can use the [Open File Dialog](userInterfaceAndComments.mdx#block_extendscript_open_file_dlg) or the [Save File Dialog](userInterfaceAndComments.mdx#block_extendscript_save_file_dlg) instead of the File block.
 
 :::
 
@@ -52,7 +52,7 @@ Embedded files can be used exactly as normal [File](#block_extendscript_file) bl
 For performance reasons, embedded files cannot be larger than 2MB. They are great to embed 
 - [Ae Preset Files](aeLayer.mdx#ae_layer_apply_preset), 
 - [Media Encoder Preset Files](prRendering.mdx#block_media_encoder_render) 
-- [Premiere Pro Sequence Presets](prSequence#block_pr_new_sequence)
+- [Premiere Pro Sequence Presets](prSequence.mdx#block_pr_new_sequence)
 - or even small image files.
 
 But they are not suited to embed large video files, for example.
@@ -80,7 +80,7 @@ This block represents a folder on your hard-drive. In Automation Blocks, a folde
 
 :::tip Open Folder Dialog
 
-If you want to give the user the freedom to choose a folder each time the script is executed, you can use the [Open Folder Dialog](userInterfaceAndComments#block_extendscript_open_folder_dlg) instead of the Folder block.
+If you want to give the user the freedom to choose a folder each time the script is executed, you can use the [Open Folder Dialog](userInterfaceAndComments.mdx#block_extendscript_open_folder_dlg) instead of the Folder block.
 
 :::
 
@@ -139,7 +139,7 @@ If you copy a folder, note that the contents of the folder is copied, not the fo
 
 That means that in this example, if you have a file `~/Desktop/src/myFile.txt`, it will be copied to `~/Desktop/target/myFile.txt` and not to `~/Desktop/target/src/myFile.txt`. 
 
-If you copy a single file, as destination you can either give a [File](files#block_extendscript_file) or a [Folder](files#block_extendscript_folder). If you provide a folder, the file is copied to that location and keeps its existing filename. If you provide a file, the copy is renamed accordingly. 
+If you copy a single file, as destination you can either give a [File](files.mdx#block_extendscript_file) or a [Folder](files.mdx#block_extendscript_folder). If you provide a folder, the file is copied to that location and keeps its existing filename. If you provide a file, the copy is renamed accordingly. 
 
 <RetinaImg src="/img/blockOther/block_extendscript_copy_file_example_rename.png" alt="rename example"/>
 

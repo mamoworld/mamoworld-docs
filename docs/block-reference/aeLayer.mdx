@@ -47,7 +47,7 @@ If you skip the comp name, you can usually also skip the `::` separator. However
 
 <RetinaImg src="/img/blockOther/access_layer_example_active_comp_colons.png" alt="layer path vs project item path"/>
 
-Note that the first one uses the block [Get Attribute of Layer](aeLayer.mdx#ae_layer_get_attribute), whereas the second and third one use the block [Get Attribute of Project Item](aeProjectItems.mdx#ae_item_get_attribute). Hence, the first example retrieves the label color name of the layer with name `my video` (from the active comp), whereas the second example retieves the label color of a project item with name `my video`. In the third example, we put the colons in front of the name to make it clear that this should actually be a layer name. So, Automation Blocks searches for the layer with name `my video` (in the active composition) and because the block expects a project item as argument, it then attempts to convert the layer into a project item. For details about this, see the section about [accessing a project item using a layer or property](aeProjectItems#accessProjectItem).
+Note that the first one uses the block [Get Attribute of Layer](aeLayer.mdx#ae_layer_get_attribute), whereas the second and third one use the block [Get Attribute of Project Item](aeProjectItems.mdx#ae_item_get_attribute). Hence, the first example retrieves the label color name of the layer with name `my video` (from the active comp), whereas the second example retieves the label color of a project item with name `my video`. In the third example, we put the colons in front of the name to make it clear that this should actually be a layer name. So, Automation Blocks searches for the layer with name `my video` (in the active composition) and because the block expects a project item as argument, it then attempts to convert the layer into a project item. For details about this, see the section about [accessing a project item using a layer or property](aeProjectItems.mdx#accessProjectItem).
 
 ### (Not) Unique Layer Names
 
@@ -103,7 +103,7 @@ This is very useful if you want to write a script which assumes that the user ha
 
 This block creates a [list](lists.mdx) (array) of all layers a composition. Optionally, it can also just put the selected layers into the list and also limit the list to a specific layer type.
 
-For examples of using this block, see the blocks [Delete Layer](#ae_layer_remove), [Select Layers](#block_ae_layer_select), and [Select Project Items](aeProjectItems#block_ae_item_select_example).
+For examples of using this block, see the blocks [Delete Layer](#ae_layer_remove), [Select Layers](#block_ae_layer_select), and [Select Project Items](aeProjectItems.mdx#block_ae_item_select_example).
 
 ## For Each Layer {#ae_layer_for_all}
 
@@ -522,7 +522,7 @@ The label color name of the project item as configured in the *Labels* preferenc
 
 By default, the block to set the label color name shows a convenient dropdown where you can pick any of the default label colors. Note that this dropdown does not update when you have configured custom label color names. If you have configured custom label colors in the preferences, you can either drag a [Text](text.mdx#text) block on top of the dropdown and enter the custom label name manually, or you can set the label color using the [color id](#ae_layer_set_attribute_label_color_id).
 
-For an example, see the [label color name of Project Items](aeProjectItems#ae_item_set_attribute_label_color_name), which works in exactly the same way.
+For an example, see the [label color name of Project Items](aeProjectItems.mdx#ae_item_set_attribute_label_color_name), which works in exactly the same way.
 
 ### light type (only for light layers)
 

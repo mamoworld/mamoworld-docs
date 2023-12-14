@@ -24,7 +24,7 @@ The block then searches though all the texts of all motion graphics template cli
 
 #### in sequence (or clip)
 
-By default, the block looks at all clips in the active sequence, but you can also specify a different sequence, or a single clip instead. If the text you want to replace is just contained in a single clip and you know which clip that is, it makes sense to provide this clip as an argument, instead of the entire sequence, because the block will process much faster if it does not need to search through the entire sequence. For all the ways to specify a specific clip, see [Accessing a Particular Sequence Clip](prSequenceClips#accessSequenceClip).
+By default, the block looks at all clips in the active sequence, but you can also specify a different sequence, or a single clip instead. If the text you want to replace is just contained in a single clip and you know which clip that is, it makes sense to provide this clip as an argument, instead of the entire sequence, because the block will process much faster if it does not need to search through the entire sequence. For all the ways to specify a specific clip, see [Accessing a Particular Sequence Clip](prSequenceClips.mdx#accessSequenceClip).
 
 
 #### case sensitive
@@ -51,7 +51,7 @@ If you start with the English texts instead, things can become messy when you de
 
 :::tip use clones
 
-If you want to keep your original sequence and make the replacements in a copy, you can use the [Clone Sequence Block](prSequence#block_pr_sequence_clone) for that.
+If you want to keep your original sequence and make the replacements in a copy, you can use the [Clone Sequence Block](prSequence.mdx#block_pr_sequence_clone) for that.
 
 :::
 
@@ -69,7 +69,7 @@ Instead of choosing a parameter from the dropdown, you can also drag a text bloc
 
 #### clip
 
-Specify the clip from which you want to read a parameter value here. In the example above, the `::V1\1` represents the first clip in track V1 of the active sequence. For all the ways to specify a specific clip, see [Accessing a Particular Sequence Clip](prSequenceClips#accessSequenceClip).
+Specify the clip from which you want to read a parameter value here. In the example above, the `::V1\1` represents the first clip in track V1 of the active sequence. For all the ways to specify a specific clip, see [Accessing a Particular Sequence Clip](prSequenceClips.mdx#accessSequenceClip).
 
 #### if clip does not have this parameter
 
@@ -101,7 +101,7 @@ Instead of choosing a parameter from the dropdown, you can also drag a text bloc
 
 #### clip
 
-Specify the clip whose parameters you want to change here. In the example above, the `::V1\1` represents the first clip in track V1 of the active sequence. For all the ways to specify a specific clip see [Accessing a Particular Sequence Clip](prSequenceClips#accessSequenceClip).
+Specify the clip whose parameters you want to change here. In the example above, the `::V1\1` represents the first clip in track V1 of the active sequence. For all the ways to specify a specific clip see [Accessing a Particular Sequence Clip](prSequenceClips.mdx#accessSequenceClip).
 
 #### set value to
 
@@ -111,7 +111,7 @@ By default (dropdown option `set value to`), the existing parameter value is rep
 - *multiply value with*: multiplies the existing value with the new one. If you want to make a layer twice as big, for example, no matter how it has been scaled before, you can multiply its scale value by 2. (This only makes sense for number and list values, not for boolean or text values)
 - *multiply value with %*: multiplies the existing value with the new value divided by a hundred. So if you want to make your layer half as big as before, you can multiply its scale parameter by 50% (e.g. pass number 50 as new value). (This only makes sense for number and list values, not for boolean or text values) 
 - *add to value*: adds the new value to the existing one - so if you want to lower the opacity of a clip by 20%, you can just add the number -20 to the existing value, for example. (This only makes sense for number and list values, not for boolean or text values) 
-- *keep current value (ignore new value)*: This does not change the value at all. It does not make a lot of sense for this block, but works the same way on the [Set Clip Parameter Value At Time](PrMogrtsAndClipParameters#pr_component_parameter_set_value_at_time) block, where it creates a new keyframe at the given time but keeps the existing value.
+- *keep current value (ignore new value)*: This does not change the value at all. It does not make a lot of sense for this block, but works the same way on the [Set Clip Parameter Value At Time](prMogrtsAndClipParameters.mdx#pr_component_parameter_set_value_at_time) block, where it creates a new keyframe at the given time but keeps the existing value.
 
 #### value
 
@@ -144,14 +144,14 @@ If the parameter you want to change has keyframes, the value changes over time. 
 - *delete keyframes*: deletes all existing keyframes on the parameter before setting the new value.
 - *stop with error*: choose this error if you want to be sure that the parameter has no keyframes.
 
-If you want to create keyframes (i.e. change the value only at the current time), you need to use the [Set Clip Parameter Value At Time Block](PrMogrtsAndClipParameters#pr_component_parameter_set_value_at_time) instead.
+If you want to create keyframes (i.e. change the value only at the current time), you need to use the [Set Clip Parameter Value At Time Block](prMogrtsAndClipParameters.mdx#pr_component_parameter_set_value_at_time) instead.
 
 ## Get Clip Parameter Value At Time {#pr_component_parameter_get_value_at_time}
 
 <RetinaImg src="/img/blockScreenshots/PrMogrtsAndClipParameters/pr_component_parameter_get_value_at_time.png" alt="Block pr_component_parameter_get_value_at_time"/>
 
 
-Reads the value from a keyframed parameter at the given time. This block is very similar to the [Get Clip Parameter Value Block](PrMogrtsAndClipParameters#pr_component_parameter_get_value), except that it supports an additional time value to specify at which point in time the value should be read. For parameters which are not keyframed, the two blocks behave identically, but if the value changes over time, this block can read that keyframed value.
+Reads the value from a keyframed parameter at the given time. This block is very similar to the [Get Clip Parameter Value Block](prMogrtsAndClipParameters.mdx#pr_component_parameter_get_value), except that it supports an additional time value to specify at which point in time the value should be read. For parameters which are not keyframed, the two blocks behave identically, but if the value changes over time, this block can read that keyframed value.
 
 #### at clip time
 
@@ -164,7 +164,7 @@ Here you need to specify the time (in seconds) where the keyframed value should 
 
 #### other controls
 
-For everything else that this block has to offer - in particular how to access properties which are not listed in the dropdown by default - see the documentation for the [Get Clip Parameter Value Block](PrMogrtsAndClipParameters#pr_component_parameter_get_value), which is identical to this one, except for the missing time value.
+For everything else that this block has to offer - in particular how to access properties which are not listed in the dropdown by default - see the documentation for the [Get Clip Parameter Value Block](prMogrtsAndClipParameters.mdx#pr_component_parameter_get_value), which is identical to this one, except for the missing time value.
 
 
 ## Set Clip Parameter Value At Time {#pr_component_parameter_set_value_at_time}
@@ -172,7 +172,7 @@ For everything else that this block has to offer - in particular how to access p
 <RetinaImg src="/img/blockScreenshots/PrMogrtsAndClipParameters/pr_component_parameter_set_value_at_time.png" alt="Block pr_component_parameter_set_value_at_time"/>
 
 
-Adds (or modifies) a keyframe to a parameter at the given time. This block is very similar to the [Set Clip Parameter Value Block](PrMogrtsAndClipParameters#pr_component_parameter_set_value), except that it supports:
+Adds (or modifies) a keyframe to a parameter at the given time. This block is very similar to the [Set Clip Parameter Value Block](prMogrtsAndClipParameters.mdx#pr_component_parameter_set_value), except that it supports:
 
 - an additional time value to specify at which point in time the value should be read. 
 - a control to choose the keyframe type
@@ -210,7 +210,7 @@ We reported this bug (bug DVAPR-4231653) to the Premiere Pro team and hope they 
 
 #### other controls
 
-For everything else that this block has to offer - in particular how to access properties which are not listed in the dropdown by default - see the documentation of the [Set Clip Parameter Value Block](PrMogrtsAndClipParameters#pr_component_parameter_set_value), which is identical to this one, except for the missing time and easing controls.
+For everything else that this block has to offer - in particular how to access properties which are not listed in the dropdown by default - see the documentation of the [Set Clip Parameter Value Block](prMogrtsAndClipParameters.mdx#pr_component_parameter_set_value), which is identical to this one, except for the missing time and easing controls.
 
 
 ## Remove Keyframes {#pr_component_parameter_remove_key_range}
@@ -221,11 +221,11 @@ By default, this block removes all keyframes from the given clip param between i
 
 #### start & end time
 You can specify the time range in which the keys should be deleted (both start and end time are inclusive, i.e. keys which are exactly at the start or end time are removed, too).
-For details how exactly the start and end time can be specified see the [Set Clip Parameter Value At Time block](PrMogrtsAndClipParameters#pr_component_parameter_set_value_at_time), which has the same options (i.e. the time can be specified relative to the in- or out-point, or in clip time or sequence time).
+For details how exactly the start and end time can be specified see the [Set Clip Parameter Value At Time block](prMogrtsAndClipParameters.mdx#pr_component_parameter_set_value_at_time), which has the same options (i.e. the time can be specified relative to the in- or out-point, or in clip time or sequence time).
 
 #### other controls
 
-For everything else that this block has to offer - in particular how to access properties which are not listed in the dropdown by default - see the documentation of the [Set Clip Parameter Value Block](PrMogrtsAndClipParameters#pr_component_parameter_set_value), which is identical to this one, except for the missing time and easing controls.
+For everything else that this block has to offer - in particular how to access properties which are not listed in the dropdown by default - see the documentation of the [Set Clip Parameter Value Block](prMogrtsAndClipParameters.mdx#pr_component_parameter_set_value), which is identical to this one, except for the missing time and easing controls.
 
 
 ## For Each Parameter of Clip {#block_pr_for_all_component_params_of_clip}

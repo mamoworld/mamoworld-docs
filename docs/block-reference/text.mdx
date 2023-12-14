@@ -14,10 +14,10 @@ import RetinaImg from '../../src/components/RetinaImg'
 <RetinaImg src="/img/blockScreenshots/Text/text.png" alt="Block text"/>
 
 
-This block creates a simple text. If you need a text with multiple lines, use the [Multiline Text block](text#text_multiline) instead.
+This block creates a simple text. If you need a text with multiple lines, use the [Multiline Text block](text.mdx#text_multiline) instead.
 
 ### Text for Paths
-In Automation Blocks, texts are also used to [access project items](prProjectItems#accessProjectItem) or [clips](prSequenceClips#accessSequenceClip) by their path. You can also use it for File and Folder path but for those, Automation Blocks has dedicated [File](files#block_extendscript_file) and [Folder](files#block_extendscript_folder) blocks, which allow you to choose this type of path more conveniently.
+In Automation Blocks, texts are also used to [access project items](prProjectItems.mdx#accessProjectItem) or [clips](prSequenceClips.mdx#accessSequenceClip) by their path. You can also use it for File and Folder path but for those, Automation Blocks has dedicated [File](files.mdx#block_extendscript_file) and [Folder](files.mdx#block_extendscript_folder) blocks, which allow you to choose this type of path more conveniently.
 
 
 ## Multiline Text {#text_multiline}
@@ -25,7 +25,7 @@ In Automation Blocks, texts are also used to [access project items](prProjectIte
 <RetinaImg src="/img/blockScreenshots/Text/text_multiline.png" alt="Block text_multiline"/>
 
 
-This block is identical to the [Text block](text#text), except that it supports multiple lines.
+This block is identical to the [Text block](text.mdx#text), except that it supports multiple lines.
 
 
 ## Join Text {#text_join}
@@ -34,7 +34,7 @@ This block is identical to the [Text block](text#text), except that it supports 
 
 
 This block combines several texts into one.
-By default, it offers inputs for two texts, but you can add more by clicking on the blue cogwheel in the top left corner of the block. If you need to combine many texts, the [Text Pattern](text#string_pattern) might be more convenient to use. The following blocks do exactly the same - on the left with the Join Text block, and on the right with the Text Pattern block:
+By default, it offers inputs for two texts, but you can add more by clicking on the blue cogwheel in the top left corner of the block. If you need to combine many texts, the [Text Pattern](text.mdx#string_pattern) might be more convenient to use. The following blocks do exactly the same - on the left with the Join Text block, and on the right with the Text Pattern block:
 
 <RetinaImg src="/img/blockOther/text_join_example.png" alt="Block text_join"/>
 
@@ -72,7 +72,7 @@ Of course, you can also use a [multi-line text](#text_multiline) as your pattern
 
 This block does a basic search & replace on the given text. It can either replace all occurrences, or only the first occurrence of the search word. For an example, see the tutorial [Search & Replace in Project Items](../tutorials-pr/searchReplaceProjectItems#search--replace-in-texts)
 
-If you just want to search without replacing, you can use the [Find In Text block](text#text_indexOf).
+If you just want to search without replacing, you can use the [Find In Text block](text.mdx#text_indexOf).
 
 ## For All RegExp Matches {#string_for_all_regex_matches}
 
@@ -81,7 +81,7 @@ If you just want to search without replacing, you can use the [Find In Text bloc
 
 This is an advanced block to search in a text with the help of regular expressions. If you don't know what regular expressions are, I recommend [this article](https://www.codemag.com/article/0305041/Getting-Started-With-Regular-Expressions) to get started. Regular expressions can be very useful to read structured data from a text file. For a more advanced example, see the script "Import Marker from Srt File".
 
-For a simpler search, you can also use the [Find in Text block](text#text_indexOf).
+For a simpler search, you can also use the [Find in Text block](text.mdx#text_indexOf).
 
 ### Example 
 
@@ -175,4 +175,4 @@ This block returns a part of the given text.
 <RetinaImg src="/img/blockScreenshots/Text/text_trim.png" alt="Block text_trim"/>
 
 
-This block removes spaces (and other whitespace like tabs) from the beginning and/or end of the given text. This is useful if you ask the user to enter some text with a [prompt](userInterfaceAndComments#block_extendscript_prompt), for example, but want to ignore any space he might accidentally add to his input.
+This block removes spaces (and other whitespace like tabs) from the beginning and/or end of the given text. This is useful if you ask the user to enter some text with a [prompt](userInterfaceAndComments.mdx#block_extendscript_prompt), for example, but want to ignore any space he might accidentally add to his input.

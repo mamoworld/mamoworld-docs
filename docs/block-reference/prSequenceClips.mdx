@@ -13,7 +13,7 @@ In contrast to [Project Items](prProjectItems) (or short: items), which denote a
 ### Accessing a Particular Sequence Clip {#accessSequenceClip}
 
 
-**For Each Clip Block:** Usually the best way to access a sequence clip is to use the [For Each Clip Block](prSequenceClips#block_pr_for_all_sequence_items). This comes with very powerful filtering features to select all kinds of different clips, like only clips in a particular track, only selected clips, or only tracks at the current time.
+**For Each Clip Block:** Usually the best way to access a sequence clip is to use the [For Each Clip Block](prSequenceClips.mdx#block_pr_for_all_sequence_items). This comes with very powerful filtering features to select all kinds of different clips, like only clips in a particular track, only selected clips, or only tracks at the current time.
 
 **Path texts** like project items and sequences, clips are also represented by texts in Automation blocks. These texts consist of two parts separated by `::`. The part before `::` describes the sequence in which the clip is contained, and the part after it describes exactly where it is located in that sequence.
 
@@ -22,7 +22,7 @@ A typical path looks like this:
 This text says that there is a sequence named `my sequence name` inside the project bin `my bin` and that the project item we want is the third item in video track V1. 
 
 To specify a sequence name (the part of the text before the `::`), you can do everything that is described in the section 
-[Accessing a Particular Project Item](prProjectItems#accessProjectItem), i.e. you can specify only a name, a name with a path, and also include a prefix for the project. If you leave the part before the `::` empty, the active sequence is used:
+[Accessing a Particular Project Item](prProjectItems.mdx#accessProjectItem), i.e. you can specify only a name, a name with a path, and also include a prefix for the project. If you leave the part before the `::` empty, the active sequence is used:
 
 `::A2\1` denotes the first clip in the audio track 2 of the active sequence.
 
@@ -57,7 +57,7 @@ You can limit the block to only the items of a particular track. Your options ar
 
 #### Sequence
 
-By default, this block iterates over the clips of the active sequence. For all possible ways to specify a sequence see [Accessing a Particular Sequence](prSequence#accessSequence).
+By default, this block iterates over the clips of the active sequence. For all possible ways to specify a sequence see [Accessing a Particular Sequence](prSequence.mdx#accessSequence).
 
 
 :::tip Selecting a single clip
@@ -73,7 +73,7 @@ In those cases you can make sure that the iteration is executed only once (or no
 <RetinaImg src="/img/blockScreenshots/PrSequenceClips/pr_track_item_get_property.png" alt="Block pr_track_item_get_property"/>
 
 
-Returns one of the following properties of the given sequence clip (for all the ways you can specify a clip, see [Accessing a Particular Sequence Clip](prSequenceClips#accessSequenceClip))
+Returns one of the following properties of the given sequence clip (for all the ways you can specify a clip, see [Accessing a Particular Sequence Clip](prSequenceClips.mdx#accessSequenceClip))
 
 ### name
 
@@ -85,31 +85,31 @@ A text, either `Audio` or `Video`. (read only)
 
 ### start time in sequence
 
-The time in the sequence where the clip starts (in seconds; a value of 0 corresponds to the beginning of the sequence). At this time, the frame of the footage given by [in point](prSequenceClips#in-point) is visible. 
+The time in the sequence where the clip starts (in seconds; a value of 0 corresponds to the beginning of the sequence). At this time, the frame of the footage given by [in point](prSequenceClips.mdx#in-point) is visible. 
 
-For a detailed explanation of in point, out point, sequence start and end time, see the [Convert Time Between Sequence and Clip Block](prTime#pr_clip_time_to_sequence_time)
+For a detailed explanation of in point, out point, sequence start and end time, see the [Convert Time Between Sequence and Clip Block](prTime.mdx#pr_clip_time_to_sequence_time)
 
 ### end time in sequence
 
-The time in the sequence where the clip ends (in seconds; a value of 0 corresponds to the beginning of the sequence). At this time, the frame of the footage given by [out point](prSequenceClips#out-point) is visible.
+The time in the sequence where the clip ends (in seconds; a value of 0 corresponds to the beginning of the sequence). At this time, the frame of the footage given by [out point](prSequenceClips.mdx#out-point) is visible.
 
-For a detailed explanation of in point, out point, sequence start and end time, see the [Convert Time Between Sequence and Clip Block](prTime#pr_clip_time_to_sequence_time)
+For a detailed explanation of in point, out point, sequence start and end time, see the [Convert Time Between Sequence and Clip Block](prTime.mdx#pr_clip_time_to_sequence_time)
 
 ### in point
 
-The in point of this clip (in seconds; a value of 0 corresponds to the beginning of the footage). Note that this is not the same as the in point of the project item (which you can get by using this clip with the [Get Property of Project Item Block](prProjectItems#pr_item_get_property)) instead of the *Get Property of Clip* Block. Each clip that uses a project item has its own in and out points, which correspond to the section of the footage that this clip uses. The project item itself has yet another in and out point, which corresponds to the in and out points you choose in the source monitor.
+The in point of this clip (in seconds; a value of 0 corresponds to the beginning of the footage). Note that this is not the same as the in point of the project item (which you can get by using this clip with the [Get Property of Project Item Block](prProjectItems.mdx#pr_item_get_property)) instead of the *Get Property of Clip* Block. Each clip that uses a project item has its own in and out points, which correspond to the section of the footage that this clip uses. The project item itself has yet another in and out point, which corresponds to the in and out points you choose in the source monitor.
 
-For a detailed explanation of in point, out point, sequence start and end time, see the [Convert Time Between Sequence and Clip Block](prTime#pr_clip_time_to_sequence_time)
+For a detailed explanation of in point, out point, sequence start and end time, see the [Convert Time Between Sequence and Clip Block](prTime.mdx#pr_clip_time_to_sequence_time)
 
 ### out point
 
-The out point of this clip (in seconds; a value of 0 corresponds to the beginning of the footage). Note that this is not the same as the out point of the project item (which you can get by using this clip with the [Get Property of Project Item Block](prProjectItems#pr_item_get_property)) instead of the *Get Property of Clip* Block. Each clip that uses a project item has its own in and out points, which correspond to the section of the footage that this clip uses. The project item itself has yet another in and out point, which corresponds to the in and out points you choose in the source monitor.
+The out point of this clip (in seconds; a value of 0 corresponds to the beginning of the footage). Note that this is not the same as the out point of the project item (which you can get by using this clip with the [Get Property of Project Item Block](prProjectItems.mdx#pr_item_get_property)) instead of the *Get Property of Clip* Block. Each clip that uses a project item has its own in and out points, which correspond to the section of the footage that this clip uses. The project item itself has yet another in and out point, which corresponds to the in and out points you choose in the source monitor.
 
-For a detailed explanation of in point, out point, sequence start and end time, see the [Convert Time Between Sequence and Clip Block](prTime#pr_clip_time_to_sequence_time)
+For a detailed explanation of in point, out point, sequence start and end time, see the [Convert Time Between Sequence and Clip Block](prTime.mdx#pr_clip_time_to_sequence_time)
 
 ### duration
 
-Duration of the clip in the sequence in seconds. This is the duration from in to out point. If you need the full length of the footage instead, use the [Get Property of Project Item Block](prProjectItems#pr_item_get_property) (read only)
+Duration of the clip in the sequence in seconds. This is the duration from in to out point. If you need the full length of the footage instead, use the [Get Property of Project Item Block](prProjectItems.mdx#pr_item_get_property) (read only)
 
 ### speed factor
 
@@ -124,6 +124,6 @@ The name of the track in which the item is located (read only)
 <RetinaImg src="/img/blockScreenshots/PrSequenceClips/pr_track_item_set_property.png" alt="Block pr_track_item_set_property"/>
 
 
-Sets any property of the given sequence clip (for all the ways you can specify a clip, see [Accessing a Particular Sequence Clip](prSequenceClips#accessSequenceClip))
+Sets any property of the given sequence clip (for all the ways you can specify a clip, see [Accessing a Particular Sequence Clip](prSequenceClips.mdx#accessSequenceClip))
 
-For a description of the available properties, see the [Get Clip Property Block](prSequenceClips#pr_track_item_get_property). Properties which are read only are only available in *Get Clip Property*, not in *Set Clip Property*. 
+For a description of the available properties, see the [Get Clip Property Block](prSequenceClips.mdx#pr_track_item_get_property). Properties which are read only are only available in *Get Clip Property*, not in *Set Clip Property*. 

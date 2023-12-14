@@ -22,7 +22,7 @@ These blocks only support the simple text format (.txt) and cannot parse rich te
 <RetinaImg src="/img/blockScreenshots/FilesText/block_extendscript_text_file_write.png" alt="Block block_extendscript_text_file_write"/>
 
 
-Writes the given text to a text file. If the text file already exists, the new text is appended to the end of the file. If you don't want that, [delete the file](files#block_extendscript_delete_file) first.
+Writes the given text to a text file. If the text file already exists, the new text is appended to the end of the file. If you don't want that, [delete the file](files.mdx#block_extendscript_delete_file) first.
 
 If the file does not yet exist, it will be created.
 
@@ -32,7 +32,7 @@ If this option is enabled, the folder where the text file is located (and any of
 
 :::tip format with pattern
 
-If the text you want to write has a complex structure, you can combine the *Write Text File* block with the [Text Pattern Block](text#string_pattern). The script *export marker to srt file* is a good example of this.
+If the text you want to write has a complex structure, you can combine the *Write Text File* block with the [Text Pattern Block](text.mdx#string_pattern). The script *export marker to srt file* is a good example of this.
 
 :::
 
@@ -50,11 +50,11 @@ The blocks that you nest inside this block are executed once for each line of th
 <RetinaImg src="/img/blockScreenshots/FilesText/extendscript_text_file_read.png" alt="Block extendscript_text_file_read"/>
 
 
-Reads either the entire contents of a text file, or just a single line. If you choose to read a single line, it will start with the first line and each subsequent call will read the next line. However, to read the entire file line by line, the [For All Lines of Text File Block](filesText#extendscript_text_file_for_all_lines) is a better option.
+Reads either the entire contents of a text file, or just a single line. If you choose to read a single line, it will start with the first line and each subsequent call will read the next line. However, to read the entire file line by line, the [For All Lines of Text File Block](filesText.mdx#extendscript_text_file_for_all_lines) is a better option.
 
 ## End of File {#extendscript_text_file_eof}
 
 <RetinaImg src="/img/blockScreenshots/FilesText/extendscript_text_file_eof.png" alt="Block extendscript_text_file_eof"/>
 
 
-When you read a file line by line using the [Read Text File Block](filesText#extendscript_text_file_read), you can use this block to check if the end of the file has been reached. It returns the logic value `true` if the end of the file has been reached and `false` if there is still content left to read.
+When you read a file line by line using the [Read Text File Block](filesText.mdx#extendscript_text_file_read), you can use this block to check if the end of the file has been reached. It returns the logic value `true` if the end of the file has been reached and `false` if there is still content left to read.

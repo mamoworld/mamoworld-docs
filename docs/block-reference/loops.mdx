@@ -41,7 +41,7 @@ The blocks in this section are general purpose loops, but you'll find some more 
 <RetinaImg src="/img/blockScreenshots/Loops/controls_repeat_ext.png" alt="Block controls_repeat_ext"/>
 
 
-This loop just executes the blocks you plug inside it as many times as you want. It is the simplest loop and therefore useful to understand the concept of loop blocks. However, in practice you will use the [For Loop](loops#controls_forcontrols_for) much more often, which is very similar, but more powerful.
+This loop just executes the blocks you plug inside it as many times as you want. It is the simplest loop and therefore useful to understand the concept of loop blocks. However, in practice you will use the [For Loop](loops.mdx#controls_forcontrols_for) much more often, which is very similar, but more powerful.
 
 ### Example
 
@@ -80,7 +80,7 @@ In the dropdown of the block you can choose between "while" and "until". The onl
 This script imports multiple footage folders into your Premiere Pro project. The blocks plugged into the loop first show a "Choose Folder" dialog and then import the folder that the user has chosen.
 Since we plugged the blocks into the loop, the script then asks "Do you want to import more footage?" and as long as the user chooses "yes", the script repeats the process. Note that we have chosen the "until" option, so that the question is not asked before the first folder import.
 
-By the way, if you're wondering what the [Tinker File Path block](filesNameAndPath#string_tinker_path) here does: from the full path (say `C:\projects\myProject\footage`), it just takes the name (like `footage` in our example) and puts a `\` in front of it to indicate that we want to import it into a bin in the root bin of the project (`\footage` denotes a bin "footage" in the root bin, whereas `footage` denotes a bin with name "footage" that could be anywhere - so Automation Blocks would search your project to see if it can find a bin of that name).
+By the way, if you're wondering what the [Tinker File Path block](filesNameAndPath.mdx#string_tinker_path) here does: from the full path (say `C:\projects\myProject\footage`), it just takes the name (like `footage` in our example) and puts a `\` in front of it to indicate that we want to import it into a bin in the root bin of the project (`\footage` denotes a bin "footage" in the root bin, whereas `footage` denotes a bin with name "footage" that could be anywhere - so Automation Blocks would search your project to see if it can find a bin of that name).
 
 
 ## Count With {#controls_for}
@@ -88,7 +88,7 @@ By the way, if you're wondering what the [Tinker File Path block](filesNameAndPa
 <RetinaImg src="/img/blockScreenshots/Loops/controls_for.png" alt="Block controls_for"/>
 
 
-The "Count With" loop is similar to the simple [Repeat Loop](loops#controls_repeat_ext), but it offers a [variable](variables.mdx) `i`, which you can use for counting how often the loop has already repeated. 
+The "Count With" loop is similar to the simple [Repeat Loop](loops.mdx#controls_repeat_ext), but it offers a [variable](variables.mdx) `i`, which you can use for counting how often the loop has already repeated. 
 
 :::danger Count with is NOT a real For loop
 

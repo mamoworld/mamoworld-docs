@@ -10,10 +10,10 @@ import RetinaImg from '../../src/components/RetinaImg'
 
 ### Accessing a Particular Sequence {#accessSequence}
 
-By default, all blocks use the [active sequence](prSequence#block_pr_active_seqence), but you can also specify other sequences easily:
-- **Sequence Name or Path** Each sequence has a corresponding project item and Automation Blocks converts this type of project item to the corresponding sequence object whenever needed. So, in every block that expects a sequence as argument, you can also [provide the project item](prProjectItems#accessProjectItem) of that sequence instead. Since project items can simply be specified by their name or path, you can do the same for any sequence, too.
+By default, all blocks use the [active sequence](prSequence.mdx#block_pr_active_seqence), but you can also specify other sequences easily:
+- **Sequence Name or Path** Each sequence has a corresponding project item and Automation Blocks converts this type of project item to the corresponding sequence object whenever needed. So, in every block that expects a sequence as argument, you can also [provide the project item](prProjectItems.mdx#accessProjectItem) of that sequence instead. Since project items can simply be specified by their name or path, you can do the same for any sequence, too.
 
-- **Iterating over all sequences** Since each sequence is a project item, you can use the [For Each Project Item Block](prProjectItems#block_pr_for_all_items_in_bin) to iterate over all sequences of your project or inside a particular bin. Just make sure to set the filter checkboxes to only allow items of type sequence.
+- **Iterating over all sequences** Since each sequence is a project item, you can use the [For Each Project Item Block](prProjectItems.mdx#block_pr_for_all_items_in_bin) to iterate over all sequences of your project or inside a particular bin. Just make sure to set the filter checkboxes to only allow items of type sequence.
 
 - ** Sequence from Clip ** If you have a particular [sequence clip](prSequenceClips) and need to access the sequence that this clip is located in, you can just use the clip itself, instead of the sequence; whenever a block expects a sequence as argument but gets a clip instead, it converts it to the sequence that the clip is contained in.
 
@@ -33,7 +33,7 @@ The currently active sequence. If there is no active sequence, the script stops 
 
 Makes the given sequence the active sequence. This will also open the sequence in the Timeline panel.
 
-For all the possible ways to specify a sequence, see [Accessing a Particular Sequence](prSequence#accessSequence).
+For all the possible ways to specify a sequence, see [Accessing a Particular Sequence](prSequence.mdx#accessSequence).
 
 ## New Sequence from Clips {#block_pr_new_sequence_from_clips}
 
@@ -64,7 +64,7 @@ The sequence presets you can choose in the dropdown are identical to the presets
 
 #### using custom presets
 
-Instead of using a preset from the dropdown, you can also drag a [File block](files#block_extendscript_file) or [Embedded File block](files#block_extendscript_embedded_file) over the dropdown to use a custom preset file:
+Instead of using a preset from the dropdown, you can also drag a [File block](files.mdx#block_extendscript_file) or [Embedded File block](files.mdx#block_extendscript_embedded_file) over the dropdown to use a custom preset file:
 
 <RetinaImg src="/img/blockOther/block_pr_new_sequence_custom_preset.png" alt="use custom preset"/>
 
@@ -88,7 +88,7 @@ In the second argument you specify the name of the new sequence. You can also sp
 
 :::tip unique sequence name
 
-You should avoid having multiple sequences with the same name in the same bin of your project. If you are not sure if a sequence with the name you chose already exists, you can use the [Get New Unique Project Item Path block](prProjectItems#block_pr_item_unique_name) to make sure your sequence has a unique path.
+You should avoid having multiple sequences with the same name in the same bin of your project. If you are not sure if a sequence with the name you chose already exists, you can use the [Get New Unique Project Item Path block](prProjectItems.mdx#block_pr_item_unique_name) to make sure your sequence has a unique path.
 
 :::
 
@@ -111,7 +111,7 @@ This block creates a copy of the given sequence. The footage items it uses are n
 
 #### sequence
 
-By default, this block clones the active sequence. For all the possible ways to specify a sequence, see [Accessing a Particular Sequence](prSequence#accessSequence).
+By default, this block clones the active sequence. For all the possible ways to specify a sequence, see [Accessing a Particular Sequence](prSequence.mdx#accessSequence).
 
 #### new name (or path)
 
@@ -128,7 +128,7 @@ If you enable this and the sequence contains any nested sequences, then these ne
 
 This block returns one of the time-related properties of the given sequence, which are listed below. Time values in Automation blocks are always given as point numbers in seconds. To convert them to other time formats or time codes, see the blocks in [Pr Time](prTime)
 
-By default, this block returns the respective property of the active sequence. For all the possible ways to specify a sequence, see [Accessing a Particular Sequence](prSequence#accessSequence).
+By default, this block returns the respective property of the active sequence. For all the possible ways to specify a sequence, see [Accessing a Particular Sequence](prSequence.mdx#accessSequence).
 
 ### playhead position
 
@@ -168,7 +168,7 @@ The duration of a single frame in seconds (this is the multiplicative inverse of
 
 
 This block returns one of the properties of the given sequence listed below.
- By default, this block uses the active sequence. For all the possible ways to specify a sequence, see [Accessing a Particular Sequence](prSequence#accessSequence).
+ By default, this block uses the active sequence. For all the possible ways to specify a sequence, see [Accessing a Particular Sequence](prSequence.mdx#accessSequence).
 
 ### name
 
@@ -259,7 +259,7 @@ path to the output preset (.epr file) being used for preview file rendering.
 
 :::tip Rendering 
 
-You can render clips using that output preset file with the [Add to Media Encoder Queue Block](PrRendering#block_media_encoder_render)
+You can render clips using that output preset file with the [Add to Media Encoder Queue Block](prRendering.mdx#block_media_encoder_render)
 
 :::
 ### video display format
@@ -304,7 +304,7 @@ Video field type in use in the sequence. One of these texts:
 The pixel aspect ratio, as a ratio, as a text. Like `1:1`, for example.
 :::tip Getting the pixel aspect ratio as a number
 
-To get the pixel aspect ratio of the sequence as a single number instead of a text, use the [Get Property of Project Item Block](prProjectItems#pr_item_get_property) to retrieve the *pixel aspect ratio*. The block for project items returns it as a single number, and since sequences are also project items, it works for those, too.
+To get the pixel aspect ratio of the sequence as a single number instead of a text, use the [Get Property of Project Item Block](prProjectItems.mdx#pr_item_get_property) to retrieve the *pixel aspect ratio*. The block for project items returns it as a single number, and since sequences are also project items, it works for those, too.
 
 :::
 
@@ -316,7 +316,7 @@ To get the pixel aspect ratio of the sequence as a single number instead of a te
 <RetinaImg src="/img/blockScreenshots/PrSequence/pr_sequence_set_property.png" alt="Block pr_sequence_set_property"/>
 
 
-This block sets one of the properties of the sequence. For a detailed description of properties, see the [Get Property of Sequence block](prSequence#pr_sequence_get_property) or for time-related properties [Get Time Value of Sequence](prSequence#pr_sequence_get_time).
+This block sets one of the properties of the sequence. For a detailed description of properties, see the [Get Property of Sequence block](prSequence.mdx#pr_sequence_get_property) or for time-related properties [Get Time Value of Sequence](prSequence.mdx#pr_sequence_get_time).
 
 
 ## Sequence Preset {#pr_sequence_preset_file}
@@ -325,7 +325,7 @@ This block sets one of the properties of the sequence. For a detailed descriptio
 
 
 This block shows a list of the available sequence presets and returns the corresponding `.sqpreset` file.
-Usually, this block is only used as part of the [New Sequence from Preset block](prSequence#block_pr_new_sequence), but you can also use it as a standalone block. This is useful, for example, if you want to create multiple sequences with the same preset. In this example, we create two sequences and both use the preset you choose in the first line:
+Usually, this block is only used as part of the [New Sequence from Preset block](prSequence.mdx#block_pr_new_sequence), but you can also use it as a standalone block. This is useful, for example, if you want to create multiple sequences with the same preset. In this example, we create two sequences and both use the preset you choose in the first line:
 
 <RetinaImg src="/img/blockOther/pr_sequence_preset_file_example.png" alt="multiple sequences with same preset"/>
 

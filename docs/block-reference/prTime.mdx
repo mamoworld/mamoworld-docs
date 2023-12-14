@@ -23,13 +23,13 @@ Specifically, it does the following:
 
 :::danger Frame Numbers
 
-If you work with frame numbers, Automation Blocks does not convert these automatically. It considers simple numbers to be values in seconds, so if you have frame numbers, you'll need to use the [Convert Timecode to Time Block](prTime#pr_time_from_timecode) to convert the frame number to a value in seconds.
+If you work with frame numbers, Automation Blocks does not convert these automatically. It considers simple numbers to be values in seconds, so if you have frame numbers, you'll need to use the [Convert Timecode to Time Block](prTime.mdx#pr_time_from_timecode) to convert the frame number to a value in seconds.
 
 :::
 
 :::danger timecode
 
-Like frame numbers, timecodes also cannot be automatically converted into a value in seconds. The reason is that the timecode `00:00:00:01`, for example, can mean different times - depending on the framerate of the sequence! Therefore, you need to convert timecode values to time using the [Convert Timecode to Time Block](prTime#pr_time_from_timecode), which you can use to specify the framerate that should be used.
+Like frame numbers, timecodes also cannot be automatically converted into a value in seconds. The reason is that the timecode `00:00:00:01`, for example, can mean different times - depending on the framerate of the sequence! Therefore, you need to convert timecode values to time using the [Convert Timecode to Time Block](prTime.mdx#pr_time_from_timecode), which you can use to specify the framerate that should be used.
 
 :::
 
@@ -50,7 +50,7 @@ By default, all time values that Automation Blocks return are a simple number wh
 - H:MM:SS,MS (`0:03:04,000`)
 - HH:MM:SS,MS (`00:03:04,000`)
 
-If you need to convert the time to a timecode format, use the [Convert Time to Timecode Block](prTime#pr_time_to_timecode) or the [Convert Time to Timecode of Sequence Block](prTime#pr_time_to_timecode_of_sequence) instead.
+If you need to convert the time to a timecode format, use the [Convert Time to Timecode Block](prTime.mdx#pr_time_to_timecode) or the [Convert Time to Timecode of Sequence Block](prTime.mdx#pr_time_to_timecode_of_sequence) instead.
 
 :::danger accuracy
 
@@ -81,7 +81,7 @@ Instead of a number, you can also provide a sequence as an example, to use the f
 <RetinaImg src="/img/blockScreenshots/PrTime/pr_time_to_timecode_of_sequence.png" alt="Block pr_time_to_timecode_of_sequence"/>
 
 
-This block works exactly the same as the [Convert Time to Timecode Block](prTime#pr_time_to_timecode), except that you don't have to choose a timecode format. Instead, the block uses the timecode format that Premiere Pro is using in the given sequence (and if a framerate is required, it is also taken from that sequence).
+This block works exactly the same as the [Convert Time to Timecode Block](prTime.mdx#pr_time_to_timecode), except that you don't have to choose a timecode format. Instead, the block uses the timecode format that Premiere Pro is using in the given sequence (and if a framerate is required, it is also taken from that sequence).
 
 This is useful if you want to display timecodes in exactly the same way as Premiere does (if the user changes the time display for a sequence in Premiere Pro, the behavior of the block changes accordingly).
 
@@ -101,7 +101,7 @@ This block converts texts of any of the following formats into a time value in s
 - `frame 0`
 - `0 frames`
 
-Note that texts of the form `1234` are considered to be a value in seconds, but texts of the form `frame 1234` are considered to be a frame number. Hence, if you have a frame number value, just put the text `frame ` before it to make sure it is interpreted correctly. You can use the [Text Pattern](text#string_pattern), for example, to add such a prefix. The following example converts the frame number `123` to a value in seconds (assuming the framerate of the active sequence)
+Note that texts of the form `1234` are considered to be a value in seconds, but texts of the form `frame 1234` are considered to be a frame number. Hence, if you have a frame number value, just put the text `frame ` before it to make sure it is interpreted correctly. You can use the [Text Pattern](text.mdx#string_pattern), for example, to add such a prefix. The following example converts the frame number `123` to a value in seconds (assuming the framerate of the active sequence)
 
 <RetinaImg src="/img/blockOther/pr_time_from_timecode_frame_number_example.png" alt="convert frame number to time"/>
 
@@ -116,8 +116,8 @@ The exact time that a timecode corresponds to depends on the framerate (the numb
 
 
 Time values related to a clip in a sequence can be measured in different ways:
-- **clip time** measures the time so that `0` is the beginning of the footage file (and the clip starts in the footage at its [in point](prSequenceClips#in-point))
-- **sequence time** measures the time so that `0` is the beginning of the sequence (and the clip starts in the sequence at its [start time in sequence](prSequenceClips#start-time-in-sequence)
+- **clip time** measures the time so that `0` is the beginning of the footage file (and the clip starts in the footage at its [in point](prSequenceClips.mdx#in-point))
+- **sequence time** measures the time so that `0` is the beginning of the sequence (and the clip starts in the sequence at its [start time in sequence](prSequenceClips.mdx#start-time-in-sequence)
 
 <RetinaImg src="/img/blockOther/sequence_vs_clip_time@2x.png" alt="Sequence Time vs Clip Time"/>
 

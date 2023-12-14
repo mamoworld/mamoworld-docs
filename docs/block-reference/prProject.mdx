@@ -13,12 +13,12 @@ These blocks allow you to work with Premiere Pro projects. Open, save and close 
 
 ### Accessing a Particular Project {#accessProject}
 
-Usually, you do all your actions on the [active project](prProject#pr_project_active_project). However, Premiere Pro supports having multiple projects open at the same time, and Automation Blocks can also perform operations on the other currently open projects. Instead of `active project`, you can use one of the following methods to explicitly use another project (note that this only works with projects that are already open in Pr):
+Usually, you do all your actions on the [active project](prProject.mdx#pr_project_active_project). However, Premiere Pro supports having multiple projects open at the same time, and Automation Blocks can also perform operations on the other currently open projects. Instead of `active project`, you can use one of the following methods to explicitly use another project (note that this only works with projects that are already open in Pr):
 
 - use a text block with the name of the project: <RetinaImg src="/img/blockOther/project_text.png" alt="myProject.prproj"/>
 
 - use a block that represents a project item, sequence, or clip within a sequence. If these are used in a context where a project is expected, they will be converted to the project that contains the project item, sequence or clip.
-- you can iterate over all open projects with the [For All Open Projects block](prProject#block_pr_for_all_open_projects), to do something with each of them.
+- you can iterate over all open projects with the [For All Open Projects block](prProject.mdx#block_pr_for_all_open_projects), to do something with each of them.
 
 
 ## Active Project {#pr_project_active_project}
@@ -39,7 +39,7 @@ This block creates a new bin in the project. In the example above, the bin with 
 <RetinaImg src="/img/blockOther/pr_project_item_create_bin_example.png" alt="Block pr_project_item_create_bin"/>
 
 
-This example also creates the bin `subbin` inside the bin `bin`, but this time, if `bin` does not exist yet, the script stops with an error. Note that this time it will also search for a bin with the name `bin` inside all sub-bins of the project if it does not find it in the root bin (see [Accessing a Particular Project Item](prProjectItems#accessProjectItem) for details of all possibilities to specify a parent bin).
+This example also creates the bin `subbin` inside the bin `bin`, but this time, if `bin` does not exist yet, the script stops with an error. Note that this time it will also search for a bin with the name `bin` inside all sub-bins of the project if it does not find it in the root bin (see [Accessing a Particular Project Item](prProjectItems.mdx#accessProjectItem) for details of all possibilities to specify a parent bin).
 
 
 
@@ -56,7 +56,7 @@ If you import images, you can
 
 :::tip Syncing folders
 
-If you want to import all the files in a particular folder, the [Sync Folder with Project Bin Block](prProject#block_pr_sync_project_bin_with_folder) is the most powerful and convenient choice.
+If you want to import all the files in a particular folder, the [Sync Folder with Project Bin Block](prProject.mdx#block_pr_sync_project_bin_with_folder) is the most powerful and convenient choice.
 
 :::
 
@@ -128,7 +128,7 @@ It is good practice to always sync with a subbin of your project and not the roo
 
 This block returns the filename of the given project. It returns either the full name like `myProject.prproj` or, if you choose the option **without extension**, the name without the file suffix, i.e. just `myProject`.
 
-By default, the block uses the active project. See [Accessing a Particular Project](prProject#accessProject) for how to use another currently open project instead.
+By default, the block uses the active project. See [Accessing a Particular Project](prProject.mdx#accessProject) for how to use another currently open project instead.
 
 ## Project File {#block_pr_project_file}
 
@@ -137,16 +137,16 @@ By default, the block uses the active project. See [Accessing a Particular Proje
 
 This block returns the project file of the given project. Since in Automation Blocks files are simply represented by the full file path on your hard-drive, the result is a text containing that path.
 
-By default, the block uses the active project. See [Accessing a Particular Project](prProject#accessProject) for how to use another currently open project instead.
+By default, the block uses the active project. See [Accessing a Particular Project](prProject.mdx#accessProject) for how to use another currently open project instead.
 
 ## Project Folder {#block_pr_project_folder}
 
 <RetinaImg src="/img/blockScreenshots/PrProject/block_pr_project_folder.png" alt="Block block_pr_project_folder"/>
 
 
-This block returns the full path of the folder on your hard-drive, where the given project file is located. This is the same as the [Project File](prProject#block_pr_project_file) but without the [Project Name](prProject#block_pr_project_name) at the end.
+This block returns the full path of the folder on your hard-drive, where the given project file is located. This is the same as the [Project File](prProject.mdx#block_pr_project_file) but without the [Project Name](prProject.mdx#block_pr_project_name) at the end.
 
-By default, the block uses the active project. See [Accessing a Particular Project](prProject#accessProject) for how to use another currently open project instead.
+By default, the block uses the active project. See [Accessing a Particular Project](prProject.mdx#accessProject) for how to use another currently open project instead.
 
 ## New Project {#pr_project_new}
 
@@ -165,7 +165,7 @@ The block will give an error if the file path has a different file extension tha
  If this option is enabled, the block creates the folder on your hard-drive where the project should be located (and its parent folders) if needed. If the option is disabled, the block gives an error if the folder does not exist yet.
 
 
-See [Accessing a Particular File](files#accessFile) for all the ways to specify a file.
+See [Accessing a Particular File](files.mdx#accessFile) for all the ways to specify a file.
 
 ## Open Project {#pr_project_open}
 
@@ -174,7 +174,7 @@ See [Accessing a Particular File](files#accessFile) for all the ways to specify 
 
 Opens the given Premiere Pro project file (must be a .prproj) file.
 
-See [Accessing a Particular File](files#accessFile) for all the ways to specify a file.
+See [Accessing a Particular File](files.mdx#accessFile) for all the ways to specify a file.
 
 ## Save Project {#pr_project_save}
 
@@ -183,7 +183,7 @@ See [Accessing a Particular File](files#accessFile) for all the ways to specify 
 
 Saves the given project. 
 
-By default, the block uses the active project. See [Accessing a Particular Project](prProject#accessProject) for how to use another currently open project instead.
+By default, the block uses the active project. See [Accessing a Particular Project](prProject.mdx#accessProject) for how to use another currently open project instead.
 
 ## Save Project As {#pr_project_save_as}
 
@@ -200,9 +200,9 @@ If this option is **not** enabled, the script stops with an error if the project
 
 With this option, you can save the project to a new folder that does not exist yet. The block will create the folder where the project file is located (and any parent folder thereof) if needed, before actually saving the project.
 
-See [Accessing a Particular File](files#accessFile) for all the ways to specify a project file.
+See [Accessing a Particular File](files.mdx#accessFile) for all the ways to specify a project file.
 
-By default, the block uses the active project. See [Accessing a Particular Project](prProject#accessProject) for how to use another currently open project instead.
+By default, the block uses the active project. See [Accessing a Particular Project](prProject.mdx#accessProject) for how to use another currently open project instead.
 
 ## Close Project {#pr_project_close}
 
@@ -211,7 +211,7 @@ By default, the block uses the active project. See [Accessing a Particular Proje
 
 This block closes the given project.
 
-By default, the block uses the active project. See [Accessing a Particular Project](prProject#accessProject) for how to use another currently open project instead.
+By default, the block uses the active project. See [Accessing a Particular Project](prProject.mdx#accessProject) for how to use another currently open project instead.
 
 
 ## For Each Open Project {#block_pr_for_all_open_projects}

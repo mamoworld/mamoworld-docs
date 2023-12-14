@@ -88,7 +88,7 @@ This block turns a `true` into a `false` and vice versa.
 <RetinaImg src="/img/blockOther/logic_negate_example.png" alt="or example"/>
 
 
-The [End of File](filesText#extendscript_text_file_eof) block returns `true` if the script has read the entire contents of the text file already. If you plug it into a *Not* block, it returns `true` if there is still content left to read.
+The [End of File](filesText.mdx#extendscript_text_file_eof) block returns `true` if the script has read the entire contents of the text file already. If you plug it into a *Not* block, it returns `true` if there is still content left to read.
 
 ## Boolean (Logic Value){#logic_boolean}
 
@@ -104,7 +104,7 @@ This block always returns `true` or always returns `false` (depending on which o
 
 
 The JavaScript value [null](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null), which represents the intentional absense of any object value.
-You can also use Null directly in a logic test (as the condition of an [if block](logic#controls_if), for example). In a logic test, Null will behave like `false` whereas any other object behaves like `true`. For example, see the [Ternary Test](logic#logic_ternary) below.
+You can also use Null directly in a logic test (as the condition of an [if block](logic.mdx#controls_if), for example). In a logic test, Null will behave like `false` whereas any other object behaves like `true`. For example, see the [Ternary Test](logic.mdx#logic_ternary) below.
 
 
 ## Ternary Test {#logic_ternary}
@@ -112,7 +112,7 @@ You can also use Null directly in a logic test (as the condition of an [if block
 <RetinaImg src="/img/blockScreenshots/Logic/logic_ternary.png" alt="Block logic_ternary"/>
 
 
-This block is similar to an [if...else](logic#controls_if_else_1) statement. The difference is the following: with the *if...else* block, you can plug in two block stacks (where one block stack is executed when the condition is `true` and the other when the condition is `false`). In the *Ternary Test* you plug in two values instead of two block stacks and the first value is returned if the condition is `true` and the second is returned if the value is `false`. In other words, this is a mini-version of the *if....else* block that is just about calculating a single value instead of executing arbitrary blocks.
+This block is similar to an [if...else](logic.mdx#controls_if_else_1) statement. The difference is the following: with the *if...else* block, you can plug in two block stacks (where one block stack is executed when the condition is `true` and the other when the condition is `false`). In the *Ternary Test* you plug in two values instead of two block stacks and the first value is returned if the condition is `true` and the second is returned if the value is `false`. In other words, this is a mini-version of the *if....else* block that is just about calculating a single value instead of executing arbitrary blocks.
 
 <RetinaImg src="/img/blockOther/logic_ternary_example_simple.png" alt="simple ternary example"/>
 

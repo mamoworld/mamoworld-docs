@@ -63,7 +63,7 @@ It comes in two flavors:
 
 You can filter the types of project items that you want to iterate using the checkbox options.
 
-By default (bin `\`) this block iterates over all project items in the root bin of the active project. For all the ways to specify a particular bin, see [Accessing a Particular Project Item](prProjectItems#accessProjectItem).
+By default (bin `\`) this block iterates over all project items in the root bin of the active project. For all the ways to specify a particular bin, see [Accessing a Particular Project Item](prProjectItems.mdx#accessProjectItem).
 
 #### Selected Items
 
@@ -89,15 +89,15 @@ This block creates a list of all project items that are contained in the given p
 
 You can filter the types of project items that you want to iterate using the checkbox options.
 
-By default (bin `\`) this block puts all project items in the root bin of the active project in the list. For all the ways to specify a particular bin, see [Accessing a Particular Project Item](prProjectItems#accessProjectItem).
+By default (bin `\`) this block puts all project items in the root bin of the active project in the list. For all the ways to specify a particular bin, see [Accessing a Particular Project Item](prProjectItems.mdx#accessProjectItem).
 
 #### Selected Items
 
-This block can either return a list of all project items (in the given bin) or only a list of the selected ones. Note that in a Premiere Pro project you can have several selections at the same time and that that Automation Blocks always just considers the selection of the Project panel, and not of other bin panels. For details see the [For Each Project Item block](prProjectItems#block_pr_for_all_items_in_bin)
+This block can either return a list of all project items (in the given bin) or only a list of the selected ones. Note that in a Premiere Pro project you can have several selections at the same time and that that Automation Blocks always just considers the selection of the Project panel, and not of other bin panels. For details see the [For Each Project Item block](prProjectItems.mdx#block_pr_for_all_items_in_bin)
 
 :::tip Iterating
 
-If you want to do something with all the items in a project bin, there is no need to create a list. You can use the [For Each Project Item Block](prProjectItems#block_pr_for_all_items_in_bin) instead.
+If you want to do something with all the items in a project bin, there is no need to create a list. You can use the [For Each Project Item Block](prProjectItems.mdx#block_pr_for_all_items_in_bin) instead.
 
 :::
 
@@ -110,10 +110,10 @@ Returns one of the following properties of the given project item. Depending on 
 
 ### in point 
 
-The *in point* of the project item (in seconds). Note that while the [in point of a clip in a sequence](prSequenceClips#in-point) describes at what time in the actual source file the clip in the sequence starts, the inPoint of the project item corresponds to the in point you can set in the source monitor. This in point is also used when rendering the item (when being rendered on its own and not as part of a sequence).
+The *in point* of the project item (in seconds). Note that while the [in point of a clip in a sequence](prSequenceClips.mdx#in-point) describes at what time in the actual source file the clip in the sequence starts, the inPoint of the project item corresponds to the in point you can set in the source monitor. This in point is also used when rendering the item (when being rendered on its own and not as part of a sequence).
 
 ### out point 
-The *out point* of the project item (in seconds). Note that while the [out point of a clip in a sequence](prSequenceClips#out-point) describes at what time in the actual source file the clip in the sequence starts, the inPoint of the project item corresponds to the in point you can set in the source monitor. This in point is also used when rendering the item (when being rendered on its own and not as part of a sequence).
+The *out point* of the project item (in seconds). Note that while the [out point of a clip in a sequence](prSequenceClips.mdx#out-point) describes at what time in the actual source file the clip in the sequence starts, the inPoint of the project item corresponds to the in point you can set in the source monitor. This in point is also used when rendering the item (when being rendered on its own and not as part of a sequence).
 
 ### zero point
 
@@ -137,11 +137,11 @@ The Team Projects Asset ID of the project item.
 
 ### tree path
 
-The current project location of the project item, like `\ProjectName.prproj\Media\MXF\filename.mxf`. As mentioned [here](prProjectItems#accessProjectItem), in Automation Blocks a project item is represented by this kind of path text. Therefore, a tree path is a valid project item in Automation Blocks, too.
+The current project location of the project item, like `\ProjectName.prproj\Media\MXF\filename.mxf`. As mentioned [here](prProjectItems.mdx#accessProjectItem), in Automation Blocks a project item is represented by this kind of path text. Therefore, a tree path is a valid project item in Automation Blocks, too.
 
 ### parent bin
 
-The bin in which the project item is contained. If you want to move the item to a different bin, use the [Move Project Item to Bin block](prProjectItems#block_pr_item_move_to_bin).
+The bin in which the project item is contained. If you want to move the item to a different bin, use the [Move Project Item to Bin block](prProjectItems.mdx#block_pr_item_move_to_bin).
 
 ### (extended) type 
 
@@ -154,15 +154,15 @@ The type of the project item. The result is one of the following texts
 - `TYPE_SEQUENCE` : a sequence
 - `TYPE_MULTICAM_SEQUENCE` : a [multi-camera source sequence](https://helpx.adobe.com/premiere-pro/using/create-multi-camera-source-sequence.html)
 
-If you just want to check if your project item has one particular type, you can also use the [Project Item Has Type Block](prProjectItems#block_pr_item_has_extended_type).
+If you just want to check if your project item has one particular type, you can also use the [Project Item Has Type Block](prProjectItems.mdx#block_pr_item_has_extended_type).
 
 ### can change media path
 
-This is `true` when the item is associated with a media file and that media file can be changed. If it is `true` you can change it with the [Change Media of Project Item Block](prProjectItems#block_pr_item_change_media).
+This is `true` when the item is associated with a media file and that media file can be changed. If it is `true` you can change it with the [Change Media of Project Item Block](prProjectItems.mdx#block_pr_item_change_media).
 
 ### media path
 
-The file that belongs to this project item. You can change it with the [Change Media of Project Item Block](prProjectItems#block_pr_item_change_media)
+The file that belongs to this project item. You can change it with the [Change Media of Project Item Block](prProjectItems.mdx#block_pr_item_change_media)
 
 ### can proxy
 
@@ -201,8 +201,8 @@ The label color of this project item represented as a text. One of the following
 - `Yellow`
 
 You can *set this property* via both 
-- [Set Property of Project Item Block](prProjectItems#pr_item_set_property) which accepts as a value either: any of the color name texts above, or a number where `Violet` corresponds to `0` and `Yellow` corresponds to `15`.
-- [Set Label Color of Project Item Block](prProjectItems#block_pr_item_metadata_color_label_set) which offers a convenient dropdown menu to choose the label color.
+- [Set Property of Project Item Block](prProjectItems.mdx#pr_item_set_property) which accepts as a value either: any of the color name texts above, or a number where `Violet` corresponds to `0` and `Yellow` corresponds to `15`.
+- [Set Label Color of Project Item Block](prProjectItems.mdx#block_pr_item_metadata_color_label_set) which offers a convenient dropdown menu to choose the label color.
 
 ### alpha usage
 
@@ -321,7 +321,7 @@ The aspect ratio of the footage (taking into account the pixel aspect ratio).
 <RetinaImg src="/img/blockScreenshots/PrProjectItems/pr_item_set_property.png" alt="Block pr_item_set_property"/>
 
 
-This block sets any property for a project item. For a list of the available properties and their description, see the [Get Property of Project Item Block](prProjectItems#pr_item_get_property). Note that some of the properties described there are read only and don't occur in the Set Property of Project Item block.
+This block sets any property for a project item. For a list of the available properties and their description, see the [Get Property of Project Item Block](prProjectItems.mdx#pr_item_get_property). Note that some of the properties described there are read only and don't occur in the Set Property of Project Item block.
 
 
 
@@ -343,7 +343,7 @@ This way, you can access any kinds of metadata entries - even properties of a ne
 
 :::tip Get Property Block
 
-A few frequently used metadata properties like *video usage*, *audio usage*, *hidden* or *good* are also available in the [Get Property of Project Item Block](prProjectItems#pr_item_get_property)
+A few frequently used metadata properties like *video usage*, *audio usage*, *hidden* or *good* are also available in the [Get Property of Project Item Block](prProjectItems.mdx#pr_item_get_property)
 
 :::
 
@@ -353,25 +353,25 @@ A few frequently used metadata properties like *video usage*, *audio usage*, *hi
 <RetinaImg src="/img/blockScreenshots/PrProjectItems/pr_item_set_metadata.png" alt="Block pr_item_set_metadata"/>
 
 
-Writes any kind of metadata to a project item. Exactly as in the *Get Metadata of Project Item* block, in this block you can also use the refresh icon behind the dropdown field to load all available metadata keys from a clip in your sequence. See the description of the [Get Metadata of Project Item Block](prProjectItems#pr_item_get_metadata) for details.
+Writes any kind of metadata to a project item. Exactly as in the *Get Metadata of Project Item* block, in this block you can also use the refresh icon behind the dropdown field to load all available metadata keys from a clip in your sequence. See the description of the [Get Metadata of Project Item Block](prProjectItems.mdx#pr_item_get_metadata) for details.
 
 ## Move Project Item to Bin {#block_pr_item_move_to_bin}
 
 <RetinaImg src="/img/blockScreenshots/PrProjectItems/block_pr_item_move_to_bin.png" alt="Block block_pr_item_move_to_bin"/>
 
 
-Moves the given project item to a project bin. If the bin does not exist, the script stops with an error. So make sure to [create the bin](prProject#pr_project_item_create_bin) before you execute this block, if you want to move the project item to a bin that does not yet exist.
+Moves the given project item to a project bin. If the bin does not exist, the script stops with an error. So make sure to [create the bin](prProject.mdx#pr_project_item_create_bin) before you execute this block, if you want to move the project item to a bin that does not yet exist.
 
-For all the possibilities to specify a project item (or a bin - which is also a project item), see the section [Accessing a Particular Project Item](prProjectItems#accessProjectItem)
+For all the possibilities to specify a project item (or a bin - which is also a project item), see the section [Accessing a Particular Project Item](prProjectItems.mdx#accessProjectItem)
 
 ## Delete Project Item {#block_pr_item_delete}
 
 <RetinaImg src="/img/blockScreenshots/PrProjectItems/block_pr_item_delete.png" alt="Block block_pr_item_delete"/>
 
 
-Deletes the given project item. Note that for footage items, only the item - not the footage file on the hard-drive - is deleted. If you want to delete the footage file too, use the [Delete File Block](files#block_extendscript_delete_file) for that.
+Deletes the given project item. Note that for footage items, only the item - not the footage file on the hard-drive - is deleted. If you want to delete the footage file too, use the [Delete File Block](files.mdx#block_extendscript_delete_file) for that.
 
-For all possibilities to specify a project item, see the section [Accessing a Particular Project Item](prProjectItems#accessProjectItem)
+For all possibilities to specify a project item, see the section [Accessing a Particular Project Item](prProjectItems.mdx#accessProjectItem)
 
 ## Project Item Exists {#pr_item_exists}
 
@@ -394,9 +394,9 @@ Checks if the given project item has the chosen type and returns `true` or `fals
 - `TYPE_MULTICAM_SEQUENCE` : a [multi-camera source sequence](https://helpx.adobe.com/premiere-pro/using/create-multi-camera-source-sequence.html)
 
 If you want to retrieve the type of a project item as a text instead of checking for a particular type, you can use the 
-[Get Property of Project Item Block](prProjectItems#pr_item_get_property) to retrieve the (extended) type.
+[Get Property of Project Item Block](prProjectItems.mdx#pr_item_get_property) to retrieve the (extended) type.
 
-For all the possibilities to specify a project item, see the section [Accessing a Particular Project Item](prProjectItems#accessProjectItem)
+For all the possibilities to specify a project item, see the section [Accessing a Particular Project Item](prProjectItems.mdx#accessProjectItem)
 
 ## Set Label Color of Project Item {#block_pr_item_metadata_color_label_set}
 
@@ -404,9 +404,9 @@ For all the possibilities to specify a project item, see the section [Accessing 
 
 
 This block sets the label color of the given project item to the color you choose in the dropdown.
-If you want to set the label color based on a text, you can also set it using the [Set Property of Project Item Block](prProjectItems#pr_item_set_property). This is useful if you want to read the color name from a file, for example, instead of using exactly the same color each time the block is executed.
+If you want to set the label color based on a text, you can also set it using the [Set Property of Project Item Block](prProjectItems.mdx#pr_item_set_property). This is useful if you want to read the color name from a file, for example, instead of using exactly the same color each time the block is executed.
 
-For all the possibilities to specify a project item, see the section [Accessing a Particular Project Item](prProjectItems#accessProjectItem)
+For all the possibilities to specify a project item, see the section [Accessing a Particular Project Item](prProjectItems.mdx#accessProjectItem)
 
 ## Change Media of Project Item {#block_pr_item_change_media}
 
@@ -417,7 +417,7 @@ With this block you can replace the footage file of a footage item (like when yo
 
 :::danger Does not work for all items
 
-Some items (like sequences or bins) have no media path that can be changed. To check if a project item supports this operation, use the [Get Property of Project Item Block](prProjectItems#pr_item_get_property) to read the *can change media path* property.
+Some items (like sequences or bins) have no media path that can be changed. To check if a project item supports this operation, use the [Get Property of Project Item Block](prProjectItems.mdx#pr_item_get_property) to read the *can change media path* property.
 
 :::
 
