@@ -1,0 +1,28 @@
+---
+sidebar_position: 5
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+import Youtube from '../../src/components/YouTube'
+import RoundButton from '../../src/components/RoundButton'
+
+# Export Clip Details to Spreadsheet
+
+In the Adobe forum [Emily asked](https://community.adobe.com/t5/premiere-pro-discussions/metadata/m-p/14297414#M484867) how to export the in and out points and other details of all clips of a sequence to a spreadsheet.
+
+Since this is a perfect job for Automation Blocks, I created a ten minute tutorial showing how to create an Automation Blocks tool for this purpose. You learn how to create a spreadsheet, how to choose which data to put in which column and also how to convert between time and timecode values to get exactly the spreadsheet you want.
+
+<Youtube id="DdpJbUOukpU" />
+
+Here is the full code of the tool:
+<RetinaImg src="/img/tutorials-pr/exportClipDetailsToSpreadsheet/exportClipDetailsToSpreadsheet.png" alt="Automation Blocks script to export clip details to a spreadsheet"/>
+
+:::tip Existing Spreadsheet File
+
+Make sure the spreadsheet file does not exist, yet, if you run the tool. If it exists already, Automation Blocks will append the new spreadsheet data to the existing file. Of course, you can also add a block to the beginning of the block script, which [deletes the file](../block-reference/files.mdx#block_extendscript_delete_file) if it exists, but I wanted to keep the block code simple.
+
+:::
+
+
