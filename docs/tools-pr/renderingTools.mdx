@@ -59,6 +59,15 @@ Just choose in the inputs panel how many frames should be between the exported f
 
 <RetinaImg src="/img/tools-pr/renderingTools/renderFramesAtEqualDistancesUI.png" alt="Render One Image every 10 frames of your sequence"/>
 
+Based on [this forum discussion](https://community.adobe.com/t5/premiere-pro-discussions/automation-blocks-export-batch-stills-feature-and-custom-filenaming/m-p/14316798#M485747) I recorded the following video showing how to customize the tool:
+<Youtube id="ON2fstB5EHc" />
+In the video we implement the following changes:
+
+- the name of the sequence is used for the naming of the output files
+- instead of the active sequence all sequences selected in the project panel are processed
+- extra parameters are added to the UI to specify a start and end timecode for the range that should be processed
+
+
 ### Custom Naming
 
 As *naming pattern* for the file names of the exported images you can enter a text which may contain the following placefolders:
