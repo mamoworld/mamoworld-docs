@@ -102,6 +102,25 @@ This block executes the chosen file. This is the same as double-clicking the fil
 
 You can use this to execute bat files in Windows, for example, or to open images in the system default program for that image type.
 
+## Rename File {#block_extendscript_rename_file}
+
+<RetinaImg src="/img/blockScreenshots/Files/block_extendscript_rename_file.png" alt="Block block_extendscript_rename_file"/>
+
+This block changes the name of a file on your hard-drive. If a file with the new name already exists in the same folder, you can choose if
+
+- the user should be asked if the existing file should be replaced
+- the existing file should be replaced
+- the file should not be renamed
+- the script should stop with an error
+
+If the old and new name of the file are identical, the block does nothing. So if you batch-update many filenames, you don't need to test for that case explicitly.
+
+:::tip New in Automation Blocks 1.0.018
+
+This block has been added in Automation Blocks 1.0.018 and does not exist in earlier versions.
+
+:::
+
 ## Delete File {#block_extendscript_delete_file}
 
 <RetinaImg src="/img/blockScreenshots/Files/block_extendscript_delete_file.png" alt="Block block_extendscript_delete_file"/>
