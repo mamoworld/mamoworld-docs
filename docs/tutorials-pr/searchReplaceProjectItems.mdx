@@ -108,7 +108,7 @@ Let's see what happens if we combine the block we just created with the Search &
 
 As you can see, we can indeed combine the two blocks to replace the text `Africa Scenics` in the project item name with `ASC`. The result calculated by the block (and as shown in the console) is exactly what we want, but so far our script just prints this result in the console, rather than actually changing the name of the block.
 
-This is because we didn't yet tell the block what to do with the result. You could do all kinds of things with it: maybe you calculated this value because you want to write it to a text file, or use it as the name for a new sequence. But what we actually want to do, of course, is to replace the existing name of the project item with that new text. Hence, we need to feed the result into the [Set Property of Project Item block](../block-reference/prProjectItems#pr_item_set_property):
+This is because we didn't yet tell the block what to do with the result. You could do all kinds of things with it: maybe you calculated this value because you want to write it to a text file, or use it as the name for a new sequence. But what we actually want to do, of course, is to replace the existing name of the project item with that new text. Hence, we need to feed the result into the [Set Attribute of Project Item block](../block-reference/prProjectItems#pr_item_set_property):
 
 <Anigif src={useBaseUrl('/img/tutorials-pr/searchReplaceProjectItems/step_5_replace_name_of_project_item.gif')} />
 

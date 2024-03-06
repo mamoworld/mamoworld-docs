@@ -101,7 +101,7 @@ If you want to do something with all the items in a project bin, there is no nee
 
 :::
 
-## Get Property of Project Item {#pr_item_get_property}
+## Get Attribute of Project Item {#pr_item_get_property}
 
 <RetinaImg src="/img/blockScreenshots/PrProjectItems/pr_item_get_property.png" alt="Block pr_item_get_property"/>
 
@@ -201,7 +201,7 @@ The label color of this project item represented as a text. One of the following
 - `Yellow`
 
 You can *set this property* via both 
-- [Set Property of Project Item Block](prProjectItems.mdx#pr_item_set_property) which accepts as a value either: any of the color name texts above, or a number where `Violet` corresponds to `0` and `Yellow` corresponds to `15`.
+- [Set Attribute of Project Item Block](prProjectItems.mdx#pr_item_set_property) which accepts as a value either: any of the color name texts above, or a number where `Violet` corresponds to `0` and `Yellow` corresponds to `15`.
 - [Set Label Color of Project Item Block](prProjectItems.mdx#block_pr_item_metadata_color_label_set) which offers a convenient dropdown menu to choose the label color.
 
 ### alpha usage
@@ -316,12 +316,12 @@ The pixel aspect ratio of the footage.
 
 The aspect ratio of the footage (taking into account the pixel aspect ratio).
 
-## Set Property of Project Item {#pr_item_set_property}
+## Set Attribute of Project Item {#pr_item_set_property}
 
 <RetinaImg src="/img/blockScreenshots/PrProjectItems/pr_item_set_property.png" alt="Block pr_item_set_property"/>
 
 
-This block sets any property for a project item. For a list of the available properties and their description, see the [Get Property of Project Item Block](prProjectItems.mdx#pr_item_get_property). Note that some of the properties described there are read only and don't occur in the Set Property of Project Item block.
+This block sets any property for a project item. For a list of the available properties and their description, see the [Get Attribute of Project Item Block](prProjectItems.mdx#pr_item_get_property). Note that some of the properties described there are read only and don't occur in the Set Attribute of Project Item block.
 
 
 
@@ -343,7 +343,7 @@ This way, you can access any kinds of metadata entries - even properties of a ne
 
 :::tip Get Property Block
 
-A few frequently used metadata properties like *video usage*, *audio usage*, *hidden* or *good* are also available in the [Get Property of Project Item Block](prProjectItems.mdx#pr_item_get_property)
+A few frequently used metadata properties like *video usage*, *audio usage*, *hidden* or *good* are also available in the [Get Attribute of Project Item Block](prProjectItems.mdx#pr_item_get_property)
 
 :::
 
@@ -394,7 +394,7 @@ Checks if the given project item has the chosen type and returns `true` or `fals
 - `TYPE_MULTICAM_SEQUENCE` : a [multi-camera source sequence](https://helpx.adobe.com/premiere-pro/using/create-multi-camera-source-sequence.html)
 
 If you want to retrieve the type of a project item as a text instead of checking for a particular type, you can use the 
-[Get Property of Project Item Block](prProjectItems.mdx#pr_item_get_property) to retrieve the (extended) type.
+[Get Attribute of Project Item Block](prProjectItems.mdx#pr_item_get_property) to retrieve the (extended) type.
 
 For all the possibilities to specify a project item, see the section [Accessing a Particular Project Item](prProjectItems.mdx#accessProjectItem)
 
@@ -402,11 +402,11 @@ For all the possibilities to specify a project item, see the section [Accessing 
 
 <RetinaImg src="/img/blockScreenshots/PrProjectItems/block_pr_item_metadata_color_label_set.png" alt="Block block_pr_item_metadata_color_label_set"/>
 
+:::tip Deprecated
 
-This block sets the label color of the given project item to the color you choose in the dropdown.
-If you want to set the label color based on a text, you can also set it using the [Set Property of Project Item Block](prProjectItems.mdx#pr_item_set_property). This is useful if you want to read the color name from a file, for example, instead of using exactly the same color each time the block is executed.
+This block is deprecated. Use the [Set Attribute of Project Item Block](prProjectItems.mdx#pr_item_set_property) instead (with the attribute 'Color Label').
 
-For all the possibilities to specify a project item, see the section [Accessing a Particular Project Item](prProjectItems.mdx#accessProjectItem)
+:::
 
 ## Change Media of Project Item {#block_pr_item_change_media}
 
@@ -417,7 +417,7 @@ With this block you can replace the footage file of a footage item (like when yo
 
 :::danger Does not work for all items
 
-Some items (like sequences or bins) have no media path that can be changed. To check if a project item supports this operation, use the [Get Property of Project Item Block](prProjectItems.mdx#pr_item_get_property) to read the *can change media path* property.
+Some items (like sequences or bins) have no media path that can be changed. To check if a project item supports this operation, use the [Get Attribute of Project Item Block](prProjectItems.mdx#pr_item_get_property) to read the *can change media path* property.
 
 :::
 
