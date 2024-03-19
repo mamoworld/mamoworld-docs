@@ -1,0 +1,222 @@
+---
+sidebar_position: 19.1
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../../src/components/Anigif'
+import RetinaImg from '../../src/components/RetinaImg'
+
+# Pr Other
+
+## Execute Code {#pr_execute_code}
+
+<RetinaImg src="/img/blockScreenshots/PrOther/pr_execute_code.png" alt="Block pr_execute_code"/>
+
+This block can execute any [Adobe ExtendScript](https://extendscript.docsforadobe.dev/) (jsx) code using the [Premiere Pro scripting API](https://ppro-scripting.docsforadobe.dev/).
+
+Automation Blocks also uses the Premiere Pro scripting API under the hood and most of its functionality can be used  without writing any programming code. But whenever you need a function of the scripting API that is not covered by Automation Blocks natively, you can use this block.
+
+### Variables
+
+At the top of the block, you can configure variables, which are passed from Automation Blocks to the ExtendScript code. By default, you have a single variable "myName1", but you can change this name freely. Just make sure to follow the rules for variable names in JavaScript, i.e. in contrast to [variables in Automation Blocks](variables.mdx), the name may not contains spaces, for example.
+
+To add more variables, use the blue cog wheel icon at the top left of the block:
+<RetinaImg src="/img/blockOther/pr_execute_code_example_add_variables.png" alt=""/>
+
+### Variable Types
+
+By default, variables have the type "other", which means that Automation Blocks just passes the data to ExtendScript without any modification. This is fine for numbers, strings, or [lists](lists.mdx) (which are represented as JavaScrript arrays). But let's say you set the variable value to the [project item](prProjectItems.mdx#pr_item_path) "\footage\logo.png":
+
+<RetinaImg src="/img/blockOther/pr_execute_code_example_variable_types.png" alt=""/>
+
+Then with type "other" the variable would contain the string "\footage\logo.png", but if we choose the type "ProjectItem", Automation Blocks converts it to a [ProjectItem object](https://ppro-scripting.docsforadobe.dev/item/projectitem.html). Therefore, we can call the method `myItem.setOffline()` of the ProjectItem object in the jsx code.
+
+The following types are available:
+
+- other (data is not converted)
+- [File](https://extendscript.docsforadobe.dev/file-system-access/file-object.html)
+- [Folder](https://extendscript.docsforadobe.dev/file-system-access/folder-object.html)
+- [Project](https://ppro-scripting.docsforadobe.dev/general/project.html)
+- [ProjectItem](https://ppro-scripting.docsforadobe.dev/item/projectitem.html)
+- [Sequence](https://ppro-scripting.docsforadobe.dev/sequence/sequence.html)
+- [Track](https://ppro-scripting.docsforadobe.dev/sequence/track.html)
+- [TrackItem](https://ppro-scripting.docsforadobe.dev/item/trackitem.html)
+
+Automation Blocks will do its best to convert anything to the chosen type. So if you choose type "Sequence", for example, and give it a TrackItem, then it will convert it to the sequence, which contains the track item.
+### Returning a Result
+
+By default, the execute code block has result type "none", which means that the execution result of the jsx code is discarded. However, if you choose another result type, the shape of the block changes, such that you can plug it into other blocks as a value. Here is a same block with the result type "none" and "other":
+
+<RetinaImg src="/img/blockOther/pr_execute_code_example_returning_result.png" alt=""/>
+
+The result of the code is always the value of the last statement, i.e. if you have a code 
+````
+statement 1;
+statement 2;
+statement 3
+````
+then the end result will be the result of statement 3. You cannot use `return` to return a value (since internally the code is executed with eval and it is not a function call). A good pattern is usually to create a variable `result` and then simply put that variable value as the last statement, such that it is returned:
+````
+var result;
+// do everything you want here and assign your return value to result
+result  // this value will be returned
+````
+
+
+
+
+
+
+## Execute Code - Examples{#pr_execute_code}
+
+### Executing jsx Files
+
+You can combine the Execute Code block with the [Read Text File block](filesText.mdx#extendscript_text_file_read). Since script files take  no arguments, you can remove all variable definitions from the Execute Code block in that case.
+
+<RetinaImg src="/img/blockOther/pr_execute_code_example_exec_jsx_file.png" alt=""/>
+
+:::warning $.filename
+
+Some script files use the attribute `$.fileName` to retrieve the file path of the currently executed file. Since we first read the file contents and then eval it, this won't work properly. Instead, better use a variable, to pass information like the file path to the jsx.
+
+:::
+
+
+### ProjectItem: Create Smart Bin
+This block creates a new smart bin and saves it in the Automation Blocks variable `smart bin`:
+
+<RetinaImg src="/img/blockOther/pr_execute_code_example_smart_bin.png" alt=""/>
+
+````
+var result = parentBin.createSmartBin(
+    smartBinName, 
+    queryString
+);
+result
+````
+
+
+### ProjectItem: Set Offline
+
+We've shown the example above already: To set a project item offline use the code
+````
+myItem.setOffline();
+````
+with a variable `myItem` of type "ProjectItem":
+
+<RetinaImg src="/img/blockOther/pr_execute_code_example_variable_types.png" alt=""/>
+
+
+
+Note that the variable `parentBin` and the result have type "ProjectItem" whereas the variables `smartBinName` and `queryString` represent basic strings and hence keep the default type "other". Also note that the [documentation of ProjectItem.createSmartBin](https://ppro-scripting.docsforadobe.dev/item/projectitem.html#projectitem-createsmartbin) says that it returns 0, but in practice it looks like it is actually returning the item of the new bin. Hence, we also return it. 
+
+### ProjectItem: Audio Channel Mappings
+
+This example sets the audio channel mapping of a project item:
+<RetinaImg src="/img/blockOther/pr_execute_code_example_audio_channel_mapping.png" alt=""/>
+
+````
+if(myItem){
+    var mapping = myItem.getAudioChannelMapping
+    if(mapping){
+        for(var i=0; i< map.length; i++){
+            mapping.setMappingForChannel(i,map[i]);
+        }
+        myItem.setAudioChannelMapping(mapping);
+    }
+    else {
+        throw new Error("Current audio mapping unavailable for item "+myItem.treePath);
+    }
+}
+else {
+    throw new Error("ProjectItem not found");
+}
+````
+
+In the screenshot above, we used the [list](lists.mdx) `[0,0]` as map, to map both the left and right channel of the clip to the left media source channel (and replacing a 0 by 1 would map to the right media source channel). For clips with more channels, you can simply use a list with more entries.
+
+Audio Channel Mappings are also discussed in [this forum thread](https://community.adobe.com/t5/premiere-pro-discussions/automation-blocks-interpret-footage-automation-audio-channel-mapping/m-p/14473377#M493220).
+
+
+### Import Mogrts
+
+### Track: Set Visibility (Eyeball)
+
+This example switches the eyeball icon on/off, which controls the visibility of a video track:
+
+<RetinaImg src="/img/blockOther/pr_execute_code_example_track_eyeball.png" alt=""/>
+
+````
+var track = seq.videoTracks[videoTrackIndex-1];
+track.setMute(eyeballState?0:1)
+````
+
+Note that the function `setMute()` can both mute audio tracks and set the eyeball of  video tracks.
+
+### Track: Mute
+
+<RetinaImg src="/img/blockOther/pr_execute_code_example_track_mute.png" alt=""/>
+````
+var track = seq.audioTracks[audioTrackIndex-1];
+track.setMute(muteState?1:0)
+````
+
+
+### Track: Set Locked
+
+You can lock tracks using the method `Track.setLocked()`. You needd to give the funtion `1` as argument to lock it and `0` to unlock it. See also [this forum discussion](https://community.adobe.com/t5/after-effects-discussions/how-to-toggle-track-lock-in-premiere-pro-with-automation-blocks-aescript-plugin/m-p/14275932).
+
+In this implementation we pass the sequence and a track index as argument to lock tracks A1 and V1, respectively:
+
+<RetinaImg src="/img/blockOther/pr_execute_code_example_track_lock.png" alt=""/>
+
+**Lock Audio Track:**
+````
+var track = seq.audioTracks[audioTrackIndex-1];
+track.setLocked(lockedState?1:0)
+````
+
+**Lock Video Track:**
+````
+var track = seq.videoTracks[videoTrackIndex-1];
+track.setLocked(lockedState?1:0)
+````
+
+Here is an alternative implementation, which can lock both audio and video tracks and which takes the track itself as argument (learn [here](prSequenceClips.mdx#accessSequenceClip) how to  specify a track using a path string):
+
+<RetinaImg src="/img/blockOther/pr_execute_code_example_track_lock_track_var.png" alt=""/>
+
+````
+track.setLocked(lockedState?1:0)
+````
+
+
+### Clip: Remove
+
+In Premiere Pro's scripting API, clips in a sequence are represented by objects of type TrackItem. The function `TrackItem.remove()` removes the clip from a sequence and takes two arguments: `inRipple` and `inAlignToVideo`. See [here](https://ppro-scripting.docsforadobe.dev/item/trackitem.html#trackitem-remove) for a description of these arguments.
+
+In this example, we remove the first clip in track V1 of the active sequence. If you wonder what the `::V1\1` exactly means and what other options you have to specify a TrackItem, see [here](prSequenceClips.mdx#accessSequenceClip).
+
+<RetinaImg src="/img/blockOther/pr_execute_code_example_clip_remove.png" alt=""/>
+
+````
+item.remove(inRipple,inAlignToVideo)
+````
+
+### Clip: Apply Effect
+
+The official scripting API of Premiere Pro contains no function to apply effects. But there is also the undocumented QEdom, which you can actually use to apply effects. Be aware that this is unsave territory officially not supported by Adobe, but it still might work. This example applies the Gaussian Blur effect to the first clip in track V1 of the active sequence:
+
+<RetinaImg src="/img/blockOther/pr_execute_code_example_apply_effect.png" alt=""/>
+
+````
+app.enableQE();
+var qeEffect = qe.project.getVideoEffectByName(effectName);
+var qeSeq = qe.project.getActiveSequence();
+var qeTrack = qeSeq.getVideoTrackAt(videoTrackIndex-1);
+var qeClip = qeTrack.getItemAt(trackItemIndex-1);
+qeClip.addVideoEffect(qeEffect);
+````
+
+Cudos to NT Productions for [figuring this out](https://www.youtube.com/watch?v=mdB58gEBQaA); see also [this forum discussion](https://community.adobe.com/t5/premiere-pro-discussions/in-premiere-pro-can-an-effect-mosaic-be-applied-to-an-adjustment-layer-using-automation-blocks/m-p/14478002#M493399).
+

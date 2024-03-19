@@ -75,6 +75,14 @@ In those cases you can make sure that the iteration is executed only once (or no
 
 Returns one of the following properties of the given sequence clip (for all the ways you can specify a clip, see [Accessing a Particular Sequence Clip](prSequenceClips.mdx#accessSequenceClip))
 
+### disabled
+
+A [logic value](logic.mdx) `true` or `false` indicating if the clip is disabled in the timeline.
+
+### duration
+
+Duration of the clip in the sequence in seconds. This is the duration from in to out point. If you need the full length of the footage instead, use the [Get Attribute of Project Item Block](prProjectItems.mdx#pr_item_get_property) (read only)
+
 ### name
 
 The name of the clip. Note that this is not the same as the name of the project item of this clip. By default these two are identical, but you can right-click on a clip in your sequence and rename it. This will not rename the project item, only the sequence clip.
@@ -107,9 +115,7 @@ The out point of this clip (in seconds; a value of 0 corresponds to the beginnin
 
 For a detailed explanation of in point, out point, sequence start and end time, see the [Convert Time Between Sequence and Clip Block](prTime.mdx#pr_clip_time_to_sequence_time)
 
-### duration
 
-Duration of the clip in the sequence in seconds. This is the duration from in to out point. If you need the full length of the footage instead, use the [Get Attribute of Project Item Block](prProjectItems.mdx#pr_item_get_property) (read only)
 
 ### speed factor
 
