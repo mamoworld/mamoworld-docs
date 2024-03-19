@@ -41,6 +41,7 @@ The following types are available:
 - [Sequence](https://ppro-scripting.docsforadobe.dev/sequence/sequence.html)
 - [Track](https://ppro-scripting.docsforadobe.dev/sequence/track.html)
 - [TrackItem](https://ppro-scripting.docsforadobe.dev/item/trackitem.html)
+- [Time](https://ppro-scripting.docsforadobe.dev/other/time.html#time-object)
 
 Automation Blocks will do its best to convert anything to the chosen type. So if you choose type "Sequence", for example, and give it a TrackItem, then it will convert it to the sequence, which contains the track item.
 ### Returning a Result
@@ -110,6 +111,23 @@ with a variable `myItem` of type "ProjectItem":
 
 Note that the variable `parentBin` and the result have type "ProjectItem" whereas the variables `smartBinName` and `queryString` represent basic strings and hence keep the default type "other". Also note that the [documentation of ProjectItem.createSmartBin](https://ppro-scripting.docsforadobe.dev/item/projectitem.html#projectitem-createsmartbin) says that it returns 0, but in practice it looks like it is actually returning the item of the new bin. Hence, we also return it. 
 
+
+### ProjectItem: Import Mogrt
+
+This example  inserts the motion graphics template contained in the file *test.mogrt* on your desktop into the active sequence into tracks V1 and A1 at time 0s:
+
+<RetinaImg src="/img/blockOther/pr_execute_code_example_import_mogrt.png" alt=""/>
+
+````
+var newTrackItem = seq.importMGT(mogrtFile.fsName, time.ticks, videoTrack-1, audioTrack-1);
+if (!newTrackItem) throw new Error("track item could not be created");
+if (!(newTrackItem.projectItem)) throw new Error("track item of mogrt has no project item");
+newTrackItem.projectItem
+````
+
+Note that currently, Automation Blocks does not support track items as result type. Therefore, we return the corresponding project item instead.
+
+
 ### ProjectItem: Audio Channel Mappings
 
 This example sets the audio channel mapping of a project item:
@@ -138,7 +156,6 @@ In the screenshot above, we used the [list](lists.mdx) `[0,0]` as map, to map bo
 Audio Channel Mappings are also discussed in [this forum thread](https://community.adobe.com/t5/premiere-pro-discussions/automation-blocks-interpret-footage-automation-audio-channel-mapping/m-p/14473377#M493220).
 
 
-### Import Mogrts
 
 ### Track: Set Visibility (Eyeball)
 
