@@ -308,6 +308,21 @@ To get the pixel aspect ratio of the sequence as a single number instead of a te
 
 :::
 
+### work area (enabled / in point / out point)
+
+These three properties show/hide the workarea and change its in and out point. Note that the workarea is not the same as the in out range of the sequence:
+
+<RetinaImg src="/img/blockOther/pr_sequence_set_property_in_out_workarea.png" alt="in out of sequence vs work area in out point"/>
+
+:::danger API Bug
+
+Due to a bug in the Premiere Pro scripting API (#DVAPR-4239719), the functions to manipulate the workarea do not work reliably. 
+Most notably, the in and out point can only be set via the API after they have been changed manually once. Apparently a sequence can have two states regarding the workarea:  manual state (user or Extend script can set the workarea) or auto-state, where the workarea keeps adapting to the length of the last clip (default state). But we couldn't find a way to swich from auto-state to manual state by code, other then a user manually dragging before executing code.
+
+We still keep the functions here in Automation Blocks, in case they are still useful, despite the current limitations.
+
+:::
+
 
 
 
