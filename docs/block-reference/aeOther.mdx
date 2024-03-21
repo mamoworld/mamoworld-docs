@@ -13,3 +13,120 @@ import Youtube from "../../src/components/YouTube";
 ### Execute Code {#ae_execute_code}
 
 <RetinaImg src="/img/blockScreenshots/AeOther/ae_execute_code.png" alt="Block ae_execute_code"/>
+
+This block can execute any [Adobe ExtendScript](https://extendscript.docsforadobe.dev/) (jsx) code using the [After Effects scripting API](https://ae-scripting.docsforadobe.dev/).
+
+**Please refer to the [documentation of the Execute Code block for Premiere Pro](prOther.mdx#pr_execute_code) for a detailed description.** The block is identical for Ae and Pr, except for the available variable types and result types.
+
+### Variable Types
+
+The following types are available in Ae (both as variable type and result type of the block):
+
+- other (data is not converted)
+- [File](https://extendscript.docsforadobe.dev/file-system-access/file-object.html)
+- [Folder](https://extendscript.docsforadobe.dev/file-system-access/folder-object.html)
+- [Item](https://ae-scripting.docsforadobe.dev/items/item.html#item-object)
+- [Layer](https://ae-scripting.docsforadobe.dev/layers/layer.html#layer-object)
+- [Property](https://ae-scripting.docsforadobe.dev/properties/property.html)
+
+Note that Automation Blocks handles subclasses properly. If you choose type "Layer" for a text layer, for example, the actual type will be [TextLayer](https://ae-scripting.docsforadobe.dev/layers/textlayer.html#textlayer-object) and  if you choose type "Property", the result may also be a [PropertyGroup](https://ae-scripting.docsforadobe.dev/properties/propertygroup.html#propertygroup-object).
+
+
+## Execute Code - Examples{#ae_execute_code_examples}
+
+We collected all examples shown below in a single Automation Blocks xml file:
+
+<RoundButton
+  url="/blockCode/Execute_Code_Examples_Ae.xml"
+  label="Download Examples"
+/>
+
+### Executing jsx Files
+
+You can combine the Execute Code block with the [Read Text File block](filesText.mdx#extendscript_text_file_read). Since script files take  no arguments, you can remove all variable definitions from the Execute Code block in that case.
+
+<RetinaImg src="/img/blockOther/ae_execute_code_example_exec_jsx_file.png" alt="Execute jsx Files with Automation Blocks for Ae"/>
+
+:::warning $.filename
+
+Some script files use the attribute `$.fileName` to retrieve the file path of the currently executed file. Since we first read the file contents and then eval it, this won't work properly. Instead, better use a variable, to pass information like the file path to the jsx.
+
+:::
+
+### System Calls
+
+The function [System.callSystem](https://ae-scripting.docsforadobe.dev/general/system.html#system-callsystem) allows to execute arbitrary sysstem commands. Since system commands are specific for the operating system, our example takes two commands as arguments: The first is executed on Windows and the second on Mac OS systems. The execute code block executes the command for the respecitive operating system and returns the result of the system call, which we save in the variable "command result":
+
+<RetinaImg src="/img/blockOther/ae_execute_code_example_call_system.png" alt="Execute System Commands with Automation Blocks for Ae"/>
+
+
+````
+var result = null;
+if($.os.indexOf("Windows") != -1){
+    result = system.callSystem(systemCommandWindows);
+}
+else
+{
+    result = system.callSystem(systemCommandMacOs);
+}
+result
+````
+
+### Mogrts
+
+The [CompItem object](https://ae-scripting.docsforadobe.dev/items/compitem.html#compitem-object) of the Ae API has various functions for motion graphics templates. Here are some examples how to use those with Automation Blocks:
+
+#### Get Number of Motion Graphics Controllers
+
+In this example, we retrieve the number of controllers with the execute code block and then alert the result. Note that the variable `comp` has the type `Item`, since compositions have type `CompItem` which is a subclass of `Item`.
+<RetinaImg src="/img/blockOther/ae_execute_code_example_mogrt_get_num_controllers.png" alt="Retrieve number of mogrt controllers with Automation Blocks for Ae"/>
+
+````
+comp.motionGraphicsTemplateControllerCount
+````
+
+#### Set Name of Motion Graphics Template
+
+Here we set the name of the template shown in the Essential Graphics panel for the active composition. If the name does not update instantly in the panel, try to close  and repoen the Essential Graphics panel to see the change.
+
+<RetinaImg src="/img/blockOther/ae_execute_code_example_mogrt_set_name.png" alt="Set mogrt template name with Automation Blocks for Ae"/>
+
+````
+comp.motionGraphicsTemplateName=newName
+````
+
+#### Get Name of Motion Graphics Template
+
+In this example, we get the name shown in the Essential Graphics panel for the active composition. You can, of course, store the result in a variable, but here we just alert it instead.
+
+<RetinaImg src="/img/blockOther/ae_execute_code_example_mogrt_get_name.png" alt="Get mogrt template name with Automation Blocks for Ae"/>
+
+````
+comp.motionGraphicsTemplateName
+````
+
+#### Add Property to Mogrt
+
+In this example, we add all selected properties of the active composition to the Essential Graphics panel of the active composition. Properties, which are not supported, are ignored.
+Note that we only loop over Properties and not over PropertyGroups, since those don't have the [addToMotionGraphicsTemplateAs() method](https://ae-scripting.docsforadobe.dev/properties/property.html#property-addtomotiongraphicstemplateas).
+
+<RetinaImg src="/img/blockOther/ae_execute_code_example_mogrt_add_property.png" alt="Add property to mogrt with Automation Blocks for Ae"/>
+
+````
+if(prop.canAddToMotionGraphicsTemplate(comp)){
+    prop.addToMotionGraphicsTemplateAs(comp, name);
+}
+````
+
+#### Export Mogrt
+
+In this example, we use [CompItem.exportAsMotionGraphicsTemplate](https://ae-scripting.docsforadobe.dev/items/compitem.html#compitem-exportasmotiongraphicstemplate) to export the active composition as motion graphics template to a mogrt file on your desktop. The template name is used as file name.
+Note that we [save](aeProject.mdx#ae_project_save) the project first, since otherwise After Effects will prompt the user to save the project it if has unsaved changes. If your project has no project file, yet, you might want to use the [Save As](aeProject.mdx#ae_project_save_as) block instead.
+
+<RetinaImg src="/img/blockOther/ae_execute_code_example_mogrt_export.png" alt="Export mogrt template with Automation Blocks for Ae"/>
+
+````
+comp.exportAsMotionGraphicsTemplate(doOverwriteIfExisting,targetFolder.fsName)
+````
+
+
