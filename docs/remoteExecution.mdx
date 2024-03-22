@@ -1,0 +1,314 @@
+---
+sidebar_position: 5
+---
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Anigif from '../src/components/Anigif'
+import RetinaImg from '../src/components/RetinaImg'
+import Youtube from '../src/components/YouTube'
+import RoundButton from '../src/components/RoundButton'
+
+# Remote Execution
+
+Automation Blocks tools can be launchen in all kinds of ways, using external devices, your phone, keyboard shortcuts or other software running on your machine. There are two methods to do that:
+
+- *HTTP Requests* are great to lauch AB scripts from external devices like [Stream Deck](#streamdeck), from automation software like [Auto Hotkey](#autohotkey) or [Keyboard Maestro](#keyboardmaestro) and from your phone using [Touch Portal](#touchportal).
+- *CEP Events* can be used to launch AB scripts from other extensions in Ae and Pr. This also includes script launchers like [KBar and Quick Menu](#kbarquickmemu).
+
+
+
+## Remote Execution via HTTP Requests
+
+With Automation Blocks, you have the power to execute any automation remotely using HTTP requests. This feature enables seamless integration with external devices such as Elgato Stream Deck, Touch Portal, Keyboard Maestro on Mac, Auto Hotkey on Windows, and various other trigger-based software packages.
+
+### Enabling HTTP Request Execution
+To activate HTTP request execution for your Automation Blocks scripts, follow these steps:
+
+1. Navigate to Settings: Open the Automation Blocks extension and navigate to the settings panel.
+
+2. Toggle HTTP Request Execution: Within the settings panel, locate the option to toggle HTTP request execution on or off. Enable this option to allow remote execution of scripts via HTTP requests.
+
+3. Configure Port (Optional): Additionally, you have the option to configure the port used for HTTP requests. By default, Automation Blocks uses a predefined port (7741 for Pr and 7742 for Ae), but you can customize this to suit your preferences. Simply specify the desired port number in the preferences section.
+
+4. Restart Host Application: After making any changes to the HTTP request settings, it's important to restart the host application (Premiere Pro or After Effects) for the changes to take effect.
+
+<RetinaImg src="/img/remoteExecution/remote_execution_settings.png" alt="Enable Remote Execution in Automation Blocks"/>
+
+### How It Works
+
+Once enabled, you can trigger your Automation Blocks scripts by simply opening a specific URL. Here's how it works:
+
+#### Executing the Current Automation Blocks Script:
+
+If you want to execute the Automation Blocks tool currently open in the Automation Blocks panel (assuming that you've chosen port 7741), simply open the following URL:
+
+````
+http://localhost:7741/runCurrentAutomationBlocksScript
+````
+
+#### Executing a Script from a File:
+
+If you have a script saved in a file, such as C:\myTools\sampleTool.xml, you can execute it by opening the URL:
+````
+http://localhost:7741/runAutomationBlocksScript?filePath=C:\myTools\sampleTool.xml
+````
+
+This functionality even works if the Automation Blocks panel is not open, though the host application must be running.
+
+#### Viewing Remote URLs:
+
+In the preferences, you'll find the option to "View Remote URLs". Opening the following URL in your web browser will display a web page listing all tools in your Automation Blocks library along with their respective URLs for execution:
+
+````
+http://localhost:7741/listAutomationBlocksScripts
+````
+This feature provides convenient access to all available scripts and their corresponding URLs.
+
+
+
+
+### Auto Hotkey (Win) {#autohotkey}
+
+[AutoHotkey](https://www.autohotkey.com/) is a free and open-source scripting language for Windows that enables users to create macros, automate repetitive tasks, and remap keys and buttons, making it a versatile tool for automating workflows and customizing system behavior.
+
+#### Configure Hotkey
+
+Here is a sample Auto Hotkey V2 script, which executes an Automation Blocks script file `C:\Users\info\OneDrive\Dokumente\Automation Blocks Pr Library\HelloWorld.xml`
+ with the F11 key (adjust port according to port configured in your AB prefs):
+
+````
+; Define a hotkey for F11
+F11::
+{
+	; enter here the URL of the Automation Blocks tool you want to trigger:
+	url := 'http://localhost:7741/runAutomationBlocksScript?filePath=C:\Users\info\OneDrive\Dokumente\Automation%20Blocks%20Pr%20Library\HelloWorld.xml'
+
+	whr := ComObject("WinHttp.WinHttpRequest.5.1")
+	whr.Open("GET", url, False), whr.Send()  
+}
+````
+
+Just update the line `url := ...` with the remote url of the Automation Blocks tool you want to trigger.
+
+#### Limit Hotkey to be Active Only when Pr/Ae has Focus
+
+Note that the script above will run the Automation Blocks tool whenever the F11 key is pressed - also if Premiere Pro is just running in the background and anoth application has the focus. If you want the shortcut to only be active when Premiere Pro has focus, you can change the script like that:
+
+````
+; Define a hotkey for F11
+F11::
+{
+	if WinActive("Premiere Pro"){
+		
+		; enter here the URL of the Automation Blocks tool you want to trigger:
+		url := 'http://localhost:7741/runAutomationBlocksScript?filePath=C:\Users\info\OneDrive\Dokumente\Automation%20Blocks%20Pr%20Library\HelloWorld.xml'
+
+	whr := ComObject("WinHttp.WinHttpRequest.5.1")
+	whr.Open("GET", url, False), whr.Send()  
+	}  
+}
+````
+
+The WinActive command ensures that the url trigger is only executed if a window with "Premiere Pro" in its title is in focus. Of course, you ned to replace "Premiere Pro" by "After Effecs" if you configure hotkeys for Ae.
+
+Note that you can define multiple keyboard shortcuts in a single Auto Hotkey script:
+
+````
+; Define a hotkey for F11
+F11::
+{
+		; code for F11 hotkey goes here
+}
+
+; Define a hotkey for Ctrl+Shift+A
+^+a::
+{
+		; code for Ctrl+Shift+A hotkey goes here
+}
+````
+
+
+### Keyboard Maestro (Mac) {#keyboardmaestro}
+
+[Keyboard Maestro](https://www.keyboardmaestro.com/main/) is a powerful automation tool for macOS that allows users to create macros and automate repetitive tasks using keyboard shortcuts, triggers, and actions, providing advanced automation capabilities for productivity and efficiency.
+
+To execute an Automation Blocks script, just open the respective URL with the "*Get URL*" action of Keyboard Maestro:
+
+<RetinaImg src="/img/remoteExecution/example_keyboard_maestro.png" alt="Execute Automation Blocks script with Keyboard Maestro in Premiere Pro and After Effects"/>
+
+
+#### Triggers
+
+Keyboard Maestro offers a [wide range of triggers](https://wiki.keyboardmaestro.com/Triggers), including [hotkey triggers](https://wiki.keyboardmaestro.com/trigger/Hot_Key) like the one demonstrated above, which executes the Automation Blocks tool when Ctrl+Shift+A is pressed. Alternatively, you can utilize a [Folder trigger](https://wiki.keyboardmaestro.com/trigger/Folder) to create watch folder functionality, or a [Mounted Volume trigger](https://wiki.keyboardmaestro.com/trigger/Mounted_Volume) to automatically execute an AB script when connecting your camera's memory card to your computer.
+
+#### Limit Hotkey to be Active Only when Pr/Ae has Focus
+
+Macros in Keyboard Maestro are organized in [macro groups](https://wiki.keyboardmaestro.com/Macro_Groups) and for each macro group you can configure that it is only active when a particular application has focus. That way, you can ensure that the keyboard shortcuts you configure are only active when Premiere Pro has focus, for example.
+
+
+
+### Stream Deck {#streamdeck}
+
+Stream Deck is a customizable control surface by Elgato that allows users to create personalized buttons for controlling various software applications and functions, making it ideal for streamers, content creators, and power users.
+
+To launch an Automation Blocks tool, use the [System Action - Website](https://help.elgato.com/hc/en-us/articles/360028234471-Elgato-Stream-Deck-System-Actions-Hotkey-Open-Website-Multimedia#h_01G93JMZXBEAT71H4NSYM2YTXE) and make sure to check the option "GET Request in background", such that the URL is not opened in your default webbrowser, but only opened in the background.
+
+
+### Touch Portal {#touchportal}
+
+[Touch Portal](https://www.touch-portal.com/) is a mobile app that transforms your smartphone or tablet into a customizable control surface, enabling users to remotely trigger actions, macros, and commands on their computer, making it versatile for streamers, video editors, and automation enthusiasts.
+
+To execute an Automation Blocks script with Touch Portal, just configure a button with a "Http Get" action and enter the remote URL for the script you want to execute:
+
+<RetinaImg src="/img/remoteExecution/example_touch_portal.png" alt="Execute Automation Blocks script with Touch Portal in Premiere Pro and After Effects"/>
+
+
+## Remote Execution via CEP Events
+
+You can also remote-execute Automation Blocks scripts from other  extensions (CEP panels). If you develop your own extensions, there is no need to reinvent the wheel: Just use Automation Blocks inside your own extensions and speed up your development.
+
+:::tip new in Automation Blocks 1.0.012
+
+CEP events have been added in Autommation Blocks 1.0.012. If you use an older version, make sure to update!
+
+:::
+
+### Run Script File
+*Event for Pr: `com.aescripts.AutomationBlocksPr.runScriptFile`<br/>
+Event for Ae: `com.aescripts.AutomationBlocksAe.runScriptFile`*
+
+To execute an Automation Blocks script, just send a CSEvent with type `com.aescripts.AutomationBlocksPr.runScriptFile` in Premiere Pro or `com.aescripts.AutomationBlocksAe.runScriptFile` in After Effects.
+ 
+ In the event data, you need to provide a `filePath`, to specify the xml file containing the block script you want to execute:
+
+```
+// execute script test.xml without loading it into the UI
+var event = new CSEvent('com.aescripts.AutomationBlocksPr.runScriptFile', 'APPLICATION');
+event.data = {
+    filePath: "/path/to/file/test.xml"
+};
+new CSInterface().dispatchEvent(event);
+```
+In order to make this work, Automation Blocks needs to be installed (and licensed) on the machine, but the Automation Blocks user interface does not need to be open.
+
+If you run into any issues open http://localhost:2029/ with Chrome to see the debugger of the Automation Blocks API. Automation Blocks prints status messages in this console when it receives the event and also shows the errors there, if something went wrong.
+
+#### Callback
+
+If you [register a callback](#callbacks), then Automation Blocks will send an event back to you after it executed the script (or if that failed). The data sent with the callback event will contain the following properties:
+- **status** will be `ERROR` if loading or executing the script failed and `SUCCESS` otherwise.
+- **result** will be an error message if status is `ERROR`. Otherwise it will contain the result of the script execution.
+
+
+:::danger Input Blocks Limitation
+
+Since this event executes the block scripts without a user interface, [input blocks](block-reference/userInterfaceAndComments.mdx#input_arg) will always use their default value. If you need user input, use the other user interface blocks, which create popup dialogs.
+
+:::
+
+###  Run Current Script
+
+*Event for Pr: `com.aescripts.AutomationBlocksPr.runCurrentScript`<br/>
+Event for Ae: `com.aescripts.AutomationBlocksAe.runCurrentScript`*
+
+If the user interface of Automation Blocks is open , you can also ask it to run the block script, which is currently open in the UI:
+```
+// run the script that is currently open in the Automation Blocks UI
+var event = new CSEvent('com.aescripts.AutomationBlocksPr.runCurrentScript', 'APPLICATION');
+new CSInterface().dispatchEvent(event);
+```
+
+This event is handled by the panel showing the Automation Blocks UI. Hence, it only works if the Automation Blocks UI is open.
+For debugging open the Automation Blocks panel at http://localhost:2026/ (note the 2026 instead of 2029!).
+
+#### Callback
+
+If you [register a callback](#callbacks), the data sent with the callback event will contain the following properties:
+- **status** will be `ERROR` if the script execution failed and `SUCCESS` otherwise.
+- **result** will be an error message if status is `ERROR`. Otherwise it will contain the result of the script execution.
+
+
+###  Load Script File
+*Event for Pr: `com.aescripts.AutomationBlocksPr.loadScriptFile`<br/>
+Event for Ae: `com.aescripts.AutomationBlocksAe.loadScriptFile`*
+
+If the user interface of Automation Blocks is open, you can also tell it to open a block script of your choice in the user interface:
+
+```
+// load the block script test.xml into the Automation. Blocks UI
+var event = new CSEvent('com.aescripts.AutomationBlocksPr.loadScriptFile', 'APPLICATION');
+event.data = {
+    filePath: "/path/to/file/test.xml"
+};
+new CSInterface().dispatchEvent(event);
+```
+
+This event is handled by the panel showing the Automation Blocks UI. Hence, it only works if the Automation Blocks UI is open.
+For debugging open the Automation Blocks panel at http://localhost:2026/.
+
+#### Callback
+
+If you [register a callback](#callbacks), the data sent with the callback event will contain the following properties:
+- **status** will be `ERROR` if loading the script failed and `SUCCESS` otherwise.
+- **result** will be an error message if status is `ERROR`. Otherwise it will be the empty string.
+
+
+### Callbacks {#callbacks}
+
+When you send an event to Automation Blocks, you can also request Automation Blocks to send an answer back to your CEP panel. 
+For this, just add an object `callbackData` to the event data with the following properties:
+- *eventType*: A string for the type of event you want to recieve. Make sure to choose a unique name, which does not overlap with events from other extensions.
+- *customData*: Here you can pass any json object. Automation Blocks will send this data back with the reply. You can use this to pass unique IDs for each event, for example, such that you know to which your your events the reply belongs.
+
+Here is an example:
+```
+// register an event handler to recieve the reply from Automation Blocks
+new CSInterface().addEventListener(
+  "my_reply_callback_unique_name",
+  function (event) {
+    var data = event.data;
+    console.log("recieved reply event:", event.data);
+  }
+);
+
+// now send your event
+var myEvent = new CSEvent(
+	"com.aescripts.AutomationBlocksPr.runScriptFile",
+	"APPLICATION"
+);
+myEvent.data = {
+	filePath: "path/to/test.xml",
+	callbackData: {
+	  eventType: "my_reply_callback_unique_name",
+	  customData: {
+		id: 1234,
+		whatever: "foo",
+	  },
+	},
+};
+new CSInterface().dispatchEvent(myEvent);
+```
+
+## ExtendScript, Kbar & Quick Menu {#kbarquickmemu}
+
+You can also send the events from After Effects scripts (ExtendScript). This is in particular useful, since launcher tools like [KBar](https://aescripts.com/kbar/) or [Quick Menu](https://aescripts.com/quick-menu/) can execute custom scripts. 
+
+
+The syntax for ExtendScript is a little bit different, since you need to load the PlugPlugExternalObject library and also need to *JSON.stringify* your data. You can use the script code below to launch an Automation Blocks script from Kbar's "Run Scriptlet", for example. You can also save the code to a jsx file and run it from the Ae menu "File->Scripts->Run Script File" or from QuickMenu.
+
+```
+var xLib;
+try {
+    xLib = new ExternalObject("lib:\PlugPlugExternalObject");
+} catch(e) { alert("Missing ExternalObject: "+e); }
+
+if (xLib) {
+	var eventObj = new CSXSEvent();
+	eventObj.type = 'com.aescripts.AutomationBlocksAe.runScriptFile';
+	eventObj.data = JSON.stringify({
+		filePath: "/path/to/file/test.xml"
+	});
+	eventObj.dispatch();
+}
+```
+Just replace `"/path/to/file/test.xml"` by the file path of the block script you want to execute.
