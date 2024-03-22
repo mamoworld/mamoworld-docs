@@ -247,3 +247,26 @@ qeClip.addVideoEffect(qeEffect);
 
 Cudos to NT Productions for [figuring this out](https://www.youtube.com/watch?v=mdB58gEBQaA); see also [this forum discussion](https://community.adobe.com/t5/premiere-pro-discussions/in-premiere-pro-can-an-effect-mosaic-be-applied-to-an-adjustment-layer-using-automation-blocks/m-p/14478002#M493399).
 
+### Source Monitor: Open Project Item
+
+With the method [app.sourceMonitor.openProjectItem()](https://ppro-scripting.docsforadobe.dev/general/sourcemonitor.html#sourcemonitor-openprojectitem) of Premiere Pro's scripting API, you can open any project item in
+the source viewer. In this example, we open the image "image.jpeg" in the project bin "footage" in the source monitor:
+
+<RetinaImg src="/img/blockOther/pr_execute_code_example_source_monitor_open_item.png" alt=""/>
+
+````
+app.sourceMonitor.openProjectItem(myItem)
+````
+
+Here is another variant, which optionally closes all other open clips in the source monitor before opeing the new one:
+
+<RetinaImg src="/img/blockOther/pr_execute_code_example_source_monitor_open_item_close_option.png" alt=""/>
+
+````
+if(closeOthers) app.sourceMonitor.closeAllClips();
+app.sourceMonitor.openProjectItem(myItem)
+````
+
+
+###
+
