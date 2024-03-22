@@ -106,6 +106,7 @@ var result = parentBin.createSmartBin(
 result
 ````
 
+Note that the variable `parentBin` and the result have type "ProjectItem" whereas the variables `smartBinName` and `queryString` represent basic strings and hence keep the default type "other". Also note that the [documentation of ProjectItem.createSmartBin](https://ppro-scripting.docsforadobe.dev/item/projectitem.html#projectitem-createsmartbin) says that it returns 0, but in practice it looks like it is actually returning the item of the new bin. Hence, we also return it. 
 
 ### ProjectItem: Set Offline
 
@@ -116,10 +117,6 @@ myItem.setOffline();
 with a variable `myItem` of type "ProjectItem":
 
 <RetinaImg src="/img/blockOther/pr_execute_code_example_variable_types.png" alt=""/>
-
-
-
-Note that the variable `parentBin` and the result have type "ProjectItem" whereas the variables `smartBinName` and `queryString` represent basic strings and hence keep the default type "other". Also note that the [documentation of ProjectItem.createSmartBin](https://ppro-scripting.docsforadobe.dev/item/projectitem.html#projectitem-createsmartbin) says that it returns 0, but in practice it looks like it is actually returning the item of the new bin. Hence, we also return it. 
 
 
 ### ProjectItem: Import Mogrt
