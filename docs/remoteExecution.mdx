@@ -10,9 +10,9 @@ import RoundButton from '../src/components/RoundButton'
 
 # Remote Execution
 
-Automation Blocks tools can be launchen in all kinds of ways, using external devices, your phone, keyboard shortcuts or other software running on your machine. There are two methods to do that:
+Automation Blocks tools can be launchen in all kinds of ways, using keyboard shortcuts, external devices, your phone, or other software running on your machine. There are two methods to do that:
 
-- *HTTP Requests* are great to lauch AB scripts from external devices like [Stream Deck](#streamdeck), from automation software like [Auto Hotkey](#autohotkey) or [Keyboard Maestro](#keyboardmaestro) and from your phone using [Touch Portal](#touchportal).
+- *HTTP Requests* are great to lauch AB scripts with keyboard shortcuts (using [Auto Hotkey](#autohotkey) on Windows or [Automator](#automator) or [Keyboard Maestro](#keyboardmaestro) on Mac OS). It is also useful to trigger Automation Blocks with external devices like [Stream Deck](#streamdeck) or your phone using [Touch Portal](#touchportal).
 - *CEP Events* can be used to launch AB scripts from other extensions in Ae and Pr. This also includes script launchers like [KBar and Quick Menu](#kbarquickmemu).
 
 
@@ -34,7 +34,7 @@ To activate HTTP request execution for your Automation Blocks scripts, follow th
 
 <RetinaImg src="/img/remoteExecution/remote_execution_settings.png" alt="Enable Remote Execution in Automation Blocks"/>
 
-### How It Works
+### How It Works {#howitworks}
 
 Once enabled, you can trigger your Automation Blocks scripts by simply opening a specific URL. Here's how it works:
 
@@ -126,6 +126,42 @@ F11::
 		; code for Ctrl+Shift+A hotkey goes here
 }
 ````
+
+### Automator (Mac) {#automator}
+
+Automator for Mac OS is a built-in application that allows users to automate repetitive tasks by creating custom workflows or shortcuts, streamlining processes and saving time. Since Automator is installed by default on any Mac, it allows you to execute Automation Blocks tools with keyboard shortcuts without the need to install any third party tools.
+
+To setup a new shortcut for an Automation Blocks Remote URL, follow these steps.
+
+1. Open Automator and create a new Quick Action.
+
+<RetinaImg src="/img/remoteExecution/example_automator_quick_action_1.png" alt=""/>
+
+2. In the Quick Action choose the action "Run Shell Script" and enter as script the command `curl` followed by the URL you want to trigger:
+<RetinaImg src="/img/remoteExecution/example_automator_quick_action_2.png" alt=""/>
+
+The command to execute the currently open Automation Blocks script, for example, would be:
+````
+curl http://localhost:7741/runCurrentAutomationBlocksScript
+````
+
+(For more URLs see the section [How it Works](#howitworks))
+
+Also make sure to set the option that the workflow receives no input and choose as target application Premiere Pro (or choose ttarget "any application" if the keyboard shortcut should also work when any other applicataion has the focus). Save the quick action with a meaningful name - in our example we use "Automation Blocks Pr Run Current Script"
+
+Once it is saved, you find the quick action in the main menu of Premiere Pro at "Premiere Pro->Services"; so you can check now if it executes the Automation Blocks script properly. In the remaining steps we configure that the quick action can be triggered with a keyboard shortcut.
+
+3. Open the Mac OS System Settings, open the tab "Keyboard", and choose "Keyboard Shortcuts..."
+
+<RetinaImg src="/img/remoteExecution/example_automator_quick_action_3.png" alt=""/>
+
+4. Open the tab "App Shortcuts" and click on the + at the bottom of the list to add a new shortcut. In the dialog which pops up, choose as *Application* Adobe Premiere Pro and enter as Menu Title the exact name of your quick action (as it is listed in the main menu of Pr at "Premiere Pro->Services"). Then enter as keyboad shortcut the shortcut you want to use.
+
+<RetinaImg src="/img/remoteExecution/example_automator_quick_action_4.png" alt=""/>
+
+
+
+
 
 
 ### Keyboard Maestro (Mac) {#keyboardmaestro}
