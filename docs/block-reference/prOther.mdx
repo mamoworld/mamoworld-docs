@@ -231,7 +231,7 @@ item.remove(inRipple,inAlignToVideo)
 
 The official scripting API of Premiere Pro contains no function to apply effects. But there is also the undocumented QEdom, which you can actually use to apply effects. Be aware that this is unsave territory officially not supported by Adobe, but it still might work. This example applies the Gaussian Blur effect to the first clip in track V1 of the active sequence:
 
-<RetinaImg src="/img/blockOther/pr_execute_code_example_apply_effect.png" alt=""/>
+<RetinaImg src="/img/blockOther/pr_execute_code_example_apply_effect.png" alt="apply effects to clips in Premiere Pro using Automation Blocks"/>
 
 ````
 app.enableQE();
@@ -244,6 +244,38 @@ qeClip.addVideoEffect(qeEffect);
 
 Cudos to NT Productions for [figuring this out](https://www.youtube.com/watch?v=mdB58gEBQaA); see also [this forum discussion](https://community.adobe.com/t5/premiere-pro-discussions/in-premiere-pro-can-an-effect-mosaic-be-applied-to-an-adjustment-layer-using-automation-blocks/m-p/14478002#M493399).
 
+
+:::warning trackItemIndex
+
+`qeTrack.getItemAt()` counts the gaps between clips in a track also as "items". Hence, you need to count both the clips and the gaps between them to find the right value for trackItemIndex.
+
+<RetinaImg src="/img/blockOther/pr_execute_code_example_apply_transition_track_item_index.png" alt=""/>
+
+:::
+
+### Clip: Apply Transition
+
+<RetinaImg src="/img/blockOther/pr_execute_code_example_apply_transition.png" alt="apply a transition to clips in Premiere Pro using Automation Blocks"/>
+
+````
+app.enableQE();
+var qeSeq = qe.project.getActiveSequence();
+var qeTrack = qeSeq.getVideoTrackAt(videoTrackIndex-1);
+var qeClip = qeTrack.getItemAt(trackItemIndex-1);
+var insertAtStart = (startOrEnd == "at clip start");
+qeClip.addTransition(qe.project.getVideoTransitionByName(effectName), insertAtStart, durationTimecode,  "0", position );
+````
+
+Applying transitions works very similar to applying effects (and also has the same stumbling block that gaps between clips affect the `trackItemIndex`).
+
+For transitions you have a few extra parameters:
+
+- **startOrEnd:** Set this to "at clip start" to insert the transition at the beginning of the clip and to any other value otherwise.
+- **durationTimecode:** The total duration of the transition as a timecode - like "10" for 10 frames or "00:00:00:10". Note that this must be a string, not a number value
+- **position**: A number between 0 and 1 determining the exact position of the transition. A value of 0.5 inserts the transition in the middle of the cut. For a value of 0.2, 20% of the total duration of the transition are on the first clip and 80% on the second clip.
+
+Note that `qeClip.addTransition()` also has an extra argument `"0"`. We have no idea what it is doing - if you do, please let us know!
+ 
 ### Source Monitor: Open Project Item
 
 With the method [app.sourceMonitor.openProjectItem()](https://ppro-scripting.docsforadobe.dev/general/sourcemonitor.html#sourcemonitor-openprojectitem) of Premiere Pro's scripting API, you can open any project item in
