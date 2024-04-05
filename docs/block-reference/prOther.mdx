@@ -180,6 +180,7 @@ Note that the function `setMute()` can both mute audio tracks and set the eyebal
 ### Track: Mute
 
 <RetinaImg src="/img/blockOther/pr_execute_code_example_track_mute.png" alt=""/>
+
 ````
 var track = seq.audioTracks[audioTrackIndex-1];
 track.setMute(muteState?1:0)
@@ -195,12 +196,14 @@ In this implementation we pass the sequence and a track index as argument to loc
 <RetinaImg src="/img/blockOther/pr_execute_code_example_track_lock.png" alt=""/>
 
 **Lock Audio Track:**
+
 ````
 var track = seq.audioTracks[audioTrackIndex-1];
 track.setLocked(lockedState?1:0)
 ````
 
 **Lock Video Track:**
+
 ````
 var track = seq.videoTracks[videoTrackIndex-1];
 track.setLocked(lockedState?1:0)
