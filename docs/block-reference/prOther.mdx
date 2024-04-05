@@ -137,7 +137,7 @@ Note that currently, Automation Blocks does not support track items as result ty
 
 ### ProjectItem: Audio Channel Mappings
 
-This example sets the audio channel mapping of a project item:
+This example sets [the audio channel mapping](https://ppro-scripting.docsforadobe.dev/other/audiochannelmapping.html#audiochannelmapping-object) of a project item:
 <RetinaImg src="/img/blockOther/pr_execute_code_example_audio_channel_mapping.png" alt=""/>
 
 ````
@@ -159,6 +159,33 @@ else {
 ````
 
 In the screenshot above, we used the [list](lists.mdx) `[0,0]` as map, to map both the left and right channel of the clip to the left media source channel (and replacing a 0 by 1 would map to the right media source channel). For clips with more channels, you can simply use a list with more entries.
+
+Here is a second example, which changes the audio channel mapping of a stereo file, such that it uses two mono tracks instead of one stereo track in the timeline:
+
+<RetinaImg src="/img/blockOther/pr_execute_code_example_audio_channel_mapping_2.png" alt="Premiere Pro: Set Stereo Clip to Two Mono Channels with Automation Blocks"/>
+
+````
+if(myItem){
+    var mapping = myItem.getAudioChannelMapping
+    if(mapping){
+        // possible values for audioChannelsType:
+        // 0=mono; 1=stereo; 2=5.1
+       mapping.audioChannelsType = 0;  
+       mapping.audioClipsNumber = 2;
+   
+       myItem.setAudioChannelMapping(mapping);
+    }
+    else {
+        throw new Error("Current audio mapping unavailable for item "+myItem.treePath);
+    }
+}
+else {
+    throw new Error("ProjectItem not found");
+}
+````
+
+To chieve this, we set the audioChannesType of the [the audio channel mapping](https://ppro-scripting.docsforadobe.dev/other/audiochannelmapping.html#audiochannelmapping-object) to 0 (0=mono; 1=stereo; 2=5.1) and the audioClipsNumber to 2, since we need two mono tracks for the stereo data.
+
 
 Audio Channel Mappings are also discussed in [this forum thread](https://community.adobe.com/t5/premiere-pro-discussions/automation-blocks-interpret-footage-automation-audio-channel-mapping/m-p/14473377#M493220).
 
