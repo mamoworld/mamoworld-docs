@@ -68,7 +68,7 @@ In those cases you can make sure that the iteration is executed only once (or no
 :::
 
 
-## Get Property of Clip {#pr_track_item_get_property}
+## Get Attribute of Clip {#pr_track_item_get_property}
 
 <RetinaImg src="/img/blockScreenshots/PrSequenceClips/pr_track_item_get_property.png" alt="Block pr_track_item_get_property"/>
 
@@ -83,20 +83,6 @@ A [logic value](logic.mdx) `true` or `false` indicating if the clip is disabled 
 
 Duration of the clip in the sequence in seconds. This is the duration from in to out point. If you need the full length of the footage instead, use the [Get Attribute of Project Item Block](prProjectItems.mdx#pr_item_get_property) (read only)
 
-### name
-
-The name of the clip. Note that this is not the same as the name of the project item of this clip. By default these two are identical, but you can right-click on a clip in your sequence and rename it. This will not rename the project item, only the sequence clip.
-
-### media type
-
-A text, either `Audio` or `Video`. (read only)
-
-### start time in sequence
-
-The time in the sequence where the clip starts (in seconds; a value of 0 corresponds to the beginning of the sequence). At this time, the frame of the footage given by [in point](prSequenceClips.mdx#in-point) is visible. 
-
-For a detailed explanation of in point, out point, sequence start and end time, see the [Convert Time Between Sequence and Clip Block](prTime.mdx#pr_clip_time_to_sequence_time)
-
 ### end time in sequence
 
 The time in the sequence where the clip ends (in seconds; a value of 0 corresponds to the beginning of the sequence). At this time, the frame of the footage given by [out point](prSequenceClips.mdx#out-point) is visible.
@@ -109,23 +95,64 @@ The in point of this clip (in seconds; a value of 0 corresponds to the beginning
 
 For a detailed explanation of in point, out point, sequence start and end time, see the [Convert Time Between Sequence and Clip Block](prTime.mdx#pr_clip_time_to_sequence_time)
 
+### is adjustment layer 
+
+A [logic value](logic.mdx) `true` or `false` indicating if the clip is an adjustment layer. (read only)
+
+###  match name 
+
+The [match name of the trackitem](https://ppro-scripting.docsforadobe.dev/item/trackitem.html#trackitem-matchname) internally used by Pr. (read only)
+
+### media type
+
+A text, either `Audio` or `Video`. (read only)
+
+### name
+
+The name of the clip. Note that this is not the same as the name of the project item of this clip. By default these two are identical, but you can right-click on a clip in your sequence and rename it. This will not rename the project item, only the sequence clip.
+
+### nodeId
+
+The [nodeId of the trackitem](https://ppro-scripting.docsforadobe.dev/item/trackitem.html#trackitem-nodeid) internally used by Pr. (read only)
+
 ### out point
 
 The out point of this clip (in seconds; a value of 0 corresponds to the beginning of the footage). Note that this is not the same as the out point of the project item (which you can get by using this clip with the [Get Attribute of Project Item Block](prProjectItems.mdx#pr_item_get_property)) instead of the *Get Property of Clip* Block. Each clip that uses a project item has its own in and out points, which correspond to the section of the footage that this clip uses. The project item itself has yet another in and out point, which corresponds to the in and out points you choose in the source monitor.
 
 For a detailed explanation of in point, out point, sequence start and end time, see the [Convert Time Between Sequence and Clip Block](prTime.mdx#pr_clip_time_to_sequence_time)
 
+### project item
 
+The [project item](prProjectItems.mdx) of this clip or [null](logic.mdx#logic_null), if the clip has no corresponding project item.
+Note that whenever a block expects a project item as argument and you give it a sequence clip instead, Automation Blocks converts it to the corresponding project item for you (if the clip has a corresponding project item). Therefore, accessing the project item attribute explicitly is often not needed. But it is very helpful to check if this attribute is null, if you want to check if there is a corresponding project item.
+
+### selected
+
+A [logic value](logic.mdx) `true` or `false` indicating if the clip is currently selected.
 
 ### speed factor
 
 The speed multiplier applied to the clip (read only)
 
+### speed is reversed
+
+A [logic value](logic.mdx) `true` or `false` indicating if the clip speed is reversed. (read only)
+
+### start time in sequence
+
+The time in the sequence where the clip starts (in seconds; a value of 0 corresponds to the beginning of the sequence). At this time, the frame of the footage given by [in point](prSequenceClips.mdx#in-point) is visible. 
+
+For a detailed explanation of in point, out point, sequence start and end time, see the [Convert Time Between Sequence and Clip Block](prTime.mdx#pr_clip_time_to_sequence_time)
+
 ### track name
 
 The name of the track in which the item is located (read only)
 
-## Set Clip Property {#pr_track_item_set_property}
+
+
+
+
+## Set Attribute of Clip {#pr_track_item_set_property}
 
 <RetinaImg src="/img/blockScreenshots/PrSequenceClips/pr_track_item_set_property.png" alt="Block pr_track_item_set_property"/>
 
