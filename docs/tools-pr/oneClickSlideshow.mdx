@@ -62,13 +62,26 @@ In this dropdown you have three (pretty self-explanatory) choices:
 - add to render queue
 - add to render queue and start rendering
 
-
-
 ### Image Duration
 
 To change how long each image is visible, you don't even need to modify the script. Just go to the Premiere Pro Preferences and adjust the  `Still Image Default Duration` in the *Timeline* section to your liking.
 
 <RetinaImg src="/img/tools-pr/oneClickSlideshow/still_image_default_duration.png" alt="customization overview"/>
 
+
+## Bug in Premiere Pro 24.2
+
+:::danger Bug in PR2024 - User Canceled Error
+
+In Premiere Pro 2024 versions 24.2 and probably also 24.3 there is a [bug which causes the select dialog to fail](https://community.adobe.com/t5/premiere-pro-discussions/open-folder-dialog-doesn-t-works-in-pr-2024/m-p/14503742#M494898).
+If your Pr version still has this bug, the slideshow tool will show a "user cancelled" error whenever you try to run the tool.
+
+Workarounds:
+1. use a newer Pr version (the current beta or any release newer than Pr 24.3 already contains the fix)
+2. replace the [select folder dialog block](../block-reference/userInterfaceAndComments.mdx#block_extendscript_open_folder_dlg) by a [folder block](../block-reference/files.mdx#block_extendscript_folder) and enter the folder containing your slideshow images directly in that block.
+
+<RetinaImg src="/img/tools-pr/oneClickSlideshow/oneClickSlideshow_PR2024_bug.png" alt="customization overview"/>
+
+:::
 
 
