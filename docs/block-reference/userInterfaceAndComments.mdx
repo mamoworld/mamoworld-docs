@@ -189,6 +189,19 @@ If you want to hard-code a particular folder instead of allowing the user to cho
 
 :::
 
+#### Bug in Premiere Pro 24.2
+
+:::danger Bug in PR2024
+
+In Premiere Pro 2024 versions 24.2 and probably also 24.3 there is a [bug which causes the select dialog to fail](https://community.adobe.com/t5/premiere-pro-discussions/open-folder-dialog-doesn-t-works-in-pr-2024/m-p/14503742#M494898).
+If your Pr version still has this bug, this block will not show a dialog and returns `null` immediately.
+
+Workarounds:
+1. use a newer Pr version (the current beta or any release newer than Pr 24.3 already contains the fix) or
+2. hard-code a folder (using a [folder block](files.mdx#block_extendscript_folder))
+
+:::
+
 ## Prompt Dialog {#block_extendscript_prompt}
 
 <RetinaImg src="/img/blockScreenshots/UserInterfaceAndComments/block_extendscript_prompt.png" alt="Block block_extendscript_prompt"/>
