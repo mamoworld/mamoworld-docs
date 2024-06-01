@@ -258,3 +258,33 @@ By default, the dropdown lists the clip paramters which most clips have. However
 
 
 This block works exactly as the [Clip Param block](#pr_component_parameter_path), except that the dropdown only lists the clip parameters that can be keyframed.
+
+
+## Troubleshooting Clip Param Issues
+
+### Could not find component parameter
+
+If a component parameter could not be found by Automation Blocks, you typically see a message like this in the console:
+```
+could not find component parameter mySequence::V1\1\Motion\Scale
+```
+It indicates, that in the sequence with name "mySequence" in Track V1 the clip numer 1 has no clip parameter "Scale" in the group "Motion". This can have two reasons:
+
+1. The parameter really does not exist (maybe you try to access the scale of an audio clip?)
+2. The parameter has a different name, since you use a different UI language version of Pr.
+
+In German Pr, for  example, "Scale" is named "Skalieren" and "Motion" is "Bewegung". To avoid issues, I recommend to switch the UI language of Pr to English. You can also create scripts using names in other languages (but then your scripts will only be compatible with that language). All sample scripts included in Automation Blocks rely on the English names.
+
+#### Changing the UI langage of Pr
+
+You can change the language without reinstalling Pr:
+
+1. in Pr use the keyboard shortcut to open up the console window:
+    Mac:     fn + command + F12
+    Win:     ctrl + F12
+
+2. in the Console, make sure the Debug Database view is open:
+<RetinaImg src="/img/blockOther/PrConsoleWindowDebugDatabaseView.png" alt=""/>
+3. search in the Console for "ApplicationLanguage" and set it to "en_EN" for English
+
+4. restart Pr
