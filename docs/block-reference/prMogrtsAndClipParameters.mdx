@@ -273,7 +273,10 @@ It indicates, that in the sequence with name "mySequence" in Track V1 the clip n
 1. The parameter really does not exist (maybe you try to access the scale of an audio clip?)
 2. The parameter has a different name, since you use a different UI language version of Pr.
 
-In German Pr, for  example, "Scale" is named "Skalieren" and "Motion" is "Bewegung". To avoid issues, I recommend to switch the UI language of Pr to English. You can also create scripts using names in other languages (but then your scripts will only be compatible with that language). All sample scripts included in Automation Blocks rely on the English names.
+In German Pr, for  example, "Scale" is named "Skalieren" and "Motion" is "Bewegung". 
+Automation Blocks 1.1.001 or newer knows the names of all parameters in all user interface languages. That means, if it looks for a property "Scale" and cannot find it, it will check if it finds a property "Skalieren" instead, for example. Therefore, **updating to Automation Blocks 1.1.001 solves most language issues**.
+
+However, for third party effects, it is not aware of their localizations, for example. Hence, if you run into any issues, you might want to check if switching the UI language of Pr to English solves your issue.
 
 #### Changing the UI langage of Pr
 
