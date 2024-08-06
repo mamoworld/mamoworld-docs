@@ -31,3 +31,14 @@ If you run a non-english version of Premiere Pro, make sure to use Automation Bl
 ## Issues with Spreadsheets
 
 If you run into issues with reading or writing spreadsheets, [see "Troubleshooting Spreadsheet Issues"](/block-reference/filesSpreadsheet#troubleshooting-spreadsheet-issues).
+
+## Issues with Team Projects
+
+Automation Blocks has the assumption that the name of a Pr project always ends with `.prproj`.
+This is always the case for normal Premiere Pro projects, but not necessarily for team projects. Hence, if you want to use Automation Blocks with a team project, make sure to add .prproj at the end of the project name:
+
+<RetinaImg src="/img/troubleshooting/troubleshooting_team_project.png" alt="Automation Blocks script works with team project with this workaround"/>
+
+### Background
+
+In Automation Blocks, [project items are described by a path](/block-reference/aeProjectItems#accessProjectItem). For example, `music/song.mp3` describes the clip with name "song.mp3" in the project bin "music" of the active project. On the other hand `concert.prproj/music/song.mp3` describes the same project item not in the active project, but in the project "concert.prproj". Now if your project only has the name "concert" then Automation Blocks thinks that concert it s name of a bin, i.e. `concert/music/song.mp3` is referring to a clip "song.mp3" inside the subbin "music" of the bin "concert" of the active project. Therefore, Automation Blocks is not able to locate any project item properly, if your project name does not end with `.prproj`.
