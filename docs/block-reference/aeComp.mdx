@@ -5,12 +5,15 @@ sidebar_position: 22
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import Anigif from "../../src/components/Anigif";
 import RetinaImg from "../../src/components/RetinaImg";
+import RoundButton from "../../src/components/RoundButton";
 
 # Ae Comp
 
 ### Accessing a Particular Composition {#accessComp}
 
 Comps are project items. So, if you need to give a block a comp as argument, you can access it in exactly the same way as you [access any other project items](aeProjectItems.mdx#accessProjectItem). To access the currently active composition, you can use the block [Active Compositon](#ae_active_comp).
+
+See also [this forum post](https://community.adobe.com/t5/after-effects-discussions/automation-blocks-open-a-comp/m-p/14878440#M256424).
 
 
 ## Active Composition {#ae_active_comp}
@@ -35,6 +38,22 @@ Returns the [Logic value](logic.mdx) `true` or `false` indicating if there is an
   src="/img/blockOther/ae_has_active_comp_example.png"
   alt="Example: Checking if project has an active comp"
 />
+
+## Make Active Composition {#ae_has_active_comp}
+
+Automation Blocks currently has no block to make a composition the active one. But it can easily be achieved using the [Execute Code Block](aeOther.mdx/#ae_execute_code). 
+<RetinaImg
+  src="/img/blockOther/ae_execute_code_example_make_active_comp.png"
+  alt="Block ae_new_comp"
+/>
+<div style={{ marginTop: '10px' }}>
+<RoundButton
+  url="/blockCode/Make Active Comp.xml"
+  label="Download Block Code"
+/>
+</div>
+
+See also [this forum post](https://community.adobe.com/t5/after-effects-discussions/automation-blocks-open-a-comp/m-p/14878440#M256424).
 
 ## New Composition {#ae_new_comp}
 
