@@ -36,6 +36,18 @@ If the text you want to write has a complex structure, you can combine the *Writ
 
 :::
 
+### Forcing File Writes to Disk
+
+For performance reasons, Automation Blocks delays writing files to disk until the script execution is complete.
+
+If you need a file to be saved earlier (e.g., to [execute it](files.mdx#block_extendscript_execute_file) immediately or [use an .sqpreset file](prSequence.mdx#block_pr_new_sequence) in subsequent blocks), you can force Automation Blocks to save all open files by running the following code in an [Execute Code block](prOther.mdx#pr_execute_code):
+
+`$._extAutomationBlocks.all.fileCollection.cleanup()`
+
+This applies to both text and spreadsheet files.
+
+See also [this forum discussion](https://community.adobe.com/t5/premiere-pro-discussions/create-custom-resolution-sequences-from-a-spreadsheet-using-automation-blocks/m-p/15161360#M552965).
+
 ## For All Lines of Text File{#extendscript_text_file_for_all_lines}
 
 <RetinaImg src="/img/blockScreenshots/FilesText/extendscript_text_file_for_all_lines.png" alt="Block extendscript_text_file_for_all_lines"/>
