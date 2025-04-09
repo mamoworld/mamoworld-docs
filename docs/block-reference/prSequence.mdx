@@ -5,6 +5,8 @@ sidebar_position: 14
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Anigif from '../../src/components/Anigif'
 import RetinaImg from '../../src/components/RetinaImg'
+import Youtube from "../../src/components/YouTube";
+
 
 # Pr Sequence
 
@@ -91,6 +93,18 @@ In the second argument you specify the name of the new sequence. You can also sp
 You should avoid having multiple sequences with the same name in the same bin of your project. If you are not sure if a sequence with the name you chose already exists, you can use the [Get New Unique Project Item Path block](prProjectItems.mdx#block_pr_item_unique_name) to make sure your sequence has a unique path.
 
 :::
+
+## New Multicam Sequence
+
+There is no way to create a new multi-camera source sequence with Pr's scripting API (and hence also with Automation Blocks). But you can create an empty multicam sequence with offline clips using the desired settings manually and then save that in a template project. Then, whenever you want to create such a multicam sequence in your active project, you can simply import the sequence from your template project (see [Import Sequence](#pr_import_sequence) below).
+
+## Import Sequence {#pr_import_sequence}
+
+This tutorial shows how to import sequences (or multi-camera source sequences) from another project into the active project.
+
+<Youtube id="MzAPHsfQNv8" />
+
+
 
 ## Add Project Items to Sequence {#pr_sequence_add_clips}
 
