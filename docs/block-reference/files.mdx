@@ -32,9 +32,12 @@ Usually, you don't need to think about these details. However, for long-running 
 In most cases, Automation Blocks' caching system improves performance and speeds up your scripts.
 However, there are situations where you need to ensure that changes are immediately written to disk — for example, if you write a file and then want to [execute](#block_extendscript_execute_file) it. Or if you want to [write an sequence preset file and then use that preset in the next block](https://community.adobe.com/t5/premiere-pro-discussions/create-custom-resolution-sequences-from-a-spreadsheet-using-automation-blocks/m-p/15161360#M552965). To guarantee that the file exists on disk before proceeding, you can manually force Automation Blocks to close all open files by running the following command inside an [Execute Code block](prOther.mdx#pr_execute_code):
 
-```$._extAutomationBlocks.all.fileCollection.cleanup()```
+```
+$._extAutomationBlocks.all.fileCollection.cleanup()
+```
 
 This command forces Automation Blocks to close all currently open files and write any cached changes to disk.
+
 
 ## File {#block_extendscript_file}
 
