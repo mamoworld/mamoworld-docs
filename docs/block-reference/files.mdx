@@ -21,16 +21,24 @@ If you want the user to choose a file, you can use the [Open File Dialog](userIn
 
 ### Opening & Closing Files
 
-You don't need to worry about the details of opening or closing files - Automation Blocks handles all of this for you in the background.
-When you try to read from or write to a file, Automation Blocks checks if it's already opened the file before, and if so continues the reading or writing from that position. It also makes sure that all files are closed properly again when the script execution is finished.
+You don't need to worry about opening or closing files manually — Automation Blocks takes care of everything for you in the background.
+Whenever you read from or write to a file, Automation Blocks checks if the file is already open and continues reading or writing from the current position. It also ensures that all files are properly closed once the script finishes executing.
 
-For performance reasons, read and write operations on spreadsheet files are cached. So, when you first read a value from a spreadsheet, the entire spreadsheet is read and all subsequent read or write operations use that cache. The cache is then written into the file again when the script is finished. Usually, you don't need to worry about these details, but for long running scripts this means that you'll see changes in the spreadsheet file only after the script is finished, not while it is still running.
+For performance reasons, read and write operations on spreadsheet and text files are cached. When you first access a value from a spreadsheet, the entire file is loaded into memory, and all subsequent read or write operations use this cache. The cache is written back to the file only when the script has finished running.
+Usually, you don't need to think about these details. However, for long-running scripts, it’s important to note that changes to the spreadsheet file will only appear after the script completes — not while it’s still executing.
 
+#### Forcing Files to Close {#forcing_files_to_close}
+
+In most cases, Automation Blocks' caching system improves performance and speeds up your scripts.
+However, there are situations where you need to ensure that changes are immediately written to disk — for example, if you write a file and then want to [execute](#block_extendscript_execute_file) it. Or if you want to [write an sequence preset file and then use that preset in the next block](https://community.adobe.com/t5/premiere-pro-discussions/create-custom-resolution-sequences-from-a-spreadsheet-using-automation-blocks/m-p/15161360#M552965). To guarantee that the file exists on disk before proceeding, you can manually force Automation Blocks to close all open files by running the following command inside an [Execute Code block](prOther.mdx#pr_execute_code):
+
+```$._extAutomationBlocks.all.fileCollection.cleanup()```
+
+This command forces Automation Blocks to close all currently open files and write any cached changes to disk.
 
 ## File {#block_extendscript_file}
 
 <RetinaImg src="/img/blockScreenshots/Files/block_extendscript_file.png" alt="Block block_extendscript_file"/>
-
 
 This block represents a file on your hard-drive. In Automation Blocks, a file is just the absolute path of a file represented as a text, so technically this block is the same as a normal text block. But it has this extra folder icon at the end, which allows you to choose a file more conveniently. If you click the icon, an Open File dialog opens and the text of the block is replaced with whatever file you have chosen.
 
