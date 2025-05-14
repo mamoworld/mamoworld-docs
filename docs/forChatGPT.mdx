@@ -1,0 +1,510 @@
+---
+sidebar_position: 8
+---
+
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import Anigif from "../src/components/Anigif";
+import RetinaImg from "../src/components/RetinaImg";
+import Youtube from "../src/components/YouTube";
+import RoundButton from "../src/components/RoundButton";
+
+
+# Infos for ChatGPT
+
+This guide explains how ChatGPT and other AI chatbots can generate **Automation Blocks** scripts. These scripts are XML files that users can load directly into **Automation Blocks for Premiere Pro** or **Automation Blocks for After Effects**.
+
+## If You Are Human
+
+If you're a human looking to get ChatGPT to write a specific Automation Blocks script for you, follow these best practices to achieve high-quality results:
+
+- Use a reasoning model like **ChatGPT o4-mini-high**.
+- Start your prompt with the following template:
+
+```text
+Please create a script for Automation Blocks for Premiere Pro. 
+Follow the details explained at https://mamoworld.com/chatGPT. 
+Read that entire page carefully and follow every advice given there. 
+The script should do the following:...
+```
+
+## General Strategy for Chatbots to Create Automation Blocks Scripts
+
+**Automation Blocks** for **Adobe Premiere Pro** and **Adobe After Effects** is built on **Google Blockly XML**. The core strategy for generating scripts is to use a special block that can run arbitrary Adobe ExtendScript code:
+
+- For Premiere Pro: `<block type="pr_execute_code">`
+- For After Effects: `<block type="ae_execute_code">`
+
+This means the most reliable and straightforward method is:
+
+1. First, write the entire script logic in **Adobe ExtendScript**.
+2. Then wrap that code inside the appropriate **execute code** block.
+
+💡 If your script should include a user interface (e.g., input fields, checkboxes, or dropdowns), you'll need to combine the execute block with additional input_arg blocks. For details, see the Creating User Interfaces section below.
+
+
+#### Template for Premiere Pro
+````
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="pr_execute_code" id="%UNIQUE_ID%">
+    <mutation items="0" resultType="none"/>
+    <field name="RESULT_TYPE">none</field>
+    <value name="CODE">
+      <shadow type="text_multiline">
+        <field name="TEXT">
+          <!--
+            1. Replace %YOUR_ESCAPED_CODE% with your ExtendScript,
+               but first XML-escape every special character:
+                 &  → &amp;
+                 <  → &lt;
+                 >  → &gt;
+                 "  → &quot;
+                 '  → &#39;
+
+            2. Turn each line break into &#10; (or leave literal newlines
+               if your CMS preserves them).
+            
+            Example:
+              var binName = "stock footage";
+            becomes:
+              var binName = &quot;stock footage&quot;;
+              ...
+          -->
+          %YOUR_ESCAPED_CODE%
+        </field>
+      </shadow>
+    </value>
+  </block>
+</xml>
+
+````
+
+For After Effects, use this template
+
+#### Template for After Effects
+````
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="ae_execute_code" id="%UNIQUE_ID%">
+    <mutation items="0" resultType="none"/>
+    <field name="RESULT_TYPE">none</field>
+    <value name="CODE">
+      <shadow type="text_multiline">
+        <field name="TEXT">
+          <!--
+            Same rules as above:
+             • & → &amp;
+             • < → &lt;
+             • > → &gt;
+             • " → &quot;
+             • ' → &#39;
+          -->
+          %YOUR_ESCAPED_CODE%
+        </field>
+      </shadow>
+    </value>
+  </block>
+</xml>
+
+````
+#### Key encoding steps
+
+1. Escape XML specials in your ExtendScript:
+
+- `&` → `&amp;`  (and of course `&&` by `&amp;&amp;`)
+- `<` → `&lt;`
+- `>` → `&gt;`
+- `"` → `&quot;`
+- `'` → `&#39;`
+
+2. Paste the resulting single string into the <field name="TEXT">…</field> placeholder.
+
+With this in place, any valid ExtendScript you write will be correctly wrapped, escaped and ready for Automation Blocks to parse next time.
+
+
+
+
+## Creating User Interfaces
+
+Automation Blocks scripts can include custom user interfaces. When the script is loaded, the interface is displayed in the **Inputs Panel** of Automation Blocks, allowing users to interact with the script via text fields, checkboxes, dropdowns, and more.
+
+### Basic Example
+
+The following example shows how to create a very simple UI for **Premiere Pro**: a single-line text field labeled “text to alert” with a default value of “Hello World”. When the script runs, it passes the value from the input into the `pr_execute_code` block and alerts it using ExtendScript.
+
+#### Premiere Pro Version
+
+```xml
+<xml xmlns="https://developers.google.com/blockly/xml">
+    <block type="pr_execute_code" id="%iY3K8}7bn%l.Zc]]6Zp">
+        <mutation items="1" resultType="none"></mutation>
+        <field name="FIELD_VAR_NAME_0">userText</field>
+        <field name="FIELD_VAR_TYPE_0">other</field>
+        <field name="RESULT_TYPE">none</field>
+        <value name="ADD0">
+            <block type="input_arg" id="(5;552lWsig;%)81`7l)">
+                <mutation inputType="TEXT_SINGLELINE"></mutation>
+                <field name="INPUT_TYPE">TEXT_SINGLELINE</field>
+                <field name="INPUT_LABEL">text to alert</field>
+                <field name="DEFAULT FIELD">Hello World</field>
+            </block>
+        </value>
+        <value name="CODE">
+            <shadow type="text_multiline" id="ER6sdOaHs09=6shK54:m">
+                <field name="TEXT">alert(userText)</field>
+            </shadow>
+        </value>
+    </block>
+</xml>
+```
+
+In this example:
+
+- A text input labeled **"text to alert"** is defined using an `input_arg` block.
+
+- Its value is passed to the global variable `userText`.
+
+- The `pr_execute_code block` uses `alert(userText)` to display it.
+
+#### After Effects Version
+
+The same UI setup works in **After Effects** by using the `ae_execute_code` block instead:
+
+```xml
+<xml xmlns="https://developers.google.com/blockly/xml">
+    <block type="ae_execute_code" id="*(K2*X#o%hhJ0#X=iI|v">
+        <mutation items="1" resultType="none"></mutation>
+        <field name="FIELD_VAR_NAME_0">userText</field>
+        <field name="FIELD_VAR_TYPE_0">other</field>
+        <field name="RESULT_TYPE">none</field>
+        <value name="ADD0">
+            <block type="input_arg" id="zABhfFxR/eVIzn6~i%mW">
+                <mutation inputType="TEXT_SINGLELINE"></mutation>
+                <field name="INPUT_TYPE">TEXT_SINGLELINE</field>
+                <field name="INPUT_LABEL">text to alert</field>
+                <field name="DEFAULT FIELD">Hello World</field>
+            </block>
+        </value>
+        <value name="CODE">
+            <shadow type="text_multiline" id="aYiy?/U)k8G:02-Ix7(1">
+                <field name="TEXT">alert(userText)</field>
+            </shadow>
+        </value>
+    </block>
+</xml>
+```
+In both cases, the value of the input field is available in the ExtendScript code via the global variable userText.
+
+### Comprehensive Example Featuring All Available UI Elements
+
+To create more advanced user interfaces, you can add multiple `input_arg` blocks to your script. Each input defines one UI control, such as text fields, checkboxes, dropdowns, or file/folder pickers.
+
+The following example for **Premiere Pro** includes **all available UI elements**. The corresponding values are passed into the `pr_execute_code` block as global variables.
+
+```xml
+<xml xmlns="https://developers.google.com/blockly/xml">
+    <block type="pr_execute_code" id="%iY3K8}7bn%l.Zc]]6Zp" x="17" y="37">
+        <mutation items="9" resultType="none"></mutation>
+        <field name="FIELD_VAR_NAME_0">mySingleLineText</field>
+        <field name="FIELD_VAR_TYPE_0">other</field>
+        <field name="FIELD_VAR_NAME_1">myMultiLineText</field>
+        <field name="FIELD_VAR_TYPE_1">other</field>
+        <field name="FIELD_VAR_NAME_2">myInt</field>
+        <field name="FIELD_VAR_TYPE_2">other</field>
+        <field name="FIELD_VAR_NAME_3">myFloat</field>
+        <field name="FIELD_VAR_TYPE_3">other</field>
+        <field name="FIELD_VAR_NAME_4">myCheckBox</field>
+        <field name="FIELD_VAR_TYPE_4">other</field>
+        <field name="FIELD_VAR_NAME_5">myDropDown</field>
+        <field name="FIELD_VAR_TYPE_5">other</field>
+        <field name="FIELD_VAR_NAME_6">myOpenFilePath</field>
+        <field name="FIELD_VAR_TYPE_6">other</field>
+        <field name="FIELD_VAR_NAME_7">mySaveFilePath</field>
+        <field name="FIELD_VAR_TYPE_7">other</field>
+        <field name="FIELD_VAR_NAME_8">myFolderPath</field>
+        <field name="FIELD_VAR_TYPE_8">other</field>
+        <field name="RESULT_TYPE">none</field>
+        <value name="ADD0">
+            <block type="input_arg" id="(5;552lWsig;%)81`7l)">
+                <mutation inputType="TEXT_SINGLELINE"></mutation>
+                <field name="INPUT_TYPE">TEXT_SINGLELINE</field>
+                <field name="INPUT_LABEL">sample single line</field>
+                <field name="DEFAULT FIELD">Hello World</field>
+            </block>
+        </value>
+        <value name="ADD1">
+            <block type="input_arg" id="JJ[;v0]Y5=ZEi1x^ZAx1">
+                <mutation inputType="TEXT_MULTILINE"></mutation>
+                <field name="INPUT_TYPE">TEXT_MULTILINE</field>
+                <field name="INPUT_LABEL">sample multi line</field>
+                <field name="DEFAULT FIELD">line 1&amp;#10;line 2</field>
+            </block>
+        </value>
+        <value name="ADD2">
+            <block type="input_arg" id="$g#6:9MaCLyjfc;flJlO">
+                <mutation inputType="NUMBER_INT"></mutation>
+                <field name="INPUT_TYPE">NUMBER_INT</field>
+                <field name="INPUT_LABEL">sample int</field>
+                <field name="DEFAULT FIELD">0</field>
+            </block>
+        </value>
+        <value name="ADD3">
+            <block type="input_arg" id="krdEOpOs#|LA%{NO[Ker">
+                <mutation inputType="NUMBER_FLOAT"></mutation>
+                <field name="INPUT_TYPE">NUMBER_FLOAT</field>
+                <field name="INPUT_LABEL">sample float</field>
+                <field name="DEFAULT FIELD">0</field>
+            </block>
+        </value>
+        <value name="ADD4">
+            <block type="input_arg" id="k|#)5eQvX7-Ic]20@e4+">
+                <mutation inputType="CHECKBOX"></mutation>
+                <field name="INPUT_TYPE">CHECKBOX</field>
+                <field name="INPUT_LABEL">sample checkbox</field>
+                <field name="DEFAULT FIELD">TRUE</field>
+            </block>
+        </value>
+        <value name="ADD5">
+            <block type="input_arg" id="nToJwv5vHbl5A1:zW;tQ">
+                <mutation inputType="DROPDOWN"></mutation>
+                <field name="INPUT_TYPE">DROPDOWN</field>
+                <field name="INPUT_LABEL">sample dropdown</field>
+                <field name="DEFAULT FIELD">option 1|option 2|option 3</field>
+            </block>
+        </value>
+        <value name="ADD6">
+            <block type="input_arg" id="=SOky3W[L*^Tg7cU-)|w" inline="false">
+                <mutation inputType="OPEN_FILE"></mutation>
+                <field name="INPUT_TYPE">OPEN_FILE</field>
+                <field name="INPUT_LABEL">sample open file</field>
+                <field name="DEFAULT FIELD"></field>
+                <field name="NO_FILE_BEHAVIOR">CONTINUE</field>
+                <field name="FILE_DOES_NOT_EXIST_BEHAVIOR">CONTINUE</field>
+            </block>
+        </value>
+        <value name="ADD7">
+            <block type="input_arg" id="B+Ae9,62M)o_-{UyFD,Z" inline="false">
+                <mutation inputType="SAVE_FILE"></mutation>
+                <field name="INPUT_TYPE">SAVE_FILE</field>
+                <field name="INPUT_LABEL">sample save file</field>
+                <field name="DEFAULT FIELD"></field>
+                <field name="NO_FILE_BEHAVIOR">STOP</field>
+                <field name="PARENT_FOLDER_NOT_EXISTS_BEHAVIOR">STOP</field>
+                <field name="FILE_EXISTS_BEHAVIOR">CONFIRM_DELETE</field>
+            </block>
+        </value>
+        <value name="ADD8">
+            <block type="input_arg" id="Z6dYS8b!0aWomPU,j7%;" inline="false">
+                <mutation inputType="CHOOSE_FOLDER"></mutation>
+                <field name="INPUT_TYPE">CHOOSE_FOLDER</field>
+                <field name="INPUT_LABEL">sample folder picker</field>
+                <field name="DEFAULT FIELD"></field>
+                <field name="NO_FILE_BEHAVIOR">CONTINUE</field>
+                <field name="FILE_DOES_NOT_EXIST_BEHAVIOR">CONTINUE</field>
+            </block>
+        </value>
+        <value name="CODE">
+            <shadow type="text_multiline" id="ER6sdOaHs09=6shK54:m">
+                <field name="TEXT">alert("sample single line value is " +
+                    mySingleLineText);&amp;#10;alert("sample multi line value is "+
+                    myMultiLineText);&amp;#10;alert("sample int value is
+                    "+myInt);&amp;#10;alert("sample float value is "+myFloat);&amp;#10;alert("sample
+                    checkbox value is "+ (myCheckBox ? "checked":"unchecked"));&amp;#10;alert("in
+                    the dropdown you have chosen the text
+                    "+myDropDown);&amp;#10;&amp;#10;if(myOpenFilePath =="") alert("you didn't pick a
+                    file in the sample open file picker")&amp;#10;else {&amp;#10; var file = new
+                    File(myOpenFilePath);&amp;#10; alert("you picked the file with path
+                    "+myOpenFilePath+ " to be opened and it "+ (file.exists? "exists" : "does not
+                    exist"));&amp;#10;}&amp;#10;&amp;#10;if(mySaveFilePath == "") alert("you didn't
+                    pick a file in the sample save file picker")&amp;#10;else {&amp;#10; var file =
+                    new File(mySaveFilePath);&amp;#10; alert("you want to sav to the file path
+                    "+mySaveFilePath+ " and this file "+ (file.exists? "exists" : "does not
+                    exist"));&amp;#10;}&amp;#10;if(myFolderPath == "") alert("you didn't pick a
+                    folder in the sample folder picker")&amp;#10;else {&amp;#10; var folder = new
+                    Folder(myFolderPath);&amp;#10; alert("you picked the folder with path
+                    "+myFolderPath+ " and this folder "+ (folder.exists? "exists" : "does not
+                    exist"));&amp;#10;&amp;#10;}</field>
+            </shadow>
+        </value>
+    </block>
+</xml>
+```
+
+### What This Example Does
+
+This example generates a UI containing:
+
+- A single-line text field
+- A multiline text field
+- Integer number input
+- Float number input
+- A checkbox
+- A dropdown with options: `"option 1"`, `"option 2"`, `"option 3"`
+- A file picker to select a file to open
+- A file picker to select a file path for saving
+- A folder picker
+
+Each UI value is passed into a global variable and used inside the ExtendScript to display alerts with the input values.
+
+This example is helpful if you want to:
+- Understand how to define different input types
+- Learn how to bind UI input values to ExtendScript variables
+- See the structure of a more complex UI setup
+
+### Passing UI Element Values into the Execute Code Block
+
+Execute Code blocks may contain tags like `<value name="ADD0"><block type="input_arg">DETAILS OF INPUT HERE</block</value>`. Use "ADD0" for the first input,  "ADD1" for the second one, etc. If you have a  `<value name="ADD0">` in your execute code  block, for example, you must also have  `<field name="FIELD_VAR_NAME_0">SOME VARIABLE NAME HERE</field>` and `<field name="FIELD_VAR_TYPE_0">other</field>`. Before the ExtendScript code is executed, Automation Blocks then creates a global variable of the given name and assigns the value of the block contained in ADD0 to it. With the "FIELD_VAR_TYPE" you can specify that the result of the block code should be converted to a particular object before binding it to the global variable. But usually you can keep this as "other", which means no conversion.
+
+Also,  the execute code block must contain a mutation tag like "<mutation items="NUMBER OF VARS HERE" resultType="none"></mutation>", which describes the number of variables. So if you have entries ADD0,...,ADD5 you need the tag to be "<mutation items="5" resultType="none"></mutation>".
+
+
+### Passing UI Element Values into the Execute Code Block
+
+To pass user input values into your ExtendScript code, each `input_arg` block must be properly connected to the `execute_code` block using three key components:
+
+1. **Value Tag**  
+   Each input must be included in a `<value name="ADDn">` tag (where `n` is the input index, starting from 0):
+
+   ```xml
+   <value name="ADD0">
+     <block type="input_arg">...</block>
+   </value>
+
+2. **Field Variable Mapping**  
+   You must define a corresponding variable for each input in the block using:
+
+```xml
+<field name="FIELD_VAR_NAME_0">yourVariableName</field>
+<field name="FIELD_VAR_TYPE_0">other</field>
+```
+
+    This tells Automation Blocks to create a global variable (e.g., `yourVariableName`) and assign it the value from the `ADD0` input block.
+
+   - `FIELD_VAR_NAME_0` matches `ADD0`
+   - `FIELD_VAR_TYPE_0` is typically set to `"other"` (no type conversion)  
+
+3. **Mutation Tag**  
+   The `<mutation>` tag declares how many inputs/variables are connected. For example, if you use `ADD0`, `ADD1`, and `ADD2`, you must set:
+```xml
+   <mutation items="3" resultType="none"></mutation>
+```
+
+> 💡 All three components—`<value name="ADDn">`, `FIELD_VAR_NAME_n`, and `mutation items="..."`—must be aligned. If any part is missing or the counts don't match, the script may fail or behave unpredictably.
+
+
+### More Examples
+
+Here’s a simple example that demonstrates how to collect two integer inputs from the user and alert their sum:
+
+```xml
+<xml xmlns="https://developers.google.com/blockly/xml">
+    <block type="pr_execute_code" id="?6ou@P!7pk2.X3C!A|nK" x="-412" y="293">
+        <mutation items="2" resultType="none"></mutation>
+        <field name="FIELD_VAR_NAME_0">num1</field>
+        <field name="FIELD_VAR_TYPE_0">other</field>
+        <field name="FIELD_VAR_NAME_1">num2</field>
+        <field name="FIELD_VAR_TYPE_1">other</field>
+        <field name="RESULT_TYPE">none</field>
+        <value name="ADD0">
+            <shadow type="text" id="kA$mZBxg)(4WbxlI/8ph">
+                <field name="TEXT">variable value</field>
+            </shadow>
+            <block type="input_arg" id="}}5~D!hkf4/E?:b.=?Fi">
+                <mutation inputType="NUMBER_INT"></mutation>
+                <field name="INPUT_TYPE">NUMBER_INT</field>
+                <field name="INPUT_LABEL">first number</field>
+                <field name="DEFAULT FIELD">0</field>
+            </block>
+        </value>
+        <value name="ADD1">
+            <block type="input_arg" id="]KgWl(VXhGM0iugtlJWA">
+                <mutation inputType="NUMBER_INT"></mutation>
+                <field name="INPUT_TYPE">NUMBER_INT</field>
+                <field name="INPUT_LABEL">second number</field>
+                <field name="DEFAULT FIELD">0</field>
+            </block>
+        </value>
+        <value name="CODE">
+            <shadow type="text_multiline" id="=|xGua9(i-iN^f#%3phN">
+                <field name="TEXT">var sum =
+                    num1+num2;&amp;#10;alert("the sum is "+sum);</field>
+            </shadow>
+        </value>
+    </block>
+</xml>
+```
+
+In this script:
+- Two number inputs are created using `input_arg` blocks with labels **"first number"** and **"second number"**.
+- Their values are passed into the global variables `num1` and `num2`.
+- The ExtendScript code calculates their sum and displays it with `alert("the sum is " + sum)`.
+
+---
+
+## General Block Attributes
+
+All `<block>` tags must include a unique `id` attribute — typically a random string.  
+Top-level blocks may also include optional `x` and `y` attributes to define their position on the canvas. These coordinates are **purely visual** and have no effect on the program logic.
+
+---
+
+## Tips for Writing Script Logic
+
+### Use `log()` for Debugging
+
+To output messages to the **Automation Blocks console panel**, use this function inside your ExtendScript code:
+
+```js
+$._extAutomationBlocks.all.log("My log message here");
+```
+
+This is especially useful for debugging and troubleshooting when users report unexpected script behavior. Logging intermediate steps makes it easier to trace what's going on.
+
+### Avoid Skipping Items When Modifying Collections
+
+If you're moving or deleting items in a collection (e.g., clips in a bin or on a track), iterate in reverse order.
+This helps avoid accidentally skipping elements. For example:
+
+- If you move the second item in a bin, the third one becomes the new second.
+- If you loop forward, this could cause elements to be skipped.
+
+## Output Format: Don't Show XML — Provide a Download Link
+
+When ChatGPT (or any chatbot) creates an Automation Blocks script, it should **not** display the raw XML code to the end user.
+
+Instead, it should:
+
+1. **Save the XML as a downloadable file**, ideally named based on the script's purpose (e.g., `moveStockFootage.xml`).
+2. **Provide a download link** to that file.
+
+This is important because:
+- Raw XML is hard to read and error-prone to copy-paste.
+- Automation Blocks expects `.xml` files to be imported or placed in specific locations.
+
+### How Users Should Use the XML File
+
+After downloading the file, users have **two options** to use it:
+
+#### Option 1: Load the File Manually
+
+1. Open Automation Blocks in Premiere Pro or After Effects.
+2. Click the **Load** button in the Automation Blocks panel.
+3. Select the downloaded `.xml` file.
+
+#### Option 2: Add the File to the User Library
+
+1. Move the `.xml` file into your **Automation Blocks User Library** folder.
+2. Restart Automation Blocks to make the script appear in the library.
+
+To learn where your User Library is located, see:  
+👉 [Where is the User Library?](https://docs.mamoworld.com/automation-blocks/#where-is-the-user-library)
+
+> ⚠️ After adding files to the User Library manually, **Automation Blocks must be restarted** to detect the new files.
+
+
+## More Resources
+
+To learn more about the ExtendScript API for Premiere Pro and After Effects, refer to these resources:
+
+- [ExtendScript API documentation](https://extendscript.docsforadobe.dev/) (for Pr and Ae)
+- [Premiere Pro Scripting Guide](https://ppro-scripting.docsforadobe.dev/)
+- [After Effects Scripting Guide](https://ae-scripting.docsforadobe.dev/)
+
