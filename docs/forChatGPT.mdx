@@ -21,11 +21,18 @@ If you're a human looking to get ChatGPT to write a specific Automation Blocks s
 - Start your prompt with the following template:
 
 ```text
-Please create a script for Automation Blocks for Premiere Pro. 
+Please create a script for Automation Blocks for Premiere Pro as a downloadable xml file.  
 Follow the details explained at https://mamoworld.com/chatGPT. 
 Read that entire page carefully and follow every advice given there. 
 The script should do the following:...
 ```
+- If the result **does not work as expected**, **don’t give up**. Instead, explain to ChatGPT **exactly what’s wrong**, including:
+  - What the script was supposed to do
+  - What actually happened
+  - Any error messages or unexpected behavior
+  - What you already tried to fix it
+
+  The more precisely you describe the issue, the better ChatGPT can help you resolve it.
 
 ## General Strategy for Chatbots to Create Automation Blocks Scripts
 
@@ -466,7 +473,100 @@ This helps avoid accidentally skipping elements. For example:
 - If you move the second item in a bin, the third one becomes the new second.
 - If you loop forward, this could cause elements to be skipped.
 
+
+### File Input and Output: Always Provide a UI if No Method Is Specified
+
+When the user asks for a script that **reads from** or **writes to** a file or folder — but does **not** specify how the file should be selected — the chatbot should **create a user interface for it** using the `input_arg` blocks.
+
+#### Why This Matters
+
+Hardcoding file paths is:
+- Not portable across different systems
+- Often not what the user intends
+- Prone to errors and user frustration
+
+Instead, always assume that the user wants to be prompted to pick a file or folder.
+
+#### How to Do It
+
+Use the appropriate input type in an `input_arg` block:
+
+| Task                        | Recommended Input Type |
+|----------------------------|------------------------|
+| Select a file to open      | `OPEN_FILE`            |
+| Select a file to save to   | `SAVE_FILE`            |
+| Select a folder            | `CHOOSE_FOLDER`        |
+
+For example, to let the user pick a file to read, use:
+
+```xml
+<block type="input_arg" id="=SOky3W[L*^Tg7cU-)|w" inline="false">
+    <mutation inputType="OPEN_FILE"></mutation>
+    <field name="INPUT_TYPE">OPEN_FILE</field>
+    <field name="INPUT_LABEL">sample open file</field>
+    <field name="DEFAULT FIELD"></field>
+    <field name="NO_FILE_BEHAVIOR">CONTINUE</field>
+    <field name="FILE_DOES_NOT_EXIST_BEHAVIOR">CONTINUE</field>
+</block>
+```
+
+You must also make sure that:
+- The input is passed as a global variable to the `execute_code` block
+- The script logic handles cases where the user did not select a file (e.g., variable is empty)
+
+#### Example Use Case
+
+If a user says:
+
+> "Create a script that exports a list of clip names to a file"
+
+…but does **not** mention a file path or method for choosing the destination, the chatbot should automatically create a **Save File Picker** UI using `inputType="SAVE_FILE"`.
+
+> ✅ Always prioritize flexibility and usability — if a path isn't specified, prompt the user with a UI.
+
+### No Top-Level `return` Statements in ExtendScript Code
+
+When writing ExtendScript for an `execute_code` block in Automation Blocks, **do not use `return` at the top level** of your code.
+
+#### Why?
+
+Automation Blocks uses JavaScript's `eval()` function to execute the ExtendScript code. In JavaScript, `eval()` **does not allow `return` statements at the top level** — doing so will throw a syntax error.
+
+#### What to Do Instead
+
+If you need to exit early from a script (e.g., because a file couldn’t be opened), wrap your logic in a function or use conditional blocks.
+
+#### ❌ Invalid Example (will cause a syntax error):
+
+```js
+if (!outputFile.open("w")) {
+    alert("Cannot open file: " + filePath);
+    return;
+}
+```
+
+#### ✅ Valid Alternative:
+
+```js
+if (!outputFile.open("w")) {
+    alert("Cannot open file: " + filePath);
+} else {
+    // Continue with the rest of the logic here
+}
+```
+
+✅ Tip: If your script is large and needs structured flow control, consider wrapping the entire logic in a function and calling it explicitly.
+
 ## Output Format: Don't Show XML — Provide a Download Link
+
+### Output Format
+
+When generating scripts or other code for Automation Blocks, the assistant **must**:
+
+1. Write the code into a `.xml` file.  
+2. Provide a direct download link to that file (e.g. `sandbox:/mnt/data/<filename>.xml`).  
+3. **Do not** paste the raw XML inline in the chat.  
+
 
 When ChatGPT (or any chatbot) creates an Automation Blocks script, it should **not** display the raw XML code to the end user.
 
